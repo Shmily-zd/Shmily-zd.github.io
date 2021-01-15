@@ -2,13 +2,73 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://shmily-zd.github.io</id>
     <title>zd_blog</title>
-    <updated>2021-01-15T16:56:44.977Z</updated>
+    <updated>2021-01-15T18:11:01.682Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://shmily-zd.github.io"/>
     <link rel="self" href="https://shmily-zd.github.io/atom.xml"/>
     <logo>https://shmily-zd.github.io/images/avatar.png</logo>
     <icon>https://shmily-zd.github.io/favicon.ico</icon>
     <rights>All rights reserved 2021, zd_blog</rights>
+    <entry>
+        <title type="html"><![CDATA[Markdown使用说明]]></title>
+        <id>https://shmily-zd.github.io/post/markdown-shi-yong-shuo-ming/</id>
+        <link href="https://shmily-zd.github.io/post/markdown-shi-yong-shuo-ming/">
+        </link>
+        <updated>2021-01-15T18:09:26.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="1-标题">1 标题</h1>
+<h2 id="11-使用kbdkbd和kbd-kbd标记一级和二级标题">1.1 使用<kbd>=</kbd>和<kbd>-</kbd>标记一级和二级标题</h2>
+<p>=和-标记语法格式如下：</p>
+<pre><code>一级标题    
+=============
+二级标题
+-------------
+</code></pre>
+<h2 id="12-使用标记">1.2 使用#标记</h2>
+<p>使用<kbd>#</kbd>可标记1-6级标题，一级标题对应<kbd>#</kbd>,二级标题对应<kbd>##</kbd>，以此类推</p>
+<pre><code># 一级标题
+## 二级标题
+### 三级标题
+#### 四级标题
+##### 五级标题
+###### 六级标题
+</code></pre>
+<h1 id="2-段落">2 段落</h1>
+<p>Markdown段落没有特殊的格式，段落的换行是使用<strong>两个以上空格加回车</strong>，也可以使用<strong>空行</strong>。</p>
+<h2 id="21-字体">2.1 字体</h2>
+<p>Markdown可以使用以下几种字体</p>
+<pre><code>*斜体*
+**粗体**
+***粗斜体***
+_斜体_
+__粗体__
+___粗斜体___
+</code></pre>
+<h2 id="22-分隔线">2.2 分隔线</h2>
+<p>三个以上<kbd>*</kbd>,<kbd>-</kbd>,<kbd>_</kbd>建立分隔线，行内不能有东西，<kbd>*</kbd>或<kbd>-</kbd>中间可以插入空格</p>
+<pre><code>***
+---
+___
+* * *
+- - -
+</code></pre>
+<h2 id="23-删除线">2.3 删除线</h2>
+<p>在要添加删除线的文本两端加入两个波浪线<kbd>~~</kbd></p>
+<pre><code>~~删除文本~~
+</code></pre>
+<h2 id="24-下划线">2.4 下划线</h2>
+<p>再要添加下划线的文本两端加入两个htlm的<kbd>&lt;u&gt;</kbd></p>
+<pre><code>&lt;u&gt;带下划线的文本&lt;u&gt;
+</code></pre>
+<p><sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup></p>
+<hr class="footnotes-sep">
+<section class="footnotes">
+<ol class="footnotes-list">
+<li id="fn1" class="footnote-item"><p>gah <a href="#fnref1" class="footnote-backref">↩︎</a></p>
+</li>
+</ol>
+</section>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[hello my blog]]></title>
         <id>https://shmily-zd.github.io/post/hello-my-blog/</id>
