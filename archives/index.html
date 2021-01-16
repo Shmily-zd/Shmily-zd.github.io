@@ -9,7 +9,7 @@
 <meta name="description" content="">
 <meta name="theme-color" content="#495057">
 <title>zd_blog</title>
-<link rel="shortcut icon" href="/favicon.ico?v=1610777205634">
+<link rel="shortcut icon" href="/favicon.ico?v=1610798054053">
 <link rel="stylesheet" href="/media/css/gemini.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
 <link
@@ -156,7 +156,7 @@
     <div class="sidebar-item-box">
       <a href="/archives/">
         
-        <span class="site-item-stat-count">3</span>
+        <span class="site-item-stat-count">2</span>
         <span class="site-item-stat-name language" data-lan="article">文章</span>
       </a>
     </div>
@@ -211,7 +211,7 @@
   <div class="archive-timeline-box">
     <div class="archive-timeline-title">
       
-        <h2 class="language" data-lan="archives" data-count="3">非常好！目前共计3篇日志，继续努力！</h2>
+        <h2 class="language" data-lan="archives" data-count="2">非常好！目前共计2篇日志，继续努力！</h2>
       
     </div>
     
@@ -228,19 +228,6 @@
             <h1>
               01-16
               <small>Markdown使用说明</small>
-            </h1>
-          </div>  
-      </div>
-      </a>
-    
-      
-      
-      <a href="https://shmily-zd.github.io/post/hello-my-blog/">
-        <div class="motion-warpper tag-archive-node">
-          <div class="tag-node">
-            <h1>
-              01-13
-              <small>hello my blog</small>
             </h1>
           </div>  
       </div>
@@ -561,81 +548,215 @@ ___
 &lt;p&gt;再要添加下划线的文本两端加入两个htlm的&lt;kbd&gt;&amp;lt;u&amp;gt;&lt;/kbd&gt;&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;&amp;lt;u&amp;gt;带下划线的文本&amp;lt;u&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;sup class=&#34;footnote-ref&#34;&gt;&lt;a href=&#34;#fn1&#34; id=&#34;fnref1&#34;&gt;[1]&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;h2 id=&#34;25-脚注&#34;&gt;2.5 脚注&lt;/h2&gt;
+&lt;p&gt;脚注为对文本的补充说明，语法格式如下:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;[^要标注的文本]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;脚注前的文本&lt;sup class=&#34;footnote-ref&#34;&gt;&lt;a href=&#34;#fn1&#34; id=&#34;fnref1&#34;&gt;[1]&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;h1 id=&#34;3-列表&#34;&gt;3 列表&lt;/h1&gt;
+&lt;h2 id=&#34;31-无序表&#34;&gt;3.1 无序表&lt;/h2&gt;
+&lt;p&gt;无序表使用&lt;kbd&gt;*&lt;/kbd&gt;,&lt;kbd&gt;+&lt;/kbd&gt;,&lt;kbd&gt;-&lt;/kbd&gt;作为列表标记，这些标记后要加一个空格：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;* 第一项
+* 第二项
+* 第三项
++ 第一项
++ 第二项
++ 第三项
+- 第一项
+- 第二项
+- 第三项
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;显示结果：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;第一项&lt;/li&gt;
+&lt;li&gt;第二项&lt;/li&gt;
+&lt;li&gt;第三项&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul&gt;
+&lt;li&gt;第一项&lt;/li&gt;
+&lt;li&gt;第二项&lt;/li&gt;
+&lt;li&gt;第三项&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul&gt;
+&lt;li&gt;第一项&lt;/li&gt;
+&lt;li&gt;第二项&lt;/li&gt;
+&lt;li&gt;第三项&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;32-有序表&#34;&gt;3.2 有序表&lt;/h2&gt;
+&lt;p&gt;有序表使用数字并加上&lt;kbd&gt;.&lt;/kbd&gt;作为列表标记，标记后要加一个空格：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;1. 第一项
+2. 第二项
+3. 第三项
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;显示结果：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;第一项&lt;/li&gt;
+&lt;li&gt;第二项&lt;/li&gt;
+&lt;li&gt;第三项&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;33-列表嵌套&#34;&gt;3.3 列表嵌套&lt;/h2&gt;
+&lt;p&gt;列表嵌套只需在子列表前添加&lt;kbd&gt;Tab&lt;/kbd&gt;或者2(或4)个空格：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;* 第一项
+  * 第一项嵌套的第一个元素
+  * 第一项嵌套的第二个元素
+* 第二项
+  * 第二项嵌套的第一个元素
+    * 第二项二层嵌套的第一个元素
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;显示结果：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;第一项
+&lt;ul&gt;
+&lt;li&gt;第一项嵌套的第一个元素&lt;/li&gt;
+&lt;li&gt;第一项嵌套的第二个元素&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;第二项
+&lt;ul&gt;
+&lt;li&gt;第二项嵌套的第一个元素
+&lt;ul&gt;
+&lt;li&gt;第二项二层嵌套的第一个元素&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;4-区块&#34;&gt;4 区块&lt;/h1&gt;
+&lt;p&gt;区块的使用是在段落开头是用&lt;kbd&gt;&amp;gt;&lt;/kbd&gt;加一个空格：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;gt; 等风来
+&amp;gt; 追风去
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;显示结果：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;等风来&lt;br&gt;
+追风去&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;区块是可以嵌套的，&lt;kbd&gt;&amp;gt;&lt;/kbd&gt;表示最外层，&lt;kbd&gt;&amp;gt;&amp;gt;&lt;/kbd&gt;表示第一层嵌套，以此类推：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;gt; 最外层
+&amp;gt;&amp;gt; 第一层嵌套
+&amp;gt;&amp;gt;&amp;gt; 第二层嵌套
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;显示结果：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;最外层&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;第一层嵌套&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;第二层嵌套&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/blockquote&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;41-区块中使用列表&#34;&gt;4.1 区块中使用列表&lt;/h2&gt;
+&lt;p&gt;实例：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;gt; 区块中使用列表    
+&amp;gt; 1. 第一项
+&amp;gt; 2. 第二项
+&amp;gt;&amp;gt; * 元素一
+&amp;gt;&amp;gt; * 元素二
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;显示结果：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;区块中使用列表&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;第一项&lt;/li&gt;
+&lt;li&gt;第二项&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;元素一&lt;/li&gt;
+&lt;li&gt;元素二&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;列表中使用区块&#34;&gt;列表中使用区块&lt;/h2&gt;
+&lt;p&gt;在列表中放入区块，需要在&lt;kbd&gt;&amp;gt;&lt;/kbd&gt;前添加四个空格缩进：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;* 第一项
+    &amp;gt; 元素一    
+    &amp;gt; 元素二    
+* 第二项
+    &amp;gt; 元素三
+    &amp;gt;&amp;gt; 元素四
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;显示结果：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;第一项
+&lt;blockquote&gt;
+&lt;p&gt;元素一&lt;br&gt;
+元素二&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;第二项
+&lt;blockquote&gt;
+&lt;p&gt;元素三&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;元素四&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;5-代码&#34;&gt;5 代码&lt;/h1&gt;
+&lt;h2 id=&#34;51-代码片段&#34;&gt;5.1 代码片段&lt;/h2&gt;
+&lt;p&gt;如果是段落中的一个函数或片段的代&lt;code&gt;码&lt;/code&gt;可以添加左右两个反引号(&lt;kbd&gt;`&lt;/kbd&gt;)：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;`printf()`函数
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;显示结果：&lt;br&gt;
+&lt;code&gt;print()&lt;/code&gt;函数&lt;/p&gt;
+&lt;h2 id=&#34;52-代码区块&#34;&gt;5.2 代码区块&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;使用&lt;strong&gt;四个空格&lt;/strong&gt;或者&lt;strong&gt;一个制表符(&lt;kbd&gt;Tab&lt;/kbd&gt;)&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;  //不能指定语言
+  typedef struct node
+  {
+      ElemType data;       //数据元素
+      struct node *lchild; //指向左孩子
+      struct node *rchild; //指向右孩子
+  } BTNode;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;使用&lt;kbd&gt;```&lt;/kbd&gt;包裹代码段，并可以指定一种语言&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-C&#34;&gt;//指定c
+ typedef struct node
+ {
+     ElemType data;       //数据元素
+     struct node *lchild; //指向左孩子
+     struct node *rchild; //指向右孩子
+ } BTNode;``` 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;6-链接&#34;&gt;6 链接&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;[连接名称] (链接地址)   //中间去掉空格&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;  [zd_blog](https://shmily-zd.github.io/)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;a href=&#34;https://shmily-zd.github.io/&#34;&gt;zd_blog&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&amp;lt;链接地址&amp;gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;  &amp;lt;https://shmily-zd.github.io/&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;a href=&#34;https://shmily-zd.github.io/&#34;&gt;https://shmily-zd.github.io/&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;设置变量&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;  [zd_blog][1]
+  ···
+  [1]: https://shmily-zd.github.io/
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;a href=&#34;https://shmily-zd.github.io/&#34;&gt;zd_blog&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
 &lt;hr class=&#34;footnotes-sep&#34;&gt;
 &lt;section class=&#34;footnotes&#34;&gt;
 &lt;ol class=&#34;footnotes-list&#34;&gt;
-&lt;li id=&#34;fn1&#34; class=&#34;footnote-item&#34;&gt;&lt;p&gt;gah &lt;a href=&#34;#fnref1&#34; class=&#34;footnote-backref&#34;&gt;↩︎&lt;/a&gt;&lt;/p&gt;
+&lt;li id=&#34;fn1&#34; class=&#34;footnote-item&#34;&gt;&lt;p&gt;注明的内容 &lt;a href=&#34;#fnref1&#34; class=&#34;footnote-backref&#34;&gt;↩︎&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;/section&gt;
 ">Markdown使用说明</a>
-      </div>
-      
-      <div class="item">
-        <a class="result-title" style="opacity: 0;" href="https://shmily-zd.github.io/post/hello-my-blog/"" data-c="
-          &lt;h1 id=&#34;h&#34;&gt;H&lt;/h1&gt;
-&lt;h2 id=&#34;h-2&#34;&gt;H&lt;/h2&gt;
-&lt;h3 id=&#34;h-3&#34;&gt;H&lt;/h3&gt;
-&lt;pre&gt;&lt;code&gt;{
-    ElemType data;       //数据元素
-    struct node *lchild; //指向左孩子
-    struct node *rchild; //指向右孩子
-} BTNode;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h1 id=&#34;k&#34;&gt;k&lt;/h1&gt;
-&lt;h2 id=&#34;kk&#34;&gt;kk&lt;/h2&gt;
-&lt;h3 id=&#34;kk-2&#34;&gt;kk&lt;/h3&gt;
-&lt;pre&gt;&lt;code&gt;void DispBTNode(BTNode *b) //以括号表示法输出二叉树
-{
-    if (b != NULL)
-    {
-        printf(&amp;quot;%c&amp;quot;, b-&amp;gt;data);
-        if (b-&amp;gt;lchild != NULL || b-&amp;gt;rchild != NULL)
-        {
-            printf(&amp;quot;(&amp;quot;);
-            DispBTNode(b-&amp;gt;lchild);
-            if (b-&amp;gt;rchild != NULL)
-                printf(&amp;quot;,&amp;quot;);
-            DispBTNode(b-&amp;gt;rchild);
-            printf(&amp;quot;)&amp;quot;);
-        }
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&#39;&#39;&#39;&#39;&lt;br&gt;
-#include &amp;quot;btree.cpp&amp;quot;&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;int main()
-{
-    BTNode *b, *p, *lp, *rp;
-    ;
-    CreateBTNode(b, &amp;quot;A(B(D,E(H(J,K(L,M(,N))))),C(F,G(,I)))&amp;quot;);
-    printf(&amp;quot;  (2)二叉树b:&amp;quot;);
-    DispBTNode(b);
-    printf(&amp;quot;\n&amp;quot;);
-    printf(&amp;quot;  (3)H节点的左右孩子的节点值:&amp;quot;);
-    p = FindNode(b, &#39;H&#39;);
-    if (p != NULL)
-    {
-        lp = LchildNode(p);
-        if (lp != NULL)
-            printf(&amp;quot;左孩子为%c &amp;quot;, lp-&amp;gt;data);
-        else
-            printf(&amp;quot;无左孩子 &amp;quot;);
-        rp = RchildNode(p);
-        if (rp != NULL)
-            printf(&amp;quot;右孩子为%c&amp;quot;, rp-&amp;gt;data);
-        else
-            printf(&amp;quot;无右孩子 &amp;quot;);
-    }
-    printf(&amp;quot;\n&amp;quot;);
-    printf(&amp;quot;  (4)二叉树b的高度:%d\n&amp;quot;, BTNodeHeight(b));
-    printf(&amp;quot;  (5)释放二叉树b&amp;quot;); 
-    DestroyBTNode(b);
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&#39;&#39;&#39;&#39;&lt;/p&gt;
-">hello my blog</a>
       </div>
       
       <div class="item">
