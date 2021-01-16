@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://shmily-zd.github.io</id>
     <title>zd_blog</title>
-    <updated>2021-01-16T11:56:08.925Z</updated>
+    <updated>2021-01-16T17:15:37.690Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://shmily-zd.github.io"/>
     <link rel="self" href="https://shmily-zd.github.io/atom.xml"/>
@@ -14,7 +14,7 @@
         <id>https://shmily-zd.github.io/post/markdown-shi-yong-shuo-ming/</id>
         <link href="https://shmily-zd.github.io/post/markdown-shi-yong-shuo-ming/">
         </link>
-        <updated>2021-01-15T18:09:26.000Z</updated>
+        <updated>2021-01-15T16:09:26.000Z</updated>
         <content type="html"><![CDATA[<h1 id="1-标题">1 标题</h1>
 <h2 id="11-使用kbdkbd和kbd-kbd标记一级和二级标题">1.1 使用<kbd>=</kbd>和<kbd>-</kbd>标记一级和二级标题</h2>
 <p>=和-标记语法格式如下：</p>
@@ -61,7 +61,9 @@ ___
 </code></pre>
 <h2 id="25-脚注">2.5 脚注</h2>
 <p>脚注为对文本的补充说明，语法格式如下:</p>
-<pre><code>[^要标注的文本]
+<pre><code>脚注前的文本[^var]  
+
+[^var]: 注明的内容
 </code></pre>
 <p>脚注前的文本<sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup></p>
 <h1 id="3-列表">3 列表</h1>
@@ -207,7 +209,7 @@ ___
 </ul>
 <h1 id="5-代码">5 代码</h1>
 <h2 id="51-代码片段">5.1 代码片段</h2>
-<p>如果是段落中的一个函数或片段的代<code>码</code>可以添加左右两个反引号(<kbd>`</kbd>)：</p>
+<p>如果是段落中的一个函数或片段的代码可以添加左右两个反引号(<kbd>`</kbd>)：</p>
 <pre><code>`printf()`函数
 </code></pre>
 <p>显示结果：<br>
@@ -233,7 +235,7 @@ ___
      ElemType data;       //数据元素
      struct node *lchild; //指向左孩子
      struct node *rchild; //指向右孩子
- } BTNode;``` 
+ } BTNode;
 </code></pre>
 </li>
 </ul>
@@ -258,6 +260,27 @@ ___
   [1]: https://shmily-zd.github.io/
 </code></pre>
 <p><a href="https://shmily-zd.github.io/">zd_blog</a></p>
+</li>
+</ul>
+<h1 id="7-图片">7 图片</h1>
+<ul>
+<li>
+<p>插入本地图片：</p>
+<pre><code>  ![art text](D:\lzd\Documents\my_blogs\images\wallhaven-vgl5qp.jpg)
+</code></pre>
+<p>显示结果：<br>
+<img src="D:%5Clzd%5CDocuments%5Cmy_blogs%5Cimages%5Cwallhaven-vgl5qp.jpg" alt="art text" loading="lazy"></p>
+</li>
+<li>
+<p>插入网络图片：</p>
+<pre><code>  ![art text](https://w.wallhaven.cc/full/dp/wallhaven-dpgk5o.jpg)
+</code></pre>
+<p>显示结果：<br>
+<img src="https://w.wallhaven.cc/full/dp/wallhaven-dpgk5o.jpg" alt="moji" loading="lazy"></p>
+</li>
+<li>
+<p>图片存入<kbd>.md</kbd>文件<br>
+<img src="https://www.jianguoyun.com/c/tblv2/9Uj9b5oD4y4DedNB8op2P3vAqULtwH_QKj_mywJ0BeULsgHRUkBHXMROs3y6DNCQfTxP4XoR/WZziGiN4wUnKTZohTSCHeA/l" alt="moji" loading="lazy"></p>
 </li>
 </ul>
 <hr class="footnotes-sep">

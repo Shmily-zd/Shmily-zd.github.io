@@ -9,7 +9,7 @@
 <meta name="description" content="">
 <meta name="theme-color" content="#495057">
 <title>Markdown使用说明 | zd_blog</title>
-<link rel="shortcut icon" href="/favicon.ico?v=1610798111901">
+<link rel="shortcut icon" href="/favicon.ico?v=1610817335271">
 <link rel="stylesheet" href="/media/css/gemini.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
 <link
@@ -39,7 +39,7 @@
 
 
   <meta name="description" content="Markdown使用说明" />
-  <meta name="keywords" content="" />
+  <meta name="keywords" content="Markdown" />
 </head>
 
 <body>
@@ -179,13 +179,13 @@
     </div>
     <div class="sidebar-item-box">
       <a href="">
-        <span class="site-item-stat-count">1</span>
+        <span class="site-item-stat-count">2</span>
         <span class="site-item-stat-name language" data-lan="category">分类</span>
       </a>
     </div>
     <div class="sidebar-item-box">
       <a href="/tags/">
-        <span class="site-item-stat-count">1</span>
+        <span class="site-item-stat-count">2</span>
         <span class="site-item-stat-name language" data-lan="tag">标签</span>
       </a>
     </div>
@@ -246,6 +246,7 @@
 </ul>
 </li>
 <li><a href="#6-%E9%93%BE%E6%8E%A5">6 链接</a></li>
+<li><a href="#7-%E5%9B%BE%E7%89%87">7 图片</a></li>
 </ul>
 
   </div>
@@ -520,18 +521,31 @@
     <span class="meta-item pc-show">
       <i class="fa fa-calendar-o"></i>
       <span class="language" data-lan="publish">发布于</span>
-      <span class="publish-time" data-t="2021-01-16 02:09:26">2021-01-16</span>
+      <span class="publish-time" data-t="2021-01-16 00:09:26">2021-01-16</span>
       <span class="post-meta-divider pc-show">|</span>
     </span>
     
     <span class="meta-item">
+      <i class="fa fa-folder-o"></i>
+      <span class="pc-show language" data-lan="category-in">分类于</span>
+      
+      
+      <a href="https://shmily-zd.github.io/tag/qBK2s6Ys9/">
+        <span>Markdown</span>
+      </a>
+      
+      
+    </span>
+    <span class="post-meta-divider">|</span>
+    
+    <span class="meta-item">
       <i class="fa fa-clock-o"></i>
-      <span>4<span class="language" data-lan="minute">分钟</span></span>
+      <span>5<span class="language" data-lan="minute">分钟</span></span>
     </span>
     <span class="meta-item">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-file-word-o"></i>
-      <span>1012<span class="pc-show language" data-lan="words">字数</span></span>
+      <span>1070<span class="pc-show language" data-lan="words">字数</span></span>
     </span>
     
     
@@ -591,7 +605,9 @@ ___
 </code></pre>
 <h2 id="25-脚注">2.5 脚注</h2>
 <p>脚注为对文本的补充说明，语法格式如下:</p>
-<pre><code>[^要标注的文本]
+<pre><code>脚注前的文本[^var]  
+
+[^var]: 注明的内容
 </code></pre>
 <p>脚注前的文本<sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup></p>
 <h1 id="3-列表">3 列表</h1>
@@ -737,7 +753,7 @@ ___
 </ul>
 <h1 id="5-代码">5 代码</h1>
 <h2 id="51-代码片段">5.1 代码片段</h2>
-<p>如果是段落中的一个函数或片段的代<code>码</code>可以添加左右两个反引号(<kbd>`</kbd>)：</p>
+<p>如果是段落中的一个函数或片段的代码可以添加左右两个反引号(<kbd>`</kbd>)：</p>
 <pre><code>`printf()`函数
 </code></pre>
 <p>显示结果：<br>
@@ -763,7 +779,7 @@ ___
      ElemType data;       //数据元素
      struct node *lchild; //指向左孩子
      struct node *rchild; //指向右孩子
- } BTNode;``` 
+ } BTNode;
 </code></pre>
 </li>
 </ul>
@@ -788,6 +804,27 @@ ___
   [1]: https://shmily-zd.github.io/
 </code></pre>
 <p><a href="https://shmily-zd.github.io/">zd_blog</a></p>
+</li>
+</ul>
+<h1 id="7-图片">7 图片</h1>
+<ul>
+<li>
+<p>插入本地图片：</p>
+<pre><code>  ![art text](D:\lzd\Documents\my_blogs\images\wallhaven-vgl5qp.jpg)
+</code></pre>
+<p>显示结果：<br>
+<img src="D:%5Clzd%5CDocuments%5Cmy_blogs%5Cimages%5Cwallhaven-vgl5qp.jpg" alt="art text" loading="lazy"></p>
+</li>
+<li>
+<p>插入网络图片：</p>
+<pre><code>  ![art text](https://w.wallhaven.cc/full/dp/wallhaven-dpgk5o.jpg)
+</code></pre>
+<p>显示结果：<br>
+<img src="https://w.wallhaven.cc/full/dp/wallhaven-dpgk5o.jpg" alt="moji" loading="lazy"></p>
+</li>
+<li>
+<p>图片存入<kbd>.md</kbd>文件<br>
+<img src="https://www.jianguoyun.com/c/tblv2/9Uj9b5oD4y4DedNB8op2P3vAqULtwH_QKj_mywJ0BeULsgHRUkBHXMROs3y6DNCQfTxP4XoR/WZziGiN4wUnKTZohTSCHeA/l" alt="moji" loading="lazy"></p>
 </li>
 </ul>
 <hr class="footnotes-sep">
@@ -817,6 +854,8 @@ ___
     </li>
   </ul>
   <div class="tags">
+    
+      <a href="https://shmily-zd.github.io/tag/qBK2s6Ys9/"># Markdown</a>
     
   </div>
   <div class="nav">
@@ -1380,7 +1419,9 @@ ___
 &lt;/code&gt;&lt;/pre&gt;
 &lt;h2 id=&#34;25-脚注&#34;&gt;2.5 脚注&lt;/h2&gt;
 &lt;p&gt;脚注为对文本的补充说明，语法格式如下:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;[^要标注的文本]
+&lt;pre&gt;&lt;code&gt;脚注前的文本[^var]  
+
+[^var]: 注明的内容
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;脚注前的文本&lt;sup class=&#34;footnote-ref&#34;&gt;&lt;a href=&#34;#fn1&#34; id=&#34;fnref1&#34;&gt;[1]&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
 &lt;h1 id=&#34;3-列表&#34;&gt;3 列表&lt;/h1&gt;
@@ -1526,7 +1567,7 @@ ___
 &lt;/ul&gt;
 &lt;h1 id=&#34;5-代码&#34;&gt;5 代码&lt;/h1&gt;
 &lt;h2 id=&#34;51-代码片段&#34;&gt;5.1 代码片段&lt;/h2&gt;
-&lt;p&gt;如果是段落中的一个函数或片段的代&lt;code&gt;码&lt;/code&gt;可以添加左右两个反引号(&lt;kbd&gt;`&lt;/kbd&gt;)：&lt;/p&gt;
+&lt;p&gt;如果是段落中的一个函数或片段的代码可以添加左右两个反引号(&lt;kbd&gt;`&lt;/kbd&gt;)：&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;`printf()`函数
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;显示结果：&lt;br&gt;
@@ -1552,7 +1593,7 @@ ___
      ElemType data;       //数据元素
      struct node *lchild; //指向左孩子
      struct node *rchild; //指向右孩子
- } BTNode;``` 
+ } BTNode;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
@@ -1577,6 +1618,27 @@ ___
   [1]: https://shmily-zd.github.io/
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;a href=&#34;https://shmily-zd.github.io/&#34;&gt;zd_blog&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;7-图片&#34;&gt;7 图片&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;插入本地图片：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;  ![art text](D:\lzd\Documents\my_blogs\images\wallhaven-vgl5qp.jpg)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;显示结果：&lt;br&gt;
+&lt;img src=&#34;D:%5Clzd%5CDocuments%5Cmy_blogs%5Cimages%5Cwallhaven-vgl5qp.jpg&#34; alt=&#34;art text&#34; loading=&#34;lazy&#34;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;插入网络图片：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;  ![art text](https://w.wallhaven.cc/full/dp/wallhaven-dpgk5o.jpg)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;显示结果：&lt;br&gt;
+&lt;img src=&#34;https://w.wallhaven.cc/full/dp/wallhaven-dpgk5o.jpg&#34; alt=&#34;moji&#34; loading=&#34;lazy&#34;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;图片存入&lt;kbd&gt;.md&lt;/kbd&gt;文件&lt;br&gt;
+&lt;img src=&#34;https://www.jianguoyun.com/c/tblv2/9Uj9b5oD4y4DedNB8op2P3vAqULtwH_QKj_mywJ0BeULsgHRUkBHXMROs3y6DNCQfTxP4XoR/WZziGiN4wUnKTZohTSCHeA/l&#34; alt=&#34;moji&#34; loading=&#34;lazy&#34;&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;hr class=&#34;footnotes-sep&#34;&gt;
