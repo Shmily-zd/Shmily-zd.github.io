@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://zdblog.top</id>
     <title>zd_blog</title>
-    <updated>2021-01-17T04:27:32.814Z</updated>
+    <updated>2021-01-17T05:43:44.430Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://zdblog.top"/>
     <link rel="self" href="https://zdblog.top/atom.xml"/>
@@ -265,12 +265,12 @@ ___
 <h1 id="7-图片">7 图片</h1>
 <ul>
 <li>
-<p>插入本地图片：</p>
-<pre><code>  ![art text](D:\lzd\Documents\my_blogs\images\wallhaven-vgl5qp.jpg)
+<p>插入本地图片：<br>
+本博客采用<code>Gridea + github pages</code>部署，本地图片会上传至GitHub库中(加载速度较慢)</p>
+<pre><code>  ![art text](https://zdblog.top/post-images/wallhaven-vgl5qp.jpg)
 </code></pre>
 <p>显示结果：<br>
-<img src="D:%5Clzd%5CDocuments%5Cmy_blogs%5Cimages%5Cwallhaven-vgl5qp.jpg" alt="art text" loading="lazy"><br>
-<img src="https://zdblog.top/post-images/1610857534522.jpg" alt="" loading="lazy"></p>
+<img src="https://zdblog.top/post-images/1610862128990.jpg" alt="" loading="lazy"></p>
 </li>
 <li>
 <p>插入网络图片：</p>
@@ -281,10 +281,34 @@ ___
 </li>
 <li>
 <p>图片存入<kbd>.md</kbd>文件<br>
-<img src="https://www.jianguoyun.com/c/tblv2/9Uj9b5oD4y4DedNB8op2P3vAqULtwH_QKj_mywJ0BeULsgHRUkBHXMROs3y6DNCQfTxP4XoR/WZziGiN4wUnKTZohTSCHeA/l" alt="mji" loading="lazy"></p>
+使用base64转码工具将图片转成一段字符串(字符串过长，造成Markdown编辑器卡顿，实测Vscode)</p>
+<pre><code>  ![art text](data:img/jpg;base64,/9j/4SOVRXh...)
+  
+  // or
+  ![art text][base64str]
+  ...
+  [base64str]: data:img/jpg;base64,/9j/4SOVRXh...
+</code></pre>
+</li>
+<li>
+<p>采取方案-图床<br>
+综合各种插入图片方式，采取图床的方案，这里选用&lt;sm.ms&gt;<br>
+上传后界面：<br>
+<img src="https://i.loli.net/2021/01/17/PupZXoI72C4fgHW.png" alt="上传示例" loading="lazy"><br>
+可直接复制<code>HTML</code>或<code>Markdown</code></p>
+<pre><code>  // HTML
+  &lt;a href=&quot;https://sm.ms/image/RgdkyBlwOJirVW4&quot; target=&quot;_blank&quot;&gt;&lt;img src=&quot;https://i.loli.net/2021/01/17/RgdkyBlwOJirVW4.jpg&quot; alt=&quot;wallhaven-vgl5qp.jpg&quot;&gt;&lt;/a&gt;
+
+  // Markdown
+  ![wallhaven-vgl5qp.jpg](https://i.loli.net/2021/01/17/RgdkyBlwOJirVW4.jpg)
+</code></pre>
+<p>显示结果：<br>
+// HTML<br>
+<a href="https://sm.ms/image/RgdkyBlwOJirVW4" target="_blank"><img src="https://i.loli.net/2021/01/17/RgdkyBlwOJirVW4.jpg" alt="wallhaven-vgl5qp.jpg"></a></p>
+<p>// Markdown<br>
+<img src="https://i.loli.net/2021/01/17/RgdkyBlwOJirVW4.jpg" alt="wallhaven-vgl5qp.jpg" loading="lazy"></p>
 </li>
 </ul>
-<p><a href="https://sm.ms/image/RgdkyBlwOJirVW4" target="_blank"><img src="https://i.loli.net/2021/01/17/RgdkyBlwOJirVW4.jpg" ></a></p>
 <hr class="footnotes-sep">
 <section class="footnotes">
 <ol class="footnotes-list">

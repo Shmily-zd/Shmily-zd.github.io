@@ -9,7 +9,7 @@
 <meta name="description" content="">
 <meta name="theme-color" content="#495057">
 <title>Hello Gridea | zd_blog</title>
-<link rel="shortcut icon" href="/favicon.ico?v=1610857648611">
+<link rel="shortcut icon" href="/favicon.ico?v=1610862223084">
 <link rel="stylesheet" href="/media/css/gemini.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
 <link
@@ -1338,12 +1338,12 @@ ___
 &lt;h1 id=&#34;7-图片&#34;&gt;7 图片&lt;/h1&gt;
 &lt;ul&gt;
 &lt;li&gt;
-&lt;p&gt;插入本地图片：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;  ![art text](D:\lzd\Documents\my_blogs\images\wallhaven-vgl5qp.jpg)
+&lt;p&gt;插入本地图片：&lt;br&gt;
+本博客采用&lt;code&gt;Gridea + github pages&lt;/code&gt;部署，本地图片会上传至GitHub库中(加载速度较慢)&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;  ![art text](https://zdblog.top/post-images/wallhaven-vgl5qp.jpg)
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;显示结果：&lt;br&gt;
-&lt;img src=&#34;D:%5Clzd%5CDocuments%5Cmy_blogs%5Cimages%5Cwallhaven-vgl5qp.jpg&#34; alt=&#34;art text&#34; loading=&#34;lazy&#34;&gt;&lt;br&gt;
-&lt;img src=&#34;https://zdblog.top/post-images/1610857534522.jpg&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/p&gt;
+&lt;img src=&#34;https://zdblog.top/post-images/1610862128990.jpg&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;插入网络图片：&lt;/p&gt;
@@ -1354,10 +1354,34 @@ ___
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;图片存入&lt;kbd&gt;.md&lt;/kbd&gt;文件&lt;br&gt;
-&lt;img src=&#34;https://www.jianguoyun.com/c/tblv2/9Uj9b5oD4y4DedNB8op2P3vAqULtwH_QKj_mywJ0BeULsgHRUkBHXMROs3y6DNCQfTxP4XoR/WZziGiN4wUnKTZohTSCHeA/l&#34; alt=&#34;mji&#34; loading=&#34;lazy&#34;&gt;&lt;/p&gt;
+使用base64转码工具将图片转成一段字符串(字符串过长，造成Markdown编辑器卡顿，实测Vscode)&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;  ![art text](data:img/jpg;base64,/9j/4SOVRXh...)
+  
+  // or
+  ![art text][base64str]
+  ...
+  [base64str]: data:img/jpg;base64,/9j/4SOVRXh...
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;采取方案-图床&lt;br&gt;
+综合各种插入图片方式，采取图床的方案，这里选用&amp;lt;sm.ms&amp;gt;&lt;br&gt;
+上传后界面：&lt;br&gt;
+&lt;img src=&#34;https://i.loli.net/2021/01/17/PupZXoI72C4fgHW.png&#34; alt=&#34;上传示例&#34; loading=&#34;lazy&#34;&gt;&lt;br&gt;
+可直接复制&lt;code&gt;HTML&lt;/code&gt;或&lt;code&gt;Markdown&lt;/code&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;  // HTML
+  &amp;lt;a href=&amp;quot;https://sm.ms/image/RgdkyBlwOJirVW4&amp;quot; target=&amp;quot;_blank&amp;quot;&amp;gt;&amp;lt;img src=&amp;quot;https://i.loli.net/2021/01/17/RgdkyBlwOJirVW4.jpg&amp;quot; alt=&amp;quot;wallhaven-vgl5qp.jpg&amp;quot;&amp;gt;&amp;lt;/a&amp;gt;
+
+  // Markdown
+  ![wallhaven-vgl5qp.jpg](https://i.loli.net/2021/01/17/RgdkyBlwOJirVW4.jpg)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;显示结果：&lt;br&gt;
+// HTML&lt;br&gt;
+&lt;a href=&#34;https://sm.ms/image/RgdkyBlwOJirVW4&#34; target=&#34;_blank&#34;&gt;&lt;img src=&#34;https://i.loli.net/2021/01/17/RgdkyBlwOJirVW4.jpg&#34; alt=&#34;wallhaven-vgl5qp.jpg&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;// Markdown&lt;br&gt;
+&lt;img src=&#34;https://i.loli.net/2021/01/17/RgdkyBlwOJirVW4.jpg&#34; alt=&#34;wallhaven-vgl5qp.jpg&#34; loading=&#34;lazy&#34;&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;a href=&#34;https://sm.ms/image/RgdkyBlwOJirVW4&#34; target=&#34;_blank&#34;&gt;&lt;img src=&#34;https://i.loli.net/2021/01/17/RgdkyBlwOJirVW4.jpg&#34; &gt;&lt;/a&gt;&lt;/p&gt;
 &lt;hr class=&#34;footnotes-sep&#34;&gt;
 &lt;section class=&#34;footnotes&#34;&gt;
 &lt;ol class=&#34;footnotes-list&#34;&gt;
