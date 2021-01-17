@@ -9,7 +9,7 @@
 <meta name="description" content="">
 <meta name="theme-color" content="#495057">
 <title>Markdown使用说明 | zd_blog</title>
-<link rel="shortcut icon" href="/favicon.ico?v=1610862223084">
+<link rel="shortcut icon" href="/favicon.ico?v=1610863897283">
 <link rel="stylesheet" href="/media/css/gemini.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
 <link
@@ -73,6 +73,8 @@
           
             
             
+              
+            
             <li class="nav-item ">
               
               
@@ -83,6 +85,8 @@
             </li>
           
             
+            
+              
             
             <li class="nav-item ">
               
@@ -95,6 +99,8 @@
           
             
             
+              
+            
             <li class="nav-item ">
               
               
@@ -104,6 +110,16 @@
               
             </li>
           
+          
+            
+              <li class="nav-item ">
+                <a href="/friends/" target="_self">
+                  
+                    <i class="fa fa-address-book"></i> 友情链接
+                  
+                </a>
+              </li>
+            
           
           
             <li id="fa_search" class="nav-item">
@@ -195,8 +211,6 @@
   
   
 
-  
-
 
 
   <div style="width: 100%; position: relative;">
@@ -247,6 +261,7 @@
 </li>
 <li><a href="#6-%E9%93%BE%E6%8E%A5">6 链接</a></li>
 <li><a href="#7-%E5%9B%BE%E7%89%87">7 图片</a></li>
+<li><a href="#8-%E8%A1%A8%E6%A0%BC">8 表格</a></li>
 </ul>
 
   </div>
@@ -540,12 +555,12 @@
     
     <span class="meta-item">
       <i class="fa fa-clock-o"></i>
-      <span>5<span class="language" data-lan="minute">分钟</span></span>
+      <span>6<span class="language" data-lan="minute">分钟</span></span>
     </span>
     <span class="meta-item">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-file-word-o"></i>
-      <span>1251<span class="pc-show language" data-lan="words">字数</span></span>
+      <span>1347<span class="pc-show language" data-lan="words">字数</span></span>
     </span>
     
     
@@ -810,7 +825,7 @@ ___
 <ul>
 <li>
 <p>插入本地图片：<br>
-本博客采用<code>Gridea + github pages</code>部署，本地图片会上传至GitHub库中(加载速度较慢)</p>
+本博客采用<code>Gridea + github pages</code>部署，本地图片会同步至GitHub库中(加载速度较慢)</p>
 <pre><code>  ![art text](https://zdblog.top/post-images/wallhaven-vgl5qp.jpg)
 </code></pre>
 <p>显示结果：<br>
@@ -836,7 +851,7 @@ ___
 </li>
 <li>
 <p>采取方案-图床<br>
-综合各种插入图片方式，采取图床的方案，这里选用&lt;sm.ms&gt;<br>
+综合各种插入图片方式，采取图床的方案，这里选用<a href="https://sm.ms">https://sm.ms</a><br>
 上传后界面：<br>
 <img src="https://i.loli.net/2021/01/17/PupZXoI72C4fgHW.png" alt="上传示例" loading="lazy"><br>
 可直接复制<code>HTML</code>或<code>Markdown</code></p>
@@ -853,6 +868,35 @@ ___
 <img src="https://i.loli.net/2021/01/17/RgdkyBlwOJirVW4.jpg" alt="wallhaven-vgl5qp.jpg" loading="lazy"></p>
 </li>
 </ul>
+<h1 id="8-表格">8 表格</h1>
+<p>Markdown制作表格使用<kbd>|</kbd>来分隔不同的单元格，使用<kbd>-</kbd>来分隔表头和其他行，使用<kbd>:-</kbd>,<kbd>-:</kbd>,<kbd>:-:</kbd>来实现左对齐，右对齐，居中对齐：</p>
+<pre><code>|表头|表头|表头|
+|:-|-:|:-:|
+|单元格|单元格|单元格|
+|单元格|单元格|单元格|
+</code></pre>
+<p>显示结果：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">表头</th>
+<th style="text-align:right">表头</th>
+<th style="text-align:center">表头</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">单元格</td>
+<td style="text-align:right">单元格</td>
+<td style="text-align:center">单元格</td>
+</tr>
+<tr>
+<td style="text-align:left">单元格</td>
+<td style="text-align:right">单元格</td>
+<td style="text-align:center">单元格</td>
+</tr>
+</tbody>
+</table>
 <hr class="footnotes-sep">
 <section class="footnotes">
 <ol class="footnotes-list">
@@ -1650,7 +1694,7 @@ ___
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;插入本地图片：&lt;br&gt;
-本博客采用&lt;code&gt;Gridea + github pages&lt;/code&gt;部署，本地图片会上传至GitHub库中(加载速度较慢)&lt;/p&gt;
+本博客采用&lt;code&gt;Gridea + github pages&lt;/code&gt;部署，本地图片会同步至GitHub库中(加载速度较慢)&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;  ![art text](https://zdblog.top/post-images/wallhaven-vgl5qp.jpg)
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;显示结果：&lt;br&gt;
@@ -1676,7 +1720,7 @@ ___
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;采取方案-图床&lt;br&gt;
-综合各种插入图片方式，采取图床的方案，这里选用&amp;lt;sm.ms&amp;gt;&lt;br&gt;
+综合各种插入图片方式，采取图床的方案，这里选用&lt;a href=&#34;https://sm.ms&#34;&gt;https://sm.ms&lt;/a&gt;&lt;br&gt;
 上传后界面：&lt;br&gt;
 &lt;img src=&#34;https://i.loli.net/2021/01/17/PupZXoI72C4fgHW.png&#34; alt=&#34;上传示例&#34; loading=&#34;lazy&#34;&gt;&lt;br&gt;
 可直接复制&lt;code&gt;HTML&lt;/code&gt;或&lt;code&gt;Markdown&lt;/code&gt;&lt;/p&gt;
@@ -1693,6 +1737,35 @@ ___
 &lt;img src=&#34;https://i.loli.net/2021/01/17/RgdkyBlwOJirVW4.jpg&#34; alt=&#34;wallhaven-vgl5qp.jpg&#34; loading=&#34;lazy&#34;&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
+&lt;h1 id=&#34;8-表格&#34;&gt;8 表格&lt;/h1&gt;
+&lt;p&gt;Markdown制作表格使用&lt;kbd&gt;|&lt;/kbd&gt;来分隔不同的单元格，使用&lt;kbd&gt;-&lt;/kbd&gt;来分隔表头和其他行，使用&lt;kbd&gt;:-&lt;/kbd&gt;,&lt;kbd&gt;-:&lt;/kbd&gt;,&lt;kbd&gt;:-:&lt;/kbd&gt;来实现左对齐，右对齐，居中对齐：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;|表头|表头|表头|
+|:-|-:|:-:|
+|单元格|单元格|单元格|
+|单元格|单元格|单元格|
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;显示结果：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:left&#34;&gt;表头&lt;/th&gt;
+&lt;th style=&#34;text-align:right&#34;&gt;表头&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;表头&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;单元格&lt;/td&gt;
+&lt;td style=&#34;text-align:right&#34;&gt;单元格&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;单元格&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;单元格&lt;/td&gt;
+&lt;td style=&#34;text-align:right&#34;&gt;单元格&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;单元格&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
 &lt;hr class=&#34;footnotes-sep&#34;&gt;
 &lt;section class=&#34;footnotes&#34;&gt;
 &lt;ol class=&#34;footnotes-list&#34;&gt;

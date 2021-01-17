@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://zdblog.top</id>
     <title>zd_blog</title>
-    <updated>2021-01-17T05:43:44.430Z</updated>
+    <updated>2021-01-17T06:11:42.939Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://zdblog.top"/>
     <link rel="self" href="https://zdblog.top/atom.xml"/>
@@ -266,7 +266,7 @@ ___
 <ul>
 <li>
 <p>插入本地图片：<br>
-本博客采用<code>Gridea + github pages</code>部署，本地图片会上传至GitHub库中(加载速度较慢)</p>
+本博客采用<code>Gridea + github pages</code>部署，本地图片会同步至GitHub库中(加载速度较慢)</p>
 <pre><code>  ![art text](https://zdblog.top/post-images/wallhaven-vgl5qp.jpg)
 </code></pre>
 <p>显示结果：<br>
@@ -292,7 +292,7 @@ ___
 </li>
 <li>
 <p>采取方案-图床<br>
-综合各种插入图片方式，采取图床的方案，这里选用&lt;sm.ms&gt;<br>
+综合各种插入图片方式，采取图床的方案，这里选用<a href="https://sm.ms">https://sm.ms</a><br>
 上传后界面：<br>
 <img src="https://i.loli.net/2021/01/17/PupZXoI72C4fgHW.png" alt="上传示例" loading="lazy"><br>
 可直接复制<code>HTML</code>或<code>Markdown</code></p>
@@ -309,6 +309,35 @@ ___
 <img src="https://i.loli.net/2021/01/17/RgdkyBlwOJirVW4.jpg" alt="wallhaven-vgl5qp.jpg" loading="lazy"></p>
 </li>
 </ul>
+<h1 id="8-表格">8 表格</h1>
+<p>Markdown制作表格使用<kbd>|</kbd>来分隔不同的单元格，使用<kbd>-</kbd>来分隔表头和其他行，使用<kbd>:-</kbd>,<kbd>-:</kbd>,<kbd>:-:</kbd>来实现左对齐，右对齐，居中对齐：</p>
+<pre><code>|表头|表头|表头|
+|:-|-:|:-:|
+|单元格|单元格|单元格|
+|单元格|单元格|单元格|
+</code></pre>
+<p>显示结果：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">表头</th>
+<th style="text-align:right">表头</th>
+<th style="text-align:center">表头</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">单元格</td>
+<td style="text-align:right">单元格</td>
+<td style="text-align:center">单元格</td>
+</tr>
+<tr>
+<td style="text-align:left">单元格</td>
+<td style="text-align:right">单元格</td>
+<td style="text-align:center">单元格</td>
+</tr>
+</tbody>
+</table>
 <hr class="footnotes-sep">
 <section class="footnotes">
 <ol class="footnotes-list">
