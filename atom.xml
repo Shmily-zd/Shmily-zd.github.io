@@ -2,13 +2,148 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://zdblog.top</id>
     <title>zd_blog</title>
-    <updated>2021-01-24T03:00:50.178Z</updated>
+    <updated>2021-01-24T04:24:20.847Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://zdblog.top"/>
     <link rel="self" href="https://zdblog.top/atom.xml"/>
     <logo>https://zdblog.top/images/avatar.png</logo>
     <icon>https://zdblog.top/favicon.ico</icon>
     <rights>All rights reserved 2021, zd_blog</rights>
+    <entry>
+        <title type="html"><![CDATA[python_命名规范_基于PEP-8]]></title>
+        <id>https://zdblog.top/post/python_-ming-ming-gui-fan-_-ji-yu-pep-8/</id>
+        <link href="https://zdblog.top/post/python_-ming-ming-gui-fan-_-ji-yu-pep-8/">
+        </link>
+        <updated>2021-01-24T04:20:48.000Z</updated>
+        <content type="html"><![CDATA[<p>Python库的命名规范很乱，从来没能做到完全一致。但是目前有一些推荐的命名标准。新的模块和包（包括第三方框架）应该用这套标准，但当一个已有库采用了不同的风格，推荐保持内部一致性。</p>
+<h2 id="overriding-principle-最重要的原则">Overriding Principle 最重要的原则</h2>
+<p>那些暴露给用户的API接口的命名，应该遵循反映使用场景而不是实现的原则。</p>
+<h2 id="descriptive-naming-styles-描述命名风格">Descriptive: Naming Styles 描述：命名风格</h2>
+<p>有许多不同的命名风格。这里能够帮助大家识别正在使用什么样的命名风格，而不考虑他们为什么使用。<br>
+以下是常见的命名方式：</p>
+<ul>
+<li>
+<p><code>b</code>（单个小写字母）</p>
+</li>
+<li>
+<p><code>B</code>（单个大写字母）</p>
+</li>
+<li>
+<p><code>lowercase</code> 小写字母</p>
+</li>
+<li>
+<p><code>lower_case_with_underscores</code> 使用下划线分隔的小写字母</p>
+</li>
+<li>
+<p><code>UPPERCASE</code> 大写字母</p>
+</li>
+<li>
+<p><code>UPPER_CASE_WITH_UNDERSCORES</code> 使用下划线分隔的大写字母</p>
+</li>
+<li>
+<p><code>CapitalizedWords</code>（或者叫 <code>CapWords</code>，或者叫<code>CamelCase</code> 驼峰命名法 —— 这么命名是因为字母看上去有起伏的外观<a href="https://blog.csdn.net/ratsniper/article/details/78954852#fn:4" title="See footnote">5</a>）。有时候也被称为StudlyCaps。<br>
+注意：当在首字母大写的风格中用到缩写时，所有缩写的字母用大写，因此，<code>HTTPServerError</code> 比 <code>HttpServerError</code> 好。</p>
+</li>
+<li>
+<p><code>mixedCase</code>（不同于首字母大写，第一个单词的首字母小写）</p>
+</li>
+<li>
+<p><code>Capitalized_Words_With_Underscores</code>（巨丑无比！）</p>
+</li>
+</ul>
+<p>也有用唯一的短前缀把相关命名组织在一起的方法。这在Python中不常用，但还是提一下。比如，<code>os.stat()</code>函数中包含类似以<code>st\_mode</code>，<code>st\_size</code>，<code>st_mtime</code>这种传统命名方式命名的变量。（这么做是为了与 POSIX 系统的调用一致，以帮助程序员熟悉它。）<br>
+X11库的所有公共函数都加了前缀X。在Python里面没必要这么做，因为属性和方法在调用的时候都会用类名做前缀，函数名用模块名做前缀。<br>
+另外，下面这种用前缀或结尾下划线的特殊格式是被认可的（通常和一些约定相结合）：</p>
+<ul>
+<li>
+<p><code>_single_leading_underscore</code>：（单下划线开头）弱“内部使用”指示器。比如 from M import * 是不会导入以下划线开始的对象的。</p>
+</li>
+<li>
+<p><code>single_trailing_underscore_</code>：（单下划线结尾）这是避免和Python内部关键词冲突的一种约定，比如：</p>
+<pre><code>tkinter.Toplevel(master, class_=’ClassName’)
+</code></pre>
+</li>
+<li>
+<p><code>__double_leading_underscore</code>：（双下划线开头）当这样命名一个类的属性时，调用它的时候名字会做矫正（在类FooBar中，<code>__boo</code>变成了<code>_FooBar__boo</code>；见下文）。</p>
+</li>
+<li>
+<p><code>__double_leading_and_trailing_underscore__</code>：（双下划线开头，双下划线结尾）“magic”对象或者存在于用户控制的命名空间内的属性，例如：<code>__init__</code>,<code>__import__</code>或者<code>__file__</code>。除了作为文档之外，永远不要命这样的名。</p>
+</li>
+</ul>
+<h2 id="prescriptive-naming-conventions-约定俗成命名约定">Prescriptive: Naming Conventions 约定俗成：命名约定</h2>
+<h3 id="names-to-avoid-应避免的名字">Names to Avoid 应避免的名字</h3>
+<p>永远不要使用字母<code>l</code>（小写的L），<code>O</code>（大写的O），或者<code>I</code>（大写的I）作为单字符变量名。<br>
+在有些字体里，这些字符无法和数字<code>0</code>和<code>1</code>区分，如果想用<code>l</code>，用<code>L</code>代替。</p>
+<h3 id="package-and-module-names-包名和模块名">Package and Module Names 包名和模块名</h3>
+<p>模块应该用简短全小写的名字，如果为了提升可读性，下划线也是可以用的。Python包名也应该使用简短全小写的名字，但不建议用下划线。<br>
+当使用C或者C++编写了一个依赖于提供高级（更面向对象）接口的Python模块的扩展模块，这个C/C++模块需要一个下划线前缀（例如：<code>_socket</code>）</p>
+<h3 id="class-names-类名">Class Names 类名</h3>
+<p>类名一般使用首字母大写的约定。<br>
+在接口被文档化并且主要被用于调用的情况下，可以使用函数的命名风格代替。<br>
+注意，对于内置的变量命名有一个单独的约定：大部分内置变量是单个单词（或者两个单词连接在一起），首字母大写的命名法只用于异常名或者内部的常量。</p>
+<h3 id="type-variable-names-类型变量名">Type Variable Names 类型变量名</h3>
+<p>在<a href="https://www.python.org/dev/peps/pep-0484">PEP 484中</a>引入的类型变量的名称通常应使用CapWords，而应使用短名称：T，AnyStr，Num。建议将后缀_co或_contra添加到用于分别声明协变或反变行为的变量中：</p>
+<pre><code>from typing import TypeVar
+
+VT_co = TypeVar('VT_co', covariant=True)
+KT_contra = TypeVar('KT_contra', contravariant=True)
+</code></pre>
+<h3 id="exception-names-异常名">Exception Names 异常名</h3>
+<p>因为异常一般都是类，所有类的命名方法在这里也适用。然而，你需要在异常名后面加上<code>Error</code>后缀（如果异常确实是一个错误）。</p>
+<h3 id="global-variable-names-全局变量名">Global Variable Names 全局变量名</h3>
+<p>（我们希望这一类变量只在模块内部使用。）约定和函数命名规则一样。<br>
+通过<code>from M import *</code>导入的模块应该使用all机制去防止内部的接口对外暴露，或者使用在全局变量前加下划线的方式（表明这些全局变量是模块内非公有）。</p>
+<h3 id="function-names-函数名">Function Names 函数名</h3>
+<p>函数名应该小写，如果想提高可读性可以用下划线分隔。<br>
+大小写混合仅在为了兼容原来主要以大小写混合风格的情况下使用（比如 <code>threading.py</code>），保持向后兼容性。</p>
+<h3 id="function-and-method-arguments-函数和方法参数">Function and method arguments 函数和方法参数</h3>
+<p>始终要将 <code>self</code>作为实例方法的的第一个参数。<br>
+始终要将<code>cls</code>作为类静态方法的第一个参数。<br>
+如果函数的参数名和已有的关键词冲突，在最后加单一下划线比缩写或随意拼写更好。因此<code>class_</code>比<code>clss</code>更好。（也许最好用同义词来避免这种冲突）</p>
+<h3 id="method-names-and-instance-variables-方法名和实例变量">Method Names and Instance Variables 方法名和实例变量</h3>
+<p>遵循这样的函数命名规则：使用下划线分隔小写单词以提高可读性。<br>
+在非共有方法和实例变量前使用单下划线。<br>
+通过双下划线前缀触发Python的命名转换规则来避免和子类的命名冲突。<br>
+Python通过类名对这些命名进行转换：如果类 <code>Foo</code>有一个叫 <code>__a</code> 的成员变量， 它无法通过 <code>Foo.__a</code> 访问。（执着的用户可以通过 <code>Foo._Foo__a</code> 访问。）一般来说，前缀双下划线用来避免类中的属性命名与子类冲突的情况。<br>
+注意：关于<code>__names</code>的用法存在争论（见下文）。</p>
+<h3 id="constants-常量">Constants 常量</h3>
+<p>常量通常定义在模块级，通过下划线分隔的全大写字母命名。例如： <code>MAX_OVERFLOW</code> 和 <code>TOTAL</code>。</p>
+<h3 id="designing-for-inheritance-继承的设计">Designing for inheritance 继承的设计</h3>
+<p>始终要考虑到一个类的方法和实例变量（统称：属性）应该是共有还是非共有。如果存在疑问，那就选非共有；因为将一个非共有变量转为共有比反过来更容易。<br>
+公共属性是那些与类无关的客户使用的属性，并承诺避免向后不兼容的更改。非共有属性是那些不打算让第三方使用的属性；你不需要承诺非共有属性不会被修改或被删除。<br>
+我们不使用“私有（<code>private</code>）”这个说法，是因为在Python中目前还没有真正的私有属性（为了避免大量不必要的常规工作）。<br>
+另一种属性作为子类API的一部分（在其他语言中通常被称为“protected”）。有些类是专为继承设计的，用来扩展或者修改类的一部分行为。当设计这样的类时，要谨慎决定哪些属性时公开的，哪些是作为子类的API，哪些只能在基类中使用。<br>
+贯彻这样的思想，一下是一些让代码<code>Pythonic</code>的准则：</p>
+<ul>
+<li>
+<p>公共属性不应该有前缀下划线。</p>
+</li>
+<li>
+<p>如果公共属性名和关键字冲突，在属性名之后增加一个下划线。这比缩写和随意拼写好很多。（然而，尽管有这样的规则，在作为参数或者变量时，<code>cls</code>是表示<code>类</code>最好的选择，特别是作为类方法的第一个参数。）<br>
+注意1：参考之前的类方法参数命名建议</p>
+</li>
+<li>
+<p>对于单一的共有属性数据，最好直接对外暴露它的变量名，而不是通过负责的 存取器（<code>accessor</code>）/突变（<code>mutator</code>） 方法。请记住，如果你发现一个简单的属性需要成长为一个功能行为，那么Python为这种将来会出现的扩展提供了一个简单的途径。在这种情况下，使用属性去隐藏属性数据访问背后的逻辑。<br>
+注意1：属性只在<code>new-style</code>类中起作用。<br>
+注意2：尽管功能方法对于类似缓存的负面影响比较小，但还是要尽量避免。<br>
+注意3：属性标记会让调用者认为开销（相当的）小，避免用属性做开销大的计算。</p>
+</li>
+<li>
+<p>如果你的类打算用来继承的话，并且这个类里有不希望子类使用的属性，就要考虑使用双下划线前缀并且没有后缀下划线的命名方式。这会调用Python的命名转换算法，将类的名字加入到属性名里。这样做可以帮助避免在子类中不小心包含了相同的属性名而产生的冲突。<br>
+注意1：只有类名才会整合进属性名，如果子类的属性名和类名和父类都相同，那么你还是会有命名冲突的问题。<br>
+注意2：命名转换会在某些场景使用起来不太方便，例如调试，<code>__getattr__()</code>。然而命名转换的算法有很好的文档说明并且很好操作。<br>
+注意3：不是所有人都喜欢命名转换。尽量避免意外的名字冲突和潜在的高级调用。</p>
+</li>
+</ul>
+<h2 id="public-and-internal-interfaces-公共和内部的接口">Public and internal interfaces 公共和内部的接口</h2>
+<p>任何向后兼容保证只适用于公共接口，因此，用户清晰地区分公共接口和内部接口非常重要。<br>
+文档化的接口被认为是公开的，除非文档明确声明它们是临时或内部接口，不受通常的向后兼容性保证。所有未记录的接口都应该是内部的。<br>
+为了更好地支持内省（<code>introspection</code>），模块应该使用<code>__all__</code>属性显式地在它们的公共API中声明名称。将<code>__all__</code>设置为空列表表示模块没有公共API。<br>
+即使通过<code>__all__</code>设置过，内部接口（包，模块，类，方法，属性或其他名字）依然需要单个下划线前缀。<br>
+如果一个命名空间（包，模块，类）被认为是内部的，那么包含它的接口也应该被认为是内部的。<br>
+导入的名称应该始终被视作是一个实现的细节。其他模块必须不能间接访问这样的名称，除非它是包含它的模块中有明确的文档说明的API，例如 os.path 或者是一个包里从子模块公开函数接口的 <code>__init__</code> 模块。</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[pyhon_风格规范_Google]]></title>
         <id>https://zdblog.top/post/pyhon_-feng-ge-gui-fan-_google/</id>

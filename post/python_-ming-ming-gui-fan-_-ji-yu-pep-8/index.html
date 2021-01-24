@@ -8,7 +8,7 @@
 <meta name="keywords" content="Gridea静态个人博客">
 <meta name="description" content="">
 <meta name="theme-color" content="#495057">
-<title>zd_blog</title>
+<title>python_命名规范_基于PEP-8 | zd_blog</title>
 <link rel="shortcut icon" href="/favicon.ico?v=1611462258977">
 <link rel="stylesheet" href="/media/css/gemini.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
@@ -38,6 +38,8 @@
 
 
 
+  <meta name="description" content="python_命名规范_基于PEP-8" />
+  <meta name="keywords" content="python,代码规范" />
 </head>
 
 <body>
@@ -157,10 +159,26 @@
   <div class="main-continer">
     
     <div
-      class="section-layout  gemini">
+      class="section-layout gemini ">
       <div class="section-layout-wrapper">
-        <div id="sidebarMeta" class="sidebar">
-    
+        
+
+<div class="sidebar">
+  
+    <div class="sidebar-box box-shadow-wrapper bg-color right-motion" id="sidebar">
+      
+        <div class="post-list-sidebar">
+          <div class="sidebar-title">
+            <span id="tocSideBar" class="sidebar-title-item sidebar-title-active language" data-lan="index">文章目录</span>
+            <span id="metaSideBar" class="sidebar-title-item language" data-lan="preview">站点概览</span>
+          </div>
+        </div>
+      
+      <div class="sidebar-body gemini" id="sidebar_body">
+        
+          
+            <div class="post-side-meta" id="post_side_meta">
+              
 <div class="sidebar-wrapper box-shadow-wrapper bg-color">
   <div class="sidebar-item">
     <img class="site-author-image right-motion" src="/images/avatar.png"/>
@@ -201,70 +219,570 @@
   </div>
 
 </div>
+            </div>
+            <div class="post-toc sidebar-body-active" id="post_toc" style="opacity: 1;">
+              <div class="toc-box right-motion">
+  <div class="toc-wrapper  no_compress"
+    id="toc_wrapper">
+    <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#overriding-principle-%E6%9C%80%E9%87%8D%E8%A6%81%E7%9A%84%E5%8E%9F%E5%88%99">Overriding Principle 最重要的原则</a></li>
+<li><a href="#descriptive-naming-styles-%E6%8F%8F%E8%BF%B0%E5%91%BD%E5%90%8D%E9%A3%8E%E6%A0%BC">Descriptive: Naming Styles 描述：命名风格</a></li>
+<li><a href="#prescriptive-naming-conventions-%E7%BA%A6%E5%AE%9A%E4%BF%97%E6%88%90%E5%91%BD%E5%90%8D%E7%BA%A6%E5%AE%9A">Prescriptive: Naming Conventions 约定俗成：命名约定</a>
+<ul>
+<li><a href="#names-to-avoid-%E5%BA%94%E9%81%BF%E5%85%8D%E7%9A%84%E5%90%8D%E5%AD%97">Names to Avoid 应避免的名字</a></li>
+<li><a href="#package-and-module-names-%E5%8C%85%E5%90%8D%E5%92%8C%E6%A8%A1%E5%9D%97%E5%90%8D">Package and Module Names 包名和模块名</a></li>
+<li><a href="#class-names-%E7%B1%BB%E5%90%8D">Class Names 类名</a></li>
+<li><a href="#type-variable-names-%E7%B1%BB%E5%9E%8B%E5%8F%98%E9%87%8F%E5%90%8D">Type Variable Names 类型变量名</a></li>
+<li><a href="#exception-names-%E5%BC%82%E5%B8%B8%E5%90%8D">Exception Names 异常名</a></li>
+<li><a href="#global-variable-names-%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F%E5%90%8D">Global Variable Names 全局变量名</a></li>
+<li><a href="#function-names-%E5%87%BD%E6%95%B0%E5%90%8D">Function Names 函数名</a></li>
+<li><a href="#function-and-method-arguments-%E5%87%BD%E6%95%B0%E5%92%8C%E6%96%B9%E6%B3%95%E5%8F%82%E6%95%B0">Function and method arguments 函数和方法参数</a></li>
+<li><a href="#method-names-and-instance-variables-%E6%96%B9%E6%B3%95%E5%90%8D%E5%92%8C%E5%AE%9E%E4%BE%8B%E5%8F%98%E9%87%8F">Method Names and Instance Variables 方法名和实例变量</a></li>
+<li><a href="#constants-%E5%B8%B8%E9%87%8F">Constants 常量</a></li>
+<li><a href="#designing-for-inheritance-%E7%BB%A7%E6%89%BF%E7%9A%84%E8%AE%BE%E8%AE%A1">Designing for inheritance 继承的设计</a></li>
+</ul>
+</li>
+<li><a href="#public-and-internal-interfaces-%E5%85%AC%E5%85%B1%E5%92%8C%E5%86%85%E9%83%A8%E7%9A%84%E6%8E%A5%E5%8F%A3">Public and internal interfaces 公共和内部的接口</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
 </div>
+
 <script>
-  let sidebarMeta = document.querySelector('#sidebarMeta');
-  let scheme = 'gemini';
-  let sidebarWrapper = document.querySelector('.sidebar-wrapper');
-  if (sidebarMeta && (scheme === 'pisces' || scheme === 'gemini')) {
-    document.addEventListener('scroll', function(e) {
-      if (document.scrollingElement.scrollTop > parseInt(sidebarMeta.style.marginTop) + 10) {
-        sidebarWrapper.classList.add('home-sidebar-fixed')
-      } else {
-        sidebarWrapper.classList.remove('home-sidebar-fixed')
+
+  let lastTop = 0, lList = [], hList = [], postBody, lastIndex = -1;
+  let active = 'active-show', activeClass = 'active-current';
+  let tocWrapper = document.querySelector('#toc_wrapper');
+  let tocContent = tocWrapper.children[0];
+  let autoNumber = tocWrapper && tocWrapper.classList.contains('auto-number');
+
+  function addTocNumber(elem, deep) {
+    if (!elem) {
+      return;
+    }
+    let prop = elem.__proto__;
+
+    if (prop === HTMLUListElement.prototype) {
+      for (let i = 0; i < elem.children.length; i++) {
+        addTocNumber(elem.children[i], deep + (i + 1) + '.');
       }
+    } else if (prop === HTMLLIElement.prototype) {
+      // 保存li元素
+      if (elem.children[0] && elem.children[0].__proto__ === HTMLAnchorElement.prototype) {
+        lList.push(elem);
+      }
+      for (let i = 0; i < elem.children.length; i++) {
+        let cur = elem.children[i];
+        if (cur.__proto__ === HTMLAnchorElement.prototype) {
+          if (autoNumber) {
+            cur.text = deep + ' ' + cur.text;
+          }
+        } else if (cur.__proto__ === HTMLUListElement.prototype) {
+          addTocNumber(cur, deep);
+        }
+      }
+    }
+  }
+
+  function removeParentActiveClass() {
+    let parents = tocContent.querySelectorAll('.' + active)
+    parents.forEach(function (elem) {
+      elem.classList.remove(active);
     });
   }
-  </script>
-        <div class="section-box tag-line box-shadow-wrapper">
-          <section class="section tags-section posts-expand bg-color">
-            <div class="padding-wrapper">
-  <div class="tag-timeline-box">
-    <div class="tag-timeline-wrapper">
-      <div class="tag-timeline-title">
-        <h2>
-          Gridea
-          <small class="language" data-lan="tag">标签</small>
-        </h2>
+
+  function addActiveClass(index) {
+    if (index >= 0 && index < hList.length) {
+      lList[index].classList.add(activeClass);
+    }
+  }
+
+  function removeActiveClass(index) {
+    if (index >= 0 && index < hList.length) {
+      lList[index].classList.remove(activeClass);
+    }
+  }
+
+  function addActiveLiElemment(elem, parent) {
+    if (!elem || elem === parent) {
+      return;
+    } else {
+      if (elem.__proto__ === HTMLLIElement.prototype) {
+        elem.classList.add(active);
+      }
+      addActiveLiElemment(elem.parentElement, parent);
+    }
+  }
+
+  function showToc() {
+    if (tocWrapper) {
+      postBody = document.querySelector('#post_body');
+      for (let i = 0; i < postBody.children.length; i++) {
+        if (postBody.children[i].__proto__ === HTMLHeadingElement.prototype) {
+          hList.push(postBody.children[i]);
+        }
+      }
+      if (tocWrapper.classList.contains('compress')) {
+        tocContent.classList.add('closed');
+      } else if (tocWrapper.classList.contains('no_compress')) {
+        tocContent.classList.add('expanded');
+      } else {
+        if (hList.length > 10) {
+          active = 'active-hidden'
+          tocContent.classList.add('closed');
+        } else {
+          tocContent.classList.add('expanded');
+        }
+      }
+    }
+  }
+
+  (function () {
+    // 处理不是从#一级标题开始目录
+    if (tocContent.children.length === 1 && tocContent.children[0].__proto__ === HTMLLIElement.prototype) {
+      let con = tocContent.children[0].children[0];
+      tocContent.innerHTML = con.innerHTML;
+    }
+    let markdownItTOC = document.querySelector('.markdownIt-TOC');
+    let innerHeight = window.innerHeight;
+    markdownItTOC.style = `max-height: ${innerHeight - 80 > 0 ? innerHeight - 80 : innerHeight}px`
+    addTocNumber(tocContent, '');
+  })();
+
+  document.addEventListener('scroll', function (e) {
+    if (lList.length <= 0) {
+      return;
+    }
+    let scrollTop = document.scrollingElement.scrollTop + 10;
+    let dir;
+
+    if (lastTop - scrollTop > 0) {
+      dir = 'up';
+    } else {
+      dir = 'down';
+    }
+
+    lastTop = scrollTop;
+    if (scrollTop <= 0) {
+      if (lastIndex >= 0 && lastIndex < hList.length) {
+        lList[lastIndex].classList.remove(activeClass);
+      }
+      return;
+    }
+
+    let current = 0, hasFind = false;
+    for (let i = 0; i < hList.length; i++) {
+      if (hList[i].offsetTop > scrollTop) {
+        current = i;
+        hasFind = true;
+        break;
+      }
+    }
+    if (!hasFind && scrollTop > lList[lList.length - 1].offsetTop) {
+      current = hList.length - 1;
+    } else {
+      current--;
+    }
+    if (dir === 'down') {
+      if (current > lastIndex) {
+        addActiveClass(current);
+        removeActiveClass(lastIndex)
+        lastIndex = current;
+        removeParentActiveClass();
+        lList[current] && addActiveLiElemment(lList[current].parentElement, tocContent);
+      }
+    } else {
+      if (current < lastIndex) {
+        addActiveClass(current);
+        removeActiveClass(lastIndex);
+        lastIndex = current;
+        removeParentActiveClass();
+        lList[current] && addActiveLiElemment(lList[current].parentElement, tocContent);
+      }
+    }
+  });
+
+
+  window.addEventListener('load', function () {
+    showToc();
+    document.querySelector('#sidebar').style = 'display: block;';
+    tocWrapper.classList.add('toc-active');
+    setTimeout(function () {
+      if ("createEvent" in document) {
+        let evt = document.createEvent("HTMLEvents");
+        evt.initEvent("scroll", false, true);
+        document.dispatchEvent(evt);
+      }
+      else {
+        document.fireEvent("scroll");
+      }
+    }, 500)
+  })
+
+</script>
+            </div>
+          
+        
       </div>
+    </div>
+  
+</div>
+<script>
+  const SIDEBAR_TITLE_ACTIVE = 'sidebar-title-active';
+  const SIDEBAR_BODY_ACTIVE = 'sidebar-body-active';
+  const SLIDE_UP_IN = 'slide-up-in';
+
+  let sidebar = document.querySelector('#sidebar'),
+  tocSideBar = document.querySelector('#tocSideBar'),
+  metaSideBar = document.querySelector('#metaSideBar'),
+  postToc = document.querySelector('#post_toc'),
+  postSiteMeta = document.querySelector('#post_side_meta'),
+  sidebarTitle = document.querySelector('.sidebar-title'),
+  sidebarBody = document.querySelector('#sidebar_body');
+
+  tocSideBar && tocSideBar.addEventListener('click', (e) => {
+    toggleSidebar(e);
+  });
+
+  metaSideBar && metaSideBar.addEventListener('click', (e) => {
+    toggleSidebar(e);
+  });
+
+  function toggleSidebar(e) {
+    let currentTitle = document.querySelector("."+SIDEBAR_TITLE_ACTIVE);
+    if (currentTitle == e.srcElement) {
+      return ;
+    }
+    let current, showElement, hideElement;
+    if (e.srcElement == metaSideBar) {
+      showElement = postSiteMeta;
+      hideElement = postToc;
+    } else if (e.srcElement == tocSideBar){
+      showElement = postToc;
+      hideElement = postSiteMeta;
+    }
+    currentTitle.classList.remove(SIDEBAR_TITLE_ACTIVE);
+    e.srcElement.classList.add(SIDEBAR_TITLE_ACTIVE);
+
+    window.Velocity(hideElement, 'stop');
+    window.Velocity(hideElement, 'transition.slideUpOut', {
+      display: 'none',
+      duration: 200,
+      complete: function () {
+        window.Velocity(showElement, 'transition.slideDownIn', {
+          duration: 200
+        });
+      }
+    })
+    hideElement.classList.remove(SIDEBAR_BODY_ACTIVE);
+    showElement.classList.add(SIDEBAR_BODY_ACTIVE);
+  }
+
+  postToc && postToc.addEventListener('transitionend', function() {
+    this.classList.remove(SLIDE_UP_IN);
+  });
+
+  if (sidebarBody) {
+    if (sidebarBody.classList.contains('pisces') || sidebarBody.classList.contains('gemini')) {
+      let hasFix = false;
+      let scrollEl = document.querySelector('.main-continer');
+      let limitTop = document.querySelector('#nav_ul').children.length * 42 + 162;
+      window.addEventListener('scroll', function(e) {
+        if (document.scrollingElement.scrollTop >= limitTop) {
+          if (!hasFix) {
+            sidebar.classList.add('sidebar-fixed');
+            hasFix = true;
+          }
+        } else {
+          if (hasFix) {
+            sidebar.classList.remove('sidebar-fixed');
+            hasFix = false;
+          }
+        }
+      });
+    }
+  }
+  
+</script>
+        <div class="section-box box-shadow-wrapper">
+          <div class="section bg-color post post-page">
+            <section class="post-header">
+  <h1 class="post-title">
+    <a class="post-title-link" href="https://zdblog.top/post/python_-ming-ming-gui-fan-_-ji-yu-pep-8/">
+      python_命名规范_基于PEP-8
+    </a>
+  </h1>
+  <div class="post-meta">
+    
+    <span class="meta-item pc-show">
+      <i class="fa fa-calendar-o"></i>
+      <span class="language" data-lan="publish">发布于</span>
+      <span class="publish-time" data-t="2021-01-24 12:20:48">2021-01-24</span>
+      <span class="post-meta-divider pc-show">|</span>
+    </span>
+    
+    <span class="meta-item">
+      <i class="fa fa-folder-o"></i>
+      <span class="pc-show language" data-lan="category-in">分类于</span>
+      
+      
+      <a href="https://zdblog.top/tag/nYn4q_7ze/">
+        <span>python</span>
+      </a>、
       
       
       
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      <a href="https://zdblog.top/post/hello-gridea/">
-        <div class="motion-warpper">
-          <div class="tag-post-node">
-            <h1>
-              12-12
-              <small>Hello Gridea</small>
-            </h1>
-          </div>
-        </div>
+      <a href="https://zdblog.top/tag/NNQrqe37F/">
+        <span>代码规范</span>
       </a>
       
       
+    </span>
+    <span class="post-meta-divider">|</span>
+    
+    <span class="meta-item">
+      <i class="fa fa-clock-o"></i>
+      <span>10<span class="language" data-lan="minute">分钟</span></span>
+    </span>
+    <span class="meta-item">
+      <span class="post-meta-divider">|</span>
+      <i class="fa fa-file-word-o"></i>
+      <span>2760<span class="pc-show language" data-lan="words">字数</span></span>
+    </span>
+    
+    
+    
+    <span id="/post/python_-ming-ming-gui-fan-_-ji-yu-pep-8/" data-flag-title="python_命名规范_基于PEP-8" class="meta-item pc-show leancloud_visitors">
+      <span class="post-meta-divider">|</span>
+      <i class="fa fa-eye"></i>
+      <span><span class="language" data-lan="view">浏览量</span>：<span class="leancloud-visitors-count"></span></span>
+    </span>
+    
+  </div>
+</section>
+            <div class="post-body next-md-body" id="post_body">
+              <p>Python库的命名规范很乱，从来没能做到完全一致。但是目前有一些推荐的命名标准。新的模块和包（包括第三方框架）应该用这套标准，但当一个已有库采用了不同的风格，推荐保持内部一致性。</p>
+<h2 id="overriding-principle-最重要的原则">Overriding Principle 最重要的原则</h2>
+<p>那些暴露给用户的API接口的命名，应该遵循反映使用场景而不是实现的原则。</p>
+<h2 id="descriptive-naming-styles-描述命名风格">Descriptive: Naming Styles 描述：命名风格</h2>
+<p>有许多不同的命名风格。这里能够帮助大家识别正在使用什么样的命名风格，而不考虑他们为什么使用。<br>
+以下是常见的命名方式：</p>
+<ul>
+<li>
+<p><code>b</code>（单个小写字母）</p>
+</li>
+<li>
+<p><code>B</code>（单个大写字母）</p>
+</li>
+<li>
+<p><code>lowercase</code> 小写字母</p>
+</li>
+<li>
+<p><code>lower_case_with_underscores</code> 使用下划线分隔的小写字母</p>
+</li>
+<li>
+<p><code>UPPERCASE</code> 大写字母</p>
+</li>
+<li>
+<p><code>UPPER_CASE_WITH_UNDERSCORES</code> 使用下划线分隔的大写字母</p>
+</li>
+<li>
+<p><code>CapitalizedWords</code>（或者叫 <code>CapWords</code>，或者叫<code>CamelCase</code> 驼峰命名法 —— 这么命名是因为字母看上去有起伏的外观<a href="https://blog.csdn.net/ratsniper/article/details/78954852#fn:4" title="See footnote">5</a>）。有时候也被称为StudlyCaps。<br>
+注意：当在首字母大写的风格中用到缩写时，所有缩写的字母用大写，因此，<code>HTTPServerError</code> 比 <code>HttpServerError</code> 好。</p>
+</li>
+<li>
+<p><code>mixedCase</code>（不同于首字母大写，第一个单词的首字母小写）</p>
+</li>
+<li>
+<p><code>Capitalized_Words_With_Underscores</code>（巨丑无比！）</p>
+</li>
+</ul>
+<p>也有用唯一的短前缀把相关命名组织在一起的方法。这在Python中不常用，但还是提一下。比如，<code>os.stat()</code>函数中包含类似以<code>st\_mode</code>，<code>st\_size</code>，<code>st_mtime</code>这种传统命名方式命名的变量。（这么做是为了与 POSIX 系统的调用一致，以帮助程序员熟悉它。）<br>
+X11库的所有公共函数都加了前缀X。在Python里面没必要这么做，因为属性和方法在调用的时候都会用类名做前缀，函数名用模块名做前缀。<br>
+另外，下面这种用前缀或结尾下划线的特殊格式是被认可的（通常和一些约定相结合）：</p>
+<ul>
+<li>
+<p><code>_single_leading_underscore</code>：（单下划线开头）弱“内部使用”指示器。比如 from M import * 是不会导入以下划线开始的对象的。</p>
+</li>
+<li>
+<p><code>single_trailing_underscore_</code>：（单下划线结尾）这是避免和Python内部关键词冲突的一种约定，比如：</p>
+<pre><code>tkinter.Toplevel(master, class_=’ClassName’)
+</code></pre>
+</li>
+<li>
+<p><code>__double_leading_underscore</code>：（双下划线开头）当这样命名一个类的属性时，调用它的时候名字会做矫正（在类FooBar中，<code>__boo</code>变成了<code>_FooBar__boo</code>；见下文）。</p>
+</li>
+<li>
+<p><code>__double_leading_and_trailing_underscore__</code>：（双下划线开头，双下划线结尾）“magic”对象或者存在于用户控制的命名空间内的属性，例如：<code>__init__</code>,<code>__import__</code>或者<code>__file__</code>。除了作为文档之外，永远不要命这样的名。</p>
+</li>
+</ul>
+<h2 id="prescriptive-naming-conventions-约定俗成命名约定">Prescriptive: Naming Conventions 约定俗成：命名约定</h2>
+<h3 id="names-to-avoid-应避免的名字">Names to Avoid 应避免的名字</h3>
+<p>永远不要使用字母<code>l</code>（小写的L），<code>O</code>（大写的O），或者<code>I</code>（大写的I）作为单字符变量名。<br>
+在有些字体里，这些字符无法和数字<code>0</code>和<code>1</code>区分，如果想用<code>l</code>，用<code>L</code>代替。</p>
+<h3 id="package-and-module-names-包名和模块名">Package and Module Names 包名和模块名</h3>
+<p>模块应该用简短全小写的名字，如果为了提升可读性，下划线也是可以用的。Python包名也应该使用简短全小写的名字，但不建议用下划线。<br>
+当使用C或者C++编写了一个依赖于提供高级（更面向对象）接口的Python模块的扩展模块，这个C/C++模块需要一个下划线前缀（例如：<code>_socket</code>）</p>
+<h3 id="class-names-类名">Class Names 类名</h3>
+<p>类名一般使用首字母大写的约定。<br>
+在接口被文档化并且主要被用于调用的情况下，可以使用函数的命名风格代替。<br>
+注意，对于内置的变量命名有一个单独的约定：大部分内置变量是单个单词（或者两个单词连接在一起），首字母大写的命名法只用于异常名或者内部的常量。</p>
+<h3 id="type-variable-names-类型变量名">Type Variable Names 类型变量名</h3>
+<p>在<a href="https://www.python.org/dev/peps/pep-0484">PEP 484中</a>引入的类型变量的名称通常应使用CapWords，而应使用短名称：T，AnyStr，Num。建议将后缀_co或_contra添加到用于分别声明协变或反变行为的变量中：</p>
+<pre><code>from typing import TypeVar
+
+VT_co = TypeVar('VT_co', covariant=True)
+KT_contra = TypeVar('KT_contra', contravariant=True)
+</code></pre>
+<h3 id="exception-names-异常名">Exception Names 异常名</h3>
+<p>因为异常一般都是类，所有类的命名方法在这里也适用。然而，你需要在异常名后面加上<code>Error</code>后缀（如果异常确实是一个错误）。</p>
+<h3 id="global-variable-names-全局变量名">Global Variable Names 全局变量名</h3>
+<p>（我们希望这一类变量只在模块内部使用。）约定和函数命名规则一样。<br>
+通过<code>from M import *</code>导入的模块应该使用all机制去防止内部的接口对外暴露，或者使用在全局变量前加下划线的方式（表明这些全局变量是模块内非公有）。</p>
+<h3 id="function-names-函数名">Function Names 函数名</h3>
+<p>函数名应该小写，如果想提高可读性可以用下划线分隔。<br>
+大小写混合仅在为了兼容原来主要以大小写混合风格的情况下使用（比如 <code>threading.py</code>），保持向后兼容性。</p>
+<h3 id="function-and-method-arguments-函数和方法参数">Function and method arguments 函数和方法参数</h3>
+<p>始终要将 <code>self</code>作为实例方法的的第一个参数。<br>
+始终要将<code>cls</code>作为类静态方法的第一个参数。<br>
+如果函数的参数名和已有的关键词冲突，在最后加单一下划线比缩写或随意拼写更好。因此<code>class_</code>比<code>clss</code>更好。（也许最好用同义词来避免这种冲突）</p>
+<h3 id="method-names-and-instance-variables-方法名和实例变量">Method Names and Instance Variables 方法名和实例变量</h3>
+<p>遵循这样的函数命名规则：使用下划线分隔小写单词以提高可读性。<br>
+在非共有方法和实例变量前使用单下划线。<br>
+通过双下划线前缀触发Python的命名转换规则来避免和子类的命名冲突。<br>
+Python通过类名对这些命名进行转换：如果类 <code>Foo</code>有一个叫 <code>__a</code> 的成员变量， 它无法通过 <code>Foo.__a</code> 访问。（执着的用户可以通过 <code>Foo._Foo__a</code> 访问。）一般来说，前缀双下划线用来避免类中的属性命名与子类冲突的情况。<br>
+注意：关于<code>__names</code>的用法存在争论（见下文）。</p>
+<h3 id="constants-常量">Constants 常量</h3>
+<p>常量通常定义在模块级，通过下划线分隔的全大写字母命名。例如： <code>MAX_OVERFLOW</code> 和 <code>TOTAL</code>。</p>
+<h3 id="designing-for-inheritance-继承的设计">Designing for inheritance 继承的设计</h3>
+<p>始终要考虑到一个类的方法和实例变量（统称：属性）应该是共有还是非共有。如果存在疑问，那就选非共有；因为将一个非共有变量转为共有比反过来更容易。<br>
+公共属性是那些与类无关的客户使用的属性，并承诺避免向后不兼容的更改。非共有属性是那些不打算让第三方使用的属性；你不需要承诺非共有属性不会被修改或被删除。<br>
+我们不使用“私有（<code>private</code>）”这个说法，是因为在Python中目前还没有真正的私有属性（为了避免大量不必要的常规工作）。<br>
+另一种属性作为子类API的一部分（在其他语言中通常被称为“protected”）。有些类是专为继承设计的，用来扩展或者修改类的一部分行为。当设计这样的类时，要谨慎决定哪些属性时公开的，哪些是作为子类的API，哪些只能在基类中使用。<br>
+贯彻这样的思想，一下是一些让代码<code>Pythonic</code>的准则：</p>
+<ul>
+<li>
+<p>公共属性不应该有前缀下划线。</p>
+</li>
+<li>
+<p>如果公共属性名和关键字冲突，在属性名之后增加一个下划线。这比缩写和随意拼写好很多。（然而，尽管有这样的规则，在作为参数或者变量时，<code>cls</code>是表示<code>类</code>最好的选择，特别是作为类方法的第一个参数。）<br>
+注意1：参考之前的类方法参数命名建议</p>
+</li>
+<li>
+<p>对于单一的共有属性数据，最好直接对外暴露它的变量名，而不是通过负责的 存取器（<code>accessor</code>）/突变（<code>mutator</code>） 方法。请记住，如果你发现一个简单的属性需要成长为一个功能行为，那么Python为这种将来会出现的扩展提供了一个简单的途径。在这种情况下，使用属性去隐藏属性数据访问背后的逻辑。<br>
+注意1：属性只在<code>new-style</code>类中起作用。<br>
+注意2：尽管功能方法对于类似缓存的负面影响比较小，但还是要尽量避免。<br>
+注意3：属性标记会让调用者认为开销（相当的）小，避免用属性做开销大的计算。</p>
+</li>
+<li>
+<p>如果你的类打算用来继承的话，并且这个类里有不希望子类使用的属性，就要考虑使用双下划线前缀并且没有后缀下划线的命名方式。这会调用Python的命名转换算法，将类的名字加入到属性名里。这样做可以帮助避免在子类中不小心包含了相同的属性名而产生的冲突。<br>
+注意1：只有类名才会整合进属性名，如果子类的属性名和类名和父类都相同，那么你还是会有命名冲突的问题。<br>
+注意2：命名转换会在某些场景使用起来不太方便，例如调试，<code>__getattr__()</code>。然而命名转换的算法有很好的文档说明并且很好操作。<br>
+注意3：不是所有人都喜欢命名转换。尽量避免意外的名字冲突和潜在的高级调用。</p>
+</li>
+</ul>
+<h2 id="public-and-internal-interfaces-公共和内部的接口">Public and internal interfaces 公共和内部的接口</h2>
+<p>任何向后兼容保证只适用于公共接口，因此，用户清晰地区分公共接口和内部接口非常重要。<br>
+文档化的接口被认为是公开的，除非文档明确声明它们是临时或内部接口，不受通常的向后兼容性保证。所有未记录的接口都应该是内部的。<br>
+为了更好地支持内省（<code>introspection</code>），模块应该使用<code>__all__</code>属性显式地在它们的公共API中声明名称。将<code>__all__</code>设置为空列表表示模块没有公共API。<br>
+即使通过<code>__all__</code>设置过，内部接口（包，模块，类，方法，属性或其他名字）依然需要单个下划线前缀。<br>
+如果一个命名空间（包，模块，类）被认为是内部的，那么包含它的接口也应该被认为是内部的。<br>
+导入的名称应该始终被视作是一个实现的细节。其他模块必须不能间接访问这样的名称，除非它是包含它的模块中有明确的文档说明的API，例如 os.path 或者是一个包里从子模块公开函数接口的 <code>__init__</code> 模块。</p>
+
+            </div>
+            
+            
+              <div class="post-footer">
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+      <strong class="language" data-lan="author">本文作者：</strong>
+      zd
+    </li>
+    <li class="post-copyright-link">
+      <strong class="language" data-lan="link">本文链接：</strong>
+      <a href="https://zdblog.top/post/python_-ming-ming-gui-fan-_-ji-yu-pep-8/" title="python_命名规范_基于PEP-8">https://zdblog.top/post/python_-ming-ming-gui-fan-_-ji-yu-pep-8/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong class="language" data-lan="copyright">版权声明： </strong>
+      本博客所有文章除特别声明外，均采用<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i> BY-NC-SA</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+  <div class="tags">
+    
+      <a href="https://zdblog.top/tag/nYn4q_7ze/"># python</a>
+    
+      <a href="https://zdblog.top/tag/NNQrqe37F/"># 代码规范</a>
+    
+  </div>
+  <div class="nav">
+    <div class="nav-prev">
+      
+    </div>
+    <div class="nav-next">
+      
+        <a class="nav-pc-next" title="pyhon_风格规范_Google" href="https://zdblog.top/post/pyhon_-feng-ge-gui-fan-_google/">pyhon_风格规范_Google</a>
+        <a class="nav-mobile-next" title="pyhon_风格规范_Google" href="https://zdblog.top/post/pyhon_-feng-ge-gui-fan-_google/">下一篇</a>
+        <i class="fa fa-chevron-right"></i>
       
     </div>
   </div>
 </div>
-          </section>
+            
+            
+  <script src="https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js"></script>
+<div id="vcomments" style="padding: 10px 0px 0px 0px"></div>
+
+<style>
+  .v .veditor {
+    min-height: 10rem;
+    background-image: url('');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right;
+    background-color: rgba(255, 255, 255, 0);
+    resize: none;
+  }
+
+  .v .vwrap {
+    border: 1px solid #000 !important;
+  }
+
+  .v .vbtn {
+    padding: .4rem 1.2rem !important;
+    border-color: #fff !important;
+    background-color: #49b1f5 !important;
+    color: #fff !important;
+    font-size: .7rem !important;
+  }
+
+  .v .vcards .vcard .vh .vmeta .vat {
+    padding: 0 .8rem !important;
+    border: 1px solid #00c4b6 !important;
+    border-radius: 5px !important;
+    color: #00c4b6 !important;
+  }
+</style>
+<script>
+  new Valine({
+    el: '#vcomments',
+    appId: 'E4xhzIEKDmAtoVnapYU5F67t-gzGzoHsz',
+    appKey: 'Q1txwwJSaEmLcu4Oo8cHshbP',
+    avatar: 'custom',
+    placeholder: '',
+    pageSize: '10',
+    lang: 'zh-cn',
+    enableQQ: 'true' === 'true',
+    visitor: 'true' === 'true',
+    highlight: 'true' === 'true',
+    avatarForce: 'true' === 'false',
+  });
+</script>
+
+          </div>
         </div>
       </div>
     </div>
@@ -478,6 +996,223 @@
     parent.insertBefore(aelem, next);
   })
 </script>
+    <div class="reward-mask" style="display: none;">
+  <div class="reward-relative">
+    <span class="close" aria-hidden="true">x</span>
+    <div class="reward-body">
+      <h2>感谢您的支持，我会继续努力的!</h2>
+      <div class="reward-img-box">
+        <div style="position: relative; width: 140px; height: 140px;">
+          
+          
+          
+        </div>
+      </div>
+      <p class="reward-word">扫码打赏，你说多少就多少</p>
+      <p class="reward-tip">打开微信扫一扫，即可进行扫码打赏哦</p>
+    </div>
+    <div class="bottom">
+      
+      
+    </div>
+  </div>
+</div>
+<style>
+  .reward-mask {
+    position: fixed;
+    z-index: 99999;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #00000054;
+  }
+
+  .reward-relative {
+    position: relative;
+    width: 480px;
+    text-align: center;
+    margin: 0 auto;
+    border-radius: 5px;
+    background-color: #fff;
+    top: 50%;
+    margin-top: -205px;
+  }
+
+  .reward-relative .close {
+    position: absolute;
+    right: 10px;
+    font-weight: normal;
+    font-size: 16px;
+    color: #929292;
+  }
+
+  .reward-body {
+    padding: 40px 20px 20px;
+  }
+
+  .bottom {
+    display: flex;
+  }
+
+  .reward-btn {
+    text-align: center;
+  }
+
+  .reward-btn-text {
+    display: inline-block;
+    cursor: pointer;
+    width: 60px;
+    height: 60px;
+    line-height: 60px;
+    border-radius: 50%;
+    background-color: #ff9734;
+    color: #FFF;
+    margin-top: 20px;
+  }
+
+  .pay-text {
+    margin-top: 10px;
+    padding: 10px;
+    flex: 1;
+    transition: all .2s linear;
+  }
+
+  .pay-text:hover {
+    background-color: #a5a5a536;
+  }
+
+  .reward-body h2 {
+    padding-top: 10px;
+    text-align: center;
+    color: #a3a3a3;
+    font-size: 16px;
+    font-weight: normal;
+    margin: 0 0 20px;
+  }
+
+  .reward-body h2:after,
+  .reward-body h2:before {
+    font-family: Arial, Helvetica, sans-serif;
+    background: 0 0;
+    width: 0;
+    height: 0;
+    font-style: normal;
+    color: #eee;
+    font-size: 80px;
+    position: absolute;
+    top: 20px;
+  }
+
+  .reward-body h2:before {
+    content: '\201c';
+    left: 50px;
+  }
+
+  .reward-body h2:after {
+    content: '\201d';
+    right: 80px;
+  }
+
+  .reward-img-box {
+    display: inline-block;
+    padding: 10px;
+    border: 6px solid #ea5f00;
+    margin: 0 auto;
+    border-radius: 3px;
+    position: relative;
+  }
+
+  .reward-img {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+  }
+
+  @media (max-width: 767px) {
+    .reward-relative {
+      height: 100%;
+      top: 0px;
+      margin-top: 0;
+      width: auto;
+    }
+
+    .reward-relative .bottom {
+      flex-direction: column;
+    }
+
+    .reward-relative .pay-text {
+      width: 80%;
+      margin: 5px auto;
+      border: 1px solid silver;
+      padding: 6px;
+      border-radius: 4px;
+    }
+
+    .reward-body h2:after {
+      right: 40px;
+    }
+
+    .reward-body h2:after,
+    .reward-body h2:before {
+      font-size: 60px;
+    }
+
+    .reward-body h2:before {
+      left: 20px;
+    }
+  }
+</style>
+<script>
+  !function () {
+    var mask = document.querySelector('.reward-mask');
+    let close = document.querySelector('.reward-relative .close');
+    let rewardBtn = document.querySelector('.reward-btn');
+
+    let zfb = document.querySelector('#zfb'),
+      wx = document.querySelector('#wx'),
+      zfbBtn = document.querySelector('#zfbBtn'),
+      wxBtn = document.querySelector('#wxBtn');
+
+    if (zfbBtn && wxBtn) {
+      zfbBtn.addEventListener('click', () => {
+        window.Velocity(zfb, 'transition.slideLeftIn', {
+          duration: 400
+        });
+        window.Velocity(wx, 'transition.slideRightOut', {
+          display: 'none',
+          duration: 400
+        });
+      });
+
+      wxBtn.addEventListener('click', () => {
+        window.Velocity(wx, 'transition.slideRightIn', {
+          duration: 400
+        });
+        window.Velocity(zfb, 'transition.slideLeftOut', {
+          display: 'none',
+          duration: 400
+        });
+      });
+    }
+
+    rewardBtn.addEventListener('click', (e) => {
+      window.Velocity(mask, 'transition.slideDownIn', {
+        duration: 400
+      })
+    });
+
+    close.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.Velocity(mask, 'transition.slideUpOut', {
+        duration: 400
+      })
+    })
+  }()
+</script>
+
   </div>
 </body>
 
@@ -2247,7 +2982,6 @@ ___
     speed: 200
   });
 </script>
-
 
 
 
