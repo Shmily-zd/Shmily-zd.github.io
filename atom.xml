@@ -2,13 +2,284 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://zdblog.top</id>
     <title>zd_blog</title>
-    <updated>2021-01-24T04:25:14.911Z</updated>
+    <updated>2021-02-04T13:06:09.762Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://zdblog.top"/>
     <link rel="self" href="https://zdblog.top/atom.xml"/>
     <logo>https://zdblog.top/images/avatar.png</logo>
     <icon>https://zdblog.top/favicon.ico</icon>
     <rights>All rights reserved 2021, zd_blog</rights>
+    <entry>
+        <title type="html"><![CDATA[python_多任务]]></title>
+        <id>https://zdblog.top/post/python_-duo-ren-wu/</id>
+        <link href="https://zdblog.top/post/python_-duo-ren-wu/">
+        </link>
+        <updated>2021-02-04T13:04:36.000Z</updated>
+        <content type="html"><![CDATA[<h3 id="多任务"><strong>多任务</strong></h3>
+<p>多任务：在同一时间内执行多个任务<br>
+多任务的目的：多任务的最大好处是<strong>充分利用CPU资源，提高程序的执行效率</strong><br>
+<code>并发</code>:在一段时间内<strong>交替</strong>执行多个任务<br>
+<code>并行</code>:在同一时刻<strong>同时</strong>执行多个任务</p>
+<h3 id="多进程多任务的实现方式"><strong>多进程(多任务的实现方式)</strong></h3>
+<p>进程：<kbd>运行</kbd>中的程序，<strong>分配</strong>资源的最小单位<br>
+线程：<strong>使用</strong>资源的最小单位<br>
+进程和线程的关系：一个程序运行后至少有一个进程，每个进程默认有一个线程</p>
+<h4 id="多进程的使用流程"><strong>多进程的使用流程：</strong></h4>
+<ol>
+<li>
+<p>导入进程模块(multiprocessing)</p>
+<pre><code>import multiprocessing     
+</code></pre>
+</li>
+<li>
+<p>创建子进程对象</p>
+<pre><code> sub_process = multiprocessing.Process(group=None, target=None, name=None, args, kwargs)
+ # 其中：args 方式传参应注意参数顺序一致，kwargs 传参应注意字典的 key 与参数名一致
+</code></pre>
+</li>
+<li>
+<p>启动子进程</p>
+<pre><code> sub_process.start() #启动子进程
+ sub_process.join() # 进程等待
+ sub_process.terminate() # 终止子进程
+ multiprocessing.current_process() #查看当前进程
+ os.getpid() # 查看进程编号
+ os.getppid() # 查看父进程编号
+ os.kill(进程编号，9) # 根据进程编号强制杀死进程
+ print(a, b, c) # 可以直接打印变量 a b c
+
+ # 进程的运行是无序的，不依赖代码的先后顺序
+</code></pre>
+</li>
+</ol>
+<p>实例：</p>
+<pre><code># 单进程
+import time
+
+
+def dance():
+    for i in range(5):
+        time.sleep(1)
+        print(&quot;DANCE&quot;, i)
+
+
+def sing():
+    for i in range(5):
+        time.sleep(1)
+        print(&quot;SING&quot;, i)
+
+
+if __name__ == '__main__':
+    dance()
+    sing()
+
+［运行结果］
+[Done] exited with code=0 in 10.052 seconds
+</code></pre>
+<hr>
+<pre><code># 多进程
+import time
+
+# 导入进程模块
+import multiprocessing
+
+
+def dance():
+    for i in range(5):
+        time.sleep(1)
+        print(&quot;DANCE&quot;, i)
+
+
+def sing():
+    for i in range(5):
+        time.sleep(1)
+        print(&quot;SING&quot;, i)
+
+
+if __name__ == '__main__':
+    # 创建子进程
+    my_dance = multiprocessing.Process(target=dance)
+    my_sing = multiprocessing.Process(target=sing)
+
+    # 启动子进程
+    my_dance.start()
+    my_sing.start()
+
+［运行结果］
+[Done] exited with code=0 in 5.095 seconds
+</code></pre>
+<h4 id="进程idos模块"><strong>进程ID(os模块)</strong></h4>
+<p>目的: 知道子进程是由哪个主进程创建的(子进程需要主进程回收资源)<br>
+​	<code>os.getpid()</code>: 表示获取当前进程编号<br>
+​	<code>os.getppid()</code>: 表示获取当前父进程编号</p>
+<h4 id="进程名字"><strong>进程名字</strong></h4>
+<ol>
+<li>
+<p>进程起名字</p>
+<pre><code> my_dance = multiprocessing.Process(target=dance, name=&quot;my_ProcessName&quot;)
+</code></pre>
+</li>
+<li>
+<p>获取进程的名字</p>
+<pre><code> multiprocessing.current_process()
+
+ # 运行结果
+ &lt;Process name='my_ProcessName' parent=151225 started&gt;
+</code></pre>
+</li>
+</ol>
+<h4 id="进程参数"><strong>进程参数</strong></h4>
+<pre><code>带有参数的函数:
+args: 元组!!!(单个元素的元组有 , )
+my_dance = multiprocessing.Process(target=dance, args=(5,))
+	
+kwargs: 字典!!!(key值要和函数中的形参完全重名)
+my_dance = multiprocessing.Process(target=dance, kwargs={&quot;count&quot;: 5})
+</code></pre>
+<h4 id="进程之间不共享全局变量"><strong>进程之间不共享全局变量</strong></h4>
+<p>进程之间不共享全局变量，是因为操作的不是同一个进程里面的全局变量，只不过不同进程里面的全局变量名字相同而已</p>
+<pre><code>import multiprocessing
+import time
+
+# 全局变量列表
+g_num = []
+
+def my_write(): # 向全局变量g_num里写入数据
+    global g_num
+    for i in range(5):
+        g_num.append(i)
+    print(&quot;my_write:&quot;, g_num)
+
+
+def my_read(): #读取全局变量g_num的值
+    global g_num
+    print(&quot;my_read:&quot;, g_num)
+
+
+if __name__ == '__main__':
+    sub_write = multiprocessing.Process(target=my_write)
+    sub_read = multiprocessing.Process(target=my_read)
+
+    sub_write.start()
+    time.sleep(1) # 保证数据写入g_num中
+    sub_read.start()
+
+［运行结果］
+my_write: [0, 1, 2, 3, 4]
+my_read: []
+</code></pre>
+<h4 id="守护主进程or销毁子进程"><strong>守护主进程or销毁子进程</strong></h4>
+<p>为了保证子进程能够正常的运行，主进程会等所有的子进程执行完成以后再销毁<br>
+设置守护主进程或销毁主进程的目的是<strong>主进程退出子进程销毁，不让主进程再等待子进程去执行</strong></p>
+<ul>
+<li>设置守护主进程： 子进程对象.daemon = True</li>
+<li>销毁子进程： 子进程对象.terminate()</li>
+</ul>
+<h3 id="多线程多任务的实现方式"><strong>多线程(多任务的实现方式)</strong></h3>
+<h4 id="多线程使用流程"><strong>多线程使用流程</strong></h4>
+<ol>
+<li>导入线程模块(threading)</li>
+<li>创建子线程</li>
+<li>开始子线程</li>
+</ol>
+<p>实例</p>
+<pre><code>import time
+
+# 导入线程模块
+import threading
+
+
+def dance():
+    for i in range(5):
+        time.sleep(1)
+        print(&quot;DANCE&quot;, i)
+
+
+def sing():
+    for i in range(5):
+        time.sleep(1)
+        print(&quot;SING&quot;, i)
+
+
+if __name__ == '__main__':
+    # 创建子进程
+    my_dance = threading.Thread(target=dance)
+    my_sing = threading.Thread(target=sing)
+
+    # 启动子进程
+    my_dance.start()
+    my_sing.start()
+
+［运行结果］
+[Done] exited with code=0 in 5.042 seconds
+</code></pre>
+<h4 id="线程之间是无序执行的"><strong>线程之间是无序执行的</strong></h4>
+<h4 id="守护主线程"><strong>守护主线程</strong>   ​</h4>
+<p>主线程会等待子线程的结束而结束<br>
+设置守护主线程的两种方式：</p>
+<ul>
+<li>threading.Thread(target=show_info, daemon=True)</li>
+<li>线程对象.setDaemon(True)</li>
+</ul>
+<h4 id="线程参数同进程"><strong>线程参数(同进程)</strong></h4>
+<h4 id="线程之间共享全局变量"><strong>线程之间共享全局变量</strong></h4>
+<p>好处是可以对全局变量的数据进行共享<br>
+但是可能会导致数据出现错误问题</p>
+<pre><code>import threading
+import time
+
+g_num = []
+
+
+def my_write():
+    global g_num
+    for i in range(5):
+        g_num.append(i)
+    print(&quot;my_write:&quot;, g_num)
+
+
+def my_read():
+    global g_num
+    print(&quot;my_read:&quot;, g_num)
+
+
+if __name__ == '__main__':
+    sub_write = threading.Thread(target=my_write)
+    sub_read = threading.Thread(target=my_read)
+
+    sub_write.start()
+    time.sleep(1)
+    sub_read.start()
+
+［运行结果］
+my_write: [0, 1, 2, 3, 4]
+my_read: [0, 1, 2, 3, 4]
+</code></pre>
+<h4 id="线程之间共享全局变量的问题"><strong>线程之间共享全局变量的问题</strong></h4>
+<p>线程同步: 保证同一时刻只能有一个线程去操作全局变量 同步: 就是协同步调，按预定的先后次序进行运行。<br>
+线程同步的方式:</p>
+<ul>
+<li>
+<p>线程等待(join)</p>
+<pre><code>  first_thread.start()
+  first_thread.join() # 等待线程first_thread执行完毕再继续向下进行
+  second_thread.start()    
+</code></pre>
+</li>
+<li>
+<p>互斥锁<br>
+对共享数据进行锁定，保证同一时刻只能有一个线程去操作<br>
+互斥锁的使用：</p>
+<ul>
+<li>创建锁:<code>mutex = threading.Lock()</code></li>
+<li>上锁:<code>mutex.acquire()</code></li>
+<li>释放锁:<code>mutex.release()</code><br>
+注意避免死锁，在合适位置释放锁</li>
+</ul>
+</li>
+</ul>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[python_命名规范_基于PEP-8]]></title>
         <id>https://zdblog.top/post/python_-ming-ming-gui-fan-_-ji-yu-pep-8/</id>
