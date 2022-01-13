@@ -2155,34 +2155,28 @@ body {
       color: #eee;
       border-bottom-color: #eee;
     }.markdownIt-TOC a:hover {
-      color: #fff0f6;
-      border-bottom-color: #fff0f6;
+      color: #fff;
+      border-bottom-color: #fff;
     }.active-current > a {
-      color: #ffdeeb !important;
-      border-bottom-color: #ffdeeb !important;
+      color: #fc6423 !important;
+      border-bottom-color: #fc6423 !important;
     }
     .sidebar-title-active {
-      color: #ffdeeb;
-      border-bottom-color: #ffdeeb;
+      color: #fc6423 !important;
+      border-bottom-color: #fc6423 !important;
     }
     .sidebar-title-item:hover {
-      color: #ffdeeb !important;
+      color: #fc6423 !important;
     }
     .active-show > a {
-      color: #ffdeeb;
-      border-bottom-color: #ffdeeb;
+      color: #fc6423;
+      border-bottom-color: #fc6423;
     }
     .active-hidden > a {
-      color: #ffdeeb;
-      border-bottom-color: #ffdeeb;
+      color: #fc6423;
+      border-bottom-color: #fc6423;
     }.bg-color {
       background-color: #fffffffe;
-    }
-    .gemini .blog-header, .gemini .sidebar-wrapper, .gemini .article-wrapper, .gemini .post, .gemini .page, .gemini .section, .gemini .section-box, .gemini .sidebar-box, .gemini .friends-section {
-      border-radius: 12px;
-    }
-    .pisces .blog-header, .pisces .sidebar-wrapper, .pisces .article-wrapper, .pisces .section, .pisces .sidebar-box, .pisces .friends-section {
-      border-radius: 12px;
     }
       .site-meta {
         background: #000 !important;
