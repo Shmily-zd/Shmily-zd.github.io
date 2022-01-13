@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://zdblog.top</id>
     <title>zd_blog</title>
-    <updated>2022-01-13T12:25:14.610Z</updated>
+    <updated>2022-01-13T13:54:08.092Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://zdblog.top"/>
     <link rel="self" href="https://zdblog.top/atom.xml"/>
@@ -12,8 +12,8 @@
     <rights>All rights reserved 2022, zd_blog</rights>
     <entry>
         <title type="html"><![CDATA[Hello Gridea]]></title>
-        <id>https://zdblog.top/post/hello-gridea/</id>
-        <link href="https://zdblog.top/post/hello-gridea/">
+        <id>https://zdblog.top/hello-gridea/</id>
+        <link href="https://zdblog.top/hello-gridea/">
         </link>
         <updated>2018-12-11T16:00:00.000Z</updated>
         <summary type="html"><![CDATA[<p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
