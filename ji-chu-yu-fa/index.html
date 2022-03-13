@@ -8,7 +8,7 @@
 <meta name="keywords" content="Gridea静态个人博客">
 <meta name="description" content="1">
 <meta name="theme-color" content="#868e96">
-<title>zd_blog</title>
+<title>基础语法 | zd_blog</title>
 <link rel="shortcut icon" href="/favicon.ico?v=1647133522330">
 <link rel="stylesheet" href="/media/css/gemini.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
@@ -41,6 +41,8 @@
 
 
 
+  <meta name="description" content="基础语法" />
+  <meta name="keywords" content="java" />
 </head>
 
 <body>
@@ -146,11 +148,27 @@
   </div>
   <div class="main-continer">
     
-      <div
-        class="section-layout gemini ">
-        <div class="section-layout-wrapper">
-          <div id="sidebarMeta" class="sidebar">
-    
+    <div
+      class="section-layout gemini ">
+      <div class="section-layout-wrapper">
+        
+
+<div class="sidebar">
+  
+    <div class="sidebar-box box-shadow-wrapper bg-color right-motion" id="sidebar">
+      
+        <div class="post-list-sidebar">
+          <div class="sidebar-title">
+            <span id="tocSideBar" class="sidebar-title-item sidebar-title-active language" data-lan="index">文章目录</span>
+            <span id="metaSideBar" class="sidebar-title-item language" data-lan="preview">站点概览</span>
+          </div>
+        </div>
+      
+      <div class="sidebar-body gemini" id="sidebar_body">
+        
+          
+            <div class="post-side-meta" id="post_side_meta">
+              
 <div class="sidebar-wrapper box-shadow-wrapper bg-color">
   <div class="sidebar-item">
     <img class="site-author-image right-motion" src="/images/avatar.png"/>
@@ -187,54 +205,1293 @@
   </div>
 
 </div>
+            </div>
+            <div class="post-toc sidebar-body-active" id="post_toc" style="opacity: 1;">
+              <div class="toc-box right-motion">
+  <div class="toc-wrapper auto-number auto"
+    id="toc_wrapper">
+    <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#java%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95">Java基础语法</a>
+<ul>
+<li><a href="#%E6%A0%87%E8%AF%86%E7%AC%A6">标识符</a></li>
+<li><a href="#%E4%BF%AE%E9%A5%B0%E7%AC%A6">修饰符</a></li>
+<li><a href="#java%E5%8F%98%E9%87%8F">Java变量</a></li>
+<li><a href="#java%E5%85%B3%E9%94%AE%E5%AD%97">Java关键字</a></li>
+</ul>
+</li>
+<li><a href="#java-%E5%AF%B9%E8%B1%A1%E5%92%8C%E7%B1%BB">Java 对象和类</a>
+<ul>
+<li><a href="#%E6%9E%84%E9%80%A0%E6%96%B9%E6%B3%95">构造方法</a></li>
+<li><a href="#%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1">创建对象</a></li>
+<li><a href="#%E8%AE%BF%E9%97%AE%E5%AE%9E%E4%BE%8B%E5%8F%98%E9%87%8F%E5%92%8C%E6%96%B9%E6%B3%95">访问实例变量和方法</a></li>
+<li><a href="#java%E5%8C%85">Java包</a></li>
+</ul>
+</li>
+<li><a href="#java%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B">Java基本数据类型</a>
+<ul>
+<li><a href="#%E5%86%85%E7%BD%AE%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B">内置数据类型</a></li>
+<li><a href="#%E5%BC%95%E7%94%A8%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B">引用数据类型</a></li>
+<li><a href="#java%E5%B8%B8%E9%87%8F">Java常量</a></li>
+<li><a href="#%E8%87%AA%E5%8A%A8%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2">自动类型转换</a></li>
+</ul>
+</li>
+<li><a href="#java%E5%8F%98%E9%87%8F%E7%B1%BB%E5%9E%8B">Java变量类型</a>
+<ul>
+<li><a href="#java%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F">java局部变量</a></li>
+<li><a href="#java%E5%AE%9E%E4%BE%8B%E5%8F%98%E9%87%8F">Java实例变量</a></li>
+<li><a href="#%E7%B1%BB%E5%8F%98%E9%87%8F%E9%9D%99%E6%80%81%E5%8F%98%E9%87%8F">类变量（静态变量）</a></li>
+</ul>
+</li>
+<li><a href="#java%E4%BF%AE%E9%A5%B0%E7%AC%A6">java修饰符</a>
+<ul>
+<li><a href="#%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%E4%BF%AE%E9%A5%B0%E7%AC%A6">访问控制修饰符</a></li>
+<li><a href="#%E9%9D%9E%E8%AE%BF%E9%97%AE%E4%BF%AE%E9%A5%B0%E7%AC%A6">非访问修饰符</a></li>
+</ul>
+</li>
+<li><a href="#java-%E8%BF%90%E7%AE%97%E7%AC%A6">java 运算符</a>
+<ul>
+<li><a href="#%E8%BF%90%E7%AE%97%E7%AC%A6%E4%BC%98%E5%85%88%E7%BA%A7">运算符优先级</a></li>
+</ul>
+</li>
+<li><a href="#java%E5%BE%AA%E7%8E%AF%E7%BB%93%E6%9E%84">Java循环结构</a>
+<ul>
+<li><a href="#java%E5%A2%9E%E5%BC%BAfor%E5%BE%AA%E7%8E%AF">Java增强for循环</a></li>
+<li><a href="#break%E5%85%B3%E9%94%AE%E5%AD%97">break关键字</a></li>
+<li><a href="#continue%E5%85%B3%E9%94%AE%E5%AD%97">continue关键字</a></li>
+</ul>
+</li>
+<li><a href="#java%E6%9D%A1%E4%BB%B6%E8%AF%AD%E5%8F%A5">Java条件语句</a></li>
+<li><a href="#java-switch-case%E8%AF%AD%E5%8F%A5">Java switch case语句</a></li>
+<li><a href="#%E6%95%B0%E7%BB%84">数组</a>
+<ul>
+<li><a href="#%E5%A3%B0%E6%98%8E%E6%95%B0%E7%BB%84%E5%8F%98%E9%87%8F">声明数组变量</a></li>
+<li><a href="#%E5%88%9B%E5%BB%BA%E6%95%B0%E7%BB%84">创建数组</a></li>
+<li><a href="#%E6%95%B0%E7%BB%84%E4%BD%9C%E4%B8%BA%E6%96%B9%E6%B3%95%E7%9A%84%E5%8F%82%E6%95%B0%E6%88%96%E8%BF%94%E5%9B%9E%E5%80%BC">数组作为方法的参数或返回值</a></li>
+<li><a href="#%E5%A4%9A%E7%BB%B4%E6%95%B0%E7%BB%84">多维数组</a></li>
+<li><a href="#arrays%E7%B1%BB">Arrays类</a></li>
+</ul>
+</li>
+<li><a href="#%E6%97%A5%E6%9C%9F%E5%92%8C%E6%97%B6%E9%97%B4date%E7%B1%BB">日期和时间（Date类）</a>
+<ul>
+<li><a href="#date%E5%AF%B9%E8%B1%A1%E6%96%B9%E6%B3%95">Date对象方法：</a></li>
+<li><a href="#%E4%BD%BF%E7%94%A8simpledateformat%E6%A0%BC%E5%BC%8F%E5%8C%96%E6%97%A5%E6%9C%9F">使用SimpleDateFormat格式化日期</a></li>
+<li><a href="#%E4%BD%BF%E7%94%A8printf%E6%A0%BC%E5%BC%8F%E5%8C%96%E6%97%A5%E6%9C%9F">使用printf格式化日期</a></li>
+<li><a href="#java%E4%BC%91%E7%9C%A0sleep">Java休眠（sleep）</a></li>
+<li><a href="#%E6%B5%8B%E9%87%8F%E6%97%B6%E9%97%B4">测量时间</a></li>
+<li><a href="#calendar%E7%B1%BB%E5%AF%B9%E6%97%A5%E6%9C%9F%E8%BF%9B%E8%A1%8C%E6%93%8D%E4%BD%9C">Calendar类（对日期进行操作）</a></li>
+<li><a href="#gregoriancalendar%E7%B1%BB">GregorianCalendar类</a></li>
+</ul>
+</li>
+<li><a href="#java%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F">Java正则表达式</a>
+<ul>
+<li><a href="#%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%AF%AD%E6%B3%95">正则表达式语法：</a></li>
+<li><a href="#regex%E5%8C%85">regex包</a></li>
+<li><a href="#matcher%E7%B1%BB%E7%9A%84%E6%96%B9%E6%B3%95">Matcher类的方法</a></li>
+<li><a href="#patternsyntaxexception%E7%B1%BB%E7%9A%84%E6%96%B9%E6%B3%95">PatternSyntaxException类的方法</a></li>
+</ul>
+</li>
+<li><a href="#java-%E6%B5%81stream-%E6%96%87%E4%BB%B6file-io">Java 流（stream）、文件（file）、IO</a>
+<ul>
+<li><a href="#%E8%AF%BB%E5%8F%96%E6%8E%A7%E5%88%B6%E5%8F%B0%E8%BE%93%E5%85%A5">读取控制台输入</a></li>
+<li><a href="#%E6%8E%A7%E5%88%B6%E5%8F%B0%E8%BE%93%E5%87%BA">控制台输出</a></li>
+<li><a href="#%E8%AF%BB%E5%86%99%E6%96%87%E4%BB%B6">读写文件</a></li>
+<li><a href="#%E5%85%B3%E4%BA%8E%E6%96%87%E4%BB%B6%E5%92%8Cio%E7%9A%84%E7%B1%BB">关于文件和I/O的类</a></li>
+<li><a href="#%E7%9B%AE%E5%BD%95">目录</a></li>
+</ul>
+</li>
+<li><a href="#scanner-%E7%B1%BB">Scanner 类</a></li>
+<li><a href="#%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86">异常处理</a>
+<ul>
+<li><a href="#java-%E5%86%85%E7%BD%AE%E5%BC%82%E5%B8%B8%E7%B1%BB">java 内置异常类</a></li>
+<li><a href="#%E5%BC%82%E5%B8%B8%E6%96%B9%E6%B3%95">异常方法</a></li>
+<li><a href="#%E6%8D%95%E8%8E%B7%E5%BC%82%E5%B8%B8">捕获异常</a></li>
+<li><a href="#%E5%A4%9A%E9%87%8D%E6%8D%95%E8%8E%B7%E5%9D%97">多重捕获块</a></li>
+<li><a href="#throwsthrow%E5%85%B3%E9%94%AE%E5%AD%97">throws/throw关键字</a></li>
+<li><a href="#finally-%E5%85%B3%E9%94%AE%E5%AD%97">finally 关键字</a></li>
+<li><a href="#%E5%A3%B0%E6%98%8E%E8%87%AA%E5%AE%9A%E4%B9%89%E5%BC%82%E5%B8%B8">声明自定义异常</a></li>
+<li><a href="#%E9%80%9A%E7%94%A8%E5%BC%82%E5%B8%B8">通用异常</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
 </div>
+
 <script>
-  let sidebarMeta = document.querySelector('#sidebarMeta');
-  let scheme = 'gemini';
-  let sidebarWrapper = document.querySelector('.sidebar-wrapper');
-  if (sidebarMeta && (scheme === 'pisces' || scheme === 'gemini')) {
-    document.addEventListener('scroll', function(e) {
-      if (document.scrollingElement.scrollTop > parseInt(sidebarMeta.style.marginTop) + 10) {
-        sidebarWrapper.classList.add('home-sidebar-fixed')
-      } else {
-        sidebarWrapper.classList.remove('home-sidebar-fixed')
+
+  let lastTop = 0, lList = [], hList = [], postBody, lastIndex = -1;
+  let active = 'active-show', activeClass = 'active-current';
+  let tocWrapper = document.querySelector('#toc_wrapper');
+  let tocContent = tocWrapper.children[0];
+  let autoNumber = tocWrapper && tocWrapper.classList.contains('auto-number');
+
+  function addTocNumber(elem, deep) {
+    if (!elem) {
+      return;
+    }
+    let prop = elem.__proto__;
+
+    if (prop === HTMLUListElement.prototype) {
+      for (let i = 0; i < elem.children.length; i++) {
+        addTocNumber(elem.children[i], deep + (i + 1) + '.');
       }
+    } else if (prop === HTMLLIElement.prototype) {
+      // 保存li元素
+      if (elem.children[0] && elem.children[0].__proto__ === HTMLAnchorElement.prototype) {
+        lList.push(elem);
+      }
+      for (let i = 0; i < elem.children.length; i++) {
+        let cur = elem.children[i];
+        if (cur.__proto__ === HTMLAnchorElement.prototype) {
+          if (autoNumber) {
+            cur.text = deep + ' ' + cur.text;
+          }
+        } else if (cur.__proto__ === HTMLUListElement.prototype) {
+          addTocNumber(cur, deep);
+        }
+      }
+    }
+  }
+
+  function removeParentActiveClass() {
+    let parents = tocContent.querySelectorAll('.' + active)
+    parents.forEach(function (elem) {
+      elem.classList.remove(active);
     });
   }
-  </script>
-            <div class="section-box gemini box-shadow-wrapper">
-              <section class="friends-section bg-color slide-down-in">
-                <div class="firends-box" align="center">
-                  <h1 class="firends-title" itemprop="name headline">
-                    友链
-                  </h1>
-                  
-                    
-                        
-                </div>
-                <hr>
-                <div style="text-align:center">
-                  <span class="with-love">
-                    <i class="fa fa-heart"></i>
-                  </span>
-                  <span class="language" data-lan="leave-message">如需添加友链,可以在关于中找到我的联系方式告知我</span>
-                  <span class="with-love">
-                    <i class="fa fa-heart"></i>
-                  </span>
-                </div>
-                <hr>
-                <div class="friends-note">
-                  <p><strong class="language" data-lan="format">友链格式：</strong></p>
-                  <ul>
-                    <li><span class="language" data-lan="site-name">网站名称：</span>zd_blog</li>
-                    <li><span class="language" data-lan="site-link">网站地址：</span><a href="https://zdblog.top" data-pjax-state="">https://zdblog.top</a></li>
-                    <li><span class="language" data-lan="site-desc">网站描述：</span>1</li>
-                    <li><span class="language" data-lan="site-img">网站头像：</span>
-                      <a href="https://zdblog.top/images/avatar.png">https://zdblog.top/images/avatar.png</a>
-                    </li>
-                  </ul>
-                </div>
-                
+
+  function addActiveClass(index) {
+    if (index >= 0 && index < hList.length) {
+      lList[index].classList.add(activeClass);
+    }
+  }
+
+  function removeActiveClass(index) {
+    if (index >= 0 && index < hList.length) {
+      lList[index].classList.remove(activeClass);
+    }
+  }
+
+  function addActiveLiElemment(elem, parent) {
+    if (!elem || elem === parent) {
+      return;
+    } else {
+      if (elem.__proto__ === HTMLLIElement.prototype) {
+        elem.classList.add(active);
+      }
+      addActiveLiElemment(elem.parentElement, parent);
+    }
+  }
+
+  function showToc() {
+    if (tocWrapper) {
+      postBody = document.querySelector('#post_body');
+      for (let i = 0; i < postBody.children.length; i++) {
+        if (postBody.children[i].__proto__ === HTMLHeadingElement.prototype) {
+          hList.push(postBody.children[i]);
+        }
+      }
+      if (tocWrapper.classList.contains('compress')) {
+        tocContent.classList.add('closed');
+      } else if (tocWrapper.classList.contains('no_compress')) {
+        tocContent.classList.add('expanded');
+      } else {
+        if (hList.length > 10) {
+          active = 'active-hidden'
+          tocContent.classList.add('closed');
+        } else {
+          tocContent.classList.add('expanded');
+        }
+      }
+    }
+  }
+
+  (function () {
+    // 处理不是从#一级标题开始目录
+    if (tocContent.children.length === 1 && tocContent.children[0].__proto__ === HTMLLIElement.prototype) {
+      let con = tocContent.children[0].children[0];
+      tocContent.innerHTML = con.innerHTML;
+    }
+    let markdownItTOC = document.querySelector('.markdownIt-TOC');
+    let innerHeight = window.innerHeight;
+    markdownItTOC.style = `max-height: ${innerHeight - 80 > 0 ? innerHeight - 80 : innerHeight}px`
+    addTocNumber(tocContent, '');
+  })();
+
+  document.addEventListener('scroll', function (e) {
+    if (lList.length <= 0) {
+      return;
+    }
+    let scrollTop = document.scrollingElement.scrollTop + 10;
+    let dir;
+
+    if (lastTop - scrollTop > 0) {
+      dir = 'up';
+    } else {
+      dir = 'down';
+    }
+
+    lastTop = scrollTop;
+    if (scrollTop <= 0) {
+      if (lastIndex >= 0 && lastIndex < hList.length) {
+        lList[lastIndex].classList.remove(activeClass);
+      }
+      return;
+    }
+
+    let current = 0, hasFind = false;
+    for (let i = 0; i < hList.length; i++) {
+      if (hList[i].offsetTop > scrollTop) {
+        current = i;
+        hasFind = true;
+        break;
+      }
+    }
+    if (!hasFind && scrollTop > lList[lList.length - 1].offsetTop) {
+      current = hList.length - 1;
+    } else {
+      current--;
+    }
+    if (dir === 'down') {
+      if (current > lastIndex) {
+        addActiveClass(current);
+        removeActiveClass(lastIndex)
+        lastIndex = current;
+        removeParentActiveClass();
+        lList[current] && addActiveLiElemment(lList[current].parentElement, tocContent);
+      }
+    } else {
+      if (current < lastIndex) {
+        addActiveClass(current);
+        removeActiveClass(lastIndex);
+        lastIndex = current;
+        removeParentActiveClass();
+        lList[current] && addActiveLiElemment(lList[current].parentElement, tocContent);
+      }
+    }
+  });
+
+
+  window.addEventListener('load', function () {
+    showToc();
+    document.querySelector('#sidebar').style = 'display: block;';
+    tocWrapper.classList.add('toc-active');
+    setTimeout(function () {
+      if ("createEvent" in document) {
+        let evt = document.createEvent("HTMLEvents");
+        evt.initEvent("scroll", false, true);
+        document.dispatchEvent(evt);
+      }
+      else {
+        document.fireEvent("scroll");
+      }
+    }, 500)
+  })
+
+</script>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+</div>
+<script>
+  const SIDEBAR_TITLE_ACTIVE = 'sidebar-title-active';
+  const SIDEBAR_BODY_ACTIVE = 'sidebar-body-active';
+  const SLIDE_UP_IN = 'slide-up-in';
+
+  let sidebar = document.querySelector('#sidebar'),
+  tocSideBar = document.querySelector('#tocSideBar'),
+  metaSideBar = document.querySelector('#metaSideBar'),
+  postToc = document.querySelector('#post_toc'),
+  postSiteMeta = document.querySelector('#post_side_meta'),
+  sidebarTitle = document.querySelector('.sidebar-title'),
+  sidebarBody = document.querySelector('#sidebar_body');
+
+  tocSideBar && tocSideBar.addEventListener('click', (e) => {
+    toggleSidebar(e);
+  });
+
+  metaSideBar && metaSideBar.addEventListener('click', (e) => {
+    toggleSidebar(e);
+  });
+
+  function toggleSidebar(e) {
+    let currentTitle = document.querySelector("."+SIDEBAR_TITLE_ACTIVE);
+    if (currentTitle == e.srcElement) {
+      return ;
+    }
+    let current, showElement, hideElement;
+    if (e.srcElement == metaSideBar) {
+      showElement = postSiteMeta;
+      hideElement = postToc;
+    } else if (e.srcElement == tocSideBar){
+      showElement = postToc;
+      hideElement = postSiteMeta;
+    }
+    currentTitle.classList.remove(SIDEBAR_TITLE_ACTIVE);
+    e.srcElement.classList.add(SIDEBAR_TITLE_ACTIVE);
+
+    jQuery.Velocity(hideElement, 'stop');
+    jQuery.Velocity(hideElement, 'transition.slideUpOut', {
+      display: 'none',
+      duration: 200,
+      complete: function () {
+        jQuery.Velocity(showElement, 'transition.slideDownIn', {
+          duration: 200
+        });
+      }
+    })
+    hideElement.classList.remove(SIDEBAR_BODY_ACTIVE);
+    showElement.classList.add(SIDEBAR_BODY_ACTIVE);
+  }
+
+  postToc && postToc.addEventListener('transitionend', function() {
+    this.classList.remove(SLIDE_UP_IN);
+  });
+
+  if (sidebarBody) {
+    if (sidebarBody.classList.contains('pisces') || sidebarBody.classList.contains('gemini')) {
+      let hasFix = false;
+      let scrollEl = document.querySelector('.main-continer');
+      let limitTop = document.querySelector('#nav_ul').children.length * 42 + 162;
+      window.addEventListener('scroll', function(e) {
+        if (document.scrollingElement.scrollTop >= limitTop) {
+          if (!hasFix) {
+            sidebar.classList.add('sidebar-fixed');
+            hasFix = true;
+          }
+        } else {
+          if (hasFix) {
+            sidebar.classList.remove('sidebar-fixed');
+            hasFix = false;
+          }
+        }
+      });
+    }
+  }
+  
+</script>
+        <div class="section-box box-shadow-wrapper">
+          <div class="section bg-color post post-page">
+            <section class="post-header">
+  <h1 class="post-title">
+    <a class="post-title-link" href="https://zdblog.top/ji-chu-yu-fa/"> 基础语法 </a>
+  </h1>
+  <div class="post-meta">
+    
+    <span class="meta-item pc-show">
+      <i class="fa fa-calendar-o"></i>
+      <span class="language" data-lan="publish">发布于</span>
+      <span class="publish-time" data-t="2022-03-13 09:01:22">2022-03-13</span>
+      <span class="post-meta-divider pc-show">|</span>
+    </span>
+    
+    <span class="meta-item">
+      <i class="fa fa-folder-o"></i>
+      <span class="pc-show language" data-lan="category-in">标签:</span>
+       
+      <a href="https://zdblog.top/SLe3AwTIj/">
+        <span>java</span>
+      </a>
+       
+    </span>
+    <span class="post-meta-divider">|</span>
+    
+    <span class="meta-item">
+      <i class="fa fa-clock-o"></i>
+      <span
+        >20<span class="language" data-lan="minute"
+          >分钟</span
+        ></span
+      >
+    </span>
+    <span class="meta-item">
+      <span class="post-meta-divider">|</span>
+      <i class="fa fa-file-word-o"></i>
+      <span
+        >4798<span class="pc-show language" data-lan="words"
+          >字数</span
+        ></span
+      >
+    </span>
+      
+    <span
+      id="/ji-chu-yu-fa/"
+      data-flag-title="基础语法"
+      class="meta-item pc-show leancloud_visitors"
+    >
+      <span class="post-meta-divider">|</span>
+      <i class="fa fa-eye"></i>
+      <span
+        ><span class="language" data-lan="view">浏览量:</span>:<span
+          class="leancloud-visitors-count"
+        ></span
+      ></span>
+    </span>
+    
+  </div>
+</section>
+
+            <div class="post-body next-md-body" id="post_body">
+              <h2 id="java基础语法">Java基础语法</h2>
+<p>Java语言是面向对象的</p>
+<p>先介绍下类、对象、方法和实例变量的概念</p>
+<ul>
+<li>对象：是类的一个实例，有状态有行为。eg：对象（一条狗），状态（名字、品种、颜色等），行为（叫、吃、摇尾巴等）</li>
+<li>类：类是一个模板，描述一类对象的行为和状态</li>
+<li>方法：方法就是行为，一个类可以有很多方法</li>
+<li>实例变量：每个对象都有独特的实例变量，对象的状态由这些实例变量的值决定</li>
+</ul>
+<p>注意：</p>
+<ul>
+<li>大小写敏感</li>
+<li>
+<blockquote>
+<p>包名：多单词都小写</p>
+<p>类名、接口名：所有单词首字母大写</p>
+<p>变量名、方法名：第一个单词首字母小写，后面大写</p>
+<p>常量名：所有字母都大写，多单词用下划线连接(eg:XXX_YYY_ZZZ)</p>
+</blockquote>
+</li>
+<li>源文件名必须与类名相同</li>
+<li>一个源文件只能有一个public类，可以有若干个非public类</li>
+<li>主方法入口：<code>public static void main(String[] args)</code></li>
+</ul>
+<p><code>public static void main(String[] args)</code>:</p>
+<blockquote>
+<p>public：访问修饰符<br>
+static：关键字<br>
+void：返回类型<br>
+main：方法名<br>
+String：String类<br>
+args：字符串数组</p>
+</blockquote>
+<h3 id="标识符">标识符</h3>
+<p>Java所有的组成部分都需要名字。</p>
+<p>标识符：类名、变量名、方法名</p>
+<p>标识符规范：</p>
+<blockquote>
+<p>首字符：字母、<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi mathvariant="normal">、</mi><mi mathvariant="normal">其</mi></msub><mi mathvariant="normal">他</mi><mi mathvariant="normal">字</mi><mi mathvariant="normal">符</mi><mi mathvariant="normal">：</mi><mi mathvariant="normal">字</mi><mi mathvariant="normal">母</mi><mi mathvariant="normal">、</mi></mrow><annotation encoding="application/x-tex">、_
+其他字符：字母、</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.15em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord cjk_fallback">、</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:-0.15em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord cjk_fallback mtight">其</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord cjk_fallback">他</span><span class="mord cjk_fallback">字</span><span class="mord cjk_fallback">符</span><span class="mord cjk_fallback">：</span><span class="mord cjk_fallback">字</span><span class="mord cjk_fallback">母</span><span class="mord cjk_fallback">、</span></span></span></span>、_、数字<br>
+大小写敏感</p>
+</blockquote>
+<h3 id="修饰符">修饰符</h3>
+<p>Java用修饰符来修饰类中的方法和属性</p>
+<ul>
+<li>访问控制修饰符：default、public、protected、private</li>
+<li>非访问控制修饰符：final、abstract、static、synchronized</li>
+</ul>
+<h3 id="java变量">Java变量</h3>
+<ul>
+<li>局部变量</li>
+<li>类变量（静态变量）</li>
+<li>成员变量（非静态变量）</li>
+</ul>
+<h3 id="java关键字">Java关键字</h3>
+<figure data-type="image" tabindex="1"><img src="https://s2.loli.net/2022/03/08/Pnm1sC7QRDZG4z6.png" alt="Java关键字.png" loading="lazy"></figure>
+<hr>
+<h2 id="java-对象和类">Java 对象和类</h2>
+<p>Java面向对象支持以下基本概念：</p>
+<ul>
+<li>多态</li>
+<li>继承</li>
+<li>封装</li>
+<li>抽象</li>
+<li>类</li>
+<li>对象</li>
+<li>实例</li>
+<li>方法</li>
+<li>重载</li>
+</ul>
+<p>方法：改变对象的内部状态，对象的相互调用</p>
+<p>类中的变量：</p>
+<ul>
+<li>局部变量：在方法中定义的变量，随方法的结束而销毁</li>
+<li>成员变量：定义在类中、方法之外的变量，在创建对象时实例化，在类中可被访问</li>
+<li>类变量：声明在类中、方法块之外、必须声明为static类型</li>
+</ul>
+<h3 id="构造方法">构造方法</h3>
+<p>每个类都有一个或多个构造方法</p>
+<p>创建对象时，至少调用一个构造方法</p>
+<p>构造方法的名称必须与类同名</p>
+<h3 id="创建对象">创建对象</h3>
+<ol>
+<li>声明：对象的名称和类型</li>
+<li>实例化：使用关键字<code>new</code>来创建一个对象</li>
+<li>初始化：使用<code>new</code>创建对象时，会调用构造方法初始化对象</li>
+</ol>
+<pre><code class="language-java">public class Puppy{
+
+    // 该构造方法仅有一个参数：name
+    public Puppy(String name){
+        System.out.println(&quot;The dog's name is : &quot; + name);
+    }
+
+    public static void main(String[] args){
+        Puppy myPuppy = new Puppy(&quot;Tommy&quot;);
+    }
+}
+</code></pre>
+<h3 id="访问实例变量和方法">访问实例变量和方法</h3>
+<p>通过已创建的对象来访问成员变量和成员方法</p>
+<pre><code class="language-java">/* 实例化对象 */
+Object referenceVariable = new Constructor();
+/* 访问类中的变量 */
+referenceVariable.variableName;
+/* 访问类中的方法 */
+referenceVariable.methodName();
+</code></pre>
+<p>eg:</p>
+<pre><code class="language-java">public class Puppy{
+    int puppyAge;
+    public Puppy(String name){
+        System.out.println(&quot;The dog's name is : &quot; + name)；
+    }
+
+    public void setAge(int age){
+        puppyAge = age;
+    }
+
+    public int getAge(){
+        return puppyAge;
+    }
+
+    public static void main(String[] args){
+        Puppy myPuppy = new Puppy(Tommy);
+
+        myPuppy.setAge(2)
+        System.out.println(&quot;myPuppy's age is : &quot; + myPuppy.getAge());
+        System.out.println(&quot;变量值：&quot; + myPuppy.puppyAge);
+    }
+}
+</code></pre>
+<h3 id="java包">Java包</h3>
+<p>包主要用来对类和接口进行分类</p>
+<hr>
+<h2 id="java基本数据类型">Java基本数据类型</h2>
+<ol>
+<li>内置数据类型</li>
+<li>引用数据类型</li>
+</ol>
+<h3 id="内置数据类型">内置数据类型</h3>
+<p>8种基本类型</p>
+<ul>
+<li>byte：8位,默认值<code>0</code></li>
+<li>short：16位，默认值<code>0</code></li>
+<li>int：32位，默认值<code>0</code></li>
+<li>long：64位，默认值<code>0L</code>(L不区分大小写，最好大写区分1)</li>
+<li>float：单精度，32位，默认值<code>0.0f</code>(不能表示精确的值)</li>
+<li>double：双精度，64位，默认值<code>0.0d</code>(不能表示精确值)</li>
+<li>boolean：标志记录true/false，默认<code>false</code></li>
+<li>char：单一的16位Unicode字符，<code>\u0000</code>~<code>\uffff</code></li>
+</ul>
+<h3 id="引用数据类型">引用数据类型</h3>
+<p>对象、数组都是引用数据类型</p>
+<p>默认值<code>null</code></p>
+<p>一个引用变量可以用来引用任何与之兼容的类型</p>
+<h3 id="java常量">Java常量</h3>
+<p>使用<code>final</code>关键字来修饰常量</p>
+<p>eg：`final double PI = 3.14159265;</p>
+<p>常量名通常大写</p>
+<p>字符串常量：双引号之间的字符序列</p>
+<p>转义字符：</p>
+<figure data-type="image" tabindex="2"><img src="https://s2.loli.net/2022/03/08/Go2nVrQZF8Rpa9K.png" alt="转义字符.png" loading="lazy"></figure>
+<h3 id="自动类型转换">自动类型转换</h3>
+<pre><code>low --------------------------------------&gt; high
+byte,short,char -&gt; int -&gt; long -&gt; float -&gt; double
+</code></pre>
+<ul>
+<li>boolean不能转换</li>
+<li>容量大的必须用强制转换才可以转换为容量小的</li>
+<li>浮点数舍弃小数转换得到整形</li>
+</ul>
+<hr>
+<h2 id="java变量类型">Java变量类型</h2>
+<ul>
+<li>类变量</li>
+<li>实例变量</li>
+<li>局部变量</li>
+</ul>
+<p>eg：</p>
+<pre><code class="language-java">public class Variable{
+    static int allClicks=0;    // 类变量
+ 
+    String str=&quot;hello world&quot;;  // 实例变量
+ 
+    public void method(){
+ 
+        int i =0;  // 局部变量
+ 
+    }
+}
+</code></pre>
+<h3 id="java局部变量">java局部变量</h3>
+<ul>
+<li>局部变量声明在方法中</li>
+<li>不能用访问修饰符</li>
+<li>没有默认值，必须先初始化</li>
+</ul>
+<h3 id="java实例变量">Java实例变量</h3>
+<ul>
+<li>实例变量声明在一个类中，在方法、构造方法和语句块之外</li>
+<li>当一个对象被实例化之后，每个实例变量的值就跟着确定，对象被销毁的时候销毁</li>
+<li>实例变量的值应该至少被一个方法，使得外部能够通过这些方式获取实例变量信息</li>
+<li>可以声明在使用前或者使用后</li>
+<li>可用访问修饰符</li>
+<li>实例变量对于类中的方法、构造方法或者语句块是可见的。一般情况下应该把实例变量设为私有。通过使用访问修饰符可以使实例变量对子类可见</li>
+<li>有默认值。数值型变量的默认值是0，布尔型变量的默认值是false，引用类型变量的默认值是null。变量的值可以在声明时指定，也可以在构造方法中指定</li>
+<li>可以直接通过变量名访问。但在静态方法以及其他类中，就应该使用完全限定名：ObejectReference.VariableName</li>
+</ul>
+<h3 id="类变量静态变量">类变量（静态变量）</h3>
+<ul>
+<li>在类中以 static 关键字声明，但必须在方法之外</li>
+<li>类只拥有类变量的一份拷贝</li>
+<li>静态变量是指声明为 public/private，final 和 static 类型的变量。静态变量初始化后不可改变。</li>
+<li>类变量被声明为 public static final 类型时，类变量名称一般建议使用大写字母</li>
+</ul>
+<hr>
+<h2 id="java修饰符">java修饰符</h2>
+<ul>
+<li>访问修饰符</li>
+<li>非访问修饰符</li>
+</ul>
+<p>修饰符用来定义类、方法或者变量，通常放在语句的最前端</p>
+<h3 id="访问控制修饰符">访问控制修饰符</h3>
+<p>用来保护对类、对象、方法的访问</p>
+<ul>
+<li>default（默认，不写）：同一包内可见，不适用任何修饰符</li>
+<li>private：同一类内可见，不能修饰类（外部类）</li>
+<li>public：对所有类可见</li>
+<li>protected：对同一包内的类和子类可见，不能修饰类</li>
+</ul>
+<p>接口里的变量都隐式声明为<code>public static final</code>，而接口里的方法默认为<code>public</code></p>
+<ol>
+<li>私有访问修饰符--private</li>
+</ol>
+<p>声明为私有访问类型的变量只能通过类中公共的 getter 方法被外部类访问</p>
+<p>eg：</p>
+<pre><code class="language-java">public class Logger {
+    private String format;
+    public String getFormat() {
+        return this.format;
+    }
+    public void setFormat(String format) {
+        this.format = format;
+    }
+}
+</code></pre>
+<ol start="2">
+<li>公有访问修饰符--public</li>
+</ol>
+<p>声明为 public 的类、方法、构造方法和接口能够被任何其他类访问</p>
+<ol start="3">
+<li>受保护的访问修饰符--protected</li>
+</ol>
+<ul>
+<li>子类与父类在同一包中：能被同一个包中的任何其他类访问</li>
+<li>子类与父类不在同一包中：在子类中，子类实例可以访问其从基类继承而来的 protected 方法，而不能访问基类实例的protected方法</li>
+</ul>
+<ol start="4">
+<li>方法继承规则：</li>
+</ol>
+<ul>
+<li>父类-public，子类public</li>
+<li>父类-protected，子类public、protected</li>
+<li>父类-private，子类不能继承</li>
+</ul>
+<h3 id="非访问修饰符">非访问修饰符</h3>
+<ul>
+<li>static：用来修饰类方法和类变量</li>
+<li>final：修饰类、方法、变量，修饰的类不能被继承，方法不能被重新定义，变量为常量，不可修改</li>
+<li>abstract：用来修饰抽象类和抽象方法</li>
+<li>synchronized和volatile：主要用于线程的编程</li>
+</ul>
+<ol>
+<li>
+<p>static修饰符</p>
+<ul>
+<li>静态变量：用来声明静态变量，只有一份拷贝</li>
+<li>静态方法：静态方法不能使用类的非静态变量</li>
+</ul>
+</li>
+<li>
+<p>final修饰符</p>
+<ul>
+<li>final变量：赋值后为常量</li>
+<li>final方法：可以被继承，但不能被子类重写</li>
+<li>final类：不能被继承</li>
+</ul>
+</li>
+<li>
+<p>abstract修饰符</p>
+</li>
+<li>
+<p>synchronized修饰符</p>
+</li>
+</ol>
+<p>声明的方法同一时间只能被一个线程访问</p>
+<ol start="5">
+<li>transient修饰符</li>
+</ol>
+<p>java 虚拟机(JVM)跳过被 transient 修饰的实例变量</p>
+<ol start="6">
+<li>volatile修饰符</li>
+</ol>
+<p>volatile 修饰的成员变量在每次被线程访问时，都强制从共享内存中重新读取该成员变量的值,成员变量发生变化时，会强制线程将变化值回写到共享内存</p>
+<p>任何时刻，两个不同的线程总是看到某个成员变量的同一个值</p>
+<hr>
+<h2 id="java-运算符">java 运算符</h2>
+<ul>
+<li>算术运算符</li>
+<li>关系运算符</li>
+<li>位运算符</li>
+<li>逻辑运算符</li>
+<li>赋值运算符</li>
+<li>其他运算符</li>
+</ul>
+<ol>
+<li>算术运算符</li>
+</ol>
+<p><code>+</code>,<code>-</code>,<code>*</code>,<code>/</code>,<code>%</code>,<code>++</code>,<code>--</code></p>
+<ul>
+<li>前缀自增自减法(++a,--a): 先进行自增或者自减运算，再进行表达式运算</li>
+<li>后缀自增自减法(a++,a--): 先进行表达式运算，再进行自增或者自减运算</li>
+</ul>
+<ol start="2">
+<li>关系运算符</li>
+</ol>
+<p><code>==</code>,<code>!=</code>,<code>&gt;</code>,<code>&lt;</code>,<code>&gt;=</code>,<code>&lt;=</code></p>
+<ol start="3">
+<li>位运算符</li>
+</ol>
+<p><code>&amp;</code>,<code>|</code>,<code>^</code>,<code>~</code>,<code>&lt;&lt;</code>,<code>&gt;&gt;</code>,<code>&gt;&gt;&gt;</code>:</p>
+<figure data-type="image" tabindex="3"><img src="https://s2.loli.net/2022/03/09/SmKYWLxFpNgVylT.png" alt="位运算符.png" loading="lazy"></figure>
+<ol start="4">
+<li>逻辑运算符</li>
+</ol>
+<p><code>&amp;&amp;</code>,<code>||</code>,<code>!</code></p>
+<ol start="5">
+<li>赋值运算符</li>
+</ol>
+<p><code>=</code>,<code>+=</code>,<code>-=</code>,<code>*=</code>,<code>/=</code>,<code>(%)=</code>,<code>&lt;&lt;=</code>,<code>&gt;&gt;=</code>,<code>&amp;=</code>,<code>^=</code>,<code>|=</code></p>
+<ol start="6">
+<li>条件运算符（三元运算符）</li>
+</ol>
+<p><code>variable x = (expression) ? value if true : value if false</code></p>
+<p>eg:<code>b = (a == 1) ? 20 : 30;</code></p>
+<ol start="7">
+<li>instanceof运算符</li>
+</ol>
+<p>用于操作对象实例，检查该对象是否是一个特定类型（类类型或接口类型）</p>
+<p><code>( Object reference variable ) instanceof (class/interface type)</code></p>
+<p>eg:</p>
+<pre><code class="language-java">String name = &quot;James&quot;;
+boolean result = name instanceof String; // 由于 name 是 String 类型，所以返回真
+</code></pre>
+<h3 id="运算符优先级">运算符优先级</h3>
+<figure data-type="image" tabindex="4"><img src="https://s2.loli.net/2022/03/09/BfPx341d8E9zSwG.png" alt="运算符优先级.png" loading="lazy"></figure>
+<h2 id="java循环结构">Java循环结构</h2>
+<ul>
+<li>while循环</li>
+<li>do...while循环</li>
+<li>for循环</li>
+</ul>
+<h3 id="java增强for循环">Java增强for循环</h3>
+<pre><code class="language-java">for(声明语句 : 表达式)
+{
+    // 代码句子
+}
+// 声明语句：声明新的局部变量，该变量的类型必须和数组元素的类型匹配
+// 表达式：要访问的数组名，或者是返回值为数组的方法
+</code></pre>
+<p>eg:</p>
+<pre><code class="language-java">public class Test{
+    public static void main(String[] args){
+        String [] names = {&quot;James&quot;, &quot;Larry&quot;, &quot;Tom&quot;, &quot;Lacy&quot;};
+        for(String name : names){
+            System.out.print(name);
+            System.out.print(&quot;,&quot;);
+        }
+    }
+}
+
+// James,Larry,Tom,Lacy,
+</code></pre>
+<h3 id="break关键字">break关键字</h3>
+<p>break 主要用在循环语句或者 switch 语句中，用来跳出语句块</p>
+<h3 id="continue关键字">continue关键字</h3>
+<p>让程序立刻跳转到下一次循环的迭代</p>
+<hr>
+<h2 id="java条件语句">Java条件语句</h2>
+<ul>
+<li>if语句</li>
+<li>if...else语句</li>
+<li>if..else if...else语句</li>
+</ul>
+<hr>
+<h2 id="java-switch-case语句">Java switch case语句</h2>
+<p>switch case 语句判断一个变量与一系列值中某个值是否相等，每个值称为一个分支</p>
+<pre><code class="language-java">switch(expression){
+    case value :
+       //语句
+       break; //可选
+    case value :
+       //语句
+       break; //可选
+    //你可以有任意数量的case语句
+    default : //可选
+       //语句
+}
+</code></pre>
+<p>如果 case 语句块中没有 break 语句时，匹配成功后，从当前 case 开始，后续所有 case 的值都会输出直至break语句出现</p>
+<pre><code class="language-java">public class Test {
+   public static void main(String args[]){
+      int i = 1;
+      switch(i){
+         case 0:
+            System.out.println(&quot;0&quot;);
+         case 1:
+            System.out.println(&quot;1&quot;);
+         case 2:
+            System.out.println(&quot;2&quot;);
+         case 3:
+            System.out.println(&quot;3&quot;); break;
+         default:
+            System.out.println(&quot;default&quot;);
+      }
+   }
+}
+
+// 1
+// 2
+// 3
+</code></pre>
+<hr>
+<h2 id="数组">数组</h2>
+<h3 id="声明数组变量">声明数组变量</h3>
+<pre><code class="language-java">dataType[] arrayRefVar;   // 首选的方法
+ 
+或
+ 
+dataType arrayRefVar[];  // 效果相同，但不是首选方法
+</code></pre>
+<h3 id="创建数组">创建数组</h3>
+<p><code>arrayRefVar = new dataType[arraySize];</code></p>
+<p>数组变量的声明，和创建数组可以用一条语句完成:</p>
+<p><code>dataType[] arrayRefVar = new dataType[arraySize];</code></p>
+<p>其他：</p>
+<p><code>dataType[] arrayRefVar = {value0, value1, ..., valuek};</code></p>
+<h3 id="数组作为方法的参数或返回值">数组作为方法的参数或返回值</h3>
+<p>eg:</p>
+<p><code>printArray(new int[]{3, 1, 2, 6, 4, 2});</code></p>
+<h3 id="多维数组">多维数组</h3>
+<p><code>String[][] str = new String[3][4];</code></p>
+<h3 id="arrays类">Arrays类</h3>
+<ul>
+<li>给数组赋值：通过 fill 方法</li>
+<li>对数组排序：通过 sort 方法,按升序</li>
+<li>比较数组：通过 equals 方法比较数组中元素值是否相等</li>
+<li>查找数组元素：通过 binarySearch 方法能对排序好的数组进行二分查找法操作</li>
+</ul>
+<hr>
+<h2 id="日期和时间date类">日期和时间（Date类）</h2>
+<p>实例化Date对象：</p>
+<ul>
+<li><code>Date()</code></li>
+<li><code>Date(long milliseconds)</code>:该参数为1970.01.01起的毫秒数</li>
+</ul>
+<h3 id="date对象方法">Date对象方法：</h3>
+<figure data-type="image" tabindex="5"><img src="https://s2.loli.net/2022/03/10/NuxSwZg4ChOGVKd.png" alt="Date方法.png" loading="lazy"></figure>
+<h3 id="使用simpledateformat格式化日期">使用SimpleDateFormat格式化日期</h3>
+<p><code>SimpleDateFormat ft = new SimpleDateFormat (&quot;yyyy-MM-dd hh:mm:ss&quot;);</code></p>
+<h3 id="使用printf格式化日期">使用printf格式化日期</h3>
+<figure data-type="image" tabindex="6"><img src="https://s2.loli.net/2022/03/10/DbGnxh2APTH9qfW.png" alt="printf格式化日期.png" loading="lazy"></figure>
+<p>eg：</p>
+<p><code>System.out.printf(&quot;全部日期和时间信息：%tc%n&quot;,date);</code></p>
+<p><code>System.out.printf(&quot;%1$s %2$tB %2$td, %2$tY&quot;, &quot;Due date:&quot;, date);</code></p>
+<p><code>System.out.printf(&quot;%s %tB %&lt;te, %&lt;tY&quot;, &quot;Due date:&quot;, date);</code></p>
+<h3 id="java休眠sleep">Java休眠（sleep）</h3>
+<p>sleep()阻塞当前进程</p>
+<pre><code class="language-java">import java.util.*;
+  
+public class SleepDemo {
+    public static void main(String[] args) {
+        try { 
+            System.out.println(new Date( ) + &quot;\n&quot;); 
+            Thread.sleep(1000*3);   // 休眠3秒
+            System.out.println(new Date( ) + &quot;\n&quot;); 
+        } catch (Exception e) { 
+            System.out.println(&quot;Got an exception!&quot;); 
+        }
+    }
+}
+</code></pre>
+<h3 id="测量时间">测量时间</h3>
+<pre><code class="language-java">import java.util.*;
+  
+public class DiffDemo {
+ 
+   public static void main(String[] args) {
+      try {
+         long start = System.currentTimeMillis( );
+         System.out.println(new Date( ) + &quot;\n&quot;);
+         Thread.sleep(5*60*10);
+         System.out.println(new Date( ) + &quot;\n&quot;);
+         long end = System.currentTimeMillis( );
+         long diff = end - start;
+         System.out.println(&quot;Difference is : &quot; + diff);
+      } catch (Exception e) {
+         System.out.println(&quot;Got an exception!&quot;);
+      }
+   }
+}
+</code></pre>
+<h3 id="calendar类对日期进行操作">Calendar类（对日期进行操作）</h3>
+<p>创建Calendar对象：</p>
+<ul>
+<li><code>Calendar c = Calendar.getInstance();//默认是当前日期</code></li>
+<li><code>//创建一个代表2009年6月12日的Calendar对象</code><br>
+<code>Calendar c1 = Calendar.getInstance();</code><br>
+<code>c1.set(2009, 6 - 1, 12);</code></li>
+</ul>
+<p>对象信息的设置:</p>
+<ul>
+<li>set设置：<code>public final void set(int year,int month,int date)</code></li>
+<li>add设置：<code>c1.add(Calendar.DATE, 10);</code></li>
+</ul>
+<p>对象信息的获得:</p>
+<p><code>int year = c1.get(Calendar.YEAR);</code></p>
+<h3 id="gregoriancalendar类">GregorianCalendar类</h3>
+<p>GregorianCalendar对象构造方法：</p>
+<figure data-type="image" tabindex="7"><img src="https://s2.loli.net/2022/03/10/Yomul6awe2RshgL.png" alt="GregorianCalendar构造方法.png" loading="lazy"></figure>
+<p>GregorianCalendar对象常用方法：</p>
+<figure data-type="image" tabindex="8"><img src="https://s2.loli.net/2022/03/10/RxTBoJFD1AIplwq.png" alt="GregorianCalendar常用方法.png" loading="lazy"></figure>
+<hr>
+<h2 id="java正则表达式">Java正则表达式</h2>
+<h3 id="正则表达式语法">正则表达式语法：</h3>
+<figure data-type="image" tabindex="9"><img src="https://s2.loli.net/2022/03/11/Mpk1wGBncSCRXOP.png" alt="正则表达式语法.png" loading="lazy"></figure>
+<h3 id="regex包">regex包</h3>
+<ul>
+<li>Pattern类：Pattern对象是一个正则表达式的编译表示</li>
+<li>Matcher类：Matcher对象是对输入字符串进行解释和匹配操作的引擎</li>
+<li>PatternSyntaxException类：是一个非强制异常类，表示一个正则表达式模式中的语法错误</li>
+</ul>
+<h3 id="matcher类的方法">Matcher类的方法</h3>
+<figure data-type="image" tabindex="10"><img src="https://s2.loli.net/2022/03/11/HKFdD3Gmsl7xXcI.png" alt="matcher方法.png" loading="lazy"></figure>
+<h3 id="patternsyntaxexception类的方法">PatternSyntaxException类的方法</h3>
+<figure data-type="image" tabindex="11"><img src="https://s2.loli.net/2022/03/11/ji7tRZLYEQkwg31.png" alt="patternsyntaxexception方法.png" loading="lazy"></figure>
+<hr>
+<h2 id="java-流stream-文件file-io">Java 流（stream）、文件（file）、IO</h2>
+<p>Java.io 包几乎包含了所有操作输入、输出需要的类</p>
+<p>一个流可以理解为一个数据的序列</p>
+<p>输入流表示从一个源读取数据，输出流表示向一个目标写数据</p>
+<h3 id="读取控制台输入">读取控制台输入</h3>
+<p>把System.in包装在一个BufferedReader对象中创建一个字符流</p>
+<p><code>BufferedReader br = new BufferedReader(new InputStreamReader(System.in));</code></p>
+<p>BufferedReader对象创建后，read()方法从控制台读取一个字符，readLine()方法从控制台读取一个字符串</p>
+<p>从控制台读取多字符输入</p>
+<p><code>int read( ) throws IOException</code></p>
+<pre><code class="language-java">//使用 BufferedReader 在控制台读取字符
+ 
+import java.io.*;
+ 
+public class BRRead {
+    public static void main(String[] args) throws IOException {
+        char c;
+        // 使用 System.in 创建 BufferedReader
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        System.out.println(&quot;输入字符, 按下 'q' 键退出。&quot;);
+        // 读取字符
+        do {
+            c = (char) br.read();
+            System.out.println(c);
+        } while (c != 'q');
+    }
+}
+</code></pre>
+<p>从控制台读取字符串</p>
+<p><code>String readLine( ) throws IOException</code></p>
+<pre><code class="language-java">//使用 BufferedReader 在控制台读取字符
+import java.io.*;
+ 
+public class BRReadLines {
+    public static void main(String[] args) throws IOException {
+        // 使用 System.in 创建 BufferedReader
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String str;
+        System.out.println(&quot;Enter lines of text.&quot;);
+        System.out.println(&quot;Enter 'end' to quit.&quot;);
+        do {
+            str = br.readLine();
+            System.out.println(str);
+        } while (!str.equals(&quot;end&quot;));
+    }
+}
+</code></pre>
+<h3 id="控制台输出">控制台输出</h3>
+<p><code>System.out.print()</code>, <code>System.out.println()</code>, <code>System.out.write()</code></p>
+<h3 id="读写文件">读写文件</h3>
+<ol>
+<li>FileInputStream</li>
+</ol>
+<p>该流用于读取数据</p>
+<ul>
+<li>
+<p>使用字符串类型的文件名来创建一个输入流对象来读取文件：</p>
+<p><code>InputStream f = new FileInputStream(&quot;C:/java/hello&quot;);</code></p>
+</li>
+<li>
+<p>使用一个文件对象来创建一个输入流对象来读取文件</p>
+<p><code>File f = new File(&quot;C:/java/hello&quot;);</code><br>
+<code>InputStream in = new FileInputStream(f);</code></p>
+</li>
+</ul>
+<p>InputStream对象的方法：</p>
+<figure data-type="image" tabindex="12"><img src="https://s2.loli.net/2022/03/11/3MpPyQUnLdIxrFD.png" alt="InputStream方法.png" loading="lazy"></figure>
+<ol start="2">
+<li>FileOutputStream</li>
+</ol>
+<p>该流用于创建一个文件并像文件中写入数据</p>
+<ul>
+<li>
+<p>使用字符串类型的文件名来创建一个输出流对象</p>
+<p><code>OutputStream f = new FileOutputStream(&quot;C:/java/hello&quot;)</code></p>
+</li>
+<li>
+<p>使用一个文件对象来创建一个输出流来写文件</p>
+<p><code>File f = new File(&quot;C:/java/hello&quot;);</code><br>
+<code>OutputStream fOut = new FileOutputStream(f);</code></p>
+</li>
+</ul>
+<p>OutputStream对象的方法：</p>
+<figure data-type="image" tabindex="13"><img src="https://s2.loli.net/2022/03/11/STUIgC2LF8MRcZ4.png" alt="OutputStream方法.png" loading="lazy"></figure>
+<p>其他输出流：<code>ByteArrayOutputStream</code>、<code>DataOutputStream</code></p>
+<p>eg：</p>
+<pre><code class="language-java">import java.io.*;
+ 
+public class fileStreamTest {
+    public static void main(String[] args) {
+        try {
+            byte bWrite[] = { 11, 21, 3, 40, 5 };
+            OutputStream os = new FileOutputStream(&quot;test.txt&quot;);
+            for (int x = 0; x &lt; bWrite.length; x++) {
+                os.write(bWrite[x]); // writes the bytes
+            }
+            os.close();
+ 
+            InputStream is = new FileInputStream(&quot;test.txt&quot;);
+            int size = is.available();
+ 
+            for (int i = 0; i &lt; size; i++) {
+                System.out.print((char) is.read() + &quot;  &quot;);
+            }
+            is.close();
+        } catch (IOException e) {
+            System.out.print(&quot;Exception&quot;);
+        }
+    }
+}
+</code></pre>
+<h3 id="关于文件和io的类">关于文件和I/O的类</h3>
+<ul>
+<li>File Class</li>
+<li>FileReader Class</li>
+<li>FileWriter Class</li>
+</ul>
+<h3 id="目录">目录</h3>
+<ol>
+<li>
+<p>创建目录：</p>
+<ul>
+<li>mkdir()方法创建一个文件夹，成功返回true，失败返回false</li>
+<li>mkidrs()方法创建一个文件夹和它所有父类文件夹</li>
+</ul>
+</li>
+</ol>
+<pre><code class="language-java">import java.io.File;
+ 
+public class CreateDir {
+    public static void main(String[] args) {
+        String dirname = &quot;/tmp/user/java/bin&quot;;
+        File d = new File(dirname);
+        // 现在创建目录
+        d.mkdirs();
+    }
+}
+</code></pre>
+<ol start="2">
+<li>读取目录</li>
+</ol>
+<p>调用该对象的list()方法，提取目录包含的文件和文件夹列表</p>
+<pre><code class="language-java">import java.io.File;
+ 
+public class DirList {
+    public static void main(String args[]) {
+        String dirname = &quot;/tmp&quot;;
+        File f1 = new File(dirname);
+        if (f1.isDirectory()) {
+            System.out.println(&quot;目录 &quot; + dirname);
+            String s[] = f1.list();
+            for (int i = 0; i &lt; s.length; i++) {
+                File f = new File(dirname + &quot;/&quot; + s[i]);
+                if (f.isDirectory()) {
+                    System.out.println(s[i] + &quot; 是一个目录&quot;);
+                } else {
+                    System.out.println(s[i] + &quot; 是一个文件&quot;);
+                }
+            }
+        } else {
+            System.out.println(dirname + &quot; 不是一个目录&quot;);
+        }
+    }
+}
+</code></pre>
+<ol start="3">
+<li>删除目录或文件</li>
+</ol>
+<p>使用<code>java.io.File.delete()</code>方法</p>
+<p>删除某一目录时，必须保证该目录下没有其他文件</p>
+<hr>
+<h2 id="scanner-类">Scanner 类</h2>
+<p>用于获取用户的输入</p>
+<p><code>Scanner s = new Scanner(System.in)</code></p>
+<p>Scanner类的next()和nextLine()获取输入的字符串</p>
+<ul>
+<li>next()以空白为结束符，不能得到带空格的字符串</li>
+<li>nextLine()以Enter为结束符</li>
+</ul>
+<p>也可以读取其他类型的数据：</p>
+<ul>
+<li><code>nextXxx()</code>: 例如 f = scan.nextFloat()</li>
+</ul>
+<hr>
+<h2 id="异常处理">异常处理</h2>
+<p>异常发生的原因：</p>
+<ul>
+<li>用户输入非法字符</li>
+<li>要打开的文件不存在</li>
+<li>网络通信连接中断，或者JVM内存溢出</li>
+</ul>
+<p>三种类型的异常：</p>
+<ul>
+<li>检查性异常</li>
+<li>运行时异常</li>
+<li>错误</li>
+</ul>
+<p>Exception类有两个主要的子类：IOException类和RuntimeException类</p>
+<h3 id="java-内置异常类">java 内置异常类</h3>
+<figure data-type="image" tabindex="14"><img src="https://s2.loli.net/2022/03/11/h7Vr2tE3Gi8vW19.png" alt="内置异常类.png" loading="lazy"></figure>
+<h3 id="异常方法">异常方法</h3>
+<h3 id="捕获异常">捕获异常</h3>
+<pre><code class="language-java">try
+{
+   // 程序代码
+}catch(ExceptionName e1)
+{
+   //Catch 块
+}
+</code></pre>
+<p>catch语句包含要捕获异常的声明</p>
+<pre><code class="language-java">import java.io.*;
+public class ExcepTest{
+ 
+   public static void main(String args[]){
+      try{
+         int a[] = new int[2];
+         System.out.println(&quot;Access element three :&quot; + a[3]);
+      }catch(ArrayIndexOutOfBoundsException e){
+         System.out.println(&quot;Exception thrown  :&quot; + e);
+      }
+      System.out.println(&quot;Out of the block&quot;);
+   }
+}
+
+
+//Exception thrown  :java.lang.ArrayIndexOutOfBoundsException: Index 3 out of bounds for length 2
+//Out of the block
+</code></pre>
+<h3 id="多重捕获块">多重捕获块</h3>
+<pre><code class="language-java">try{
+   // 程序代码
+}catch(异常类型1 异常的变量名1){
+  // 程序代码
+}catch(异常类型2 异常的变量名2){
+  // 程序代码
+}catch(异常类型3 异常的变量名3){
+  // 程序代码
+}
+</code></pre>
+<h3 id="throwsthrow关键字">throws/throw关键字</h3>
+<p>如果一个方法没有捕获到一个检查性异常，那么该方法必须使用 throws/throw 关键字来声明</p>
+<p><code>public void withdraw(double amount) throws RemoteException InsufficientFundsException</code></p>
+<h3 id="finally-关键字">finally 关键字</h3>
+<p>无论是否发生异常，finally 代码块中的代码总会被执行</p>
+<pre><code class="language-java">try{
+  // 程序代码
+}catch(异常类型1 异常的变量名1){
+  // 程序代码
+}catch(异常类型2 异常的变量名2){
+  // 程序代码
+}finally{
+  // 程序代码
+}
+</code></pre>
+<h3 id="声明自定义异常">声明自定义异常</h3>
+<ul>
+<li>所有异常都必须是 Throwable 的子类</li>
+<li>如果希望写一个检查性异常类，则需要继承 Exception 类</li>
+<li>如果你想写一个运行时异常类，那么需要继承 RuntimeException 类</li>
+</ul>
+<h3 id="通用异常">通用异常</h3>
+<ul>
+<li>JVM异常：由 JVM 抛出的异常或错误。例如：NullPointerException 类，ArrayIndexOutOfBoundsException 类，ClassCastException 类</li>
+<li>程序级异常：由程序或者API程序抛出的异常。例如 IllegalArgumentException 类，IllegalStateException 类</li>
+</ul>
+
+            </div>
+            
+            
+              <div class="post-footer">
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+      <strong class="language" data-lan="author">本文作者：</strong>
+      zd
+    </li>
+    <li class="post-copyright-link">
+      <strong class="language" data-lan="link">本文链接：</strong>
+      <a href="https://zdblog.top/ji-chu-yu-fa/" title="基础语法">https://zdblog.top/ji-chu-yu-fa/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong class="language" data-lan="copyright">版权声明： </strong>
+      本博客所有文章除特别声明外，均采用<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i> BY-NC-SA</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+  <div class="tags">
+    
+      <a href="https://zdblog.top/SLe3AwTIj/"># java</a>
+    
+  </div>
+  <div class="nav">
+    <div class="nav-prev">
+      
+        <i class="fa fa-chevron-left"></i>
+        <a class="nav-pc-next" title="面向对象" href="https://zdblog.top/mian-xiang-dui-xiang/">面向对象</a class="nav-pc-next">
+        <a class="nav-mobile-prev" title="面向对象" href="https://zdblog.top/mian-xiang-dui-xiang/">上一篇</a>
+      
+    </div>
+    <div class="nav-next">
+      
+    </div>
+  </div>
+</div>
+            
+            
   <script src="https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js"></script>
 <div id="vcomments" style="padding: 10px 0px 0px 0px"></div>
 
@@ -284,11 +1541,11 @@
   });
 </script>
 
-              </section>
-            </div>
+          </div>
         </div>
       </div>
-      <div class="footer-box">
+    </div>
+    <div class="footer-box">
   <footer class="footer">
     <center id="runTimeBox">
       已运行:<span id="run_time"></span>
@@ -536,6 +1793,223 @@
     parent.insertBefore(aelem, next);
   });
 </script>
+    <div class="reward-mask" style="display: none;">
+  <div class="reward-relative">
+    <span class="close" aria-hidden="true">x</span>
+    <div class="reward-body">
+      <h2>感谢您的支持，我会继续努力的!</h2>
+      <div class="reward-img-box">
+        <div style="position: relative; width: 140px; height: 140px;">
+          
+          
+          
+        </div>
+      </div>
+      <p class="reward-word">扫码打赏，你说多少就多少</p>
+      <p class="reward-tip"> </p>
+    </div>
+    <div class="bottom">
+      
+      
+    </div>
+  </div>
+</div>
+<style>
+  .reward-mask {
+    position: fixed;
+    z-index: 99999;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #00000054;
+  }
+
+  .reward-relative {
+    position: relative;
+    width: 480px;
+    text-align: center;
+    margin: 0 auto;
+    border-radius: 5px;
+    background-color: #fff;
+    top: 50%;
+    margin-top: -205px;
+  }
+
+  .reward-relative .close {
+    position: absolute;
+    right: 10px;
+    font-weight: normal;
+    font-size: 16px;
+    color: #929292;
+  }
+
+  .reward-body {
+    padding: 40px 20px 20px;
+  }
+
+  .bottom {
+    display: flex;
+  }
+
+  .reward-btn {
+    text-align: center;
+  }
+
+  .reward-btn-text {
+    display: inline-block;
+    cursor: pointer;
+    width: 60px;
+    height: 60px;
+    line-height: 60px;
+    border-radius: 50%;
+    background-color: #ff9734;
+    color: #FFF;
+    margin-top: 20px;
+  }
+
+  .pay-text {
+    margin-top: 10px;
+    padding: 10px;
+    flex: 1;
+    transition: all .2s linear;
+  }
+
+  .pay-text:hover {
+    background-color: #a5a5a536;
+  }
+
+  .reward-body h2 {
+    padding-top: 10px;
+    text-align: center;
+    color: #a3a3a3;
+    font-size: 16px;
+    font-weight: normal;
+    margin: 0 0 20px;
+  }
+
+  .reward-body h2:after,
+  .reward-body h2:before {
+    font-family: Arial, Helvetica, sans-serif;
+    background: 0 0;
+    width: 0;
+    height: 0;
+    font-style: normal;
+    color: #eee;
+    font-size: 80px;
+    position: absolute;
+    top: 20px;
+  }
+
+  .reward-body h2:before {
+    content: '\201c';
+    left: 50px;
+  }
+
+  .reward-body h2:after {
+    content: '\201d';
+    right: 80px;
+  }
+
+  .reward-img-box {
+    display: inline-block;
+    padding: 10px;
+    border: 6px solid #ea5f00;
+    margin: 0 auto;
+    border-radius: 3px;
+    position: relative;
+  }
+
+  .reward-img {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+  }
+
+  @media (max-width: 767px) {
+    .reward-relative {
+      height: 100%;
+      top: 0px;
+      margin-top: 0;
+      width: auto;
+    }
+
+    .reward-relative .bottom {
+      flex-direction: column;
+    }
+
+    .reward-relative .pay-text {
+      width: 80%;
+      margin: 5px auto;
+      border: 1px solid silver;
+      padding: 6px;
+      border-radius: 4px;
+    }
+
+    .reward-body h2:after {
+      right: 40px;
+    }
+
+    .reward-body h2:after,
+    .reward-body h2:before {
+      font-size: 60px;
+    }
+
+    .reward-body h2:before {
+      left: 20px;
+    }
+  }
+</style>
+<script>
+  !function () {
+    var mask = document.querySelector('.reward-mask');
+    let close = document.querySelector('.reward-relative .close');
+    let rewardBtn = document.querySelector('.reward-btn');
+
+    let zfb = document.querySelector('#zfb'),
+      wx = document.querySelector('#wx'),
+      zfbBtn = document.querySelector('#zfbBtn'),
+      wxBtn = document.querySelector('#wxBtn');
+
+    if (zfbBtn && wxBtn) {
+      zfbBtn.addEventListener('click', () => {
+        jQuery.Velocity(zfb, 'transition.slideLeftIn', {
+          duration: 400
+        });
+        jQuery.Velocity(wx, 'transition.slideRightOut', {
+          display: 'none',
+          duration: 400
+        });
+      });
+
+      wxBtn.addEventListener('click', () => {
+        jQuery.Velocity(wx, 'transition.slideRightIn', {
+          duration: 400
+        });
+        jQuery.Velocity(zfb, 'transition.slideLeftOut', {
+          display: 'none',
+          duration: 400
+        });
+      });
+    }
+
+    rewardBtn.addEventListener('click', (e) => {
+      jQuery.Velocity(mask, 'transition.slideDownIn', {
+        duration: 400
+      })
+    });
+
+    close.addEventListener('click', (e) => {
+      e.preventDefault();
+      jQuery.Velocity(mask, 'transition.slideUpOut', {
+        duration: 400
+      })
+    })
+  }()
+</script>
+
   </div>
 </body>
 
@@ -2271,7 +3745,6 @@ public class ExcepTest{
       speed: 200
     });
   </script>
-
 
 
 

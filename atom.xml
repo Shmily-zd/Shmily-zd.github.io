@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://zdblog.top</id>
     <title>zd_blog</title>
-    <updated>2022-01-13T15:31:47.170Z</updated>
+    <updated>2022-03-13T01:05:25.464Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://zdblog.top"/>
     <link rel="self" href="https://zdblog.top/atom.xml"/>
@@ -11,35 +11,1435 @@
     <icon>https://zdblog.top/favicon.ico</icon>
     <rights>All rights reserved 2022, zd_blog</rights>
     <entry>
-        <title type="html"><![CDATA[Hello Gridea]]></title>
-        <id>https://zdblog.top/hello-gridea/</id>
-        <link href="https://zdblog.top/hello-gridea/">
+        <title type="html"><![CDATA[面向对象]]></title>
+        <id>https://zdblog.top/mian-xiang-dui-xiang/</id>
+        <link href="https://zdblog.top/mian-xiang-dui-xiang/">
         </link>
-        <updated>2018-12-11T16:00:00.000Z</updated>
-        <summary type="html"><![CDATA[<p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
-✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
-]]></summary>
-        <content type="html"><![CDATA[<p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
-✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
-<!-- more -->
-<p><a href="https://github.com/getgridea/gridea">Github</a><br>
-<a href="https://gridea.dev/">Gridea 主页</a><br>
-<a href="http://fehey.com/">示例网站</a></p>
-<h2 id="特性">特性👇</h2>
-<p>📝  你可以使用最酷的 <strong>Markdown</strong> 语法，进行快速创作</p>
-<p>🌉  你可以给文章配上精美的封面图和在文章任意位置插入图片</p>
-<p>🏷️  你可以对文章进行标签分组</p>
-<p>📋  你可以自定义菜单，甚至可以创建外部链接菜单</p>
-<p>💻  你可以在 <strong>Windows</strong>，<strong>MacOS</strong> 或 <strong>Linux</strong> 设备上使用此客户端</p>
-<p>🌎  你可以使用 <strong>𝖦𝗂𝗍𝗁𝗎𝖻 𝖯𝖺𝗀𝖾𝗌</strong> 或 <strong>Coding Pages</strong> 向世界展示，未来将支持更多平台</p>
-<p>💬  你可以进行简单的配置，接入 <a href="https://github.com/gitalk/gitalk">Gitalk</a> 或 <a href="https://github.com/SukkaW/DisqusJS">DisqusJS</a> 评论系统</p>
-<p>🇬🇧  你可以使用<strong>中文简体</strong>或<strong>英语</strong></p>
-<p>🌁  你可以任意使用应用内默认主题或任意第三方主题，强大的主题自定义能力</p>
-<p>🖥  你可以自定义源文件夹，利用 OneDrive、百度网盘、iCloud、Dropbox 等进行多设备同步</p>
-<p>🌱 当然 <strong>Gridea</strong> 还很年轻，有很多不足，但请相信，它会不停向前 🏃</p>
-<p>未来，它一定会成为你离不开的伙伴</p>
-<p>尽情发挥你的才华吧！</p>
-<p>😘 Enjoy~</p>
+        <updated>2022-03-13T01:03:43.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="继承">继承</h2>
+<p>继承就是子类继承父类的特征和行为，使得子类对象（实例）具有弗雷德实例域和方法，或子类从父类继承方法，使得子类具有父类相同的行为</p>
+<p>继承格式：</p>
+<pre><code class="language-java">class 父类 {
+}
+ 
+class 子类 extends 父类 {
+}
+</code></pre>
+<h3 id="继承类型">继承类型</h3>
+<p>Java不支持多继承，但支持多重继承</p>
+<p>1.单继承</p>
+<p><code>Class A</code> &lt;-- <code>Class B</code></p>
+<ol start="2">
+<li>多重继承</li>
+</ol>
+<p><code>Class A</code> &lt;-- <code>Class B</code> &lt;-- <code>Class C</code> &lt;-- ...</p>
+<ol start="3">
+<li>不同类继承同一个类</li>
+</ol>
+<p><code>Class A</code> &lt;-- <code>Class B</code></p>
+<p><code>Class A</code> &lt;-- <code>Class C</code></p>
+<ol start="4">
+<li>多继承（不支持）</li>
+</ol>
+<p><code>Class A</code> &lt;-- <code>Class C</code></p>
+<p><code>Class B</code> &lt;-- <code>Class C</code></p>
+<h3 id="集成的特性">集成的特性</h3>
+<ul>
+<li>
+<p>子类拥有父类非 private 的属性、方法</p>
+</li>
+<li>
+<p>子类可以拥有自己的属性和方法，即子类可以对父类进行扩展</p>
+</li>
+<li>
+<p>子类可以用自己的方式实现父类的方法</p>
+</li>
+<li>
+<p>Java 的继承是单继承，但是可以多重继承</p>
+</li>
+<li>
+<p>提高了类之间的耦合性（继承的缺点，耦合度高就会造成代码之间的联系越紧密，代码独立性越差）</p>
+</li>
+</ul>
+<h3 id="继承关键字">继承关键字</h3>
+<ul>
+<li>extends</li>
+<li>implements</li>
+</ul>
+<ol>
+<li>extends关键字</li>
+</ol>
+<p>类的继承是单一继承，extends只能继承一个类</p>
+<ol start="2">
+<li>implements关键字</li>
+</ol>
+<p>implements 关键字可以变相的使java具有多继承的特性，使用范围为类继承接口的情况，可以同时继承多个接口</p>
+<pre><code class="language-java">public interface A {
+    public void eat();
+    public void sleep();
+}
+ 
+public interface B {
+    public void show();
+}
+ 
+public class C implements A,B {
+}
+</code></pre>
+<ol start="3">
+<li>super 和 this关键字</li>
+</ol>
+<ul>
+<li>
+<p>super关键字：我们可以通过super关键字来实现对父类成员的访问，用来引用当前对象的父类</p>
+</li>
+<li>
+<p>this关键字：指向自己的引用</p>
+</li>
+</ul>
+<ol start="4">
+<li>final关键字</li>
+</ol>
+<p>使用 final 关键字声明类，就是把类定义定义为最终类，不能被继承，或者用于修饰方法，该方法不能被子类重写</p>
+<h3 id="构造器">构造器</h3>
+<p>子类不继承父类的构造器，只是通过<code>super</code>关键字调用</p>
+<p>如果父类构造器没有参数，系统自动调用父类的无参数构造器</p>
+<hr>
+<h2 id="重写override与重载overload">重写（Override）与重载（Overload）</h2>
+<p>方法重载是一个类的多态性表现,而方法重写是子类与父类的一种多态性表现</p>
+<h3 id="override">Override</h3>
+<p>重写是子类在不改变形参的前提下，重新编写父类方法的实现过程</p>
+<p>重写方法不能抛出新的异常或是申明更宽泛的异常</p>
+<p>eg：</p>
+<pre><code class="language-java">class Animal{
+   public void move(){
+      System.out.println(&quot;动物可以移动&quot;);
+   }
+}
+ 
+class Dog extends Animal{
+   public void move(){
+      System.out.println(&quot;狗可以跑和走&quot;);
+   }
+}
+ 
+public class TestDog{
+   public static void main(String args[]){
+      Animal a = new Animal(); // Animal 对象
+      Animal b = new Dog(); // Dog 对象
+ 
+      a.move();// 执行 Animal 类的方法
+ 
+      b.move();//执行 Dog 类的方法
+   }
+}
+</code></pre>
+<p>方法的重写规则</p>
+<ul>
+<li>
+<p>参数列表与被重写方法的参数列表必须完全相同</p>
+</li>
+<li>
+<p>返回类型与被重写方法的返回类型可以不相同，但是必须是父类返回值的派生类（java5 及更早版本返回类型要一样，java7 及更高版本可以不同）</p>
+</li>
+<li>
+<p>访问权限不能比父类中被重写的方法的访问权限更低。例如：如果父类的一个方法被声明为 public，那么在子类中重写该方法就不能声明为 protected</p>
+</li>
+<li>
+<p>父类的成员方法只能被它的子类重写</p>
+</li>
+<li>
+<p>声明为 final 的方法不能被重写</p>
+</li>
+<li>
+<p>声明为 static 的方法不能被重写，但是能够被再次声明</p>
+</li>
+<li>
+<p>子类和父类在同一个包中，那么子类可以重写父类所有方法，除了声明为 private 和 final 的方法</p>
+</li>
+<li>
+<p>子类和父类不在同一个包中，那么子类只能够重写父类的声明为 public 和 protected 的非 final 方法</p>
+</li>
+<li>
+<p>重写的方法能够抛出任何非强制异常，无论被重写的方法是否抛出异常。但是，重写的方法不能抛出新的强制性异常，或者比被重写方法声明的更广泛的强制性异常，反之则可以</p>
+</li>
+<li>
+<p>构造方法不能被重写</p>
+</li>
+<li>
+<p>如果不能继承一个类，则不能重写该类的方法</p>
+</li>
+</ul>
+<h3 id="overload">Overload</h3>
+<p>重载是在一个类里面，方法名字相同，而参数不同，返回类型可以相同也可以不同</p>
+<p>重载规则：</p>
+<ul>
+<li>被重载的方法必须改变参数列表(参数个数或类型不一样)</li>
+<li>被重载的方法可以改变返回类型</li>
+<li>被重载的方法可以改变访问修饰符</li>
+<li>被重载的方法可以声明新的或更广的检查异常</li>
+<li>方法能够在同一个类中或者在一个子类中被重载</li>
+<li>无法以返回值类型作为重载函数的区分标准</li>
+</ul>
+<p>eg:</p>
+<pre><code class="language-java">public class Overloading {
+    public int test(){
+        System.out.println(&quot;test1&quot;);
+        return 1;
+    }
+ 
+    public void test(int a){
+        System.out.println(&quot;test2&quot;);
+    }   
+ 
+    //以下两个参数类型顺序不同
+    public String test(int a,String s){
+        System.out.println(s);
+        return &quot;return&quot; + s;
+    }   
+ 
+    public String test(String s,int a){
+        System.out.println(s);
+        return &quot;return&quot; + s;
+    }   
+ 
+    public static void main(String[] args){
+        Overloading o = new Overloading();
+        System.out.println(o.test());
+        o.test(1);
+        System.out.println(o.test(1,&quot;test3&quot;));
+        System.out.println(o.test(&quot;test4&quot;,1));
+    }
+}
+</code></pre>
+<h3 id="override-和overload之间的区别">Override 和Overload之间的区别</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">区别点</th>
+<th style="text-align:left">重载</th>
+<th style="text-align:left">重写</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">参数列表</td>
+<td style="text-align:left">必须修改</td>
+<td style="text-align:left">不能修改</td>
+</tr>
+<tr>
+<td style="text-align:left">返回类型</td>
+<td style="text-align:left">可以修改</td>
+<td style="text-align:left">不能修改</td>
+</tr>
+<tr>
+<td style="text-align:left">异常</td>
+<td style="text-align:left">可以修改</td>
+<td style="text-align:left">可以减少或删除，不能增加</td>
+</tr>
+<tr>
+<td style="text-align:left">访问</td>
+<td style="text-align:left">可以修改</td>
+<td style="text-align:left">可以降低限制，不能更严格</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="多态">多态</h2>
+<p>多态是一个行为有多个不同表现形式或形态的能力</p>
+<p>多态就是同一个接口，使用不同的实例执行不同的操作</p>
+<p>多态的优点：</p>
+<ul>
+<li>消除类型之间的耦合关系</li>
+<li>可替换性</li>
+<li>可扩充性</li>
+<li>接口性</li>
+<li>灵活性</li>
+<li>简化性</li>
+</ul>
+<p>多态存在的必要条件：</p>
+<ul>
+<li>继承</li>
+<li>重写</li>
+<li>父类引用指向子类对象：<code>Parent p = new Child();</code></li>
+</ul>
+<p>eg:</p>
+<pre><code class="language-java">public class Test {
+    public static void main(String[] args) {
+        show(new Cat());  // 以 Cat 对象调用 show 方法
+        show(new Dog());  // 以 Dog 对象调用 show 方法
+                    
+        Animal a = new Cat();  // 向上转型  
+        a.eat();               // 调用的是 Cat 的 eat
+        Cat c = (Cat)a;        // 向下转型  
+        c.work();        // 调用的是 Cat 的 work
+    }  
+            
+    public static void show(Animal a)  {
+        a.eat();  
+        // 类型判断
+        if (a instanceof Cat)  {  // 猫做的事情 
+            Cat c = (Cat)a;  
+            c.work();  
+        } else if (a instanceof Dog) { // 狗做的事情 
+            Dog c = (Dog)a;  
+            c.work();  
+        }  
+    }  
+}
+ 
+abstract class Animal {  
+    abstract void eat();  
+}  
+  
+class Cat extends Animal {  
+    public void eat() {  
+        System.out.println(&quot;吃鱼&quot;);  
+    }  
+    public void work() {  
+        System.out.println(&quot;抓老鼠&quot;);  
+    }  
+}  
+  
+class Dog extends Animal {  
+    public void eat() {  
+        System.out.println(&quot;吃骨头&quot;);  
+    }  
+    public void work() {  
+        System.out.println(&quot;看家&quot;);  
+    }  
+}
+</code></pre>
+<h3 id="虚函数">虚函数</h3>
+<p>Java没有虚函数的概念，其普通函数默认就相当于C++的虚函数，加上final关键字可以声明该函数不具有虚函数特性</p>
+<p>虚拟方法调用：</p>
+<p>实例时，编译时使用父类的方法进行，运行时调用重写的方法</p>
+<h3 id="多态的实现方式">多态的实现方式</h3>
+<ul>
+<li>重写</li>
+<li>接口</li>
+<li>抽象类和抽象方法</li>
+</ul>
+<hr>
+<h2 id="抽象类">抽象类</h2>
+<p>抽象类没有包含足够的信息来描绘一个对象</p>
+<p>所以不能实例化对象</p>
+<p>抽象类必须被继承，才能被使用</p>
+<p>抽象类是用来捕捉子类的通用特性的，是被用来创建继承层级里子类的模板。 现实中有些父类中的方法确实没有必要写，因为各个子类中的这个方法肯定会有不同；而写成抽象类，这样看代码时，就知道这是抽象方法，而知道这个方法是在子类中实现的，所以有提示作用</p>
+<h3 id="抽象类-2">抽象类</h3>
+<p>使用<code>abstract class</code>来定义抽象类</p>
+<h3 id="继承抽象类">继承抽象类</h3>
+<h3 id="抽象方法">抽象方法</h3>
+<p>抽象方法也用<code>abstract</code>来声明</p>
+<p>抽象方法只包含一个方法名，而没有方法体，即方法的具体由子类确定</p>
+<p><code>public abstract double computePay(); // 方法名后直接跟分号</code></p>
+<p>具有抽象方法的抽象类，其子类必须重写父类的抽象方法，或者也声明为抽象类</p>
+<p>构造方法，类方法（用 static 修饰的方法）不能声明为抽象方法</p>
+<hr>
+<h2 id="封装">封装</h2>
+<p>封装（Encapsulation）是指一种将抽象性函式接口的实现细节部分包装、隐藏起来的方法</p>
+<p>可理解为一个保护，防止该类的代码和数据被外部类定义的代码随机访问</p>
+<p>封装的优点：</p>
+<ul>
+<li>良好的封装能够减少耦合</li>
+<li>类内部的结构可以自由修改</li>
+<li>可以对成员变量进行更精确的控制</li>
+<li>隐藏信息，实现细节</li>
+</ul>
+<h3 id="实现封装的步骤">实现封装的步骤</h3>
+<ol>
+<li>
+<p>修改属性的可见性来限制对属性的访问（一般限制为private）</p>
+</li>
+<li>
+<p>对每个值属性提供对外的公共方法访问，即创建一对赋取值方法，用于对私有属性的访问</p>
+</li>
+</ol>
+<pre><code class="language-java">public class EncapTest{
+ 
+    private String name;
+    private String idNum;
+    private int age;
+    
+    public int getAge(){
+        return age;
+    }
+    
+    public String getName(){
+        return name;
+    }
+    
+    public String getIdNum(){
+        return idNum;
+    }
+    
+    public void setAge( int newAge){
+        age = newAge;
+    }
+    
+    public void setName(String newName){
+        name = newName;
+    }
+    
+    public void setIdNum( String newId){
+        idNum = newId;
+    }
+}
+</code></pre>
+<pre><code class="language-java">public class RunEncap{
+    public static void main(String args[]){
+        EncapTest encap = new EncapTest();
+        encap.setName(&quot;James&quot;);
+        encap.setAge(20);
+        encap.setIdNum(&quot;12343ms&quot;);
+
+        System.out.print(&quot;Name : &quot; + encap.getName()+ &quot; Age : &quot;+ encap.getAge());
+    }
+}
+</code></pre>
+<hr>
+<h2 id="接口interface">接口（Interface）</h2>
+<p>接口是抽象方法的集合</p>
+<p>通常以<code>interface</code>声明</p>
+<p>一个类通过继承接口的方式来继承接口的抽象方法</p>
+<p>类描述对象的属性和方法，接口包含类要实现的方法</p>
+<p>实现接口的类要定义接口中的所有方法，除非是抽象类</p>
+<p>接口不能实例化，但可以被实现</p>
+<p>接口与类相似点：</p>
+<ul>
+<li>一个接口可以有多个方法</li>
+<li>接口文件保存在 .java 结尾的文件中，文件名使用接口名</li>
+<li>接口的字节码文件保存在 .class 结尾的文件中</li>
+<li>接口相应的字节码文件必须在与包名称相匹配的目录结构中</li>
+</ul>
+<p>接口与类的区别：</p>
+<ul>
+<li>接口不能用于实例化对象。</li>
+<li>接口没有构造方法。</li>
+<li>接口中所有的方法必须是抽象方法，Java 8 之后 接口中可以使用 default 关键字修饰的非抽象方法。</li>
+<li>接口不能包含成员变量，除了 static 和 final 变量。</li>
+<li>接口不是被类继承了，而是要被类实现。</li>
+<li>接口支持多继承</li>
+</ul>
+<p>抽象类和接口的区别：</p>
+<ul>
+<li>抽象类中的成员变量可以是各种类型的，而接口中的成员变量只能是 <code>public static final</code> 类型的</li>
+<li>一个类只能继承一个抽象类，可以实现多个接口</li>
+</ul>
+<h3 id="接口的声明">接口的声明</h3>
+<pre><code class="language-java">[可见度] interface 接口名称 [extends 其他的接口名] {
+        // 声明变量
+        // 抽象方法
+}
+</code></pre>
+<pre><code class="language-java">interface Animal {
+   public void eat();
+   public void travel();
+}
+</code></pre>
+<h3 id="接口的实现">接口的实现</h3>
+<p><code>...implements 接口名称[, 其他接口名称, 其他接口名称..., ...] ...</code></p>
+<pre><code class="language-java">public class MammalInt implements Animal{
+    ...
+}
+</code></pre>
+<h3 id="接口的继承">接口的继承</h3>
+<pre><code class="language-java">// 文件名: Sports.java
+public interface Sports
+{
+   public void setHomeTeam(String name);
+   public void setVisitingTeam(String name);
+}
+ 
+// 文件名: Football.java
+public interface Football extends Sports
+{
+   public void homeTeamScored(int points);
+   public void visitingTeamScored(int points);
+   public void endOfQuarter(int quarter);
+}
+</code></pre>
+<h3 id="接口的多继承">接口的多继承</h3>
+<p><code>public interface Hockey extends Sports, Event</code></p>
+<h3 id="标记接口">标记接口</h3>
+<p>没有任何方法的接口被称为标记接口</p>
+<p>作用：</p>
+<ul>
+<li>建立一个公共的父接口</li>
+<li>向一个类添加数据类型</li>
+</ul>
+<hr>
+<h2 id="枚举enum">枚举（enum）</h2>
+<p>枚举是一个特殊的类，一般表示一组常量</p>
+<p>所有的枚举值都是 public static final</p>
+<pre><code class="language-java">enum Color
+{
+    RED, GREEN, BLUE;
+}
+ 
+public class Test
+{
+    // 执行输出结果
+    public static void main(String[] args)
+    {
+        Color c1 = Color.RED;
+        System.out.println(c1);
+    }
+}
+
+
+//RED
+</code></pre>
+<p>内部类中使用枚举</p>
+<pre><code class="language-java">public class Test
+{
+    enum Color
+    {
+        RED, GREEN, BLUE;
+    }
+ 
+    // 执行输出结果
+    public static void main(String[] args)
+    {
+        Color c1 = Color.RED;
+        System.out.println(c1);
+    }
+}
+</code></pre>
+<h3 id="迭代枚举元素">迭代枚举元素</h3>
+<pre><code class="language-java">enum Color
+{
+    RED, GREEN, BLUE;
+}
+public class MyClass {
+  public static void main(String[] args) {
+    for (Color myVar : Color.values()) {
+      System.out.println(myVar);
+    }
+  }
+}
+</code></pre>
+<h3 id="values-ordinal-valueof方法">values(), ordinal(), valueOf()方法</h3>
+<ul>
+<li>values() 返回枚举类中所有的值</li>
+<li>ordinal()方法可以找到每个枚举常量的索引，就像数组索引一样</li>
+<li>valueOf()方法返回指定字符串值的枚举常量</li>
+</ul>
+<pre><code class="language-java">enum Color
+{
+    RED, GREEN, BLUE;
+}
+ 
+public class Test
+{
+    public static void main(String[] args)
+    {
+        // 调用 values()
+        Color[] arr = Color.values();
+ 
+        // 迭代枚举
+        for (Color col : arr)
+        {
+            // 查看索引
+            System.out.println(col + &quot; at index &quot; + col.ordinal());
+        }
+ 
+        // 使用 valueOf() 返回枚举常量，不存在的会报错 IllegalArgumentException
+        System.out.println(Color.valueOf(&quot;RED&quot;));
+        // System.out.println(Color.valueOf(&quot;WHITE&quot;));
+    }
+}
+
+
+// RED at index 0
+// GREEN at index 1
+// BLUE at index 2
+// RED
+</code></pre>
+<h3 id="枚举类成员">枚举类成员</h3>
+<p>枚举跟普通类一样可以用自己的变量、方法和构造函数，构造函数只能使用 private 访问修饰符</p>
+<p>枚举既可以包含具体方法，也可以包含抽象方法</p>
+<pre><code class="language-java">enum Color
+{
+    RED, GREEN, BLUE;
+ 
+    // 构造函数
+    private Color()
+    {
+        System.out.println(&quot;Constructor called for : &quot; + this.toString());
+    }
+ 
+    public void colorInfo()
+    {
+        System.out.println(&quot;Universal Color&quot;);
+    }
+}
+ 
+public class Test
+{    
+    // 输出
+    public static void main(String[] args)
+    {
+        Color c1 = Color.RED;
+        System.out.println(c1);
+        c1.colorInfo();
+    }
+}
+
+
+// Constructor called for : RED
+// Constructor called for : GREEN
+// Constructor called for : BLUE
+// RED
+// Universal Color
+</code></pre>
+<hr>
+<h2 id="包package">包（package）</h2>
+<p>包的作用：</p>
+<ul>
+<li>把功能相似的类或接口组织在一个包中，方便查找和使用</li>
+<li>避免名字冲突</li>
+<li>包也限定了访问权限</li>
+</ul>
+<p>防止命名冲突，访问控制，提供搜索和定位类（class）、接口、枚举（enumerations）和注释（annotation）等</p>
+<ul>
+<li>java.lang-打包基础的类</li>
+<li>java.io-包含输入输出功能的函数</li>
+</ul>
+<h3 id="创建包">创建包</h3>
+<p><code>package pkg1[．pkg2[．pkg3…]];</code></p>
+<p>包的声明放在这个源文件的开头</p>
+<h3 id="import关键字">import关键字</h3>
+<p>import语句导入包</p>
+<p><code>import package1[.package2…].(classname|*);</code></p>
+<p>任意数量import 声明必须在包声明之后，类声明之前</p>
+<h3 id="package的目录结构">package的目录结构</h3>
+<ul>
+<li>包名成为类名的一部分，正如我们前面讨论的一样。</li>
+<li>包名必须与相应的字节码所在的目录结构相吻合</li>
+</ul>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[基础语法]]></title>
+        <id>https://zdblog.top/ji-chu-yu-fa/</id>
+        <link href="https://zdblog.top/ji-chu-yu-fa/">
+        </link>
+        <updated>2022-03-13T01:01:22.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="java基础语法">Java基础语法</h2>
+<p>Java语言是面向对象的</p>
+<p>先介绍下类、对象、方法和实例变量的概念</p>
+<ul>
+<li>对象：是类的一个实例，有状态有行为。eg：对象（一条狗），状态（名字、品种、颜色等），行为（叫、吃、摇尾巴等）</li>
+<li>类：类是一个模板，描述一类对象的行为和状态</li>
+<li>方法：方法就是行为，一个类可以有很多方法</li>
+<li>实例变量：每个对象都有独特的实例变量，对象的状态由这些实例变量的值决定</li>
+</ul>
+<p>注意：</p>
+<ul>
+<li>大小写敏感</li>
+<li>
+<blockquote>
+<p>包名：多单词都小写</p>
+<p>类名、接口名：所有单词首字母大写</p>
+<p>变量名、方法名：第一个单词首字母小写，后面大写</p>
+<p>常量名：所有字母都大写，多单词用下划线连接(eg:XXX_YYY_ZZZ)</p>
+</blockquote>
+</li>
+<li>源文件名必须与类名相同</li>
+<li>一个源文件只能有一个public类，可以有若干个非public类</li>
+<li>主方法入口：<code>public static void main(String[] args)</code></li>
+</ul>
+<p><code>public static void main(String[] args)</code>:</p>
+<blockquote>
+<p>public：访问修饰符<br>
+static：关键字<br>
+void：返回类型<br>
+main：方法名<br>
+String：String类<br>
+args：字符串数组</p>
+</blockquote>
+<h3 id="标识符">标识符</h3>
+<p>Java所有的组成部分都需要名字。</p>
+<p>标识符：类名、变量名、方法名</p>
+<p>标识符规范：</p>
+<blockquote>
+<p>首字符：字母、<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi mathvariant="normal">、</mi><mi mathvariant="normal">其</mi></msub><mi mathvariant="normal">他</mi><mi mathvariant="normal">字</mi><mi mathvariant="normal">符</mi><mi mathvariant="normal">：</mi><mi mathvariant="normal">字</mi><mi mathvariant="normal">母</mi><mi mathvariant="normal">、</mi></mrow><annotation encoding="application/x-tex">、_
+其他字符：字母、</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.15em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord cjk_fallback">、</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:-0.15em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord cjk_fallback mtight">其</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord cjk_fallback">他</span><span class="mord cjk_fallback">字</span><span class="mord cjk_fallback">符</span><span class="mord cjk_fallback">：</span><span class="mord cjk_fallback">字</span><span class="mord cjk_fallback">母</span><span class="mord cjk_fallback">、</span></span></span></span>、_、数字<br>
+大小写敏感</p>
+</blockquote>
+<h3 id="修饰符">修饰符</h3>
+<p>Java用修饰符来修饰类中的方法和属性</p>
+<ul>
+<li>访问控制修饰符：default、public、protected、private</li>
+<li>非访问控制修饰符：final、abstract、static、synchronized</li>
+</ul>
+<h3 id="java变量">Java变量</h3>
+<ul>
+<li>局部变量</li>
+<li>类变量（静态变量）</li>
+<li>成员变量（非静态变量）</li>
+</ul>
+<h3 id="java关键字">Java关键字</h3>
+<figure data-type="image" tabindex="1"><img src="https://s2.loli.net/2022/03/08/Pnm1sC7QRDZG4z6.png" alt="Java关键字.png" loading="lazy"></figure>
+<hr>
+<h2 id="java-对象和类">Java 对象和类</h2>
+<p>Java面向对象支持以下基本概念：</p>
+<ul>
+<li>多态</li>
+<li>继承</li>
+<li>封装</li>
+<li>抽象</li>
+<li>类</li>
+<li>对象</li>
+<li>实例</li>
+<li>方法</li>
+<li>重载</li>
+</ul>
+<p>方法：改变对象的内部状态，对象的相互调用</p>
+<p>类中的变量：</p>
+<ul>
+<li>局部变量：在方法中定义的变量，随方法的结束而销毁</li>
+<li>成员变量：定义在类中、方法之外的变量，在创建对象时实例化，在类中可被访问</li>
+<li>类变量：声明在类中、方法块之外、必须声明为static类型</li>
+</ul>
+<h3 id="构造方法">构造方法</h3>
+<p>每个类都有一个或多个构造方法</p>
+<p>创建对象时，至少调用一个构造方法</p>
+<p>构造方法的名称必须与类同名</p>
+<h3 id="创建对象">创建对象</h3>
+<ol>
+<li>声明：对象的名称和类型</li>
+<li>实例化：使用关键字<code>new</code>来创建一个对象</li>
+<li>初始化：使用<code>new</code>创建对象时，会调用构造方法初始化对象</li>
+</ol>
+<pre><code class="language-java">public class Puppy{
+
+    // 该构造方法仅有一个参数：name
+    public Puppy(String name){
+        System.out.println(&quot;The dog's name is : &quot; + name);
+    }
+
+    public static void main(String[] args){
+        Puppy myPuppy = new Puppy(&quot;Tommy&quot;);
+    }
+}
+</code></pre>
+<h3 id="访问实例变量和方法">访问实例变量和方法</h3>
+<p>通过已创建的对象来访问成员变量和成员方法</p>
+<pre><code class="language-java">/* 实例化对象 */
+Object referenceVariable = new Constructor();
+/* 访问类中的变量 */
+referenceVariable.variableName;
+/* 访问类中的方法 */
+referenceVariable.methodName();
+</code></pre>
+<p>eg:</p>
+<pre><code class="language-java">public class Puppy{
+    int puppyAge;
+    public Puppy(String name){
+        System.out.println(&quot;The dog's name is : &quot; + name)；
+    }
+
+    public void setAge(int age){
+        puppyAge = age;
+    }
+
+    public int getAge(){
+        return puppyAge;
+    }
+
+    public static void main(String[] args){
+        Puppy myPuppy = new Puppy(Tommy);
+
+        myPuppy.setAge(2)
+        System.out.println(&quot;myPuppy's age is : &quot; + myPuppy.getAge());
+        System.out.println(&quot;变量值：&quot; + myPuppy.puppyAge);
+    }
+}
+</code></pre>
+<h3 id="java包">Java包</h3>
+<p>包主要用来对类和接口进行分类</p>
+<hr>
+<h2 id="java基本数据类型">Java基本数据类型</h2>
+<ol>
+<li>内置数据类型</li>
+<li>引用数据类型</li>
+</ol>
+<h3 id="内置数据类型">内置数据类型</h3>
+<p>8种基本类型</p>
+<ul>
+<li>byte：8位,默认值<code>0</code></li>
+<li>short：16位，默认值<code>0</code></li>
+<li>int：32位，默认值<code>0</code></li>
+<li>long：64位，默认值<code>0L</code>(L不区分大小写，最好大写区分1)</li>
+<li>float：单精度，32位，默认值<code>0.0f</code>(不能表示精确的值)</li>
+<li>double：双精度，64位，默认值<code>0.0d</code>(不能表示精确值)</li>
+<li>boolean：标志记录true/false，默认<code>false</code></li>
+<li>char：单一的16位Unicode字符，<code>\u0000</code>~<code>\uffff</code></li>
+</ul>
+<h3 id="引用数据类型">引用数据类型</h3>
+<p>对象、数组都是引用数据类型</p>
+<p>默认值<code>null</code></p>
+<p>一个引用变量可以用来引用任何与之兼容的类型</p>
+<h3 id="java常量">Java常量</h3>
+<p>使用<code>final</code>关键字来修饰常量</p>
+<p>eg：`final double PI = 3.14159265;</p>
+<p>常量名通常大写</p>
+<p>字符串常量：双引号之间的字符序列</p>
+<p>转义字符：</p>
+<figure data-type="image" tabindex="2"><img src="https://s2.loli.net/2022/03/08/Go2nVrQZF8Rpa9K.png" alt="转义字符.png" loading="lazy"></figure>
+<h3 id="自动类型转换">自动类型转换</h3>
+<pre><code>low --------------------------------------&gt; high
+byte,short,char -&gt; int -&gt; long -&gt; float -&gt; double
+</code></pre>
+<ul>
+<li>boolean不能转换</li>
+<li>容量大的必须用强制转换才可以转换为容量小的</li>
+<li>浮点数舍弃小数转换得到整形</li>
+</ul>
+<hr>
+<h2 id="java变量类型">Java变量类型</h2>
+<ul>
+<li>类变量</li>
+<li>实例变量</li>
+<li>局部变量</li>
+</ul>
+<p>eg：</p>
+<pre><code class="language-java">public class Variable{
+    static int allClicks=0;    // 类变量
+ 
+    String str=&quot;hello world&quot;;  // 实例变量
+ 
+    public void method(){
+ 
+        int i =0;  // 局部变量
+ 
+    }
+}
+</code></pre>
+<h3 id="java局部变量">java局部变量</h3>
+<ul>
+<li>局部变量声明在方法中</li>
+<li>不能用访问修饰符</li>
+<li>没有默认值，必须先初始化</li>
+</ul>
+<h3 id="java实例变量">Java实例变量</h3>
+<ul>
+<li>实例变量声明在一个类中，在方法、构造方法和语句块之外</li>
+<li>当一个对象被实例化之后，每个实例变量的值就跟着确定，对象被销毁的时候销毁</li>
+<li>实例变量的值应该至少被一个方法，使得外部能够通过这些方式获取实例变量信息</li>
+<li>可以声明在使用前或者使用后</li>
+<li>可用访问修饰符</li>
+<li>实例变量对于类中的方法、构造方法或者语句块是可见的。一般情况下应该把实例变量设为私有。通过使用访问修饰符可以使实例变量对子类可见</li>
+<li>有默认值。数值型变量的默认值是0，布尔型变量的默认值是false，引用类型变量的默认值是null。变量的值可以在声明时指定，也可以在构造方法中指定</li>
+<li>可以直接通过变量名访问。但在静态方法以及其他类中，就应该使用完全限定名：ObejectReference.VariableName</li>
+</ul>
+<h3 id="类变量静态变量">类变量（静态变量）</h3>
+<ul>
+<li>在类中以 static 关键字声明，但必须在方法之外</li>
+<li>类只拥有类变量的一份拷贝</li>
+<li>静态变量是指声明为 public/private，final 和 static 类型的变量。静态变量初始化后不可改变。</li>
+<li>类变量被声明为 public static final 类型时，类变量名称一般建议使用大写字母</li>
+</ul>
+<hr>
+<h2 id="java修饰符">java修饰符</h2>
+<ul>
+<li>访问修饰符</li>
+<li>非访问修饰符</li>
+</ul>
+<p>修饰符用来定义类、方法或者变量，通常放在语句的最前端</p>
+<h3 id="访问控制修饰符">访问控制修饰符</h3>
+<p>用来保护对类、对象、方法的访问</p>
+<ul>
+<li>default（默认，不写）：同一包内可见，不适用任何修饰符</li>
+<li>private：同一类内可见，不能修饰类（外部类）</li>
+<li>public：对所有类可见</li>
+<li>protected：对同一包内的类和子类可见，不能修饰类</li>
+</ul>
+<p>接口里的变量都隐式声明为<code>public static final</code>，而接口里的方法默认为<code>public</code></p>
+<ol>
+<li>私有访问修饰符--private</li>
+</ol>
+<p>声明为私有访问类型的变量只能通过类中公共的 getter 方法被外部类访问</p>
+<p>eg：</p>
+<pre><code class="language-java">public class Logger {
+    private String format;
+    public String getFormat() {
+        return this.format;
+    }
+    public void setFormat(String format) {
+        this.format = format;
+    }
+}
+</code></pre>
+<ol start="2">
+<li>公有访问修饰符--public</li>
+</ol>
+<p>声明为 public 的类、方法、构造方法和接口能够被任何其他类访问</p>
+<ol start="3">
+<li>受保护的访问修饰符--protected</li>
+</ol>
+<ul>
+<li>子类与父类在同一包中：能被同一个包中的任何其他类访问</li>
+<li>子类与父类不在同一包中：在子类中，子类实例可以访问其从基类继承而来的 protected 方法，而不能访问基类实例的protected方法</li>
+</ul>
+<ol start="4">
+<li>方法继承规则：</li>
+</ol>
+<ul>
+<li>父类-public，子类public</li>
+<li>父类-protected，子类public、protected</li>
+<li>父类-private，子类不能继承</li>
+</ul>
+<h3 id="非访问修饰符">非访问修饰符</h3>
+<ul>
+<li>static：用来修饰类方法和类变量</li>
+<li>final：修饰类、方法、变量，修饰的类不能被继承，方法不能被重新定义，变量为常量，不可修改</li>
+<li>abstract：用来修饰抽象类和抽象方法</li>
+<li>synchronized和volatile：主要用于线程的编程</li>
+</ul>
+<ol>
+<li>
+<p>static修饰符</p>
+<ul>
+<li>静态变量：用来声明静态变量，只有一份拷贝</li>
+<li>静态方法：静态方法不能使用类的非静态变量</li>
+</ul>
+</li>
+<li>
+<p>final修饰符</p>
+<ul>
+<li>final变量：赋值后为常量</li>
+<li>final方法：可以被继承，但不能被子类重写</li>
+<li>final类：不能被继承</li>
+</ul>
+</li>
+<li>
+<p>abstract修饰符</p>
+</li>
+<li>
+<p>synchronized修饰符</p>
+</li>
+</ol>
+<p>声明的方法同一时间只能被一个线程访问</p>
+<ol start="5">
+<li>transient修饰符</li>
+</ol>
+<p>java 虚拟机(JVM)跳过被 transient 修饰的实例变量</p>
+<ol start="6">
+<li>volatile修饰符</li>
+</ol>
+<p>volatile 修饰的成员变量在每次被线程访问时，都强制从共享内存中重新读取该成员变量的值,成员变量发生变化时，会强制线程将变化值回写到共享内存</p>
+<p>任何时刻，两个不同的线程总是看到某个成员变量的同一个值</p>
+<hr>
+<h2 id="java-运算符">java 运算符</h2>
+<ul>
+<li>算术运算符</li>
+<li>关系运算符</li>
+<li>位运算符</li>
+<li>逻辑运算符</li>
+<li>赋值运算符</li>
+<li>其他运算符</li>
+</ul>
+<ol>
+<li>算术运算符</li>
+</ol>
+<p><code>+</code>,<code>-</code>,<code>*</code>,<code>/</code>,<code>%</code>,<code>++</code>,<code>--</code></p>
+<ul>
+<li>前缀自增自减法(++a,--a): 先进行自增或者自减运算，再进行表达式运算</li>
+<li>后缀自增自减法(a++,a--): 先进行表达式运算，再进行自增或者自减运算</li>
+</ul>
+<ol start="2">
+<li>关系运算符</li>
+</ol>
+<p><code>==</code>,<code>!=</code>,<code>&gt;</code>,<code>&lt;</code>,<code>&gt;=</code>,<code>&lt;=</code></p>
+<ol start="3">
+<li>位运算符</li>
+</ol>
+<p><code>&amp;</code>,<code>|</code>,<code>^</code>,<code>~</code>,<code>&lt;&lt;</code>,<code>&gt;&gt;</code>,<code>&gt;&gt;&gt;</code>:</p>
+<figure data-type="image" tabindex="3"><img src="https://s2.loli.net/2022/03/09/SmKYWLxFpNgVylT.png" alt="位运算符.png" loading="lazy"></figure>
+<ol start="4">
+<li>逻辑运算符</li>
+</ol>
+<p><code>&amp;&amp;</code>,<code>||</code>,<code>!</code></p>
+<ol start="5">
+<li>赋值运算符</li>
+</ol>
+<p><code>=</code>,<code>+=</code>,<code>-=</code>,<code>*=</code>,<code>/=</code>,<code>(%)=</code>,<code>&lt;&lt;=</code>,<code>&gt;&gt;=</code>,<code>&amp;=</code>,<code>^=</code>,<code>|=</code></p>
+<ol start="6">
+<li>条件运算符（三元运算符）</li>
+</ol>
+<p><code>variable x = (expression) ? value if true : value if false</code></p>
+<p>eg:<code>b = (a == 1) ? 20 : 30;</code></p>
+<ol start="7">
+<li>instanceof运算符</li>
+</ol>
+<p>用于操作对象实例，检查该对象是否是一个特定类型（类类型或接口类型）</p>
+<p><code>( Object reference variable ) instanceof (class/interface type)</code></p>
+<p>eg:</p>
+<pre><code class="language-java">String name = &quot;James&quot;;
+boolean result = name instanceof String; // 由于 name 是 String 类型，所以返回真
+</code></pre>
+<h3 id="运算符优先级">运算符优先级</h3>
+<figure data-type="image" tabindex="4"><img src="https://s2.loli.net/2022/03/09/BfPx341d8E9zSwG.png" alt="运算符优先级.png" loading="lazy"></figure>
+<h2 id="java循环结构">Java循环结构</h2>
+<ul>
+<li>while循环</li>
+<li>do...while循环</li>
+<li>for循环</li>
+</ul>
+<h3 id="java增强for循环">Java增强for循环</h3>
+<pre><code class="language-java">for(声明语句 : 表达式)
+{
+    // 代码句子
+}
+// 声明语句：声明新的局部变量，该变量的类型必须和数组元素的类型匹配
+// 表达式：要访问的数组名，或者是返回值为数组的方法
+</code></pre>
+<p>eg:</p>
+<pre><code class="language-java">public class Test{
+    public static void main(String[] args){
+        String [] names = {&quot;James&quot;, &quot;Larry&quot;, &quot;Tom&quot;, &quot;Lacy&quot;};
+        for(String name : names){
+            System.out.print(name);
+            System.out.print(&quot;,&quot;);
+        }
+    }
+}
+
+// James,Larry,Tom,Lacy,
+</code></pre>
+<h3 id="break关键字">break关键字</h3>
+<p>break 主要用在循环语句或者 switch 语句中，用来跳出语句块</p>
+<h3 id="continue关键字">continue关键字</h3>
+<p>让程序立刻跳转到下一次循环的迭代</p>
+<hr>
+<h2 id="java条件语句">Java条件语句</h2>
+<ul>
+<li>if语句</li>
+<li>if...else语句</li>
+<li>if..else if...else语句</li>
+</ul>
+<hr>
+<h2 id="java-switch-case语句">Java switch case语句</h2>
+<p>switch case 语句判断一个变量与一系列值中某个值是否相等，每个值称为一个分支</p>
+<pre><code class="language-java">switch(expression){
+    case value :
+       //语句
+       break; //可选
+    case value :
+       //语句
+       break; //可选
+    //你可以有任意数量的case语句
+    default : //可选
+       //语句
+}
+</code></pre>
+<p>如果 case 语句块中没有 break 语句时，匹配成功后，从当前 case 开始，后续所有 case 的值都会输出直至break语句出现</p>
+<pre><code class="language-java">public class Test {
+   public static void main(String args[]){
+      int i = 1;
+      switch(i){
+         case 0:
+            System.out.println(&quot;0&quot;);
+         case 1:
+            System.out.println(&quot;1&quot;);
+         case 2:
+            System.out.println(&quot;2&quot;);
+         case 3:
+            System.out.println(&quot;3&quot;); break;
+         default:
+            System.out.println(&quot;default&quot;);
+      }
+   }
+}
+
+// 1
+// 2
+// 3
+</code></pre>
+<hr>
+<h2 id="数组">数组</h2>
+<h3 id="声明数组变量">声明数组变量</h3>
+<pre><code class="language-java">dataType[] arrayRefVar;   // 首选的方法
+ 
+或
+ 
+dataType arrayRefVar[];  // 效果相同，但不是首选方法
+</code></pre>
+<h3 id="创建数组">创建数组</h3>
+<p><code>arrayRefVar = new dataType[arraySize];</code></p>
+<p>数组变量的声明，和创建数组可以用一条语句完成:</p>
+<p><code>dataType[] arrayRefVar = new dataType[arraySize];</code></p>
+<p>其他：</p>
+<p><code>dataType[] arrayRefVar = {value0, value1, ..., valuek};</code></p>
+<h3 id="数组作为方法的参数或返回值">数组作为方法的参数或返回值</h3>
+<p>eg:</p>
+<p><code>printArray(new int[]{3, 1, 2, 6, 4, 2});</code></p>
+<h3 id="多维数组">多维数组</h3>
+<p><code>String[][] str = new String[3][4];</code></p>
+<h3 id="arrays类">Arrays类</h3>
+<ul>
+<li>给数组赋值：通过 fill 方法</li>
+<li>对数组排序：通过 sort 方法,按升序</li>
+<li>比较数组：通过 equals 方法比较数组中元素值是否相等</li>
+<li>查找数组元素：通过 binarySearch 方法能对排序好的数组进行二分查找法操作</li>
+</ul>
+<hr>
+<h2 id="日期和时间date类">日期和时间（Date类）</h2>
+<p>实例化Date对象：</p>
+<ul>
+<li><code>Date()</code></li>
+<li><code>Date(long milliseconds)</code>:该参数为1970.01.01起的毫秒数</li>
+</ul>
+<h3 id="date对象方法">Date对象方法：</h3>
+<figure data-type="image" tabindex="5"><img src="https://s2.loli.net/2022/03/10/NuxSwZg4ChOGVKd.png" alt="Date方法.png" loading="lazy"></figure>
+<h3 id="使用simpledateformat格式化日期">使用SimpleDateFormat格式化日期</h3>
+<p><code>SimpleDateFormat ft = new SimpleDateFormat (&quot;yyyy-MM-dd hh:mm:ss&quot;);</code></p>
+<h3 id="使用printf格式化日期">使用printf格式化日期</h3>
+<figure data-type="image" tabindex="6"><img src="https://s2.loli.net/2022/03/10/DbGnxh2APTH9qfW.png" alt="printf格式化日期.png" loading="lazy"></figure>
+<p>eg：</p>
+<p><code>System.out.printf(&quot;全部日期和时间信息：%tc%n&quot;,date);</code></p>
+<p><code>System.out.printf(&quot;%1$s %2$tB %2$td, %2$tY&quot;, &quot;Due date:&quot;, date);</code></p>
+<p><code>System.out.printf(&quot;%s %tB %&lt;te, %&lt;tY&quot;, &quot;Due date:&quot;, date);</code></p>
+<h3 id="java休眠sleep">Java休眠（sleep）</h3>
+<p>sleep()阻塞当前进程</p>
+<pre><code class="language-java">import java.util.*;
+  
+public class SleepDemo {
+    public static void main(String[] args) {
+        try { 
+            System.out.println(new Date( ) + &quot;\n&quot;); 
+            Thread.sleep(1000*3);   // 休眠3秒
+            System.out.println(new Date( ) + &quot;\n&quot;); 
+        } catch (Exception e) { 
+            System.out.println(&quot;Got an exception!&quot;); 
+        }
+    }
+}
+</code></pre>
+<h3 id="测量时间">测量时间</h3>
+<pre><code class="language-java">import java.util.*;
+  
+public class DiffDemo {
+ 
+   public static void main(String[] args) {
+      try {
+         long start = System.currentTimeMillis( );
+         System.out.println(new Date( ) + &quot;\n&quot;);
+         Thread.sleep(5*60*10);
+         System.out.println(new Date( ) + &quot;\n&quot;);
+         long end = System.currentTimeMillis( );
+         long diff = end - start;
+         System.out.println(&quot;Difference is : &quot; + diff);
+      } catch (Exception e) {
+         System.out.println(&quot;Got an exception!&quot;);
+      }
+   }
+}
+</code></pre>
+<h3 id="calendar类对日期进行操作">Calendar类（对日期进行操作）</h3>
+<p>创建Calendar对象：</p>
+<ul>
+<li><code>Calendar c = Calendar.getInstance();//默认是当前日期</code></li>
+<li><code>//创建一个代表2009年6月12日的Calendar对象</code><br>
+<code>Calendar c1 = Calendar.getInstance();</code><br>
+<code>c1.set(2009, 6 - 1, 12);</code></li>
+</ul>
+<p>对象信息的设置:</p>
+<ul>
+<li>set设置：<code>public final void set(int year,int month,int date)</code></li>
+<li>add设置：<code>c1.add(Calendar.DATE, 10);</code></li>
+</ul>
+<p>对象信息的获得:</p>
+<p><code>int year = c1.get(Calendar.YEAR);</code></p>
+<h3 id="gregoriancalendar类">GregorianCalendar类</h3>
+<p>GregorianCalendar对象构造方法：</p>
+<figure data-type="image" tabindex="7"><img src="https://s2.loli.net/2022/03/10/Yomul6awe2RshgL.png" alt="GregorianCalendar构造方法.png" loading="lazy"></figure>
+<p>GregorianCalendar对象常用方法：</p>
+<figure data-type="image" tabindex="8"><img src="https://s2.loli.net/2022/03/10/RxTBoJFD1AIplwq.png" alt="GregorianCalendar常用方法.png" loading="lazy"></figure>
+<hr>
+<h2 id="java正则表达式">Java正则表达式</h2>
+<h3 id="正则表达式语法">正则表达式语法：</h3>
+<figure data-type="image" tabindex="9"><img src="https://s2.loli.net/2022/03/11/Mpk1wGBncSCRXOP.png" alt="正则表达式语法.png" loading="lazy"></figure>
+<h3 id="regex包">regex包</h3>
+<ul>
+<li>Pattern类：Pattern对象是一个正则表达式的编译表示</li>
+<li>Matcher类：Matcher对象是对输入字符串进行解释和匹配操作的引擎</li>
+<li>PatternSyntaxException类：是一个非强制异常类，表示一个正则表达式模式中的语法错误</li>
+</ul>
+<h3 id="matcher类的方法">Matcher类的方法</h3>
+<figure data-type="image" tabindex="10"><img src="https://s2.loli.net/2022/03/11/HKFdD3Gmsl7xXcI.png" alt="matcher方法.png" loading="lazy"></figure>
+<h3 id="patternsyntaxexception类的方法">PatternSyntaxException类的方法</h3>
+<figure data-type="image" tabindex="11"><img src="https://s2.loli.net/2022/03/11/ji7tRZLYEQkwg31.png" alt="patternsyntaxexception方法.png" loading="lazy"></figure>
+<hr>
+<h2 id="java-流stream-文件file-io">Java 流（stream）、文件（file）、IO</h2>
+<p>Java.io 包几乎包含了所有操作输入、输出需要的类</p>
+<p>一个流可以理解为一个数据的序列</p>
+<p>输入流表示从一个源读取数据，输出流表示向一个目标写数据</p>
+<h3 id="读取控制台输入">读取控制台输入</h3>
+<p>把System.in包装在一个BufferedReader对象中创建一个字符流</p>
+<p><code>BufferedReader br = new BufferedReader(new InputStreamReader(System.in));</code></p>
+<p>BufferedReader对象创建后，read()方法从控制台读取一个字符，readLine()方法从控制台读取一个字符串</p>
+<p>从控制台读取多字符输入</p>
+<p><code>int read( ) throws IOException</code></p>
+<pre><code class="language-java">//使用 BufferedReader 在控制台读取字符
+ 
+import java.io.*;
+ 
+public class BRRead {
+    public static void main(String[] args) throws IOException {
+        char c;
+        // 使用 System.in 创建 BufferedReader
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        System.out.println(&quot;输入字符, 按下 'q' 键退出。&quot;);
+        // 读取字符
+        do {
+            c = (char) br.read();
+            System.out.println(c);
+        } while (c != 'q');
+    }
+}
+</code></pre>
+<p>从控制台读取字符串</p>
+<p><code>String readLine( ) throws IOException</code></p>
+<pre><code class="language-java">//使用 BufferedReader 在控制台读取字符
+import java.io.*;
+ 
+public class BRReadLines {
+    public static void main(String[] args) throws IOException {
+        // 使用 System.in 创建 BufferedReader
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String str;
+        System.out.println(&quot;Enter lines of text.&quot;);
+        System.out.println(&quot;Enter 'end' to quit.&quot;);
+        do {
+            str = br.readLine();
+            System.out.println(str);
+        } while (!str.equals(&quot;end&quot;));
+    }
+}
+</code></pre>
+<h3 id="控制台输出">控制台输出</h3>
+<p><code>System.out.print()</code>, <code>System.out.println()</code>, <code>System.out.write()</code></p>
+<h3 id="读写文件">读写文件</h3>
+<ol>
+<li>FileInputStream</li>
+</ol>
+<p>该流用于读取数据</p>
+<ul>
+<li>
+<p>使用字符串类型的文件名来创建一个输入流对象来读取文件：</p>
+<p><code>InputStream f = new FileInputStream(&quot;C:/java/hello&quot;);</code></p>
+</li>
+<li>
+<p>使用一个文件对象来创建一个输入流对象来读取文件</p>
+<p><code>File f = new File(&quot;C:/java/hello&quot;);</code><br>
+<code>InputStream in = new FileInputStream(f);</code></p>
+</li>
+</ul>
+<p>InputStream对象的方法：</p>
+<figure data-type="image" tabindex="12"><img src="https://s2.loli.net/2022/03/11/3MpPyQUnLdIxrFD.png" alt="InputStream方法.png" loading="lazy"></figure>
+<ol start="2">
+<li>FileOutputStream</li>
+</ol>
+<p>该流用于创建一个文件并像文件中写入数据</p>
+<ul>
+<li>
+<p>使用字符串类型的文件名来创建一个输出流对象</p>
+<p><code>OutputStream f = new FileOutputStream(&quot;C:/java/hello&quot;)</code></p>
+</li>
+<li>
+<p>使用一个文件对象来创建一个输出流来写文件</p>
+<p><code>File f = new File(&quot;C:/java/hello&quot;);</code><br>
+<code>OutputStream fOut = new FileOutputStream(f);</code></p>
+</li>
+</ul>
+<p>OutputStream对象的方法：</p>
+<figure data-type="image" tabindex="13"><img src="https://s2.loli.net/2022/03/11/STUIgC2LF8MRcZ4.png" alt="OutputStream方法.png" loading="lazy"></figure>
+<p>其他输出流：<code>ByteArrayOutputStream</code>、<code>DataOutputStream</code></p>
+<p>eg：</p>
+<pre><code class="language-java">import java.io.*;
+ 
+public class fileStreamTest {
+    public static void main(String[] args) {
+        try {
+            byte bWrite[] = { 11, 21, 3, 40, 5 };
+            OutputStream os = new FileOutputStream(&quot;test.txt&quot;);
+            for (int x = 0; x &lt; bWrite.length; x++) {
+                os.write(bWrite[x]); // writes the bytes
+            }
+            os.close();
+ 
+            InputStream is = new FileInputStream(&quot;test.txt&quot;);
+            int size = is.available();
+ 
+            for (int i = 0; i &lt; size; i++) {
+                System.out.print((char) is.read() + &quot;  &quot;);
+            }
+            is.close();
+        } catch (IOException e) {
+            System.out.print(&quot;Exception&quot;);
+        }
+    }
+}
+</code></pre>
+<h3 id="关于文件和io的类">关于文件和I/O的类</h3>
+<ul>
+<li>File Class</li>
+<li>FileReader Class</li>
+<li>FileWriter Class</li>
+</ul>
+<h3 id="目录">目录</h3>
+<ol>
+<li>
+<p>创建目录：</p>
+<ul>
+<li>mkdir()方法创建一个文件夹，成功返回true，失败返回false</li>
+<li>mkidrs()方法创建一个文件夹和它所有父类文件夹</li>
+</ul>
+</li>
+</ol>
+<pre><code class="language-java">import java.io.File;
+ 
+public class CreateDir {
+    public static void main(String[] args) {
+        String dirname = &quot;/tmp/user/java/bin&quot;;
+        File d = new File(dirname);
+        // 现在创建目录
+        d.mkdirs();
+    }
+}
+</code></pre>
+<ol start="2">
+<li>读取目录</li>
+</ol>
+<p>调用该对象的list()方法，提取目录包含的文件和文件夹列表</p>
+<pre><code class="language-java">import java.io.File;
+ 
+public class DirList {
+    public static void main(String args[]) {
+        String dirname = &quot;/tmp&quot;;
+        File f1 = new File(dirname);
+        if (f1.isDirectory()) {
+            System.out.println(&quot;目录 &quot; + dirname);
+            String s[] = f1.list();
+            for (int i = 0; i &lt; s.length; i++) {
+                File f = new File(dirname + &quot;/&quot; + s[i]);
+                if (f.isDirectory()) {
+                    System.out.println(s[i] + &quot; 是一个目录&quot;);
+                } else {
+                    System.out.println(s[i] + &quot; 是一个文件&quot;);
+                }
+            }
+        } else {
+            System.out.println(dirname + &quot; 不是一个目录&quot;);
+        }
+    }
+}
+</code></pre>
+<ol start="3">
+<li>删除目录或文件</li>
+</ol>
+<p>使用<code>java.io.File.delete()</code>方法</p>
+<p>删除某一目录时，必须保证该目录下没有其他文件</p>
+<hr>
+<h2 id="scanner-类">Scanner 类</h2>
+<p>用于获取用户的输入</p>
+<p><code>Scanner s = new Scanner(System.in)</code></p>
+<p>Scanner类的next()和nextLine()获取输入的字符串</p>
+<ul>
+<li>next()以空白为结束符，不能得到带空格的字符串</li>
+<li>nextLine()以Enter为结束符</li>
+</ul>
+<p>也可以读取其他类型的数据：</p>
+<ul>
+<li><code>nextXxx()</code>: 例如 f = scan.nextFloat()</li>
+</ul>
+<hr>
+<h2 id="异常处理">异常处理</h2>
+<p>异常发生的原因：</p>
+<ul>
+<li>用户输入非法字符</li>
+<li>要打开的文件不存在</li>
+<li>网络通信连接中断，或者JVM内存溢出</li>
+</ul>
+<p>三种类型的异常：</p>
+<ul>
+<li>检查性异常</li>
+<li>运行时异常</li>
+<li>错误</li>
+</ul>
+<p>Exception类有两个主要的子类：IOException类和RuntimeException类</p>
+<h3 id="java-内置异常类">java 内置异常类</h3>
+<figure data-type="image" tabindex="14"><img src="https://s2.loli.net/2022/03/11/h7Vr2tE3Gi8vW19.png" alt="内置异常类.png" loading="lazy"></figure>
+<h3 id="异常方法">异常方法</h3>
+<h3 id="捕获异常">捕获异常</h3>
+<pre><code class="language-java">try
+{
+   // 程序代码
+}catch(ExceptionName e1)
+{
+   //Catch 块
+}
+</code></pre>
+<p>catch语句包含要捕获异常的声明</p>
+<pre><code class="language-java">import java.io.*;
+public class ExcepTest{
+ 
+   public static void main(String args[]){
+      try{
+         int a[] = new int[2];
+         System.out.println(&quot;Access element three :&quot; + a[3]);
+      }catch(ArrayIndexOutOfBoundsException e){
+         System.out.println(&quot;Exception thrown  :&quot; + e);
+      }
+      System.out.println(&quot;Out of the block&quot;);
+   }
+}
+
+
+//Exception thrown  :java.lang.ArrayIndexOutOfBoundsException: Index 3 out of bounds for length 2
+//Out of the block
+</code></pre>
+<h3 id="多重捕获块">多重捕获块</h3>
+<pre><code class="language-java">try{
+   // 程序代码
+}catch(异常类型1 异常的变量名1){
+  // 程序代码
+}catch(异常类型2 异常的变量名2){
+  // 程序代码
+}catch(异常类型3 异常的变量名3){
+  // 程序代码
+}
+</code></pre>
+<h3 id="throwsthrow关键字">throws/throw关键字</h3>
+<p>如果一个方法没有捕获到一个检查性异常，那么该方法必须使用 throws/throw 关键字来声明</p>
+<p><code>public void withdraw(double amount) throws RemoteException InsufficientFundsException</code></p>
+<h3 id="finally-关键字">finally 关键字</h3>
+<p>无论是否发生异常，finally 代码块中的代码总会被执行</p>
+<pre><code class="language-java">try{
+  // 程序代码
+}catch(异常类型1 异常的变量名1){
+  // 程序代码
+}catch(异常类型2 异常的变量名2){
+  // 程序代码
+}finally{
+  // 程序代码
+}
+</code></pre>
+<h3 id="声明自定义异常">声明自定义异常</h3>
+<ul>
+<li>所有异常都必须是 Throwable 的子类</li>
+<li>如果希望写一个检查性异常类，则需要继承 Exception 类</li>
+<li>如果你想写一个运行时异常类，那么需要继承 RuntimeException 类</li>
+</ul>
+<h3 id="通用异常">通用异常</h3>
+<ul>
+<li>JVM异常：由 JVM 抛出的异常或错误。例如：NullPointerException 类，ArrayIndexOutOfBoundsException 类，ClassCastException 类</li>
+<li>程序级异常：由程序或者API程序抛出的异常。例如 IllegalArgumentException 类，IllegalStateException 类</li>
+</ul>
 ]]></content>
     </entry>
 </feed>
