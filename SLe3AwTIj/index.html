@@ -9,7 +9,7 @@
 <meta name="description" content="1">
 <meta name="theme-color" content="#868e96">
 <title>zd_blog</title>
-<link rel="shortcut icon" href="/favicon.ico?v=1647134497534">
+<link rel="shortcut icon" href="/favicon.ico?v=1647323526970">
 <link rel="stylesheet" href="/media/css/gemini.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
 <link
@@ -74,8 +74,6 @@
           
             
             
-              
-            
             
             <li class="nav-item ">
               
@@ -87,8 +85,6 @@
             </li>
           
             
-            
-              
             
             
             <li class="nav-item ">
@@ -102,8 +98,6 @@
           
             
             
-              
-            
             
             <li class="nav-item ">
               
@@ -114,16 +108,6 @@
               
             </li>
           
-          
-            
-              <li class="nav-item ">
-                <a href="/friends/" target="_self">
-                  
-                    <i class="fa fa-address-book"></i> 友链
-                  
-                </a>
-              </li>
-            
           
           
             <li id="fa_search" class="nav-item">
@@ -177,7 +161,7 @@
     <div class="sidebar-item-box">
       <a href="/archives/">
         
-        <span class="site-item-stat-count">2</span>
+        <span class="site-item-stat-count">3</span>
         <span class="site-item-stat-name language" data-lan="article">文章</span>
       </a>
     </div>
@@ -191,6 +175,8 @@
   
     
   
+  
+
   
 
 
@@ -227,6 +213,8 @@
           <small class="language" data-lan="tag">标签</small>
         </h2>
       </div>
+      
+      
       
       
       
@@ -530,6 +518,543 @@
       <hr>
     </div>
     <div class="result" id="result">
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://zdblog.top/shu-ju-jie-gou/"" data-c="
+          &lt;h2 id=&#34;枚举enumeration&#34;&gt;枚举(Enumeration)&lt;/h2&gt;
+&lt;p&gt;枚举接口本身不属于数据结构&lt;/p&gt;
+&lt;p&gt;枚举接口定义了一种从数据结构中取回连续元素的方法&lt;/p&gt;
+&lt;p&gt;已被迭代器取代&lt;/p&gt;
+&lt;p&gt;Enumeration声明的方法：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:left&#34;&gt;方法&lt;/th&gt;
+&lt;th style=&#34;text-align:left&#34;&gt;描述&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;boolean hasMoreElements()&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;测试此枚举是否包含更多的元素&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;Object nextElements()&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;如果此枚举对象至少还有一个可提供的元素，则返回此枚举的下一个元素&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;eg:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;import java.util.Vector;
+import java.util.Enumeration;
+ 
+public class EnumerationTester {
+ 
+   public static void main(String args[]) {
+      Enumeration&amp;lt;String&amp;gt; days;
+      Vector&amp;lt;String&amp;gt; dayNames = new Vector&amp;lt;String&amp;gt;();
+      dayNames.add(&amp;quot;Sunday&amp;quot;);
+      dayNames.add(&amp;quot;Monday&amp;quot;);
+      dayNames.add(&amp;quot;Tuesday&amp;quot;);
+      dayNames.add(&amp;quot;Wednesday&amp;quot;);
+      dayNames.add(&amp;quot;Thursday&amp;quot;);
+      dayNames.add(&amp;quot;Friday&amp;quot;);
+      dayNames.add(&amp;quot;Saturday&amp;quot;);
+      days = dayNames.elements();
+      while (days.hasMoreElements()){
+         System.out.println(days.nextElement()); 
+      }
+   }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;位集合bitset&#34;&gt;位集合(BitSet)&lt;/h2&gt;
+&lt;p&gt;该集合类实现了一组可以反赌设置和清除的位或是标志&lt;/p&gt;
+&lt;p&gt;构造方法：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Bitset(): 创建一个默认对象&lt;/li&gt;
+&lt;li&gt;BitSet(int size): 指定初始大小，所有位初始为0&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;BitSet中实现了Cloneable接口中定义的方法如下表所列：&lt;/p&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;1&#34;&gt;&lt;img src=&#34;https://s2.loli.net/2022/03/13/Opdi1H87kYStvF5.png&#34; alt=&#34;bitset方法.png&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;p&gt;eg:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;import java.util.BitSet;
+ 
+public class BitSetDemo {
+ 
+  public static void main(String args[]) {
+     BitSet bits1 = new BitSet(16);
+     BitSet bits2 = new BitSet(16);
+      
+     // set some bits
+     for(int i=0; i&amp;lt;16; i++) {
+        if((i%2) == 0) bits1.set(i);
+        if((i%5) != 0) bits2.set(i);
+     }
+     System.out.println(&amp;quot;Initial pattern in bits1: &amp;quot;);
+     System.out.println(bits1);
+     System.out.println(&amp;quot;\nInitial pattern in bits2: &amp;quot;);
+     System.out.println(bits2);
+ 
+     // AND bits
+     bits2.and(bits1);
+     System.out.println(&amp;quot;\nbits2 AND bits1: &amp;quot;);
+     System.out.println(bits2);
+ 
+     // OR bits
+     bits2.or(bits1);
+     System.out.println(&amp;quot;\nbits2 OR bits1: &amp;quot;);
+     System.out.println(bits2);
+ 
+     // XOR bits
+     bits2.xor(bits1);
+     System.out.println(&amp;quot;\nbits2 XOR bits1: &amp;quot;);
+     System.out.println(bits2);
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;向量vector&#34;&gt;向量(Vector)&lt;/h2&gt;
+&lt;p&gt;向量（Vector）类和传统数组非常相似，但是Vector的大小能根据需要动态的变化&lt;/p&gt;
+&lt;p&gt;Vector类实现了动态数组&lt;/p&gt;
+&lt;p&gt;和ArrayList的区别：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Vector 是同步访问的&lt;/li&gt;
+&lt;li&gt;Vector 包含了许多传统的方法，这些方法不属于集合框架&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;构造方法：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Vector(): 创建默认向量，大小为10&lt;/li&gt;
+&lt;li&gt;Vector(int size): 创建指定大小的向量&lt;/li&gt;
+&lt;li&gt;Vector(int size, int incr): 创建指定大小和增量的向量&lt;/li&gt;
+&lt;li&gt;Vector(Collection c): 创建一个包含集合c元素的向量&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Vector定义的方法：&lt;/p&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;2&#34;&gt;&lt;img src=&#34;https://s2.loli.net/2022/03/13/Ix78Va9vgHWzupO.png&#34; alt=&#34;vector方法.png&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;import java.util.*;
+
+public class VectorDemo {
+
+    public static void main(String args[]) {
+        // initial size is 3, increment is 2
+        Vector v = new Vector(3, 2);
+        System.out.println(&amp;quot;Initial size: &amp;quot; + v.size());
+        System.out.println(&amp;quot;Initial capacity: &amp;quot; + v.capacity());
+        v.addElement(new Integer(1));
+        v.addElement(new Integer(2));
+        v.addElement(new Integer(3));
+        v.addElement(new Integer(4));
+        System.out.println(&amp;quot;Capacity after four additions: &amp;quot; + v.capacity());
+
+        v.addElement(new Double(5.45));
+        System.out.println(&amp;quot;Current capacity: &amp;quot; + v.capacity());
+        v.addElement(new Double(6.08));
+        v.addElement(new Integer(7));
+        System.out.println(&amp;quot;Current capacity: &amp;quot; + v.capacity());
+        v.addElement(new Float(9.4));
+        v.addElement(new Integer(10));
+        System.out.println(&amp;quot;Current capacity: &amp;quot; + v.capacity());
+        v.addElement(new Integer(11));
+        v.addElement(new Integer(12));
+        System.out.println(&amp;quot;First element: &amp;quot; + (Integer)v.firstElement());
+        System.out.println(&amp;quot;Last element: &amp;quot; + (Integer)v.lastElement());
+        if(v.contains(new Integer(3)))
+            System.out.println(&amp;quot;Vector contains 3.&amp;quot;);
+        // enumerate the elements in the vector.
+        Enumeration vEnum = v.elements();
+        System.out.println(&amp;quot;\nElements in vector:&amp;quot;);
+        while(vEnum.hasMoreElements())
+            System.out.print(vEnum.nextElement() + &amp;quot; &amp;quot;);
+        System.out.println();
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;栈stack&#34;&gt;栈(Stack)&lt;/h2&gt;
+&lt;p&gt;Stack是Vector的一个子类，实现一个标准的后进先出的栈&lt;/p&gt;
+&lt;p&gt;栈只定义了默认构造方法&lt;code&gt;Stack()&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;栈继承了Vector的所有方法，也自定义了一些方法：&lt;/p&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;3&#34;&gt;&lt;img src=&#34;https://s2.loli.net/2022/03/13/hDHF4MXg6wuzA9T.png&#34; alt=&#34;Stack方法.png&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;import java.util.*;
+ 
+public class StackDemo {
+ 
+    static void showpush(Stack&amp;lt;Integer&amp;gt; st, int a) {
+        st.push(new Integer(a));
+        System.out.println(&amp;quot;push(&amp;quot; + a + &amp;quot;)&amp;quot;);
+        System.out.println(&amp;quot;stack: &amp;quot; + st);
+    }
+ 
+    static void showpop(Stack&amp;lt;Integer&amp;gt; st) {
+        System.out.print(&amp;quot;pop -&amp;gt; &amp;quot;);
+        Integer a = (Integer) st.pop();
+        System.out.println(a);
+        System.out.println(&amp;quot;stack: &amp;quot; + st);
+    }
+ 
+    public static void main(String args[]) {
+        Stack&amp;lt;Integer&amp;gt; st = new Stack&amp;lt;Integer&amp;gt;();
+        System.out.println(&amp;quot;stack: &amp;quot; + st);
+        showpush(st, 42);
+        showpush(st, 66);
+        showpush(st, 99);
+        showpop(st);
+        showpop(st);
+        showpop(st);
+        try {
+            showpop(st);
+        } catch (EmptyStackException e) {
+            System.out.println(&amp;quot;empty stack&amp;quot;);
+        }
+    }
+}
+
+
+// stack: [ ]
+// push(42)
+// stack: [42]
+// ...
+&lt;/code&gt;&lt;/pre&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;字典dictionary&#34;&gt;字典(Dictionary)&lt;/h2&gt;
+&lt;p&gt;Dictionary类是一个抽象类，用来存储键值对，作用和实现Map接口相似&lt;/p&gt;
+&lt;p&gt;字典已经被实现Map接口取代&lt;/p&gt;
+&lt;p&gt;Dictionary类定义的方法：&lt;/p&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;4&#34;&gt;&lt;img src=&#34;https://s2.loli.net/2022/03/13/FUGb2d5tAr6OIQo.png&#34; alt=&#34;dictionary方法.png&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;h3 id=&#34;map接口&#34;&gt;Map接口&lt;/h3&gt;
+&lt;p&gt;抛出异常：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;给定一个键和一个值，你可以将该值存储在一个 Map 对象。之后，你可以通过键来访问对应的值&lt;/li&gt;
+&lt;li&gt;当访问的值不存在的时候，方法就会抛出一个 NoSuchElementException 异常&lt;/li&gt;
+&lt;li&gt;当对象的类型和 Map 里元素类型不兼容的时候，就会抛出一个 ClassCastException 异常&lt;/li&gt;
+&lt;li&gt;当在不允许使用 Null 对象的 Map 中使用 Null 对象，会抛出一个 NullPointerException 异常&lt;/li&gt;
+&lt;li&gt;当尝试修改一个只读的 Map 时，会抛出一个 UnsupportedOperationException 异常&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Map定义的方法：&lt;/p&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;5&#34;&gt;&lt;img src=&#34;https://s2.loli.net/2022/03/13/sHt8IeSNJ7AuTGa.png&#34; alt=&#34;Map方法.png&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;p&gt;eg：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;import java.util.*;
+
+public class CollectionsDemo {
+
+    public static void main(String[] args) {
+        Map m1 = new HashMap(); 
+        m1.put(&amp;quot;Zara&amp;quot;, &amp;quot;8&amp;quot;);
+        m1.put(&amp;quot;Mahnaz&amp;quot;, &amp;quot;31&amp;quot;);
+        m1.put(&amp;quot;Ayan&amp;quot;, &amp;quot;12&amp;quot;);
+        m1.put(&amp;quot;Daisy&amp;quot;, &amp;quot;14&amp;quot;);
+        System.out.println();
+        System.out.println(&amp;quot; Map Elements&amp;quot;);
+        System.out.print(&amp;quot;\t&amp;quot; + m1);
+    }
+}
+
+
+// Map Elements
+//         {Mahnaz=31, Ayan=12, Daisy=14, Zara=8}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;哈希表hashtable&#34;&gt;哈希表(Hashtable)&lt;/h2&gt;
+&lt;p&gt;Hashtable现在集成到了集合框架中，和HashMap类很相似，但支持同步&lt;/p&gt;
+&lt;p&gt;Hashtable在哈希表中存储键值对&lt;/p&gt;
+&lt;p&gt;当使用一个哈希表时，要指定用作键的对象，以及链接到该键的值&lt;/p&gt;
+&lt;p&gt;该键经过哈希处理，所得的散列码被用作存储在该表中值的索引&lt;/p&gt;
+&lt;p&gt;Hashtable类定义的构造方法：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Hashtable()&lt;/li&gt;
+&lt;li&gt;Hashtable(int size): 创建指定大小的哈希表&lt;/li&gt;
+&lt;li&gt;Hashtable(int size, float fillRation): 创建指定大小和填充比例的哈希表&lt;/li&gt;
+&lt;li&gt;Hashtable(Map m): 创建一个以M重元素未初始化元素的哈希表，其容量被设置为M的两倍&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Hashtable除了Map接口中定义的方法，还有自定义了：&lt;/p&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;6&#34;&gt;&lt;img src=&#34;https://s2.loli.net/2022/03/13/ol1hWptzTmU3d58.png&#34; alt=&#34;hashtable方法.png&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;p&gt;eg:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;import java.util.*;
+
+public class HashTableDemo {
+
+   public static void main(String args[]) {
+      // Create a hash map
+      Hashtable balance = new Hashtable();
+      Enumeration names;
+      String str;
+      double bal;
+
+      balance.put(&amp;quot;Zara&amp;quot;, new Double(3434.34));
+      balance.put(&amp;quot;Mahnaz&amp;quot;, new Double(123.22));
+      balance.put(&amp;quot;Ayan&amp;quot;, new Double(1378.00));
+      balance.put(&amp;quot;Daisy&amp;quot;, new Double(99.22));
+      balance.put(&amp;quot;Qadir&amp;quot;, new Double(-19.08));
+
+      // Show all balances in hash table.
+      names = balance.keys();
+      while(names.hasMoreElements()) {
+         str = (String) names.nextElement();
+         System.out.println(str + &amp;quot;: &amp;quot; +
+         balance.get(str));
+      }
+      System.out.println();
+      // Deposit 1,000 into Zara&#39;s account
+      bal = ((Double)balance.get(&amp;quot;Zara&amp;quot;)).doubleValue();
+      balance.put(&amp;quot;Zara&amp;quot;, new Double(bal+1000));
+      System.out.println(&amp;quot;Zara&#39;s new balance: &amp;quot; +
+      balance.get(&amp;quot;Zara&amp;quot;));
+   }
+}
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;属性properties&#34;&gt;属性(Properties)&lt;/h2&gt;
+&lt;p&gt;Properties 继承于 Hashtable, Properties 类表示了一个持久的属性集.属性列表中每个键及其对应值都是一个字符串&lt;/p&gt;
+&lt;p&gt;Properties 定义如下实例变量.这个变量持有一个 Properties 对象相关的默认属性列表：&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Properties defaults;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;构造方法：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Properties()&lt;/li&gt;
+&lt;li&gt;Properties(Properties propDefault)   // 两种情况下 ，属性列表都为空&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Properties类除了继承Hashtable中的方法，自定义了：&lt;/p&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;7&#34;&gt;&lt;img src=&#34;https://s2.loli.net/2022/03/13/hXfoCp9qtLHmejz.png&#34; alt=&#34;properties方法.png&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;p&gt;eg:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;import java.util.*;
+ 
+public class PropDemo {
+ 
+    public static void main(String args[]) {
+        Properties capitals = new Properties();
+        Set states;
+        String str;
+        
+        capitals.put(&amp;quot;Illinois&amp;quot;, &amp;quot;Springfield&amp;quot;);
+        capitals.put(&amp;quot;Missouri&amp;quot;, &amp;quot;Jefferson City&amp;quot;);
+        capitals.put(&amp;quot;Washington&amp;quot;, &amp;quot;Olympia&amp;quot;);
+        capitals.put(&amp;quot;California&amp;quot;, &amp;quot;Sacramento&amp;quot;);
+        capitals.put(&amp;quot;Indiana&amp;quot;, &amp;quot;Indianapolis&amp;quot;);
+    
+        // Show all states and capitals in hashtable.
+        states = capitals.keySet(); // get set-view of keys
+        Iterator itr = states.iterator();
+        while(itr.hasNext()) {
+            str = (String) itr.next();
+            System.out.println(&amp;quot;The capital of &amp;quot; + str + &amp;quot; is &amp;quot; + capitals.getProperty(str) + &amp;quot;.&amp;quot;);
+        }
+        System.out.println();
+    
+        // look for state not in list -- specify default
+        str = capitals.getProperty(&amp;quot;Florida&amp;quot;, &amp;quot;Not Found&amp;quot;);
+        System.out.println(&amp;quot;The capital of Florida is &amp;quot; + str + &amp;quot;.&amp;quot;);
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;strong&gt;以上这些类是传统遗留的，后面引入新的框架--集合框架(Collection)&lt;/strong&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;集合框架&#34;&gt;集合框架&lt;/h2&gt;
+&lt;p&gt;上述的类缺少一个核心的、统一的主题，不同类的使用方法有着很大的不同&lt;/p&gt;
+&lt;p&gt;集合框架的要求：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;该框架必须是高性能的。基本集合（动态数组，链表，树，哈希表）的实现也必须是高效的&lt;/li&gt;
+&lt;li&gt;该框架允许不同类型的集合，以类似的方式工作，具有高度的互操作性&lt;/li&gt;
+&lt;li&gt;对一个集合的扩展和适应必须是简单的&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;所以，集合框架就围绕一组标准接口而设计&lt;/p&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;8&#34;&gt;&lt;img src=&#34;https://s2.loli.net/2022/03/13/7WgzAt2Px9dpDJB.png&#34; alt=&#34;集合框架图.png&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;p&gt;Java集合框架主要包括两种类型容器：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;集合(Collection)：存储一个元素&lt;/li&gt;
+&lt;li&gt;图(Map)：存储键值对映射&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;集合框架都包含：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;接口：是代表集合的抽象数据类型。例如 Collection、List、Set、Map 等。之所以定义多个接口，是为了以不同的方式操作集合对象&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;实现（类）：是集合接口的具体实现。从本质上讲，它们是可重复使用的数据结构，例如：ArrayList、LinkedList、HashSet、HashMap&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;算法：是实现集合接口的对象里的方法执行的一些有用的计算，例如：搜索和排序。这些算法被称为多态，那是因为相同的方法可以在相似的接口上有着不同的实现&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;集合框架接口&#34;&gt;集合框架接口：&lt;/h3&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;9&#34;&gt;&lt;img src=&#34;https://s2.loli.net/2022/03/13/LFs54yEOK3WJMlp.png&#34; alt=&#34;集合框架接口.png&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;h3 id=&#34;集合实现类集合类&#34;&gt;集合实现类（集合类）&lt;/h3&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;10&#34;&gt;&lt;img src=&#34;https://s2.loli.net/2022/03/13/of3lVvQ2G6bXen8.png&#34; alt=&#34;集合实现类.png&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;h3 id=&#34;迭代器iterator&#34;&gt;迭代器(Iterator)&lt;/h3&gt;
+&lt;p&gt;迭代器是一种访问集合的方法&lt;/p&gt;
+&lt;p&gt;Iterator是迭代器最简单的实现，ListIterator是Collection API中的接口，拓展了Iterator接口&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;import java.util.Iterator; // 引入 Iterator 类&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;it.next() 会返回迭代器的下一个元素，并且更新迭代器的状态&lt;/li&gt;
+&lt;li&gt;it.hasNext() 用于检测集合中是否还有元素&lt;/li&gt;
+&lt;li&gt;it.remove() 将迭代器返回的元素删除&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;获取迭代器&#34;&gt;获取迭代器&lt;/h4&gt;
+&lt;p&gt;&lt;code&gt;iterator()&lt;/code&gt;方法&lt;/p&gt;
+&lt;h4 id=&#34;循环集合元素&#34;&gt;循环集合元素&lt;/h4&gt;
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;while(it.hasNext()) {
+    System.out.println(it.next());
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;删除集合元素&#34;&gt;删除集合元素&lt;/h4&gt;
+&lt;p&gt;&lt;code&gt;remove()&lt;/code&gt;方法&lt;/p&gt;
+&lt;p&gt;eg:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;import java.util.ArrayList;
+import java.util.Iterator;
+
+public class RunoobTest {
+    public static void main(String[] args) {
+        ArrayList&amp;lt;Integer&amp;gt; numbers = new ArrayList&amp;lt;Integer&amp;gt;();
+        numbers.add(12);
+        numbers.add(8);
+        numbers.add(2);
+        numbers.add(23);
+        Iterator&amp;lt;Integer&amp;gt; it = numbers.iterator();
+        while(it.hasNext()) {
+            Integer i = it.next();
+            if(i &amp;lt; 10) {  
+                it.remove();  // 删除小于 10 的元素
+            }
+        }
+        System.out.println(numbers);
+    }
+}
+
+// [12, 23]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;遍历arraylist&#34;&gt;遍历ArrayList&lt;/h4&gt;
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;import java.util.*;
+ 
+public class Test{
+    public static void main(String[] args) {
+        List&amp;lt;String&amp;gt; list=new ArrayList&amp;lt;String&amp;gt;();
+        list.add(&amp;quot;Hello&amp;quot;);
+        list.add(&amp;quot;World&amp;quot;);
+        list.add(&amp;quot;HAHAHAHA&amp;quot;);
+        //第一种遍历方法使用 For-Each 遍历 List
+        for (String str : list) {            //也可以改写 for(int i=0;i&amp;lt;list.size();i++) 这种形式
+            System.out.println(str);
+        }
+    
+        //第二种遍历，把链表变为数组相关的内容进行遍历
+        String[] strArray=new String[list.size()];
+        list.toArray(strArray);
+        for(int i=0;i&amp;lt;strArray.length;i++) //这里也可以改写为  for(String str:strArray) 这种形式
+        {
+            System.out.println(strArray[i]);
+        }
+        
+        //第三种遍历 使用迭代器进行相关遍历
+        
+        Iterator&amp;lt;String&amp;gt; ite=list.iterator();
+        while(ite.hasNext())//判断下一个元素之后有值
+        {
+            System.out.println(ite.next());
+        }
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;遍历map&#34;&gt;遍历Map&lt;/h4&gt;
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;import java.util.*;
+ 
+public class Test{
+    public static void main(String[] args) {
+        Map&amp;lt;String, String&amp;gt; map = new HashMap&amp;lt;String, String&amp;gt;();
+        map.put(&amp;quot;1&amp;quot;, &amp;quot;value1&amp;quot;);
+        map.put(&amp;quot;2&amp;quot;, &amp;quot;value2&amp;quot;);
+        map.put(&amp;quot;3&amp;quot;, &amp;quot;value3&amp;quot;);
+        
+        //第一种：普遍使用，二次取值
+        System.out.println(&amp;quot;通过Map.keySet遍历key和value：&amp;quot;);
+        for (String key : map.keySet()) {
+        System.out.println(&amp;quot;key= &amp;quot;+ key + &amp;quot; and value= &amp;quot; + map.get(key));
+        }
+        
+        //第二种
+        System.out.println(&amp;quot;通过Map.entrySet使用iterator遍历key和value：&amp;quot;);
+        Iterator&amp;lt;Map.Entry&amp;lt;String, String&amp;gt;&amp;gt; it = map.entrySet().iterator();
+        while (it.hasNext()) {
+        Map.Entry&amp;lt;String, String&amp;gt; entry = it.next();
+        System.out.println(&amp;quot;key= &amp;quot; + entry.getKey() + &amp;quot; and value= &amp;quot; + entry.getValue());
+        }
+        
+        //第三种：推荐，尤其是容量大时
+        System.out.println(&amp;quot;通过Map.entrySet遍历key和value&amp;quot;);
+        for (Map.Entry&amp;lt;String, String&amp;gt; entry : map.entrySet()) {
+        System.out.println(&amp;quot;key= &amp;quot; + entry.getKey() + &amp;quot; and value= &amp;quot; + entry.getValue());
+        }
+        
+        //第四种
+        System.out.println(&amp;quot;通过Map.values()遍历所有的value，但不能遍历key&amp;quot;);
+        for (String v : map.values()) {
+        System.out.println(&amp;quot;value= &amp;quot; + v);
+        }
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;比较器&#34;&gt;比较器&lt;/h3&gt;
+&lt;p&gt;Comparator接口定义了两个方法：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;compare()&lt;/li&gt;
+&lt;li&gt;equals()&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;code&gt;int compare(Object obj1, Object obj2)&lt;/code&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;arraylist-类&#34;&gt;ArrayList 类&lt;/h2&gt;
+&lt;p&gt;ArrayList类是一个可以动态修改的数组&lt;/p&gt;
+&lt;p&gt;继承了AbstractList，并实现了List接口&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;ArrayList&amp;lt;E&amp;gt; objectName =new ArrayList&amp;lt;&amp;gt;();　 // 初始化&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;ArrayList常用方法：&lt;/p&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;11&#34;&gt;&lt;img src=&#34;https://s2.loli.net/2022/03/13/6QiPYmqj2pxoAeG.png&#34; alt=&#34;ArrayList常用方法.png&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;linkedlist-类链表&#34;&gt;LinkedList 类（链表）&lt;/h2&gt;
+&lt;p&gt;链表是一种线性表，在每个节点里存放下一节点的地址&lt;/p&gt;
+&lt;p&gt;可分为&lt;code&gt;单链表&lt;/code&gt;和&lt;code&gt;双链表&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;单链表包含当前结点的值和指向后节点的链接两个值&lt;/p&gt;
+&lt;p&gt;双链表多了向后结点的链接&lt;/p&gt;
+&lt;p&gt;与 ArrayList 相比，LinkedList 的增加和删除的操作效率更高，而查找和修改的操作效率较低&lt;/p&gt;
+&lt;p&gt;ArrayList：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;频繁访问列表中的某一个元素&lt;/li&gt;
+&lt;li&gt;只需要在列表末尾进行添加和删除元素操作&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;LinkedList：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;需要通过循环迭代来访问列表中的某些元素&lt;/li&gt;
+&lt;li&gt;需要频繁的在列表开头、中间、末尾等位置进行添加和删除元素操作&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;LinkedList 继承了 AbstractSequentialList 类&lt;/p&gt;
+&lt;p&gt;LinkedList 实现了 Queue 接口，可作为队列使用&lt;/p&gt;
+&lt;p&gt;LinkedList 实现了 List 接口，可进行列表的相关操作&lt;/p&gt;
+&lt;p&gt;LinkedList 实现了 Deque 接口，可作为队列使用&lt;/p&gt;
+&lt;p&gt;LinkedList 实现了 Cloneable 接口，可实现克隆&lt;/p&gt;
+&lt;p&gt;LinkedList 实现了 java.io.Serializable 接口，即可支持序列化，能通过序列化去传输&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;LinkedList&amp;lt;E&amp;gt; list = new LinkedList&amp;lt;E&amp;gt;();   // 普通创建方法
+或者
+LinkedList&amp;lt;E&amp;gt; list = new LinkedList(Collection&amp;lt;? extends E&amp;gt; c); // 使用集合创建链表
+&lt;/code&gt;&lt;/pre&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;12&#34;&gt;&lt;img src=&#34;https://s2.loli.net/2022/03/13/TvVpFPnZl87XC1w.png&#34; alt=&#34;LinkedList常用方法.png&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;hashset&#34;&gt;HashSet&lt;/h2&gt;
+&lt;p&gt;HashSet是一个不允许有重复元素的集合，允许有null值&lt;/p&gt;
+&lt;p&gt;无序的&lt;/p&gt;
+&lt;p&gt;非线程安全&lt;/p&gt;
+&lt;p&gt;实现了Set接口&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;HashSet&amp;lt;String&amp;gt; sites = new HashSet&amp;lt;String&amp;gt;();&lt;/code&gt;&lt;/p&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;13&#34;&gt;&lt;img src=&#34;https://s2.loli.net/2022/03/13/32voSbfi9wck5dR.png&#34; alt=&#34;HashSet方法.png&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;hashmap&#34;&gt;HashMap&lt;/h2&gt;
+&lt;p&gt;HashMap是一个散列表，存储了键值对的映射&lt;/p&gt;
+&lt;p&gt;实现了Map接口&lt;/p&gt;
+&lt;p&gt;最多允许一条记录的键位null，不支持线程同步&lt;/p&gt;
+&lt;p&gt;无序的&lt;/p&gt;
+&lt;p&gt;继承了AbstractMap，实现了Map、Cloneable、java.io.Serializable接口&lt;/p&gt;
+&lt;p&gt;HashMap的key与value的类型可以不同&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;HashMap&amp;lt;Integer, String&amp;gt; Sites = new HashMap&amp;lt;Integer, String&amp;gt;();&lt;/code&gt;&lt;/p&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;14&#34;&gt;&lt;img src=&#34;https://s2.loli.net/2022/03/14/QULCFrKElsuIfX8.png&#34; alt=&#34;HashMap方法.png&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;hr&gt;
+">数据结构</a>
+      </div>
       
       <div class="item">
         <a class="result-title" style="opacity: 0;" href="https://zdblog.top/mian-xiang-dui-xiang/"" data-c="
