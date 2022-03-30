@@ -8,7 +8,7 @@
 <meta name="keywords" content="Gridea静态个人博客">
 <meta name="description" content="1">
 <meta name="theme-color" content="#868e96">
-<title>数据结构 | zd_blog</title>
+<title>zd_blog</title>
 <link rel="shortcut icon" href="/favicon.ico?v=1648647335749">
 <link rel="stylesheet" href="/media/css/gemini.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
@@ -41,8 +41,6 @@
 
 
 
-  <meta name="description" content="数据结构" />
-  <meta name="keywords" content="" />
 </head>
 
 <body>
@@ -151,24 +149,8 @@
     <div
       class="section-layout gemini ">
       <div class="section-layout-wrapper">
-        
-
-<div class="sidebar">
-  
-    <div class="sidebar-box box-shadow-wrapper bg-color right-motion" id="sidebar">
-      
-        <div class="post-list-sidebar">
-          <div class="sidebar-title">
-            <span id="tocSideBar" class="sidebar-title-item sidebar-title-active language" data-lan="index">文章目录</span>
-            <span id="metaSideBar" class="sidebar-title-item language" data-lan="preview">站点概览</span>
-          </div>
-        </div>
-      
-      <div class="sidebar-body gemini" id="sidebar_body">
-        
-          
-            <div class="post-side-meta" id="post_side_meta">
-              
+        <div id="sidebarMeta" class="sidebar">
+    
 <div class="sidebar-wrapper box-shadow-wrapper bg-color">
   <div class="sidebar-item">
     <img class="site-author-image right-motion" src="/images/avatar.png"/>
@@ -205,311 +187,115 @@
   </div>
 
 </div>
-            </div>
-            <div class="post-toc sidebar-body-active" id="post_toc" style="opacity: 1;">
-              <div class="toc-box right-motion">
-  <div class="toc-wrapper  auto"
-    id="toc_wrapper">
-    <ul class="markdownIt-TOC">
-<li>
-<ul>
-<li><a href="#%E6%9E%9A%E4%B8%BEenumeration">枚举(Enumeration)</a></li>
-<li><a href="#%E4%BD%8D%E9%9B%86%E5%90%88bitset">位集合(BitSet)</a></li>
-<li><a href="#%E5%90%91%E9%87%8Fvector">向量(Vector)</a></li>
-<li><a href="#%E6%A0%88stack">栈(Stack)</a></li>
-<li><a href="#%E5%AD%97%E5%85%B8dictionary">字典(Dictionary)</a>
-<ul>
-<li><a href="#map%E6%8E%A5%E5%8F%A3">Map接口</a></li>
-</ul>
-</li>
-<li><a href="#%E5%93%88%E5%B8%8C%E8%A1%A8hashtable">哈希表(Hashtable)</a></li>
-<li><a href="#%E5%B1%9E%E6%80%A7properties">属性(Properties)</a></li>
-<li><a href="#%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6">集合框架</a>
-<ul>
-<li><a href="#%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6%E6%8E%A5%E5%8F%A3">集合框架接口：</a></li>
-<li><a href="#%E9%9B%86%E5%90%88%E5%AE%9E%E7%8E%B0%E7%B1%BB%E9%9B%86%E5%90%88%E7%B1%BB">集合实现类（集合类）</a></li>
-<li><a href="#%E8%BF%AD%E4%BB%A3%E5%99%A8iterator">迭代器(Iterator)</a>
-<ul>
-<li><a href="#%E8%8E%B7%E5%8F%96%E8%BF%AD%E4%BB%A3%E5%99%A8">获取迭代器</a></li>
-<li><a href="#%E5%BE%AA%E7%8E%AF%E9%9B%86%E5%90%88%E5%85%83%E7%B4%A0">循环集合元素</a></li>
-<li><a href="#%E5%88%A0%E9%99%A4%E9%9B%86%E5%90%88%E5%85%83%E7%B4%A0">删除集合元素</a></li>
-<li><a href="#%E9%81%8D%E5%8E%86arraylist">遍历ArrayList</a></li>
-<li><a href="#%E9%81%8D%E5%8E%86map">遍历Map</a></li>
-</ul>
-</li>
-<li><a href="#%E6%AF%94%E8%BE%83%E5%99%A8">比较器</a></li>
-</ul>
-</li>
-<li><a href="#arraylist-%E7%B1%BB">ArrayList 类</a></li>
-<li><a href="#linkedlist-%E7%B1%BB%E9%93%BE%E8%A1%A8">LinkedList 类（链表）</a></li>
-<li><a href="#hashset">HashSet</a></li>
-<li><a href="#hashmap">HashMap</a></li>
-</ul>
-</li>
-</ul>
-
-  </div>
 </div>
-
 <script>
-
-  let lastTop = 0, lList = [], hList = [], postBody, lastIndex = -1;
-  let active = 'active-show', activeClass = 'active-current';
-  let tocWrapper = document.querySelector('#toc_wrapper');
-  let tocContent = tocWrapper.children[0];
-  let autoNumber = tocWrapper && tocWrapper.classList.contains('auto-number');
-
-  function addTocNumber(elem, deep) {
-    if (!elem) {
-      return;
-    }
-    let prop = elem.__proto__;
-
-    if (prop === HTMLUListElement.prototype) {
-      for (let i = 0; i < elem.children.length; i++) {
-        addTocNumber(elem.children[i], deep + (i + 1) + '.');
+  let sidebarMeta = document.querySelector('#sidebarMeta');
+  let scheme = 'gemini';
+  let sidebarWrapper = document.querySelector('.sidebar-wrapper');
+  if (sidebarMeta && (scheme === 'pisces' || scheme === 'gemini')) {
+    document.addEventListener('scroll', function(e) {
+      if (document.scrollingElement.scrollTop > parseInt(sidebarMeta.style.marginTop) + 10) {
+        sidebarWrapper.classList.add('home-sidebar-fixed')
+      } else {
+        sidebarWrapper.classList.remove('home-sidebar-fixed')
       }
-    } else if (prop === HTMLLIElement.prototype) {
-      // 保存li元素
-      if (elem.children[0] && elem.children[0].__proto__ === HTMLAnchorElement.prototype) {
-        lList.push(elem);
-      }
-      for (let i = 0; i < elem.children.length; i++) {
-        let cur = elem.children[i];
-        if (cur.__proto__ === HTMLAnchorElement.prototype) {
-          if (autoNumber) {
-            cur.text = deep + ' ' + cur.text;
-          }
-        } else if (cur.__proto__ === HTMLUListElement.prototype) {
-          addTocNumber(cur, deep);
-        }
-      }
-    }
-  }
-
-  function removeParentActiveClass() {
-    let parents = tocContent.querySelectorAll('.' + active)
-    parents.forEach(function (elem) {
-      elem.classList.remove(active);
     });
   }
+  </script>
+        <div class="section-box gemini">
+          <section class="section  posts-expand slide-down-in">
+            
+  <article class="post-list-box  post box-shadow-wrapper">
+    <div class="article-wrapper bg-color">
+      <section class="post-header">
+  <h1 class="post-title">
+    <a class="post-title-link" href="https://zdblog.top/XjkFHqdpf/"> MySQL_01_mysql操作 </a>
+  </h1>
+  <div class="post-meta">
+    
+    <span class="meta-item pc-show">
+      <i class="fa fa-calendar-o"></i>
+      <span class="language" data-lan="publish">发布于</span>
+      <span class="publish-time" data-t="2022-03-30 21:23:33">2022-03-30</span>
+      <span class="post-meta-divider pc-show">|</span>
+    </span>
+    
+    <span class="meta-item">
+      <i class="fa fa-folder-o"></i>
+      <span class="pc-show language" data-lan="category-in">标签:</span>
+       
+      <a href="https://zdblog.top/MySQL/">
+        <span>MySQL</span>
+      </a>
+       
+    </span>
+    <span class="post-meta-divider">|</span>
+    
+    <span class="meta-item">
+      <i class="fa fa-clock-o"></i>
+      <span
+        >5<span class="language" data-lan="minute"
+          >分钟</span
+        ></span
+      >
+    </span>
+    <span class="meta-item">
+      <span class="post-meta-divider">|</span>
+      <i class="fa fa-file-word-o"></i>
+      <span
+        >1187<span class="pc-show language" data-lan="words"
+          >字数</span
+        ></span
+      >
+    </span>
+    
+  </div>
+</section>
 
-  function addActiveClass(index) {
-    if (index >= 0 && index < hList.length) {
-      lList[index].classList.add(activeClass);
-    }
-  }
+      <div class="post-body">
+        
+        
+          
+            <!-- 没有手动摘要切开启了自动摘要,则根据配置筛除摘要内容 -->
+            
+            
+              
+              
+              
+            
+              
+              
+              
+            
+              
+              
+              
+            
+            
+              <p><h2 id="0-什么是数据库">0. 什么是数据库</h2>
+<p>数据库（DB,database）</p>
+<p>概念：数据仓库，软件，安装在操作系统(window,linux,mac...)之上。SQL，可以存储大量的数据</p>
 
-  function removeActiveClass(index) {
-    if (index >= 0 && index < hList.length) {
-      lList[index].classList.remove(activeClass);
-    }
-  }
-
-  function addActiveLiElemment(elem, parent) {
-    if (!elem || elem === parent) {
-      return;
-    } else {
-      if (elem.__proto__ === HTMLLIElement.prototype) {
-        elem.classList.add(active);
-      }
-      addActiveLiElemment(elem.parentElement, parent);
-    }
-  }
-
-  function showToc() {
-    if (tocWrapper) {
-      postBody = document.querySelector('#post_body');
-      for (let i = 0; i < postBody.children.length; i++) {
-        if (postBody.children[i].__proto__ === HTMLHeadingElement.prototype) {
-          hList.push(postBody.children[i]);
-        }
-      }
-      if (tocWrapper.classList.contains('compress')) {
-        tocContent.classList.add('closed');
-      } else if (tocWrapper.classList.contains('no_compress')) {
-        tocContent.classList.add('expanded');
-      } else {
-        if (hList.length > 10) {
-          active = 'active-hidden'
-          tocContent.classList.add('closed');
-        } else {
-          tocContent.classList.add('expanded');
-        }
-      }
-    }
-  }
-
-  (function () {
-    // 处理不是从#一级标题开始目录
-    if (tocContent.children.length === 1 && tocContent.children[0].__proto__ === HTMLLIElement.prototype) {
-      let con = tocContent.children[0].children[0];
-      tocContent.innerHTML = con.innerHTML;
-    }
-    let markdownItTOC = document.querySelector('.markdownIt-TOC');
-    let innerHeight = window.innerHeight;
-    markdownItTOC.style = `max-height: ${innerHeight - 80 > 0 ? innerHeight - 80 : innerHeight}px`
-    addTocNumber(tocContent, '');
-  })();
-
-  document.addEventListener('scroll', function (e) {
-    if (lList.length <= 0) {
-      return;
-    }
-    let scrollTop = document.scrollingElement.scrollTop + 10;
-    let dir;
-
-    if (lastTop - scrollTop > 0) {
-      dir = 'up';
-    } else {
-      dir = 'down';
-    }
-
-    lastTop = scrollTop;
-    if (scrollTop <= 0) {
-      if (lastIndex >= 0 && lastIndex < hList.length) {
-        lList[lastIndex].classList.remove(activeClass);
-      }
-      return;
-    }
-
-    let current = 0, hasFind = false;
-    for (let i = 0; i < hList.length; i++) {
-      if (hList[i].offsetTop > scrollTop) {
-        current = i;
-        hasFind = true;
-        break;
-      }
-    }
-    if (!hasFind && scrollTop > lList[lList.length - 1].offsetTop) {
-      current = hList.length - 1;
-    } else {
-      current--;
-    }
-    if (dir === 'down') {
-      if (current > lastIndex) {
-        addActiveClass(current);
-        removeActiveClass(lastIndex)
-        lastIndex = current;
-        removeParentActiveClass();
-        lList[current] && addActiveLiElemment(lList[current].parentElement, tocContent);
-      }
-    } else {
-      if (current < lastIndex) {
-        addActiveClass(current);
-        removeActiveClass(lastIndex);
-        lastIndex = current;
-        removeParentActiveClass();
-        lList[current] && addActiveLiElemment(lList[current].parentElement, tocContent);
-      }
-    }
-  });
-
-
-  window.addEventListener('load', function () {
-    showToc();
-    document.querySelector('#sidebar').style = 'display: block;';
-    tocWrapper.classList.add('toc-active');
-    setTimeout(function () {
-      if ("createEvent" in document) {
-        let evt = document.createEvent("HTMLEvents");
-        evt.initEvent("scroll", false, true);
-        document.dispatchEvent(evt);
-      }
-      else {
-        document.fireEvent("scroll");
-      }
-    }, 500)
-  })
-
-</script>
-            </div>
+                
+              <p>
+            
           
         
+        
+        <div class="post-button text-center">
+          <a class="btn language" data-lan="read-more" href="https://zdblog.top/XjkFHqdpf/" rel="contents">
+            阅读全文 »
+          </a>
+        </div>
+        
       </div>
+      
     </div>
-  
-</div>
-<script>
-  const SIDEBAR_TITLE_ACTIVE = 'sidebar-title-active';
-  const SIDEBAR_BODY_ACTIVE = 'sidebar-body-active';
-  const SLIDE_UP_IN = 'slide-up-in';
+  </article>
 
-  let sidebar = document.querySelector('#sidebar'),
-  tocSideBar = document.querySelector('#tocSideBar'),
-  metaSideBar = document.querySelector('#metaSideBar'),
-  postToc = document.querySelector('#post_toc'),
-  postSiteMeta = document.querySelector('#post_side_meta'),
-  sidebarTitle = document.querySelector('.sidebar-title'),
-  sidebarBody = document.querySelector('#sidebar_body');
-
-  tocSideBar && tocSideBar.addEventListener('click', (e) => {
-    toggleSidebar(e);
-  });
-
-  metaSideBar && metaSideBar.addEventListener('click', (e) => {
-    toggleSidebar(e);
-  });
-
-  function toggleSidebar(e) {
-    let currentTitle = document.querySelector("."+SIDEBAR_TITLE_ACTIVE);
-    if (currentTitle == e.srcElement) {
-      return ;
-    }
-    let current, showElement, hideElement;
-    if (e.srcElement == metaSideBar) {
-      showElement = postSiteMeta;
-      hideElement = postToc;
-    } else if (e.srcElement == tocSideBar){
-      showElement = postToc;
-      hideElement = postSiteMeta;
-    }
-    currentTitle.classList.remove(SIDEBAR_TITLE_ACTIVE);
-    e.srcElement.classList.add(SIDEBAR_TITLE_ACTIVE);
-
-    jQuery.Velocity(hideElement, 'stop');
-    jQuery.Velocity(hideElement, 'transition.slideUpOut', {
-      display: 'none',
-      duration: 200,
-      complete: function () {
-        jQuery.Velocity(showElement, 'transition.slideDownIn', {
-          duration: 200
-        });
-      }
-    })
-    hideElement.classList.remove(SIDEBAR_BODY_ACTIVE);
-    showElement.classList.add(SIDEBAR_BODY_ACTIVE);
-  }
-
-  postToc && postToc.addEventListener('transitionend', function() {
-    this.classList.remove(SLIDE_UP_IN);
-  });
-
-  if (sidebarBody) {
-    if (sidebarBody.classList.contains('pisces') || sidebarBody.classList.contains('gemini')) {
-      let hasFix = false;
-      let scrollEl = document.querySelector('.main-continer');
-      let limitTop = document.querySelector('#nav_ul').children.length * 42 + 162;
-      window.addEventListener('scroll', function(e) {
-        if (document.scrollingElement.scrollTop >= limitTop) {
-          if (!hasFix) {
-            sidebar.classList.add('sidebar-fixed');
-            hasFix = true;
-          }
-        } else {
-          if (hasFix) {
-            sidebar.classList.remove('sidebar-fixed');
-            hasFix = false;
-          }
-        }
-      });
-    }
-  }
-  
-</script>
-        <div class="section-box box-shadow-wrapper">
-          <div class="section bg-color post post-page">
-            <section class="post-header">
+  <article class="post-list-box  post box-shadow-wrapper">
+    <div class="article-wrapper bg-color">
+      <section class="post-header">
   <h1 class="post-title">
     <a class="post-title-link" href="https://zdblog.top/shu-ju-jie-gou/"> 数据结构 </a>
   </h1>
@@ -539,648 +325,257 @@
         ></span
       >
     </span>
+    
+  </div>
+</section>
+
+      <div class="post-body">
+        
+        
+          
+            <!-- 没有手动摘要切开启了自动摘要,则根据配置筛除摘要内容 -->
+            
+            
+              
+              
+              
+            
+              
+              
+              
+            
+              
+              
+              
+            
+            
+              <p><h2 id="枚举enumeration">枚举(Enumeration)</h2>
+<p>枚举接口本身不属于数据结构</p>
+<p>枚举接口定义了一种从数据结构中取回连续元素的方法</p>
+
+                
+              <p>
+            
+          
+        
+        
+        <div class="post-button text-center">
+          <a class="btn language" data-lan="read-more" href="https://zdblog.top/shu-ju-jie-gou/" rel="contents">
+            阅读全文 »
+          </a>
+        </div>
+        
+      </div>
       
-    <span
-      id="/shu-ju-jie-gou/"
-      data-flag-title="数据结构"
-      class="meta-item pc-show leancloud_visitors"
-    >
-      <span class="post-meta-divider">|</span>
-      <i class="fa fa-eye"></i>
+    </div>
+  </article>
+
+  <article class="post-list-box  post box-shadow-wrapper">
+    <div class="article-wrapper bg-color">
+      <section class="post-header">
+  <h1 class="post-title">
+    <a class="post-title-link" href="https://zdblog.top/mian-xiang-dui-xiang/"> 面向对象 </a>
+  </h1>
+  <div class="post-meta">
+    
+    <span class="meta-item pc-show">
+      <i class="fa fa-calendar-o"></i>
+      <span class="language" data-lan="publish">发布于</span>
+      <span class="publish-time" data-t="2022-03-13 09:03:43">2022-03-13</span>
+      <span class="post-meta-divider pc-show">|</span>
+    </span>
+    
+    <span class="meta-item">
+      <i class="fa fa-folder-o"></i>
+      <span class="pc-show language" data-lan="category-in">标签:</span>
+       
+      <a href="https://zdblog.top/SLe3AwTIj/">
+        <span>java</span>
+      </a>
+       
+    </span>
+    <span class="post-meta-divider">|</span>
+    
+    <span class="meta-item">
+      <i class="fa fa-clock-o"></i>
       <span
-        ><span class="language" data-lan="view">浏览量:</span>:<span
-          class="leancloud-visitors-count"
+        >14<span class="language" data-lan="minute"
+          >分钟</span
         ></span
-      ></span>
+      >
+    </span>
+    <span class="meta-item">
+      <span class="post-meta-divider">|</span>
+      <i class="fa fa-file-word-o"></i>
+      <span
+        >3411<span class="pc-show language" data-lan="words"
+          >字数</span
+        ></span
+      >
     </span>
     
   </div>
 </section>
 
-            <div class="post-body next-md-body" id="post_body">
-              <h2 id="枚举enumeration">枚举(Enumeration)</h2>
-<p>枚举接口本身不属于数据结构</p>
-<p>枚举接口定义了一种从数据结构中取回连续元素的方法</p>
-<p>已被迭代器取代</p>
-<p>Enumeration声明的方法：</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">方法</th>
-<th style="text-align:left">描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">boolean hasMoreElements()</td>
-<td style="text-align:left">测试此枚举是否包含更多的元素</td>
-</tr>
-<tr>
-<td style="text-align:left">Object nextElements()</td>
-<td style="text-align:left">如果此枚举对象至少还有一个可提供的元素，则返回此枚举的下一个元素</td>
-</tr>
-</tbody>
-</table>
-<p>eg:</p>
-<pre><code class="language-java">import java.util.Vector;
-import java.util.Enumeration;
- 
-public class EnumerationTester {
- 
-   public static void main(String args[]) {
-      Enumeration&lt;String&gt; days;
-      Vector&lt;String&gt; dayNames = new Vector&lt;String&gt;();
-      dayNames.add(&quot;Sunday&quot;);
-      dayNames.add(&quot;Monday&quot;);
-      dayNames.add(&quot;Tuesday&quot;);
-      dayNames.add(&quot;Wednesday&quot;);
-      dayNames.add(&quot;Thursday&quot;);
-      dayNames.add(&quot;Friday&quot;);
-      dayNames.add(&quot;Saturday&quot;);
-      days = dayNames.elements();
-      while (days.hasMoreElements()){
-         System.out.println(days.nextElement()); 
-      }
-   }
-}
-</code></pre>
-<hr>
-<h2 id="位集合bitset">位集合(BitSet)</h2>
-<p>该集合类实现了一组可以反赌设置和清除的位或是标志</p>
-<p>构造方法：</p>
-<ul>
-<li>Bitset(): 创建一个默认对象</li>
-<li>BitSet(int size): 指定初始大小，所有位初始为0</li>
-</ul>
-<p>BitSet中实现了Cloneable接口中定义的方法如下表所列：</p>
-<figure data-type="image" tabindex="1"><img src="https://s2.loli.net/2022/03/13/Opdi1H87kYStvF5.png" alt="bitset方法.png" loading="lazy"></figure>
-<p>eg:</p>
-<pre><code class="language-java">import java.util.BitSet;
- 
-public class BitSetDemo {
- 
-  public static void main(String args[]) {
-     BitSet bits1 = new BitSet(16);
-     BitSet bits2 = new BitSet(16);
+      <div class="post-body">
+        
+        
+          
+            <!-- 没有手动摘要切开启了自动摘要,则根据配置筛除摘要内容 -->
+            
+            
+              
+              
+              
+            
+              
+              
+              
+            
+              
+              
+              
+            
+            
+              <p><h2 id="继承">继承</h2>
+<p>继承就是子类继承父类的特征和行为，使得子类对象（实例）具有弗雷德实例域和方法，或子类从父类继承方法，使得子类具有父类相同的行为</p>
+<p>继承格式：</p>
+
+                
+              <p>
+            
+          
+        
+        
+        <div class="post-button text-center">
+          <a class="btn language" data-lan="read-more" href="https://zdblog.top/mian-xiang-dui-xiang/" rel="contents">
+            阅读全文 »
+          </a>
+        </div>
+        
+      </div>
       
-     // set some bits
-     for(int i=0; i&lt;16; i++) {
-        if((i%2) == 0) bits1.set(i);
-        if((i%5) != 0) bits2.set(i);
-     }
-     System.out.println(&quot;Initial pattern in bits1: &quot;);
-     System.out.println(bits1);
-     System.out.println(&quot;\nInitial pattern in bits2: &quot;);
-     System.out.println(bits2);
- 
-     // AND bits
-     bits2.and(bits1);
-     System.out.println(&quot;\nbits2 AND bits1: &quot;);
-     System.out.println(bits2);
- 
-     // OR bits
-     bits2.or(bits1);
-     System.out.println(&quot;\nbits2 OR bits1: &quot;);
-     System.out.println(bits2);
- 
-     // XOR bits
-     bits2.xor(bits1);
-     System.out.println(&quot;\nbits2 XOR bits1: &quot;);
-     System.out.println(bits2);
-  }
-}
-</code></pre>
-<hr>
-<h2 id="向量vector">向量(Vector)</h2>
-<p>向量（Vector）类和传统数组非常相似，但是Vector的大小能根据需要动态的变化</p>
-<p>Vector类实现了动态数组</p>
-<p>和ArrayList的区别：</p>
-<ul>
-<li>Vector 是同步访问的</li>
-<li>Vector 包含了许多传统的方法，这些方法不属于集合框架</li>
-</ul>
-<p>构造方法：</p>
-<ul>
-<li>Vector(): 创建默认向量，大小为10</li>
-<li>Vector(int size): 创建指定大小的向量</li>
-<li>Vector(int size, int incr): 创建指定大小和增量的向量</li>
-<li>Vector(Collection c): 创建一个包含集合c元素的向量</li>
-</ul>
-<p>Vector定义的方法：</p>
-<figure data-type="image" tabindex="2"><img src="https://s2.loli.net/2022/03/13/Ix78Va9vgHWzupO.png" alt="vector方法.png" loading="lazy"></figure>
-<pre><code class="language-java">import java.util.*;
+    </div>
+  </article>
 
-public class VectorDemo {
-
-    public static void main(String args[]) {
-        // initial size is 3, increment is 2
-        Vector v = new Vector(3, 2);
-        System.out.println(&quot;Initial size: &quot; + v.size());
-        System.out.println(&quot;Initial capacity: &quot; + v.capacity());
-        v.addElement(new Integer(1));
-        v.addElement(new Integer(2));
-        v.addElement(new Integer(3));
-        v.addElement(new Integer(4));
-        System.out.println(&quot;Capacity after four additions: &quot; + v.capacity());
-
-        v.addElement(new Double(5.45));
-        System.out.println(&quot;Current capacity: &quot; + v.capacity());
-        v.addElement(new Double(6.08));
-        v.addElement(new Integer(7));
-        System.out.println(&quot;Current capacity: &quot; + v.capacity());
-        v.addElement(new Float(9.4));
-        v.addElement(new Integer(10));
-        System.out.println(&quot;Current capacity: &quot; + v.capacity());
-        v.addElement(new Integer(11));
-        v.addElement(new Integer(12));
-        System.out.println(&quot;First element: &quot; + (Integer)v.firstElement());
-        System.out.println(&quot;Last element: &quot; + (Integer)v.lastElement());
-        if(v.contains(new Integer(3)))
-            System.out.println(&quot;Vector contains 3.&quot;);
-        // enumerate the elements in the vector.
-        Enumeration vEnum = v.elements();
-        System.out.println(&quot;\nElements in vector:&quot;);
-        while(vEnum.hasMoreElements())
-            System.out.print(vEnum.nextElement() + &quot; &quot;);
-        System.out.println();
-    }
-}
-</code></pre>
-<hr>
-<h2 id="栈stack">栈(Stack)</h2>
-<p>Stack是Vector的一个子类，实现一个标准的后进先出的栈</p>
-<p>栈只定义了默认构造方法<code>Stack()</code></p>
-<p>栈继承了Vector的所有方法，也自定义了一些方法：</p>
-<figure data-type="image" tabindex="3"><img src="https://s2.loli.net/2022/03/13/hDHF4MXg6wuzA9T.png" alt="Stack方法.png" loading="lazy"></figure>
-<pre><code class="language-java">import java.util.*;
- 
-public class StackDemo {
- 
-    static void showpush(Stack&lt;Integer&gt; st, int a) {
-        st.push(new Integer(a));
-        System.out.println(&quot;push(&quot; + a + &quot;)&quot;);
-        System.out.println(&quot;stack: &quot; + st);
-    }
- 
-    static void showpop(Stack&lt;Integer&gt; st) {
-        System.out.print(&quot;pop -&gt; &quot;);
-        Integer a = (Integer) st.pop();
-        System.out.println(a);
-        System.out.println(&quot;stack: &quot; + st);
-    }
- 
-    public static void main(String args[]) {
-        Stack&lt;Integer&gt; st = new Stack&lt;Integer&gt;();
-        System.out.println(&quot;stack: &quot; + st);
-        showpush(st, 42);
-        showpush(st, 66);
-        showpush(st, 99);
-        showpop(st);
-        showpop(st);
-        showpop(st);
-        try {
-            showpop(st);
-        } catch (EmptyStackException e) {
-            System.out.println(&quot;empty stack&quot;);
-        }
-    }
-}
-
-
-// stack: [ ]
-// push(42)
-// stack: [42]
-// ...
-</code></pre>
-<hr>
-<h2 id="字典dictionary">字典(Dictionary)</h2>
-<p>Dictionary类是一个抽象类，用来存储键值对，作用和实现Map接口相似</p>
-<p>字典已经被实现Map接口取代</p>
-<p>Dictionary类定义的方法：</p>
-<figure data-type="image" tabindex="4"><img src="https://s2.loli.net/2022/03/13/FUGb2d5tAr6OIQo.png" alt="dictionary方法.png" loading="lazy"></figure>
-<h3 id="map接口">Map接口</h3>
-<p>抛出异常：</p>
-<ul>
-<li>给定一个键和一个值，你可以将该值存储在一个 Map 对象。之后，你可以通过键来访问对应的值</li>
-<li>当访问的值不存在的时候，方法就会抛出一个 NoSuchElementException 异常</li>
-<li>当对象的类型和 Map 里元素类型不兼容的时候，就会抛出一个 ClassCastException 异常</li>
-<li>当在不允许使用 Null 对象的 Map 中使用 Null 对象，会抛出一个 NullPointerException 异常</li>
-<li>当尝试修改一个只读的 Map 时，会抛出一个 UnsupportedOperationException 异常</li>
-</ul>
-<p>Map定义的方法：</p>
-<figure data-type="image" tabindex="5"><img src="https://s2.loli.net/2022/03/13/sHt8IeSNJ7AuTGa.png" alt="Map方法.png" loading="lazy"></figure>
-<p>eg：</p>
-<pre><code class="language-java">import java.util.*;
-
-public class CollectionsDemo {
-
-    public static void main(String[] args) {
-        Map m1 = new HashMap(); 
-        m1.put(&quot;Zara&quot;, &quot;8&quot;);
-        m1.put(&quot;Mahnaz&quot;, &quot;31&quot;);
-        m1.put(&quot;Ayan&quot;, &quot;12&quot;);
-        m1.put(&quot;Daisy&quot;, &quot;14&quot;);
-        System.out.println();
-        System.out.println(&quot; Map Elements&quot;);
-        System.out.print(&quot;\t&quot; + m1);
-    }
-}
-
-
-// Map Elements
-//         {Mahnaz=31, Ayan=12, Daisy=14, Zara=8}
-</code></pre>
-<hr>
-<h2 id="哈希表hashtable">哈希表(Hashtable)</h2>
-<p>Hashtable现在集成到了集合框架中，和HashMap类很相似，但支持同步</p>
-<p>Hashtable在哈希表中存储键值对</p>
-<p>当使用一个哈希表时，要指定用作键的对象，以及链接到该键的值</p>
-<p>该键经过哈希处理，所得的散列码被用作存储在该表中值的索引</p>
-<p>Hashtable类定义的构造方法：</p>
-<ul>
-<li>Hashtable()</li>
-<li>Hashtable(int size): 创建指定大小的哈希表</li>
-<li>Hashtable(int size, float fillRation): 创建指定大小和填充比例的哈希表</li>
-<li>Hashtable(Map m): 创建一个以M重元素未初始化元素的哈希表，其容量被设置为M的两倍</li>
-</ul>
-<p>Hashtable除了Map接口中定义的方法，还有自定义了：</p>
-<figure data-type="image" tabindex="6"><img src="https://s2.loli.net/2022/03/13/ol1hWptzTmU3d58.png" alt="hashtable方法.png" loading="lazy"></figure>
-<p>eg:</p>
-<pre><code class="language-java">import java.util.*;
-
-public class HashTableDemo {
-
-   public static void main(String args[]) {
-      // Create a hash map
-      Hashtable balance = new Hashtable();
-      Enumeration names;
-      String str;
-      double bal;
-
-      balance.put(&quot;Zara&quot;, new Double(3434.34));
-      balance.put(&quot;Mahnaz&quot;, new Double(123.22));
-      balance.put(&quot;Ayan&quot;, new Double(1378.00));
-      balance.put(&quot;Daisy&quot;, new Double(99.22));
-      balance.put(&quot;Qadir&quot;, new Double(-19.08));
-
-      // Show all balances in hash table.
-      names = balance.keys();
-      while(names.hasMoreElements()) {
-         str = (String) names.nextElement();
-         System.out.println(str + &quot;: &quot; +
-         balance.get(str));
-      }
-      System.out.println();
-      // Deposit 1,000 into Zara's account
-      bal = ((Double)balance.get(&quot;Zara&quot;)).doubleValue();
-      balance.put(&quot;Zara&quot;, new Double(bal+1000));
-      System.out.println(&quot;Zara's new balance: &quot; +
-      balance.get(&quot;Zara&quot;));
-   }
-}
-
-</code></pre>
-<hr>
-<h2 id="属性properties">属性(Properties)</h2>
-<p>Properties 继承于 Hashtable, Properties 类表示了一个持久的属性集.属性列表中每个键及其对应值都是一个字符串</p>
-<p>Properties 定义如下实例变量.这个变量持有一个 Properties 对象相关的默认属性列表：</p>
-<p><code>Properties defaults;</code></p>
-<p>构造方法：</p>
-<ul>
-<li>Properties()</li>
-<li>Properties(Properties propDefault)   // 两种情况下 ，属性列表都为空</li>
-</ul>
-<p>Properties类除了继承Hashtable中的方法，自定义了：</p>
-<figure data-type="image" tabindex="7"><img src="https://s2.loli.net/2022/03/13/hXfoCp9qtLHmejz.png" alt="properties方法.png" loading="lazy"></figure>
-<p>eg:</p>
-<pre><code class="language-java">import java.util.*;
- 
-public class PropDemo {
- 
-    public static void main(String args[]) {
-        Properties capitals = new Properties();
-        Set states;
-        String str;
-        
-        capitals.put(&quot;Illinois&quot;, &quot;Springfield&quot;);
-        capitals.put(&quot;Missouri&quot;, &quot;Jefferson City&quot;);
-        capitals.put(&quot;Washington&quot;, &quot;Olympia&quot;);
-        capitals.put(&quot;California&quot;, &quot;Sacramento&quot;);
-        capitals.put(&quot;Indiana&quot;, &quot;Indianapolis&quot;);
+  <article class="post-list-box  post box-shadow-wrapper">
+    <div class="article-wrapper bg-color">
+      <section class="post-header">
+  <h1 class="post-title">
+    <a class="post-title-link" href="https://zdblog.top/ji-chu-yu-fa/"> 基础语法 </a>
+  </h1>
+  <div class="post-meta">
     
-        // Show all states and capitals in hashtable.
-        states = capitals.keySet(); // get set-view of keys
-        Iterator itr = states.iterator();
-        while(itr.hasNext()) {
-            str = (String) itr.next();
-            System.out.println(&quot;The capital of &quot; + str + &quot; is &quot; + capitals.getProperty(str) + &quot;.&quot;);
-        }
-        System.out.println();
+    <span class="meta-item pc-show">
+      <i class="fa fa-calendar-o"></i>
+      <span class="language" data-lan="publish">发布于</span>
+      <span class="publish-time" data-t="2022-03-13 09:01:22">2022-03-13</span>
+      <span class="post-meta-divider pc-show">|</span>
+    </span>
     
-        // look for state not in list -- specify default
-        str = capitals.getProperty(&quot;Florida&quot;, &quot;Not Found&quot;);
-        System.out.println(&quot;The capital of Florida is &quot; + str + &quot;.&quot;);
-    }
-}
-</code></pre>
-<hr>
-<p><strong>以上这些类是传统遗留的，后面引入新的框架--集合框架(Collection)</strong></p>
-<hr>
-<h2 id="集合框架">集合框架</h2>
-<p>上述的类缺少一个核心的、统一的主题，不同类的使用方法有着很大的不同</p>
-<p>集合框架的要求：</p>
-<ul>
-<li>该框架必须是高性能的。基本集合（动态数组，链表，树，哈希表）的实现也必须是高效的</li>
-<li>该框架允许不同类型的集合，以类似的方式工作，具有高度的互操作性</li>
-<li>对一个集合的扩展和适应必须是简单的</li>
-</ul>
-<p>所以，集合框架就围绕一组标准接口而设计</p>
-<figure data-type="image" tabindex="8"><img src="https://s2.loli.net/2022/03/13/7WgzAt2Px9dpDJB.png" alt="集合框架图.png" loading="lazy"></figure>
-<p>Java集合框架主要包括两种类型容器：</p>
-<ul>
-<li>集合(Collection)：存储一个元素</li>
-<li>图(Map)：存储键值对映射</li>
-</ul>
-<p>集合框架都包含：</p>
-<ul>
-<li>
-<p>接口：是代表集合的抽象数据类型。例如 Collection、List、Set、Map 等。之所以定义多个接口，是为了以不同的方式操作集合对象</p>
-</li>
-<li>
-<p>实现（类）：是集合接口的具体实现。从本质上讲，它们是可重复使用的数据结构，例如：ArrayList、LinkedList、HashSet、HashMap</p>
-</li>
-<li>
-<p>算法：是实现集合接口的对象里的方法执行的一些有用的计算，例如：搜索和排序。这些算法被称为多态，那是因为相同的方法可以在相似的接口上有着不同的实现</p>
-</li>
-</ul>
-<h3 id="集合框架接口">集合框架接口：</h3>
-<figure data-type="image" tabindex="9"><img src="https://s2.loli.net/2022/03/13/LFs54yEOK3WJMlp.png" alt="集合框架接口.png" loading="lazy"></figure>
-<h3 id="集合实现类集合类">集合实现类（集合类）</h3>
-<figure data-type="image" tabindex="10"><img src="https://s2.loli.net/2022/03/13/of3lVvQ2G6bXen8.png" alt="集合实现类.png" loading="lazy"></figure>
-<h3 id="迭代器iterator">迭代器(Iterator)</h3>
-<p>迭代器是一种访问集合的方法</p>
-<p>Iterator是迭代器最简单的实现，ListIterator是Collection API中的接口，拓展了Iterator接口</p>
-<p><code>import java.util.Iterator; // 引入 Iterator 类</code></p>
-<ul>
-<li>it.next() 会返回迭代器的下一个元素，并且更新迭代器的状态</li>
-<li>it.hasNext() 用于检测集合中是否还有元素</li>
-<li>it.remove() 将迭代器返回的元素删除</li>
-</ul>
-<h4 id="获取迭代器">获取迭代器</h4>
-<p><code>iterator()</code>方法</p>
-<h4 id="循环集合元素">循环集合元素</h4>
-<pre><code class="language-java">while(it.hasNext()) {
-    System.out.println(it.next());
-}
-</code></pre>
-<h4 id="删除集合元素">删除集合元素</h4>
-<p><code>remove()</code>方法</p>
-<p>eg:</p>
-<pre><code class="language-java">import java.util.ArrayList;
-import java.util.Iterator;
-
-public class RunoobTest {
-    public static void main(String[] args) {
-        ArrayList&lt;Integer&gt; numbers = new ArrayList&lt;Integer&gt;();
-        numbers.add(12);
-        numbers.add(8);
-        numbers.add(2);
-        numbers.add(23);
-        Iterator&lt;Integer&gt; it = numbers.iterator();
-        while(it.hasNext()) {
-            Integer i = it.next();
-            if(i &lt; 10) {  
-                it.remove();  // 删除小于 10 的元素
-            }
-        }
-        System.out.println(numbers);
-    }
-}
-
-// [12, 23]
-</code></pre>
-<h4 id="遍历arraylist">遍历ArrayList</h4>
-<pre><code class="language-java">import java.util.*;
- 
-public class Test{
-    public static void main(String[] args) {
-        List&lt;String&gt; list=new ArrayList&lt;String&gt;();
-        list.add(&quot;Hello&quot;);
-        list.add(&quot;World&quot;);
-        list.add(&quot;HAHAHAHA&quot;);
-        //第一种遍历方法使用 For-Each 遍历 List
-        for (String str : list) {            //也可以改写 for(int i=0;i&lt;list.size();i++) 这种形式
-            System.out.println(str);
-        }
+    <span class="meta-item">
+      <i class="fa fa-folder-o"></i>
+      <span class="pc-show language" data-lan="category-in">标签:</span>
+       
+      <a href="https://zdblog.top/SLe3AwTIj/">
+        <span>java</span>
+      </a>
+       
+    </span>
+    <span class="post-meta-divider">|</span>
     
-        //第二种遍历，把链表变为数组相关的内容进行遍历
-        String[] strArray=new String[list.size()];
-        list.toArray(strArray);
-        for(int i=0;i&lt;strArray.length;i++) //这里也可以改写为  for(String str:strArray) 这种形式
-        {
-            System.out.println(strArray[i]);
-        }
-        
-        //第三种遍历 使用迭代器进行相关遍历
-        
-        Iterator&lt;String&gt; ite=list.iterator();
-        while(ite.hasNext())//判断下一个元素之后有值
-        {
-            System.out.println(ite.next());
-        }
-    }
-}
-</code></pre>
-<h4 id="遍历map">遍历Map</h4>
-<pre><code class="language-java">import java.util.*;
- 
-public class Test{
-    public static void main(String[] args) {
-        Map&lt;String, String&gt; map = new HashMap&lt;String, String&gt;();
-        map.put(&quot;1&quot;, &quot;value1&quot;);
-        map.put(&quot;2&quot;, &quot;value2&quot;);
-        map.put(&quot;3&quot;, &quot;value3&quot;);
-        
-        //第一种：普遍使用，二次取值
-        System.out.println(&quot;通过Map.keySet遍历key和value：&quot;);
-        for (String key : map.keySet()) {
-        System.out.println(&quot;key= &quot;+ key + &quot; and value= &quot; + map.get(key));
-        }
-        
-        //第二种
-        System.out.println(&quot;通过Map.entrySet使用iterator遍历key和value：&quot;);
-        Iterator&lt;Map.Entry&lt;String, String&gt;&gt; it = map.entrySet().iterator();
-        while (it.hasNext()) {
-        Map.Entry&lt;String, String&gt; entry = it.next();
-        System.out.println(&quot;key= &quot; + entry.getKey() + &quot; and value= &quot; + entry.getValue());
-        }
-        
-        //第三种：推荐，尤其是容量大时
-        System.out.println(&quot;通过Map.entrySet遍历key和value&quot;);
-        for (Map.Entry&lt;String, String&gt; entry : map.entrySet()) {
-        System.out.println(&quot;key= &quot; + entry.getKey() + &quot; and value= &quot; + entry.getValue());
-        }
-        
-        //第四种
-        System.out.println(&quot;通过Map.values()遍历所有的value，但不能遍历key&quot;);
-        for (String v : map.values()) {
-        System.out.println(&quot;value= &quot; + v);
-        }
-    }
-}
-</code></pre>
-<h3 id="比较器">比较器</h3>
-<p>Comparator接口定义了两个方法：</p>
-<ul>
-<li>compare()</li>
-<li>equals()</li>
-</ul>
-<p><code>int compare(Object obj1, Object obj2)</code></p>
-<hr>
-<h2 id="arraylist-类">ArrayList 类</h2>
-<p>ArrayList类是一个可以动态修改的数组</p>
-<p>继承了AbstractList，并实现了List接口</p>
-<p><code>ArrayList&lt;E&gt; objectName =new ArrayList&lt;&gt;();　 // 初始化</code></p>
-<p>ArrayList常用方法：</p>
-<figure data-type="image" tabindex="11"><img src="https://s2.loli.net/2022/03/13/6QiPYmqj2pxoAeG.png" alt="ArrayList常用方法.png" loading="lazy"></figure>
-<hr>
-<h2 id="linkedlist-类链表">LinkedList 类（链表）</h2>
-<p>链表是一种线性表，在每个节点里存放下一节点的地址</p>
-<p>可分为<code>单链表</code>和<code>双链表</code></p>
-<p>单链表包含当前结点的值和指向后节点的链接两个值</p>
-<p>双链表多了向后结点的链接</p>
-<p>与 ArrayList 相比，LinkedList 的增加和删除的操作效率更高，而查找和修改的操作效率较低</p>
-<p>ArrayList：</p>
-<ul>
-<li>频繁访问列表中的某一个元素</li>
-<li>只需要在列表末尾进行添加和删除元素操作</li>
-</ul>
-<p>LinkedList：</p>
-<ul>
-<li>需要通过循环迭代来访问列表中的某些元素</li>
-<li>需要频繁的在列表开头、中间、末尾等位置进行添加和删除元素操作</li>
-</ul>
-<p>LinkedList 继承了 AbstractSequentialList 类</p>
-<p>LinkedList 实现了 Queue 接口，可作为队列使用</p>
-<p>LinkedList 实现了 List 接口，可进行列表的相关操作</p>
-<p>LinkedList 实现了 Deque 接口，可作为队列使用</p>
-<p>LinkedList 实现了 Cloneable 接口，可实现克隆</p>
-<p>LinkedList 实现了 java.io.Serializable 接口，即可支持序列化，能通过序列化去传输</p>
-<pre><code class="language-java">LinkedList&lt;E&gt; list = new LinkedList&lt;E&gt;();   // 普通创建方法
-或者
-LinkedList&lt;E&gt; list = new LinkedList(Collection&lt;? extends E&gt; c); // 使用集合创建链表
-</code></pre>
-<figure data-type="image" tabindex="12"><img src="https://s2.loli.net/2022/03/13/TvVpFPnZl87XC1w.png" alt="LinkedList常用方法.png" loading="lazy"></figure>
-<hr>
-<h2 id="hashset">HashSet</h2>
-<p>HashSet是一个不允许有重复元素的集合，允许有null值</p>
-<p>无序的</p>
-<p>非线程安全</p>
-<p>实现了Set接口</p>
-<p><code>HashSet&lt;String&gt; sites = new HashSet&lt;String&gt;();</code></p>
-<figure data-type="image" tabindex="13"><img src="https://s2.loli.net/2022/03/13/32voSbfi9wck5dR.png" alt="HashSet方法.png" loading="lazy"></figure>
-<hr>
-<h2 id="hashmap">HashMap</h2>
-<p>HashMap是一个散列表，存储了键值对的映射</p>
-<p>实现了Map接口</p>
-<p>最多允许一条记录的键位null，不支持线程同步</p>
-<p>无序的</p>
-<p>继承了AbstractMap，实现了Map、Cloneable、java.io.Serializable接口</p>
-<p>HashMap的key与value的类型可以不同</p>
-<p><code>HashMap&lt;Integer, String&gt; Sites = new HashMap&lt;Integer, String&gt;();</code></p>
-<figure data-type="image" tabindex="14"><img src="https://s2.loli.net/2022/03/14/QULCFrKElsuIfX8.png" alt="HashMap方法.png" loading="lazy"></figure>
-<hr>
+    <span class="meta-item">
+      <i class="fa fa-clock-o"></i>
+      <span
+        >20<span class="language" data-lan="minute"
+          >分钟</span
+        ></span
+      >
+    </span>
+    <span class="meta-item">
+      <span class="post-meta-divider">|</span>
+      <i class="fa fa-file-word-o"></i>
+      <span
+        >4798<span class="pc-show language" data-lan="words"
+          >字数</span
+        ></span
+      >
+    </span>
+    
+  </div>
+</section>
 
-            </div>
+      <div class="post-body">
+        
+        
+          
+            <!-- 没有手动摘要切开启了自动摘要,则根据配置筛除摘要内容 -->
             
             
-              <div class="post-footer">
-  <ul class="post-copyright">
-    <li class="post-copyright-author">
-      <strong class="language" data-lan="author">本文作者：</strong>
-      zd
-    </li>
-    <li class="post-copyright-link">
-      <strong class="language" data-lan="link">本文链接：</strong>
-      <a href="https://zdblog.top/shu-ju-jie-gou/" title="数据结构">https://zdblog.top/shu-ju-jie-gou/</a>
-    </li>
-    <li class="post-copyright-license">
-      <strong class="language" data-lan="copyright">版权声明： </strong>
-      本博客所有文章除特别声明外，均采用<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i> BY-NC-SA</a> 许可协议。转载请注明出处！
-    </li>
+              
+              
+              
+            
+              
+              
+              
+            
+              
+              
+              
+            
+            
+              <p><h2 id="java基础语法">Java基础语法</h2>
+<p>Java语言是面向对象的</p>
+<p>先介绍下类、对象、方法和实例变量的概念</p>
+
+                
+              <p>
+            
+          
+        
+        
+        <div class="post-button text-center">
+          <a class="btn language" data-lan="read-more" href="https://zdblog.top/ji-chu-yu-fa/" rel="contents">
+            阅读全文 »
+          </a>
+        </div>
+        
+      </div>
+      
+    </div>
+  </article>
+  
+            
+            
+<div class="page bg-color">
+  <ul class="pagination-ul">
+    
+      <li class="pagination-dir">
+        <a href="https://zdblog.top/">
+          <i class="fa fa-angle-left"></i>
+        </a>
+      </li>
+    
+    
+      
+        <li class="pagination-li ">
+            <a href="/page/../">
+              1
+            </a>
+        </li>
+      
+        <li class="pagination-li pagination-active">
+            <a href="/page/2">
+              2
+            </a>
+        </li>
+      
+    
+    
   </ul>
-  <div class="tags">
-    
-  </div>
-  <div class="nav">
-    <div class="nav-prev">
-      
-        <i class="fa fa-chevron-left"></i>
-        <a class="nav-pc-next" title="MySQL_01_mysql操作" href="https://zdblog.top/XjkFHqdpf/">MySQL_01_mysql操作</a class="nav-pc-next">
-        <a class="nav-mobile-prev" title="MySQL_01_mysql操作" href="https://zdblog.top/XjkFHqdpf/">上一篇</a>
-      
-    </div>
-    <div class="nav-next">
-      
-        <a class="nav-pc-next" title="面向对象" href="https://zdblog.top/mian-xiang-dui-xiang/">面向对象</a>
-        <a class="nav-mobile-next" title="面向对象" href="https://zdblog.top/mian-xiang-dui-xiang/">下一篇</a>
-        <i class="fa fa-chevron-right"></i>
-      
-    </div>
-  </div>
 </div>
-            
-            
-  <script src="https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js"></script>
-<div id="vcomments" style="padding: 10px 0px 0px 0px"></div>
-
-<style>
-  .v .veditor {
-    min-height: 10rem;
-    background-image: url('');
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: right;
-    background-color: rgba(255, 255, 255, 0);
-    resize: none;
-  }
-
-  .v .vwrap {
-    border: 1px solid #000 !important;
-  }
-
-  .v .vbtn {
-    padding: .4rem 1.2rem !important;
-    border-color: #fff !important;
-    background-color: #49b1f5 !important;
-    color: #fff !important;
-    font-size: .7rem !important;
-  }
-
-  .v .vcards .vcard .vh .vmeta .vat {
-    padding: 0 .8rem !important;
-    border: 1px solid #00c4b6 !important;
-    border-radius: 5px !important;
-    color: #00c4b6 !important;
-  }
-</style>
-<script>
-  new Valine({
-    el: '#vcomments',
-    appId: 'E4xhzIEKDmAtoVnapYU5F67t-gzGzoHsz',
-    appKey: 'Q1txwwJSaEmLcu4Oo8cHshbP',
-    avatar: '',
-    placeholder: '',
-    pageSize: '',
-    lang: 'zh-cn',
-    enableQQ: 'true' === 'true',
-    visitor: 'true' === 'true',
-    highlight: 'true' === 'true',
-    avatarForce: 'true' === 'false',
-  });
-</script>
-
-          </div>
+          </section>
         </div>
       </div>
     </div>
@@ -1432,223 +827,6 @@ LinkedList&lt;E&gt; list = new LinkedList(Collection&lt;? extends E&gt; c); // �
     parent.insertBefore(aelem, next);
   });
 </script>
-    <div class="reward-mask" style="display: none;">
-  <div class="reward-relative">
-    <span class="close" aria-hidden="true">x</span>
-    <div class="reward-body">
-      <h2>感谢您的支持，我会继续努力的!</h2>
-      <div class="reward-img-box">
-        <div style="position: relative; width: 140px; height: 140px;">
-          
-          
-          
-        </div>
-      </div>
-      <p class="reward-word">扫码打赏，你说多少就多少</p>
-      <p class="reward-tip"> </p>
-    </div>
-    <div class="bottom">
-      
-      
-    </div>
-  </div>
-</div>
-<style>
-  .reward-mask {
-    position: fixed;
-    z-index: 99999;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background-color: #00000054;
-  }
-
-  .reward-relative {
-    position: relative;
-    width: 480px;
-    text-align: center;
-    margin: 0 auto;
-    border-radius: 5px;
-    background-color: #fff;
-    top: 50%;
-    margin-top: -205px;
-  }
-
-  .reward-relative .close {
-    position: absolute;
-    right: 10px;
-    font-weight: normal;
-    font-size: 16px;
-    color: #929292;
-  }
-
-  .reward-body {
-    padding: 40px 20px 20px;
-  }
-
-  .bottom {
-    display: flex;
-  }
-
-  .reward-btn {
-    text-align: center;
-  }
-
-  .reward-btn-text {
-    display: inline-block;
-    cursor: pointer;
-    width: 60px;
-    height: 60px;
-    line-height: 60px;
-    border-radius: 50%;
-    background-color: #ff9734;
-    color: #FFF;
-    margin-top: 20px;
-  }
-
-  .pay-text {
-    margin-top: 10px;
-    padding: 10px;
-    flex: 1;
-    transition: all .2s linear;
-  }
-
-  .pay-text:hover {
-    background-color: #a5a5a536;
-  }
-
-  .reward-body h2 {
-    padding-top: 10px;
-    text-align: center;
-    color: #a3a3a3;
-    font-size: 16px;
-    font-weight: normal;
-    margin: 0 0 20px;
-  }
-
-  .reward-body h2:after,
-  .reward-body h2:before {
-    font-family: Arial, Helvetica, sans-serif;
-    background: 0 0;
-    width: 0;
-    height: 0;
-    font-style: normal;
-    color: #eee;
-    font-size: 80px;
-    position: absolute;
-    top: 20px;
-  }
-
-  .reward-body h2:before {
-    content: '\201c';
-    left: 50px;
-  }
-
-  .reward-body h2:after {
-    content: '\201d';
-    right: 80px;
-  }
-
-  .reward-img-box {
-    display: inline-block;
-    padding: 10px;
-    border: 6px solid #ea5f00;
-    margin: 0 auto;
-    border-radius: 3px;
-    position: relative;
-  }
-
-  .reward-img {
-    position: absolute;
-    left: 0px;
-    top: 0px;
-    width: 100%;
-    height: 100%;
-  }
-
-  @media (max-width: 767px) {
-    .reward-relative {
-      height: 100%;
-      top: 0px;
-      margin-top: 0;
-      width: auto;
-    }
-
-    .reward-relative .bottom {
-      flex-direction: column;
-    }
-
-    .reward-relative .pay-text {
-      width: 80%;
-      margin: 5px auto;
-      border: 1px solid silver;
-      padding: 6px;
-      border-radius: 4px;
-    }
-
-    .reward-body h2:after {
-      right: 40px;
-    }
-
-    .reward-body h2:after,
-    .reward-body h2:before {
-      font-size: 60px;
-    }
-
-    .reward-body h2:before {
-      left: 20px;
-    }
-  }
-</style>
-<script>
-  !function () {
-    var mask = document.querySelector('.reward-mask');
-    let close = document.querySelector('.reward-relative .close');
-    let rewardBtn = document.querySelector('.reward-btn');
-
-    let zfb = document.querySelector('#zfb'),
-      wx = document.querySelector('#wx'),
-      zfbBtn = document.querySelector('#zfbBtn'),
-      wxBtn = document.querySelector('#wxBtn');
-
-    if (zfbBtn && wxBtn) {
-      zfbBtn.addEventListener('click', () => {
-        jQuery.Velocity(zfb, 'transition.slideLeftIn', {
-          duration: 400
-        });
-        jQuery.Velocity(wx, 'transition.slideRightOut', {
-          display: 'none',
-          duration: 400
-        });
-      });
-
-      wxBtn.addEventListener('click', () => {
-        jQuery.Velocity(wx, 'transition.slideRightIn', {
-          duration: 400
-        });
-        jQuery.Velocity(zfb, 'transition.slideLeftOut', {
-          display: 'none',
-          duration: 400
-        });
-      });
-    }
-
-    rewardBtn.addEventListener('click', (e) => {
-      jQuery.Velocity(mask, 'transition.slideDownIn', {
-        duration: 400
-      })
-    });
-
-    close.addEventListener('click', (e) => {
-      e.preventDefault();
-      jQuery.Velocity(mask, 'transition.slideUpOut', {
-        duration: 400
-      })
-    })
-  }()
-</script>
-
   </div>
 </body>
 
@@ -6436,5 +5614,6 @@ public class ExcepTest{
 
   <div class="snow-container"></div>
   <script color="0,205,205" pointer-events="auto" zIndex="-1" opacity='0.7' count="99" src="/media/js/bg/canvas-nest.js"></script>
+
 
 </html>

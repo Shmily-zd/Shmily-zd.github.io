@@ -2071,7 +2071,7 @@ p > code {
       border-bottom-color: #555;
     }
     .archive-timeline-box::after, .tag-timeline-wrapper::after {
-      background: #ced4dacc;
+      background: #ced4dad8;
     }h1, h2, h3, h4, h5, h6 {
       color: #555;
     }
@@ -2117,11 +2117,11 @@ p > code {
       }.nav-item a:hover {
         color: #ffa8a8;
       }.nav-item-active {
-      background: #fff5f5cc;
+      background: #fff5f5d8;
     }
 
     .nav-item:hover {
-      background: #fff5f5cc;
+      background: #fff5f5d8;
       color: rgba(0, 0, 0, 0.98);
     }.site-author-image {
       border-radius: 50%;
@@ -2157,13 +2157,13 @@ p > code {
       color: #ffc9c9;
       border-bottom-color: #ffc9c9;
     }.bg-color {
-      background-color: #f1f3f5cc;
+      background-color: #f1f3f5d8;
     }
     .gemini .blog-header, .gemini .sidebar-wrapper, .gemini .article-wrapper, .gemini .post, .gemini .page, .gemini .section, .gemini .section-box, .gemini .sidebar-box, .gemini .friends-section {
-      border-radius: 4px;
+      border-radius: 3px;
     }
     .pisces .blog-header, .pisces .sidebar-wrapper, .pisces .article-wrapper, .pisces .section, .pisces .sidebar-box, .pisces .friends-section {
-      border-radius: 4px;
+      border-radius: 3px;
     }
     .site-meta {
       background: #868e96 !important;
@@ -2178,7 +2178,7 @@ p > code {
       color: #FFF !important;
     }
     .mist .site-title i {
-      background: #FFFFFFcc;
+      background: #FFFFFFd8;
     }.box-shadow-wrapper {
       box-shadow: none !important;
     }body {

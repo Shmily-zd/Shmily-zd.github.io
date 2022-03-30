@@ -8,7 +8,7 @@
 <meta name="keywords" content="Gridea静态个人博客">
 <meta name="description" content="1">
 <meta name="theme-color" content="#868e96">
-<title>数据结构 | zd_blog</title>
+<title>MySQL_02_mysql数据管理 | zd_blog</title>
 <link rel="shortcut icon" href="/favicon.ico?v=1648647335749">
 <link rel="stylesheet" href="/media/css/gemini.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
@@ -41,8 +41,8 @@
 
 
 
-  <meta name="description" content="数据结构" />
-  <meta name="keywords" content="" />
+  <meta name="description" content="MySQL_02_mysql数据管理" />
+  <meta name="keywords" content="MySQL" />
 </head>
 
 <body>
@@ -213,37 +213,31 @@
     <ul class="markdownIt-TOC">
 <li>
 <ul>
-<li><a href="#%E6%9E%9A%E4%B8%BEenumeration">枚举(Enumeration)</a></li>
-<li><a href="#%E4%BD%8D%E9%9B%86%E5%90%88bitset">位集合(BitSet)</a></li>
-<li><a href="#%E5%90%91%E9%87%8Fvector">向量(Vector)</a></li>
-<li><a href="#%E6%A0%88stack">栈(Stack)</a></li>
-<li><a href="#%E5%AD%97%E5%85%B8dictionary">字典(Dictionary)</a>
+<li><a href="#1-%E5%A4%96%E9%94%AE%E4%BA%86%E8%A7%A3">1. 外键（了解）</a>
 <ul>
-<li><a href="#map%E6%8E%A5%E5%8F%A3">Map接口</a></li>
+<li><a href="#%E6%96%B9%E5%BC%8F%E4%B8%80%E5%9C%A8%E5%88%9B%E5%BB%BA%E8%A1%A8%E7%9A%84%E6%97%B6%E5%80%99%E5%A2%9E%E5%8A%A0%E5%A4%96%E9%94%AE%E7%BA%A6%E6%9D%9F">方式一：在创建表的时候，增加外键约束</a></li>
+<li><a href="#%E6%96%B9%E5%BC%8F%E4%BA%8C%E5%88%9B%E5%BB%BA%E8%A1%A8%E5%90%8E%E6%B7%BB%E5%8A%A0%E5%A4%96%E9%94%AE%E7%BA%A6%E6%9D%9F">方式二：创建表后，添加外键约束</a></li>
 </ul>
 </li>
-<li><a href="#%E5%93%88%E5%B8%8C%E8%A1%A8hashtable">哈希表(Hashtable)</a></li>
-<li><a href="#%E5%B1%9E%E6%80%A7properties">属性(Properties)</a></li>
-<li><a href="#%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6">集合框架</a>
+<li><a href="#2-dml%E8%AF%AD%E8%A8%80">2. DML语言</a></li>
+<li><a href="#3-%E6%8F%92%E5%85%A5%E6%95%B0%E6%8D%AEinsert">3. 插入数据（Insert）</a>
 <ul>
-<li><a href="#%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6%E6%8E%A5%E5%8F%A3">集合框架接口：</a></li>
-<li><a href="#%E9%9B%86%E5%90%88%E5%AE%9E%E7%8E%B0%E7%B1%BB%E9%9B%86%E5%90%88%E7%B1%BB">集合实现类（集合类）</a></li>
-<li><a href="#%E8%BF%AD%E4%BB%A3%E5%99%A8iterator">迭代器(Iterator)</a>
-<ul>
-<li><a href="#%E8%8E%B7%E5%8F%96%E8%BF%AD%E4%BB%A3%E5%99%A8">获取迭代器</a></li>
-<li><a href="#%E5%BE%AA%E7%8E%AF%E9%9B%86%E5%90%88%E5%85%83%E7%B4%A0">循环集合元素</a></li>
-<li><a href="#%E5%88%A0%E9%99%A4%E9%9B%86%E5%90%88%E5%85%83%E7%B4%A0">删除集合元素</a></li>
-<li><a href="#%E9%81%8D%E5%8E%86arraylist">遍历ArrayList</a></li>
-<li><a href="#%E9%81%8D%E5%8E%86map">遍历Map</a></li>
+<li><a href="#%E6%8F%92%E5%85%A5%E8%AF%AD%E5%8F%A5%E6%B7%BB%E5%8A%A0">插入语句（添加）</a></li>
+<li><a href="#%E6%8F%92%E5%85%A5%E5%A4%9A%E4%B8%AA%E6%95%B0%E6%8D%AE">插入多个数据</a></li>
 </ul>
 </li>
-<li><a href="#%E6%AF%94%E8%BE%83%E5%99%A8">比较器</a></li>
+<li><a href="#4-%E4%BF%AE%E6%94%B9%E6%95%B0%E6%8D%AEupdate">4. 修改数据(update)</a></li>
+<li><a href="#5-%E5%88%A0%E9%99%A4%E6%95%B0%E6%8D%AE">5. 删除数据</a>
+<ul>
+<li><a href="#delete%E5%91%BD%E4%BB%A4">delete命令</a></li>
+<li><a href="#truncate%E5%91%BD%E4%BB%A4">truncate命令</a></li>
 </ul>
 </li>
-<li><a href="#arraylist-%E7%B1%BB">ArrayList 类</a></li>
-<li><a href="#linkedlist-%E7%B1%BB%E9%93%BE%E8%A1%A8">LinkedList 类（链表）</a></li>
-<li><a href="#hashset">HashSet</a></li>
-<li><a href="#hashmap">HashMap</a></li>
+<li><a href="#%E5%AD%90%E5%8F%A5">子句</a>
+<ul>
+<li><a href="#where%E5%AD%90%E5%8F%A5">WHERE子句</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -511,21 +505,32 @@
           <div class="section bg-color post post-page">
             <section class="post-header">
   <h1 class="post-title">
-    <a class="post-title-link" href="https://zdblog.top/shu-ju-jie-gou/"> 数据结构 </a>
+    <a class="post-title-link" href="https://zdblog.top/9N5dMuR4p/"> MySQL_02_mysql数据管理 </a>
   </h1>
   <div class="post-meta">
     
     <span class="meta-item pc-show">
       <i class="fa fa-calendar-o"></i>
       <span class="language" data-lan="publish">发布于</span>
-      <span class="publish-time" data-t="2022-03-15 13:47:00">2022-03-15</span>
+      <span class="publish-time" data-t="2022-03-30 21:26:26">2022-03-30</span>
       <span class="post-meta-divider pc-show">|</span>
     </span>
     
     <span class="meta-item">
+      <i class="fa fa-folder-o"></i>
+      <span class="pc-show language" data-lan="category-in">标签:</span>
+       
+      <a href="https://zdblog.top/MySQL/">
+        <span>MySQL</span>
+      </a>
+       
+    </span>
+    <span class="post-meta-divider">|</span>
+    
+    <span class="meta-item">
       <i class="fa fa-clock-o"></i>
       <span
-        >16<span class="language" data-lan="minute"
+        >4<span class="language" data-lan="minute"
           >分钟</span
         ></span
       >
@@ -534,15 +539,15 @@
       <span class="post-meta-divider">|</span>
       <i class="fa fa-file-word-o"></i>
       <span
-        >3237<span class="pc-show language" data-lan="words"
+        >918<span class="pc-show language" data-lan="words"
           >字数</span
         ></span
       >
     </span>
       
     <span
-      id="/shu-ju-jie-gou/"
-      data-flag-title="数据结构"
+      id="/9N5dMuR4p/"
+      data-flag-title="MySQL_02_mysql数据管理"
       class="meta-item pc-show leancloud_visitors"
     >
       <span class="post-meta-divider">|</span>
@@ -558,538 +563,174 @@
 </section>
 
             <div class="post-body next-md-body" id="post_body">
-              <h2 id="枚举enumeration">枚举(Enumeration)</h2>
-<p>枚举接口本身不属于数据结构</p>
-<p>枚举接口定义了一种从数据结构中取回连续元素的方法</p>
-<p>已被迭代器取代</p>
-<p>Enumeration声明的方法：</p>
+              <h2 id="1-外键了解">1. 外键（了解）</h2>
+<h3 id="方式一在创建表的时候增加外键约束">方式一：在创建表的时候，增加外键约束</h3>
+<pre><code class="language-sql">-- 学生表students的 gradeid 字段要去引用年级表的 gradeid 字段
+
+CREATE TABLE IF NOT EXISTS `students`(
+    `id` INT(4) NOT NULL AUTO_INCREMENT COMMENT '学号',
+    `name` VARCHAR(30) NOT NULL DEFAULT '匿名' COMMENT '姓名',
+    `password` VARCHAR(10) NOT NULL DEFAULT '123456' COMMENT '密码',
+    `sex` VARCHAR(2) NOT NULL DEFAULT '女' COMMENT '性别',
+    `birthday` DATETIME DEFAULT NULL COMMENT '出生日期',
+    `gradeid` INT(10) NOT NULL COMMENT '学生的年纪',
+    `address` VARCHAR(110) DEFAULT NULL COMMENT '家庭地址',
+    `email` VARCHAR(50) DEFAULT NULL COMMENT '电子邮箱',
+    PRIMARY KEY(`id`),
+    KEY `FK_gradeid`(`gradeid`),    -- 定义外键key
+    CONSTRAINT `FK_gradeid` FOREIGN KEY(`gradeid`) REFERENCES `grade`(`gradeid`)    -- 给这个外键添加约束（执行引用）  references引用
+)ENGINE = INNODB DEFAULT CHARSET = utf8;
+
+CREATE TABLE IF NOT EXISTS `grade`(
+    `gradeid` INT(10) NOT NULL AUTO_INCREMENT COMMENT '年级id',
+    `gradename` VARCHAR(50) NOT NULL COMMENT '年级名称',
+    PRIMARY KEY(`gradeid`)
+)ENGINE = INNODB DEFAULT CHARSET = utf8;
+</code></pre>
+<h3 id="方式二创建表后添加外键约束">方式二：创建表后，添加外键约束</h3>
+<pre><code class="language-sql">-- ALTER TABLE `表名` ADD CONSTRAINT `约束名` FOREIGN KEY (`作为外键的字段`) REFERENCES `哪个表` (`哪个字段`);
+
+ALTER TABLE `students` ADD CONSTRAINT `FK_gradeid` FOREIGN KEY (`gradeid`) REFERENCES `grade` (`gradeid`);
+</code></pre>
+<p>删除有外键关系的表，必须先删除引用的表（从表），在删除被引用的表（主表）</p>
+<p>以上操作都是物理外键，数据库级别的外键，不建议使用</p>
+<p>最佳实践：</p>
+<ul>
+<li>数据库就当作单纯的表，只用来存数据，只有行（数据）和列（字段）</li>
+<li>用程序（应用层）去实现多张表的使用、外键</li>
+</ul>
+<hr>
+<h2 id="2-dml语言">2. DML语言</h2>
+<p>数据库意义：数据存储和数据管理</p>
+<p>DML语言：数据操作语言</p>
+<ul>
+<li>Insert</li>
+<li>update</li>
+<li>delete</li>
+</ul>
+<hr>
+<h2 id="3-插入数据insert">3. 插入数据（Insert）</h2>
+<h3 id="插入语句添加">插入语句（添加）</h3>
+<p><code>INSERT INTO</code>表名<code>([</code>字段1<code>,</code>字段2<code>,</code>字段3<code>,...]) VALUES (值1,值2,值3,...);</code></p>
+<p><code>INSERT INTO</code>grade<code>(</code>gradename<code>) VALUES ('大四');</code></p>
+<p>主键自增可以省略</p>
+<p>如果不写表的字段，会一一匹配</p>
+<h3 id="插入多个数据">插入多个数据</h3>
+<p>INSERT INTO <code>grade</code>(<code>gradename</code>) VALUES ('大四'),('大三');</p>
+<p>注意：</p>
+<ul>
+<li>字段可以省略，后面的值必须一一对应</li>
+<li>可以同时插入多条数据<code>VALUES (),(),...</code></li>
+</ul>
+<hr>
+<h2 id="4-修改数据update">4. 修改数据(update)</h2>
+<pre><code class="language-sql">-- 修改一行数据的一个字段
+UPDATE `students` SET `name` = 'zd' WHERE id = 2;
+
+-- 修改一行的多个字段
+UPDATE `students` SET `name` = 'aaa', `password` = '1223434' WHERE id = 2;
+
+-- 通过多个条件定位数据
+UPDATE `students` SET `name` = 'aaa' WHERE id = 2 AND `sex` = '男';
+
+-- 格式：
+UPDATE `table_name` SET `colnum_name` = new_value[, `colnum_name1 = new_value1...]  [WHERE 子句];
+
+-- 不带[WHERE 子句]修改表中所有该字段
+UPDATE `students` SET `name` = 'aaa';
+</code></pre>
+<p>格式：</p>
+<pre><code class="language-sql">UPDATE `table_name` SET `colnum_name` = new_value[, `colnum_name1 = new_value1...]  [WHERE 子句];
+</code></pre>
+<ul>
+<li>WHERE 子句，筛选的条件</li>
+<li>new_value，可以是设置具体的值，也可以是一个变量如 CURRENT_TIME</li>
+</ul>
+<hr>
+<h2 id="5-删除数据">5. 删除数据</h2>
+<h3 id="delete命令">delete命令</h3>
+<p>格式：</p>
+<pre><code class="language-sql">DELETE FROM `table_name` [WHERE 子句];
+</code></pre>
+<p>不带[WHERE 子句]会把对应表数据全部删除</p>
+<h3 id="truncate命令">truncate命令</h3>
+<p>作用：完全清空一个数据库表，标的结构和索引约束不会变</p>
+<pre><code class="language-sql">TRUNCATE [TABLE] `table_name`;
+</code></pre>
+<p>delete 和 truncate 的异同:</p>
+<ul>
+<li>相同点：都能删除数据，不会删除表结构</li>
+<li>不同点：
+<ul>
+<li>truncate 会重新设置自增列，计数器归零，delete不会</li>
+<li>truncate 不会影响事务</li>
+</ul>
+</li>
+</ul>
+<p>DELETE删除的问题，<strong>重启数据库</strong>，现象：</p>
+<ul>
+<li>InnoDB：自增列会重新从1开始（存在在内存当中，断电即失）</li>
+<li>MyISAM：自增列从上一个自增量开始（存在在文件中，不会丢失）</li>
+</ul>
+<hr>
+<h2 id="子句">子句</h2>
+<h3 id="where子句">WHERE子句</h3>
 <table>
 <thead>
 <tr>
-<th style="text-align:left">方法</th>
-<th style="text-align:left">描述</th>
+<th style="text-align:left">操作符</th>
+<th style="text-align:left">含义</th>
+<th style="text-align:left">实例(A=2,B=4,C=5)</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left">boolean hasMoreElements()</td>
-<td style="text-align:left">测试此枚举是否包含更多的元素</td>
+<td style="text-align:left">=</td>
+<td style="text-align:left">等于，相等返回true</td>
+<td style="text-align:left">A=B,false</td>
 </tr>
 <tr>
-<td style="text-align:left">Object nextElements()</td>
-<td style="text-align:left">如果此枚举对象至少还有一个可提供的元素，则返回此枚举的下一个元素</td>
+<td style="text-align:left">&lt;&gt; 或 !=</td>
+<td style="text-align:left">不等于，不等返回true</td>
+<td style="text-align:left">A!=B,true</td>
+</tr>
+<tr>
+<td style="text-align:left">&gt;</td>
+<td style="text-align:left">大于</td>
+<td style="text-align:left">A&gt;B,false</td>
+</tr>
+<tr>
+<td style="text-align:left">&lt;</td>
+<td style="text-align:left">小于</td>
+<td style="text-align:left">A&lt;B,false</td>
+</tr>
+<tr>
+<td style="text-align:left">&gt;=</td>
+<td style="text-align:left">大于等于</td>
+<td style="text-align:left">A&gt;=B,false</td>
+</tr>
+<tr>
+<td style="text-align:left">&lt;=</td>
+<td style="text-align:left">小于等于</td>
+<td style="text-align:left">A&lt;=B,true</td>
+</tr>
+<tr>
+<td style="text-align:left">BETWEEN...AND...</td>
+<td style="text-align:left">范围内，闭区间</td>
+<td style="text-align:left">BETWEEN A AND B,[2,4]</td>
+</tr>
+<tr>
+<td style="text-align:left">AND</td>
+<td style="text-align:left">与，多个条件同时成立返回true</td>
+<td style="text-align:left">A&lt;B AND B&lt;C,true</td>
+</tr>
+<tr>
+<td style="text-align:left">OR</td>
+<td style="text-align:left">或，多个条件成立一个返回true</td>
+<td style="text-align:left">A&gt;B OR A&lt;C,true</td>
 </tr>
 </tbody>
 </table>
-<p>eg:</p>
-<pre><code class="language-java">import java.util.Vector;
-import java.util.Enumeration;
- 
-public class EnumerationTester {
- 
-   public static void main(String args[]) {
-      Enumeration&lt;String&gt; days;
-      Vector&lt;String&gt; dayNames = new Vector&lt;String&gt;();
-      dayNames.add(&quot;Sunday&quot;);
-      dayNames.add(&quot;Monday&quot;);
-      dayNames.add(&quot;Tuesday&quot;);
-      dayNames.add(&quot;Wednesday&quot;);
-      dayNames.add(&quot;Thursday&quot;);
-      dayNames.add(&quot;Friday&quot;);
-      dayNames.add(&quot;Saturday&quot;);
-      days = dayNames.elements();
-      while (days.hasMoreElements()){
-         System.out.println(days.nextElement()); 
-      }
-   }
-}
-</code></pre>
-<hr>
-<h2 id="位集合bitset">位集合(BitSet)</h2>
-<p>该集合类实现了一组可以反赌设置和清除的位或是标志</p>
-<p>构造方法：</p>
-<ul>
-<li>Bitset(): 创建一个默认对象</li>
-<li>BitSet(int size): 指定初始大小，所有位初始为0</li>
-</ul>
-<p>BitSet中实现了Cloneable接口中定义的方法如下表所列：</p>
-<figure data-type="image" tabindex="1"><img src="https://s2.loli.net/2022/03/13/Opdi1H87kYStvF5.png" alt="bitset方法.png" loading="lazy"></figure>
-<p>eg:</p>
-<pre><code class="language-java">import java.util.BitSet;
- 
-public class BitSetDemo {
- 
-  public static void main(String args[]) {
-     BitSet bits1 = new BitSet(16);
-     BitSet bits2 = new BitSet(16);
-      
-     // set some bits
-     for(int i=0; i&lt;16; i++) {
-        if((i%2) == 0) bits1.set(i);
-        if((i%5) != 0) bits2.set(i);
-     }
-     System.out.println(&quot;Initial pattern in bits1: &quot;);
-     System.out.println(bits1);
-     System.out.println(&quot;\nInitial pattern in bits2: &quot;);
-     System.out.println(bits2);
- 
-     // AND bits
-     bits2.and(bits1);
-     System.out.println(&quot;\nbits2 AND bits1: &quot;);
-     System.out.println(bits2);
- 
-     // OR bits
-     bits2.or(bits1);
-     System.out.println(&quot;\nbits2 OR bits1: &quot;);
-     System.out.println(bits2);
- 
-     // XOR bits
-     bits2.xor(bits1);
-     System.out.println(&quot;\nbits2 XOR bits1: &quot;);
-     System.out.println(bits2);
-  }
-}
-</code></pre>
-<hr>
-<h2 id="向量vector">向量(Vector)</h2>
-<p>向量（Vector）类和传统数组非常相似，但是Vector的大小能根据需要动态的变化</p>
-<p>Vector类实现了动态数组</p>
-<p>和ArrayList的区别：</p>
-<ul>
-<li>Vector 是同步访问的</li>
-<li>Vector 包含了许多传统的方法，这些方法不属于集合框架</li>
-</ul>
-<p>构造方法：</p>
-<ul>
-<li>Vector(): 创建默认向量，大小为10</li>
-<li>Vector(int size): 创建指定大小的向量</li>
-<li>Vector(int size, int incr): 创建指定大小和增量的向量</li>
-<li>Vector(Collection c): 创建一个包含集合c元素的向量</li>
-</ul>
-<p>Vector定义的方法：</p>
-<figure data-type="image" tabindex="2"><img src="https://s2.loli.net/2022/03/13/Ix78Va9vgHWzupO.png" alt="vector方法.png" loading="lazy"></figure>
-<pre><code class="language-java">import java.util.*;
-
-public class VectorDemo {
-
-    public static void main(String args[]) {
-        // initial size is 3, increment is 2
-        Vector v = new Vector(3, 2);
-        System.out.println(&quot;Initial size: &quot; + v.size());
-        System.out.println(&quot;Initial capacity: &quot; + v.capacity());
-        v.addElement(new Integer(1));
-        v.addElement(new Integer(2));
-        v.addElement(new Integer(3));
-        v.addElement(new Integer(4));
-        System.out.println(&quot;Capacity after four additions: &quot; + v.capacity());
-
-        v.addElement(new Double(5.45));
-        System.out.println(&quot;Current capacity: &quot; + v.capacity());
-        v.addElement(new Double(6.08));
-        v.addElement(new Integer(7));
-        System.out.println(&quot;Current capacity: &quot; + v.capacity());
-        v.addElement(new Float(9.4));
-        v.addElement(new Integer(10));
-        System.out.println(&quot;Current capacity: &quot; + v.capacity());
-        v.addElement(new Integer(11));
-        v.addElement(new Integer(12));
-        System.out.println(&quot;First element: &quot; + (Integer)v.firstElement());
-        System.out.println(&quot;Last element: &quot; + (Integer)v.lastElement());
-        if(v.contains(new Integer(3)))
-            System.out.println(&quot;Vector contains 3.&quot;);
-        // enumerate the elements in the vector.
-        Enumeration vEnum = v.elements();
-        System.out.println(&quot;\nElements in vector:&quot;);
-        while(vEnum.hasMoreElements())
-            System.out.print(vEnum.nextElement() + &quot; &quot;);
-        System.out.println();
-    }
-}
-</code></pre>
-<hr>
-<h2 id="栈stack">栈(Stack)</h2>
-<p>Stack是Vector的一个子类，实现一个标准的后进先出的栈</p>
-<p>栈只定义了默认构造方法<code>Stack()</code></p>
-<p>栈继承了Vector的所有方法，也自定义了一些方法：</p>
-<figure data-type="image" tabindex="3"><img src="https://s2.loli.net/2022/03/13/hDHF4MXg6wuzA9T.png" alt="Stack方法.png" loading="lazy"></figure>
-<pre><code class="language-java">import java.util.*;
- 
-public class StackDemo {
- 
-    static void showpush(Stack&lt;Integer&gt; st, int a) {
-        st.push(new Integer(a));
-        System.out.println(&quot;push(&quot; + a + &quot;)&quot;);
-        System.out.println(&quot;stack: &quot; + st);
-    }
- 
-    static void showpop(Stack&lt;Integer&gt; st) {
-        System.out.print(&quot;pop -&gt; &quot;);
-        Integer a = (Integer) st.pop();
-        System.out.println(a);
-        System.out.println(&quot;stack: &quot; + st);
-    }
- 
-    public static void main(String args[]) {
-        Stack&lt;Integer&gt; st = new Stack&lt;Integer&gt;();
-        System.out.println(&quot;stack: &quot; + st);
-        showpush(st, 42);
-        showpush(st, 66);
-        showpush(st, 99);
-        showpop(st);
-        showpop(st);
-        showpop(st);
-        try {
-            showpop(st);
-        } catch (EmptyStackException e) {
-            System.out.println(&quot;empty stack&quot;);
-        }
-    }
-}
-
-
-// stack: [ ]
-// push(42)
-// stack: [42]
-// ...
-</code></pre>
-<hr>
-<h2 id="字典dictionary">字典(Dictionary)</h2>
-<p>Dictionary类是一个抽象类，用来存储键值对，作用和实现Map接口相似</p>
-<p>字典已经被实现Map接口取代</p>
-<p>Dictionary类定义的方法：</p>
-<figure data-type="image" tabindex="4"><img src="https://s2.loli.net/2022/03/13/FUGb2d5tAr6OIQo.png" alt="dictionary方法.png" loading="lazy"></figure>
-<h3 id="map接口">Map接口</h3>
-<p>抛出异常：</p>
-<ul>
-<li>给定一个键和一个值，你可以将该值存储在一个 Map 对象。之后，你可以通过键来访问对应的值</li>
-<li>当访问的值不存在的时候，方法就会抛出一个 NoSuchElementException 异常</li>
-<li>当对象的类型和 Map 里元素类型不兼容的时候，就会抛出一个 ClassCastException 异常</li>
-<li>当在不允许使用 Null 对象的 Map 中使用 Null 对象，会抛出一个 NullPointerException 异常</li>
-<li>当尝试修改一个只读的 Map 时，会抛出一个 UnsupportedOperationException 异常</li>
-</ul>
-<p>Map定义的方法：</p>
-<figure data-type="image" tabindex="5"><img src="https://s2.loli.net/2022/03/13/sHt8IeSNJ7AuTGa.png" alt="Map方法.png" loading="lazy"></figure>
-<p>eg：</p>
-<pre><code class="language-java">import java.util.*;
-
-public class CollectionsDemo {
-
-    public static void main(String[] args) {
-        Map m1 = new HashMap(); 
-        m1.put(&quot;Zara&quot;, &quot;8&quot;);
-        m1.put(&quot;Mahnaz&quot;, &quot;31&quot;);
-        m1.put(&quot;Ayan&quot;, &quot;12&quot;);
-        m1.put(&quot;Daisy&quot;, &quot;14&quot;);
-        System.out.println();
-        System.out.println(&quot; Map Elements&quot;);
-        System.out.print(&quot;\t&quot; + m1);
-    }
-}
-
-
-// Map Elements
-//         {Mahnaz=31, Ayan=12, Daisy=14, Zara=8}
-</code></pre>
-<hr>
-<h2 id="哈希表hashtable">哈希表(Hashtable)</h2>
-<p>Hashtable现在集成到了集合框架中，和HashMap类很相似，但支持同步</p>
-<p>Hashtable在哈希表中存储键值对</p>
-<p>当使用一个哈希表时，要指定用作键的对象，以及链接到该键的值</p>
-<p>该键经过哈希处理，所得的散列码被用作存储在该表中值的索引</p>
-<p>Hashtable类定义的构造方法：</p>
-<ul>
-<li>Hashtable()</li>
-<li>Hashtable(int size): 创建指定大小的哈希表</li>
-<li>Hashtable(int size, float fillRation): 创建指定大小和填充比例的哈希表</li>
-<li>Hashtable(Map m): 创建一个以M重元素未初始化元素的哈希表，其容量被设置为M的两倍</li>
-</ul>
-<p>Hashtable除了Map接口中定义的方法，还有自定义了：</p>
-<figure data-type="image" tabindex="6"><img src="https://s2.loli.net/2022/03/13/ol1hWptzTmU3d58.png" alt="hashtable方法.png" loading="lazy"></figure>
-<p>eg:</p>
-<pre><code class="language-java">import java.util.*;
-
-public class HashTableDemo {
-
-   public static void main(String args[]) {
-      // Create a hash map
-      Hashtable balance = new Hashtable();
-      Enumeration names;
-      String str;
-      double bal;
-
-      balance.put(&quot;Zara&quot;, new Double(3434.34));
-      balance.put(&quot;Mahnaz&quot;, new Double(123.22));
-      balance.put(&quot;Ayan&quot;, new Double(1378.00));
-      balance.put(&quot;Daisy&quot;, new Double(99.22));
-      balance.put(&quot;Qadir&quot;, new Double(-19.08));
-
-      // Show all balances in hash table.
-      names = balance.keys();
-      while(names.hasMoreElements()) {
-         str = (String) names.nextElement();
-         System.out.println(str + &quot;: &quot; +
-         balance.get(str));
-      }
-      System.out.println();
-      // Deposit 1,000 into Zara's account
-      bal = ((Double)balance.get(&quot;Zara&quot;)).doubleValue();
-      balance.put(&quot;Zara&quot;, new Double(bal+1000));
-      System.out.println(&quot;Zara's new balance: &quot; +
-      balance.get(&quot;Zara&quot;));
-   }
-}
-
-</code></pre>
-<hr>
-<h2 id="属性properties">属性(Properties)</h2>
-<p>Properties 继承于 Hashtable, Properties 类表示了一个持久的属性集.属性列表中每个键及其对应值都是一个字符串</p>
-<p>Properties 定义如下实例变量.这个变量持有一个 Properties 对象相关的默认属性列表：</p>
-<p><code>Properties defaults;</code></p>
-<p>构造方法：</p>
-<ul>
-<li>Properties()</li>
-<li>Properties(Properties propDefault)   // 两种情况下 ，属性列表都为空</li>
-</ul>
-<p>Properties类除了继承Hashtable中的方法，自定义了：</p>
-<figure data-type="image" tabindex="7"><img src="https://s2.loli.net/2022/03/13/hXfoCp9qtLHmejz.png" alt="properties方法.png" loading="lazy"></figure>
-<p>eg:</p>
-<pre><code class="language-java">import java.util.*;
- 
-public class PropDemo {
- 
-    public static void main(String args[]) {
-        Properties capitals = new Properties();
-        Set states;
-        String str;
-        
-        capitals.put(&quot;Illinois&quot;, &quot;Springfield&quot;);
-        capitals.put(&quot;Missouri&quot;, &quot;Jefferson City&quot;);
-        capitals.put(&quot;Washington&quot;, &quot;Olympia&quot;);
-        capitals.put(&quot;California&quot;, &quot;Sacramento&quot;);
-        capitals.put(&quot;Indiana&quot;, &quot;Indianapolis&quot;);
-    
-        // Show all states and capitals in hashtable.
-        states = capitals.keySet(); // get set-view of keys
-        Iterator itr = states.iterator();
-        while(itr.hasNext()) {
-            str = (String) itr.next();
-            System.out.println(&quot;The capital of &quot; + str + &quot; is &quot; + capitals.getProperty(str) + &quot;.&quot;);
-        }
-        System.out.println();
-    
-        // look for state not in list -- specify default
-        str = capitals.getProperty(&quot;Florida&quot;, &quot;Not Found&quot;);
-        System.out.println(&quot;The capital of Florida is &quot; + str + &quot;.&quot;);
-    }
-}
-</code></pre>
-<hr>
-<p><strong>以上这些类是传统遗留的，后面引入新的框架--集合框架(Collection)</strong></p>
-<hr>
-<h2 id="集合框架">集合框架</h2>
-<p>上述的类缺少一个核心的、统一的主题，不同类的使用方法有着很大的不同</p>
-<p>集合框架的要求：</p>
-<ul>
-<li>该框架必须是高性能的。基本集合（动态数组，链表，树，哈希表）的实现也必须是高效的</li>
-<li>该框架允许不同类型的集合，以类似的方式工作，具有高度的互操作性</li>
-<li>对一个集合的扩展和适应必须是简单的</li>
-</ul>
-<p>所以，集合框架就围绕一组标准接口而设计</p>
-<figure data-type="image" tabindex="8"><img src="https://s2.loli.net/2022/03/13/7WgzAt2Px9dpDJB.png" alt="集合框架图.png" loading="lazy"></figure>
-<p>Java集合框架主要包括两种类型容器：</p>
-<ul>
-<li>集合(Collection)：存储一个元素</li>
-<li>图(Map)：存储键值对映射</li>
-</ul>
-<p>集合框架都包含：</p>
-<ul>
-<li>
-<p>接口：是代表集合的抽象数据类型。例如 Collection、List、Set、Map 等。之所以定义多个接口，是为了以不同的方式操作集合对象</p>
-</li>
-<li>
-<p>实现（类）：是集合接口的具体实现。从本质上讲，它们是可重复使用的数据结构，例如：ArrayList、LinkedList、HashSet、HashMap</p>
-</li>
-<li>
-<p>算法：是实现集合接口的对象里的方法执行的一些有用的计算，例如：搜索和排序。这些算法被称为多态，那是因为相同的方法可以在相似的接口上有着不同的实现</p>
-</li>
-</ul>
-<h3 id="集合框架接口">集合框架接口：</h3>
-<figure data-type="image" tabindex="9"><img src="https://s2.loli.net/2022/03/13/LFs54yEOK3WJMlp.png" alt="集合框架接口.png" loading="lazy"></figure>
-<h3 id="集合实现类集合类">集合实现类（集合类）</h3>
-<figure data-type="image" tabindex="10"><img src="https://s2.loli.net/2022/03/13/of3lVvQ2G6bXen8.png" alt="集合实现类.png" loading="lazy"></figure>
-<h3 id="迭代器iterator">迭代器(Iterator)</h3>
-<p>迭代器是一种访问集合的方法</p>
-<p>Iterator是迭代器最简单的实现，ListIterator是Collection API中的接口，拓展了Iterator接口</p>
-<p><code>import java.util.Iterator; // 引入 Iterator 类</code></p>
-<ul>
-<li>it.next() 会返回迭代器的下一个元素，并且更新迭代器的状态</li>
-<li>it.hasNext() 用于检测集合中是否还有元素</li>
-<li>it.remove() 将迭代器返回的元素删除</li>
-</ul>
-<h4 id="获取迭代器">获取迭代器</h4>
-<p><code>iterator()</code>方法</p>
-<h4 id="循环集合元素">循环集合元素</h4>
-<pre><code class="language-java">while(it.hasNext()) {
-    System.out.println(it.next());
-}
-</code></pre>
-<h4 id="删除集合元素">删除集合元素</h4>
-<p><code>remove()</code>方法</p>
-<p>eg:</p>
-<pre><code class="language-java">import java.util.ArrayList;
-import java.util.Iterator;
-
-public class RunoobTest {
-    public static void main(String[] args) {
-        ArrayList&lt;Integer&gt; numbers = new ArrayList&lt;Integer&gt;();
-        numbers.add(12);
-        numbers.add(8);
-        numbers.add(2);
-        numbers.add(23);
-        Iterator&lt;Integer&gt; it = numbers.iterator();
-        while(it.hasNext()) {
-            Integer i = it.next();
-            if(i &lt; 10) {  
-                it.remove();  // 删除小于 10 的元素
-            }
-        }
-        System.out.println(numbers);
-    }
-}
-
-// [12, 23]
-</code></pre>
-<h4 id="遍历arraylist">遍历ArrayList</h4>
-<pre><code class="language-java">import java.util.*;
- 
-public class Test{
-    public static void main(String[] args) {
-        List&lt;String&gt; list=new ArrayList&lt;String&gt;();
-        list.add(&quot;Hello&quot;);
-        list.add(&quot;World&quot;);
-        list.add(&quot;HAHAHAHA&quot;);
-        //第一种遍历方法使用 For-Each 遍历 List
-        for (String str : list) {            //也可以改写 for(int i=0;i&lt;list.size();i++) 这种形式
-            System.out.println(str);
-        }
-    
-        //第二种遍历，把链表变为数组相关的内容进行遍历
-        String[] strArray=new String[list.size()];
-        list.toArray(strArray);
-        for(int i=0;i&lt;strArray.length;i++) //这里也可以改写为  for(String str:strArray) 这种形式
-        {
-            System.out.println(strArray[i]);
-        }
-        
-        //第三种遍历 使用迭代器进行相关遍历
-        
-        Iterator&lt;String&gt; ite=list.iterator();
-        while(ite.hasNext())//判断下一个元素之后有值
-        {
-            System.out.println(ite.next());
-        }
-    }
-}
-</code></pre>
-<h4 id="遍历map">遍历Map</h4>
-<pre><code class="language-java">import java.util.*;
- 
-public class Test{
-    public static void main(String[] args) {
-        Map&lt;String, String&gt; map = new HashMap&lt;String, String&gt;();
-        map.put(&quot;1&quot;, &quot;value1&quot;);
-        map.put(&quot;2&quot;, &quot;value2&quot;);
-        map.put(&quot;3&quot;, &quot;value3&quot;);
-        
-        //第一种：普遍使用，二次取值
-        System.out.println(&quot;通过Map.keySet遍历key和value：&quot;);
-        for (String key : map.keySet()) {
-        System.out.println(&quot;key= &quot;+ key + &quot; and value= &quot; + map.get(key));
-        }
-        
-        //第二种
-        System.out.println(&quot;通过Map.entrySet使用iterator遍历key和value：&quot;);
-        Iterator&lt;Map.Entry&lt;String, String&gt;&gt; it = map.entrySet().iterator();
-        while (it.hasNext()) {
-        Map.Entry&lt;String, String&gt; entry = it.next();
-        System.out.println(&quot;key= &quot; + entry.getKey() + &quot; and value= &quot; + entry.getValue());
-        }
-        
-        //第三种：推荐，尤其是容量大时
-        System.out.println(&quot;通过Map.entrySet遍历key和value&quot;);
-        for (Map.Entry&lt;String, String&gt; entry : map.entrySet()) {
-        System.out.println(&quot;key= &quot; + entry.getKey() + &quot; and value= &quot; + entry.getValue());
-        }
-        
-        //第四种
-        System.out.println(&quot;通过Map.values()遍历所有的value，但不能遍历key&quot;);
-        for (String v : map.values()) {
-        System.out.println(&quot;value= &quot; + v);
-        }
-    }
-}
-</code></pre>
-<h3 id="比较器">比较器</h3>
-<p>Comparator接口定义了两个方法：</p>
-<ul>
-<li>compare()</li>
-<li>equals()</li>
-</ul>
-<p><code>int compare(Object obj1, Object obj2)</code></p>
-<hr>
-<h2 id="arraylist-类">ArrayList 类</h2>
-<p>ArrayList类是一个可以动态修改的数组</p>
-<p>继承了AbstractList，并实现了List接口</p>
-<p><code>ArrayList&lt;E&gt; objectName =new ArrayList&lt;&gt;();　 // 初始化</code></p>
-<p>ArrayList常用方法：</p>
-<figure data-type="image" tabindex="11"><img src="https://s2.loli.net/2022/03/13/6QiPYmqj2pxoAeG.png" alt="ArrayList常用方法.png" loading="lazy"></figure>
-<hr>
-<h2 id="linkedlist-类链表">LinkedList 类（链表）</h2>
-<p>链表是一种线性表，在每个节点里存放下一节点的地址</p>
-<p>可分为<code>单链表</code>和<code>双链表</code></p>
-<p>单链表包含当前结点的值和指向后节点的链接两个值</p>
-<p>双链表多了向后结点的链接</p>
-<p>与 ArrayList 相比，LinkedList 的增加和删除的操作效率更高，而查找和修改的操作效率较低</p>
-<p>ArrayList：</p>
-<ul>
-<li>频繁访问列表中的某一个元素</li>
-<li>只需要在列表末尾进行添加和删除元素操作</li>
-</ul>
-<p>LinkedList：</p>
-<ul>
-<li>需要通过循环迭代来访问列表中的某些元素</li>
-<li>需要频繁的在列表开头、中间、末尾等位置进行添加和删除元素操作</li>
-</ul>
-<p>LinkedList 继承了 AbstractSequentialList 类</p>
-<p>LinkedList 实现了 Queue 接口，可作为队列使用</p>
-<p>LinkedList 实现了 List 接口，可进行列表的相关操作</p>
-<p>LinkedList 实现了 Deque 接口，可作为队列使用</p>
-<p>LinkedList 实现了 Cloneable 接口，可实现克隆</p>
-<p>LinkedList 实现了 java.io.Serializable 接口，即可支持序列化，能通过序列化去传输</p>
-<pre><code class="language-java">LinkedList&lt;E&gt; list = new LinkedList&lt;E&gt;();   // 普通创建方法
-或者
-LinkedList&lt;E&gt; list = new LinkedList(Collection&lt;? extends E&gt; c); // 使用集合创建链表
-</code></pre>
-<figure data-type="image" tabindex="12"><img src="https://s2.loli.net/2022/03/13/TvVpFPnZl87XC1w.png" alt="LinkedList常用方法.png" loading="lazy"></figure>
-<hr>
-<h2 id="hashset">HashSet</h2>
-<p>HashSet是一个不允许有重复元素的集合，允许有null值</p>
-<p>无序的</p>
-<p>非线程安全</p>
-<p>实现了Set接口</p>
-<p><code>HashSet&lt;String&gt; sites = new HashSet&lt;String&gt;();</code></p>
-<figure data-type="image" tabindex="13"><img src="https://s2.loli.net/2022/03/13/32voSbfi9wck5dR.png" alt="HashSet方法.png" loading="lazy"></figure>
-<hr>
-<h2 id="hashmap">HashMap</h2>
-<p>HashMap是一个散列表，存储了键值对的映射</p>
-<p>实现了Map接口</p>
-<p>最多允许一条记录的键位null，不支持线程同步</p>
-<p>无序的</p>
-<p>继承了AbstractMap，实现了Map、Cloneable、java.io.Serializable接口</p>
-<p>HashMap的key与value的类型可以不同</p>
-<p><code>HashMap&lt;Integer, String&gt; Sites = new HashMap&lt;Integer, String&gt;();</code></p>
-<figure data-type="image" tabindex="14"><img src="https://s2.loli.net/2022/03/14/QULCFrKElsuIfX8.png" alt="HashMap方法.png" loading="lazy"></figure>
-<hr>
 
             </div>
             
@@ -1102,7 +743,7 @@ LinkedList&lt;E&gt; list = new LinkedList(Collection&lt;? extends E&gt; c); // �
     </li>
     <li class="post-copyright-link">
       <strong class="language" data-lan="link">本文链接：</strong>
-      <a href="https://zdblog.top/shu-ju-jie-gou/" title="数据结构">https://zdblog.top/shu-ju-jie-gou/</a>
+      <a href="https://zdblog.top/9N5dMuR4p/" title="MySQL_02_mysql数据管理">https://zdblog.top/9N5dMuR4p/</a>
     </li>
     <li class="post-copyright-license">
       <strong class="language" data-lan="copyright">版权声明： </strong>
@@ -1111,19 +752,21 @@ LinkedList&lt;E&gt; list = new LinkedList(Collection&lt;? extends E&gt; c); // �
   </ul>
   <div class="tags">
     
+      <a href="https://zdblog.top/MySQL/"># MySQL</a>
+    
   </div>
   <div class="nav">
     <div class="nav-prev">
       
         <i class="fa fa-chevron-left"></i>
-        <a class="nav-pc-next" title="MySQL_01_mysql操作" href="https://zdblog.top/XjkFHqdpf/">MySQL_01_mysql操作</a class="nav-pc-next">
-        <a class="nav-mobile-prev" title="MySQL_01_mysql操作" href="https://zdblog.top/XjkFHqdpf/">上一篇</a>
+        <a class="nav-pc-next" title="MySQL_03_DQL查询数据语言" href="https://zdblog.top/lwJF2vSoV/">MySQL_03_DQL查询数据语言</a class="nav-pc-next">
+        <a class="nav-mobile-prev" title="MySQL_03_DQL查询数据语言" href="https://zdblog.top/lwJF2vSoV/">上一篇</a>
       
     </div>
     <div class="nav-next">
       
-        <a class="nav-pc-next" title="面向对象" href="https://zdblog.top/mian-xiang-dui-xiang/">面向对象</a>
-        <a class="nav-mobile-next" title="面向对象" href="https://zdblog.top/mian-xiang-dui-xiang/">下一篇</a>
+        <a class="nav-pc-next" title="MySQL_01_mysql操作" href="https://zdblog.top/XjkFHqdpf/">MySQL_01_mysql操作</a>
+        <a class="nav-mobile-next" title="MySQL_01_mysql操作" href="https://zdblog.top/XjkFHqdpf/">下一篇</a>
         <i class="fa fa-chevron-right"></i>
       
     </div>

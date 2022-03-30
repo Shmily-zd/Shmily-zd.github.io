@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://zdblog.top</id>
     <title>zd_blog</title>
-    <updated>2022-03-15T05:55:26.732Z</updated>
+    <updated>2022-03-30T13:35:38.992Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://zdblog.top"/>
     <link rel="self" href="https://zdblog.top/atom.xml"/>
@@ -10,6 +10,2540 @@
     <logo>https://zdblog.top/images/avatar.png</logo>
     <icon>https://zdblog.top/favicon.ico</icon>
     <rights>All rights reserved 2022, zd_blog</rights>
+    <entry>
+        <title type="html"><![CDATA[MySQL_09_JDBC]]></title>
+        <id>https://zdblog.top/uLsqXSo3q/</id>
+        <link href="https://zdblog.top/uLsqXSo3q/">
+        </link>
+        <updated>2022-03-30T13:33:57.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="1-数据库驱动和jdbc">1. 数据库驱动和JDBC</h2>
+<h3 id="数据库驱动">数据库驱动</h3>
+<p>驱动：声卡，显卡，数据库</p>
+<figure data-type="image" tabindex="1"><img src="https://s2.loli.net/2022/03/29/ho7KxS4Q5e6zHaj.png" alt="MySQL驱动.png" loading="lazy"></figure>
+<p>我们的程序会通过数据库驱动，和数据库打交道！</p>
+<h3 id="jdbc">JDBC</h3>
+<p>SUN公司为了简化开发人员的（对数据库的统一）操作，提供了一个（java操作数据库的）规范，俗称JDBC</p>
+<p>这些规范的实现由具体的厂商去做~</p>
+<p>对于开发人员来说，我们只需要掌握JDBC接口的操作即可！</p>
+<figure data-type="image" tabindex="2"><img src="https://s2.loli.net/2022/03/29/KlqWwSMETmivyGX.png" alt="JDBC接口.png" loading="lazy"></figure>
+<p>java.sql</p>
+<p>javax.sql</p>
+<p>还需要导入一个数据库驱动包 mysql-connector-java-8.0.28.jar</p>
+<h2 id="2-第一个jdbc程序">2. 第一个JDBC程序</h2>
+<blockquote>
+<p>创建测试数据库</p>
+</blockquote>
+<pre><code class="language-sql">CREATE DATABASE jdbcstudy CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+USE jdbcstudy;
+
+CREATE TABLE users(
+  `id` INT PRIMARY KEY,
+  `name` VARCHAR(40),
+  `password` VARCHAR(40),
+  `email` VARCHAR(60),
+  `birthday` DATE
+);
+
+INSERT INTO users(`id`,`name`,`password`,`email`,`birthday`)
+VALUES(1,'张三','123456','zs@sina.com','1980-12-04'),
+(2,'李四','123456','lisi@sina.com','1981-12-04'),
+(3,'王五','123456','wangwu@sina.com','1982-12-04');
+</code></pre>
+<ol>
+<li>
+<p>创建一个普通项目</p>
+</li>
+<li>
+<p>导入数据库驱动（jar包）</p>
+</li>
+<li>
+<p>编写测试代码</p>
+</li>
+</ol>
+<pre><code class="language-java">package com.zd.test01;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+// 我的第一个JDBC程序
+public class JdbcFirstDemo {
+    public static void main(String[] args) throws ClassNotFoundException, SQLException {
+        // 1. 加载驱动
+        Class.forName(&quot;com.mysql.cj.jdbc.Driver&quot;);
+
+        // 2. 连接数据库
+        String url = &quot;jdbc:mysql://124.2...:3306/jdbcstudy?useUnicode = true &amp; characterEncoding = utf8 &amp; useSSL = false&quot;;
+        String username = &quot;root&quot;;
+        String password = &quot;******&quot;;
+
+        Connection connection = DriverManager.getConnection(url, username, password);
+
+        // 3. 执行SQL的对象
+        Statement statement = connection.createStatement();
+
+        // 4. 获得返回的结果集
+        String sql = &quot;SELECT * FROM users&quot;;
+
+        ResultSet resultSet = statement.executeQuery(sql);
+
+        while(resultSet.next()){
+            System.out.println(&quot;id = &quot; + resultSet.getObject(&quot;id&quot;));
+            System.out.println(&quot;name = &quot; + resultSet.getObject(&quot;name&quot;));
+            System.out.println(&quot;password = &quot; + resultSet.getObject(&quot;password&quot;));
+            System.out.println(&quot;email = &quot; + resultSet.getObject(&quot;email&quot;));
+            System.out.println(&quot;birthday = &quot; + resultSet.getObject(&quot;birthday&quot;));
+            System.out.println(&quot;======================&quot;);
+        }
+
+        // 5. 释放连接
+        resultSet.close();
+        statement.close();
+        connection.close();
+    }
+}
+</code></pre>
+<p>步骤总结：</p>
+<ol>
+<li>加载驱动</li>
+<li>连接数据库DriverManager</li>
+<li>获取执行SQL的对象 Statement</li>
+<li>获得返回的结果集</li>
+<li>释放连接</li>
+</ol>
+<hr>
+<h2 id="3-jdbc中对象解释">3. JDBC中对象解释</h2>
+<blockquote>
+<p>DriverManager</p>
+</blockquote>
+<pre><code class="language-java">// 1. 加载驱动
+// Drivermanager.registerDriver(new com.mysql.cj.jdbc.Driver);
+// Class.forName() 方法初始化给定的类
+Class.forName(&quot;com.mysql.cj.jdbc.Driver&quot;);
+</code></pre>
+<blockquote>
+<p>URL</p>
+</blockquote>
+<pre><code class="language-java">String url = &quot;jdbc:mysql://127....:3306/jdbcstudy?useUnicode=true&amp;characterEncoding=utf8&amp;useSSL=false&quot;;
+
+// mysql默认端口3306
+// 协议://主机地址:端口号/数据库名?参数1&amp;参数2&amp;参数3
+// oracle默认端口1521
+// jdbc:oracle:thin:@localhost:1521:sid
+</code></pre>
+<blockquote>
+<p>Connection</p>
+</blockquote>
+<pre><code class="language-java">Connection connection = DriverManager.getConnection(url, userName, passWord);   // connection代表数据库
+
+connection.setAutoCommit(true); // 数据库设置自动提交
+connection.commit();            // 事务提交
+connection.rollback();          // 事务回滚
+</code></pre>
+<blockquote>
+<p>Statement 执行sql对象  、  PreparedStatement 执行sql对象</p>
+</blockquote>
+<pre><code class="language-java">String sql = &quot;SELECT * FROM users&quot;;//编写SQL
+
+statement.executeQuery();//执行查询 返回ResultSet
+statement.executeUpdate();//新增，删除，修改，都用这个，返回受影响的行数
+statement.execute();//执行任何SQL
+</code></pre>
+<blockquote>
+<p>ResultSet 查询的结果集，封装了所有的查询结果</p>
+</blockquote>
+<p>获得指定的数据类型</p>
+<pre><code class="language-java">//在不知道列类型的情况下使用
+resultSet.getObject();
+//如果知道列类型，就使用指定的类型
+resultSet.getString();
+resultSet.getInt();
+resultSet.getDouble();
+resultSet.getBigDecimal();
+resultSet.getFloat();
+resultSet.getDate();
+//...
+</code></pre>
+<p>遍历，指针</p>
+<pre><code class="language-java">resultSet.beforeFirst();    //移动到最前面
+resultSet.afterLast();      //移动到最后面
+resultSet.next();           //移动到下一个数据
+resultSet.previous();       //移动到前一行
+resultSet.absolute(row);    //移动到指定行
+</code></pre>
+<blockquote>
+<p>释放资源</p>
+</blockquote>
+<pre><code class="language-java">resultSet.close();
+statement.close();
+connection.close();//消耗资源
+</code></pre>
+<hr>
+<h3 id="4-statement对象详解">4. statement对象详解</h3>
+<p><strong>jdbc中的statement对象用于向数据库发送SQL语句，想完成对数据库的增删改查，只需要通过这个对象向数据库发送增删改查语句即可</strong></p>
+<p>Statement对象的executeUpdate方法，用于向数据库发送增、删、改的SQL语句，executeUpdate执行完后，将会返回一个整数（即增删改语句导致了数据库几行数据发送了变化）</p>
+<p>Statement.executeQuery方法用于向数据库发送查询语句，executeQuery方法返回代表查询结果的ResultSet对象</p>
+<blockquote>
+<p>CRUD操作-create</p>
+</blockquote>
+<p>使用executeUpdate(String sql)方法完成数据添加操作，示例操作：</p>
+<pre><code class="language-java">Statement statement = connection.createStatement();
+String sql = &quot;insert into user(...) values(...)&quot;;
+int num = statement.executeUpdate(sql);
+if (num &gt; 0) {
+    System.out.println(&quot;插入成功~&quot;);
+}
+</code></pre>
+<blockquote>
+<p>CRUD操作-delete</p>
+</blockquote>
+<pre><code class="language-java">Statement statement = connection.createStatement();
+String sql = &quot;delete from user where id=1&quot;;
+int num = statement.executeUpdate(sql);
+if (num &gt; 0) {
+    System.out.println(&quot;删除成功~&quot;);
+}
+</code></pre>
+<blockquote>
+<p>CRUD操作-update</p>
+</blockquote>
+<pre><code class="language-java">Statement statement = connection.createStatement();
+String sql = &quot;update user set name='' where name =''&quot;;
+int num = statement.executeUpdate(sql);
+if (num &gt; 0) {
+    System.out.println(&quot;修改成功~&quot;);
+}
+</code></pre>
+<blockquote>
+<p>CRUD操作-read</p>
+</blockquote>
+<pre><code class="language-java">Statement statement = connection.createStatement();
+String sql = &quot;SELECT * FROM users&quot;;
+ResultSet resultSet = statement.executeQuery(sql);
+while (resultSet.next()) {
+    //根据获取列的数据类型，分别调用resultSet的相应方法映射到java对象中
+}
+</code></pre>
+<blockquote>
+<p>代码实现</p>
+</blockquote>
+<ol>
+<li>
+<p>提取工具类</p>
+<pre><code class="language-java">package com.zd.test02.utils;
+
+import java.io.InputStream;
+import java.sql.*;
+import java.util.Properties;
+
+public class JdbcUtils {
+
+    private static String driver = null;
+    private static String url = null;
+    private static String username = null;
+    private static String password = null;
+
+    static{
+
+        try {
+            InputStream in = JdbcUtils.class.getClassLoader().getResourceAsStream(&quot;db.properties&quot;);
+            Properties properties = new Properties();
+            properties.load(in);
+
+            driver = properties.getProperty(&quot;driver&quot;);
+            url = properties.getProperty(&quot;url&quot;);
+            username = properties.getProperty(&quot;username&quot;);
+            password = properties.getProperty(&quot;password&quot;);
+
+            Class.forName(driver);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    // 获取连接
+    public static Connection getConnect() throws SQLException {
+        return DriverManager.getConnection(url, username, password);
+    }
+
+    // 释放资源
+    public static void release(Connection conn, Statement st, ResultSet rs) {
+        if (rs != null){
+            try {
+                rs.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        if (st != null) {
+            try {
+                st.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        if (conn != null) {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+}
+</code></pre>
+<p>配置文件db.properties</p>
+<pre><code class="language-properties"> driver = com.mysql.cj.jdbc.Driver
+ url = jdbc:mysql://124.223.57.6:3306/jdbcstudy?useUnicode=true &amp; characterEncoding=utf8 &amp; useSSL=true
+ username = zd
+ password = zd111
+</code></pre>
+</li>
+<li>
+<p>编写增删改的方法: <code>executeUpdate</code></p>
+<pre><code class="language-java">// TestInsert.java
+package com.zd.test02;
+
+import com.zd.test02.utils.JdbcUtils;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+public class TestInsert {
+    public static void main(String[] args) {
+
+        Connection conn = null;
+        Statement st = null;
+        ResultSet rs = null;
+
+        try {
+            conn = JdbcUtils.getConnect(); // 连接数据库
+            st = conn.createStatement(); // 执行SQL的对象
+
+            // 执行sql语句，返回受影响的行数
+            String sql = &quot;INSERT INTO users(`id`, `name`, `password`, `email`, `birthday`)&quot;
+                    + &quot;VALUES(4, '赵六', '234243', '234242@qq.com', '2001-01-02')&quot;;
+            int i = st.executeUpdate(sql);
+            if (i &gt; 0) {
+                System.out.println(&quot;插入数据成功！&quot;);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            JdbcUtils.release(conn, st, rs); // 释放资源
+        }
+    }
+}
+</code></pre>
+<pre><code class="language-java">package com.zd.test02;
+
+import com.zd.test02.utils.JdbcUtils;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+public class TestInsert {
+    public static void main(String[] args){
+
+        Connection conn = null;
+        Statement st = null;
+        ResultSet rs = null;
+
+        try {
+            conn = JdbcUtils.getConnect();
+            st = conn.createStatement();
+
+            String sql = &quot;DELETE FROM users WHERE `id`=4&quot;;
+            int i = st.executeUpdate(sql);
+            if (i&gt;0){
+                System.out.println(&quot;删除数据成功！&quot;);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            JdbcUtils.release(conn, st, rs);
+        }
+    }
+}
+</code></pre>
+<pre><code class="language-java">package com.zd.test02;
+
+import com.zd.test02.utils.JdbcUtils;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+public class TestInsert {
+    public static void main(String[] args){
+
+        Connection conn = null;
+        Statement st = null;
+        ResultSet rs = null;
+
+        try {
+            conn = JdbcUtils.getConnect();
+            st = conn.createStatement();
+
+            String sql = &quot;UPDATE users SET birthday='1990-12-01' WHERE id=1&quot;;
+            int i = st.executeUpdate(sql);
+            if (i&gt;0){
+                System.out.println(&quot;插入数据成功！&quot;);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            JdbcUtils.release(conn, st, rs);
+        }
+    }
+}
+</code></pre>
+</li>
+<li>
+<p>查询</p>
+<pre><code class="language-java">package com.zd.test02;
+
+import com.zd.test02.utils.JdbcUtils;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+public class TestSelect {
+    public static void main(String[] args) {
+        Connection coon = null;
+        Statement st = null;
+        ResultSet rs = null;
+
+        {
+            try {
+                coon = JdbcUtils.getConnect();
+                st = coon.createStatement();
+
+                String sql = &quot;SELECT * FROM users;&quot;;
+                rs = st.executeQuery(sql);
+
+                while (rs.next()) {
+                    System.out.println(&quot;id = &quot; + rs.getInt(&quot;id&quot;));
+                    System.out.println(&quot;name = &quot; + rs.getString(&quot;name&quot;));
+                    System.out.println(&quot;password = &quot; + rs.getString(&quot;password&quot;));
+                    System.out.println(&quot;email = &quot; + rs.getString(&quot;email&quot;));
+                    System.out.println(&quot;birthday = &quot; + rs.getString(&quot;birthday&quot;));
+                    System.out.println(&quot;========================&quot;);
+                }
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } finally {
+                JdbcUtils.release(coon, st, rs);
+            }
+        }
+    }
+}
+</code></pre>
+</li>
+</ol>
+<h3 id="sql注入问题">sql注入问题</h3>
+<p>ql存在漏洞，会被攻击导致数据泄露 <strong>SQL会被拼接</strong></p>
+<p>导致结果：错误的用户名或者密码可以获取到全部的用户信息</p>
+<pre><code class="language-java">ackage com.zd.test02;
+
+import com.zd.test02.utils.JdbcUtils;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+public class SQLQustion {
+    public static void main(String[] args) {
+        // 正常登录
+        // SELECT * FROM users WHERE `name` = '张三' AND `password` = '123456' 
+//        login(&quot;张三&quot;, &quot;123456&quot;);
+
+        // 非法登录
+        // SELECT * FROM users WHERE `name` = '' OR '1=1' AND `password` = '' OR '1=1' ,sql语句被拼接
+        login(&quot;' or '1 = 1&quot;, &quot;' or '1 = 1&quot;);
+        // 张三
+        // 123456
+        // ==================
+        // 李四
+        // 123456
+        // ==================
+        // 王五
+        // 123456
+        // ==================
+        // 赵六
+        // 234243
+        // ==================
+    }
+
+    // 登录业务
+    public static void login(String userName, String password) {
+        Connection conn = null;
+        Statement st = null;
+        ResultSet rs = null;
+
+        try {
+            conn = JdbcUtils.getConnect();
+            st = conn.createStatement();
+
+
+            String sql = &quot;SELECT * FROM users WHERE `name` = '&quot; + userName + &quot;' AND `password` = '&quot; + password + &quot;'&quot;;
+            rs = st.executeQuery(sql);
+
+            while(rs.next()) {
+                System.out.println(rs.getString(&quot;name&quot;));
+                System.out.println(rs.getString(&quot;password&quot;));
+                System.out.println(&quot;==================&quot;);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            JdbcUtils.release(conn, st, rs);
+        }
+    }
+}
+</code></pre>
+<hr>
+<h2 id="5-preparedstatement对象">5. PreparedStatement对象</h2>
+<p>preparedStatement 可以防止sql注入，效率更高</p>
+<blockquote>
+<p>增/删/改</p>
+</blockquote>
+<pre><code class="language-java">package com.zd.test03;
+
+import com.zd.test02.utils.JdbcUtils;
+
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+public class TestInsert {
+    public static void main(String[] args) {
+        Connection conn = null;
+        PreparedStatement pst = null;
+
+        try {
+            conn = JdbcUtils.getConnect();
+
+            // PreparedStatement 区别
+            // 先预编译sql语句，使用？占位符代替参数
+            String sql = &quot;INSERT INTO users(`id`, `name`, `password`, `email`, `birthday`) VALUES(?,?,?,?,?);&quot;;
+
+            pst = conn.prepareStatement(sql);
+
+            // 手动给参数赋值
+            pst.setInt(1, 5);
+            pst.setString(2, &quot;钱七&quot;);
+            pst.setString(3, &quot;134141&quot;);
+            pst.setString(4, &quot;3242523@qq.com&quot;);
+
+            // 注意：sql.Date()  数据库
+            //       util.Date()  java  获得时间戳
+            // pst.setDate(5, Date.valueOf(&quot;2003-03-03&quot;));
+            pst.setDate(5, new java.sql.Date(new java.util.Date().getTime()));
+
+            int i = pst.executeUpdate();
+
+            if (i &gt; 0) {
+                System.out.println(&quot;插入数据成功！&quot;);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            JdbcUtils.release(conn, pst, null);
+        }
+    }
+}
+</code></pre>
+<blockquote>
+<p>查</p>
+</blockquote>
+<pre><code class="language-java">package com.zd.test03;
+
+import com.zd.test02.utils.JdbcUtils;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+public class TestSelect {
+    public static void main(String[] args) {
+        Connection con = null;
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        try {
+            con = JdbcUtils.getConnect();
+
+            String sql = &quot;SELECT * FROM users WHERE id=?&quot;;
+
+            pst = con.prepareStatement(sql);
+
+            pst.setInt(1, 1);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                System.out.println(&quot;id=&quot;+rs.getInt(&quot;id&quot;));
+                System.out.println(&quot;name=&quot;+rs.getString(&quot;name&quot;));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            JdbcUtils.release(con, pst, rs);
+        }
+
+    }
+}
+</code></pre>
+<blockquote>
+<p>防止sql注入</p>
+</blockquote>
+<p>PreparedStatement 防止sql注入的本质，把传递进来的参数当作字符</p>
+<p>若其中有转义字符，比如<code>'</code>会被直接转义</p>
+<pre><code class="language-java">package com.zd.test03;
+
+import com.zd.test02.utils.JdbcUtils;
+
+import java.sql.*;
+
+public class SQLQustion {
+    public static void main(String[] args) {
+        // 正常登录
+        // SELECT * FROM users WHERE `name` = '张三' AND `password` = '123456'
+//        login(&quot;张三&quot;, &quot;123456&quot;);
+
+        // 非法登录
+        // SELECT * FROM users WHERE `name` = '' OR '1=1' AND `password` = '' OR '1=1' ,sql语句被拼接
+        login(&quot;'' or 1 = 1&quot;, &quot;'' or 1 = 1&quot;);
+        // 执行成功 没有返回
+    }
+
+    // 登录业务
+    public static void login(String userName, String password) {
+        Connection conn = null;
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+
+        try {
+            conn = JdbcUtils.getConnect();
+
+            String sql = &quot;SELECT * FROM users WHERE `name` = ? AND `password` = ?&quot;;
+
+            pst = conn.prepareStatement(sql);
+
+            pst.setString(1, userName);
+            pst.setString(2, password);
+
+            rs = pst.executeQuery();
+
+            while(rs.next()) {
+                System.out.println(rs.getString(&quot;name&quot;));
+                System.out.println(rs.getString(&quot;password&quot;));
+                System.out.println(&quot;==================&quot;);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            JdbcUtils.release(conn, pst, rs);
+        }
+    }
+}
+</code></pre>
+<hr>
+<h2 id="6-事务的jdbc实现">6. 事务的JDBC实现</h2>
+<blockquote>
+<p>创建表</p>
+</blockquote>
+<pre><code class="language-sql">CREATE TABLE account(
+`id` INT AUTO_INCREMENT,
+`name` VARCHAR(40),
+`money` FLOAT,
+PRIMARY KEY(`id`)
+);
+
+INSERT INTO account(`name`, `money`)
+VALUES
+('A',1000),('B',2000),('C',3000);
+</code></pre>
+<blockquote>
+<p>实例</p>
+</blockquote>
+<pre><code class="language-java">// success
+package com.zd.test04;
+
+import com.zd.test02.utils.JdbcUtils;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+public class TestTransaction {
+    public static void main(String[] args) {
+        Connection conn = null;
+        PreparedStatement pst = null;
+
+        try {
+            conn = JdbcUtils.getConnect();
+
+            // 关闭自动提交，会自动开启事务
+            conn.setAutoCommit(false);
+
+            String sql1 = &quot;UPDATE account SET `money` = `money` - 100 WHERE `name` = 'A'&quot;;
+            pst = conn.prepareStatement(sql1);
+            pst.executeUpdate();
+
+            // int x = 1 / 0; // 失败，回滚
+
+            String sql2 = &quot;UPDATE account SET `money` = `money` + 100 WHERE `name` = 'B'&quot;;
+            pst = conn.prepareStatement(sql2);
+            pst.executeUpdate();
+
+            // 业务完毕，提交事务
+            conn.commit();
+            System.out.println(&quot;success&quot;);
+        } catch (SQLException e) {
+            try {
+                conn.rollback(); // 失败，默认回滚，可以不写
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+            e.printStackTrace();
+        } finally {
+            JdbcUtils.release(conn, pst, null);
+        }
+    }
+}
+</code></pre>
+<hr>
+<h2 id="7-数据库连接池">7. 数据库连接池</h2>
+<p>数据库连接 -- 执行完毕 -- 释放</p>
+<p>连接-- 释放  是十分浪费系统资源的</p>
+<p><strong>池化技术：准备一些预先的资源，过来就连接预先准备好的</strong></p>
+<p>最小连接数：10(常用连接)</p>
+<p>最大连接数：100 （业务最高承载上线）</p>
+<p>等待超时：100ms</p>
+<p>编写连接池，实现一个接口DataSource</p>
+<ul>
+<li>
+<p>DataSource 只是一个接口，该接口通常由服务器(Weblogic, WebSphere, Tomcat)提供实现，也有一些开源组织提供实现</p>
+</li>
+<li>
+<p>DataSource 通常被称为数据源，它包含连接池和连接池管理两个部分，习惯上也经常把 DataSource 称为连接池</p>
+</li>
+<li>
+<p>DataSource用来取代DriverManager来获取Connection，获取速度快，同时可以大幅度提高数据库访问速度</p>
+</li>
+</ul>
+<blockquote>
+<p>开源数据源实现</p>
+</blockquote>
+<p>DBCP</p>
+<p>C3p0</p>
+<p><strong>Druid:阿里巴巴</strong></p>
+<p>使用了这些数据库连接池之后，我们在项目开发中就不需要编写连接数据库的代码了</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[MySQL_08_规范数据库设计]]></title>
+        <id>https://zdblog.top/ZIAPXpmk6/</id>
+        <link href="https://zdblog.top/ZIAPXpmk6/">
+        </link>
+        <updated>2022-03-30T13:32:35.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="1-为什么需要设计">1. 为什么需要设计</h2>
+<p><mark>当数据库比较复杂的时候，我们就需要设计了</mark></p>
+<p><strong>糟糕的数据库设计</strong></p>
+<ul>
+<li>数据冗余，浪费空间</li>
+<li>数据库插入和删除都会麻烦、异常（屏蔽使用物理外键）</li>
+<li>程序的性能差</li>
+</ul>
+<p><strong>良好的数据库设计</strong></p>
+<ul>
+<li>节省内存空间</li>
+<li>保证数据库的完整性</li>
+<li>方便我们开发系统</li>
+</ul>
+<p><strong>软件开发中，关于数据库的设计</strong></p>
+<ul>
+<li>分析需求，分析业务和需要处理的数据库的需求</li>
+<li>概要设计：设计关系图E-R图</li>
+</ul>
+<p><strong>设计数据库的步骤（个人博客）</strong></p>
+<ul>
+<li>
+<p>收集信息，分析需求</p>
+<ul>
+<li>
+<p>用户表（用户登录注销，用户的个人信息，写博客，创建分类）</p>
+<figure data-type="image" tabindex="1"><img src="https://gitee.com/zhayuyao/img/raw/master/zhayuyao/img/image-20210704162821445.png" alt="image-20210704162821445" loading="lazy"></figure>
+</li>
+<li>
+<p>分类表（文章分类，谁创建的）</p>
+<figure data-type="image" tabindex="2"><img src="https://gitee.com/zhayuyao/img/raw/master/zhayuyao/img/image-20210704163120753.png" alt="image-20210704163120753" loading="lazy"></figure>
+</li>
+<li>
+<p>文章表（文章信息）</p>
+<figure data-type="image" tabindex="3"><img src="https://gitee.com/zhayuyao/img/raw/master/zhayuyao/img/image-20210704164131400.png" alt="image-20210704164131400" loading="lazy"></figure>
+</li>
+<li>
+<p>评论表</p>
+<figure data-type="image" tabindex="4"><img src="https://gitee.com/zhayuyao/img/raw/master/zhayuyao/img/image-20210704164555263.png" alt="image-20210704164555263" loading="lazy"></figure>
+</li>
+<li>
+<p>友链表（友情链接信息）</p>
+<figure data-type="image" tabindex="5"><img src="https://gitee.com/zhayuyao/img/raw/master/zhayuyao/img/image-20210704164938625.png" alt="image-20210704164938625" loading="lazy"></figure>
+</li>
+<li>
+<p>自定义表（系统信息，某个关键的字，或者一些主字段） <code>key:value</code></p>
+</li>
+<li>
+<p>关注表(粉丝数)</p>
+<figure data-type="image" tabindex="6"><img src="https://gitee.com/zhayuyao/img/raw/master/zhayuyao/img/image-20210704165556127.png" alt="image-20210704165556127" loading="lazy"></figure>
+</li>
+<li>
+<p>说说表（发表心情， id...content...create_time）</p>
+</li>
+</ul>
+</li>
+<li>
+<p>标识实体（把需求落到每个字段）</p>
+</li>
+<li>
+<p>标识实体之间的关系</p>
+<ul>
+<li>写博客：user --&gt; blog</li>
+<li>创建分类：user --&gt; category</li>
+<li>关注：user --&gt; user</li>
+<li>友链：links</li>
+<li>评论：user --&gt; user --&gt; blog</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="2-数据库三大范式了解">2. 数据库三大范式（了解）</h2>
+<p><strong>为什么需要数据规范化？</strong></p>
+<ul>
+<li>信息重复</li>
+<li>更新异常</li>
+<li>插入异常
+<ul>
+<li>无法正常显示信息</li>
+</ul>
+</li>
+<li>删除异常
+<ul>
+<li>丢失有效的信息</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>三大范式</p>
+</blockquote>
+<h3 id="第一范式1nf"><strong>第一范式（1NF）</strong></h3>
+<p>原子性：保证每一列不可再分</p>
+<h3 id="第二范式2nf"><strong>第二范式（2NF）</strong></h3>
+<p>前提：满足第一范式</p>
+<p>第二范式需要确保数据库表中的每一列都和主键相关，而不能只与主键的某一部分相关（主要针对联合主键而言）。</p>
+<p>每张表只描述一件事情</p>
+<h3 id="第三范式3nf"><strong>第三范式（3NF）</strong></h3>
+<p>前提：满足第一范式和第二范式</p>
+<p>第三范式需要确保数据表中的每一列数据都和主键直接相关，而不能间接相关。</p>
+<p>规范数据库的设计</p>
+<h3 id="规范性和性能的问题"><strong>规范性和性能的问题</strong></h3>
+<p>关联查询的表不得超过三张表</p>
+<ul>
+<li>考虑商业化的需求和目标（成本，用户体验）数据库的性能更加重要</li>
+<li>在规范性能的问题的时候，需要适当的考虑一下规范性</li>
+<li>故意给某些表增加一些冗余的字段。（从多表查询中变为单表查询）</li>
+<li>故意增加一些计算列（从大数据库降低为小数据量的查询：索引）</li>
+</ul>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[MySQL_07_权限管理和备份]]></title>
+        <id>https://zdblog.top/YMrTb0F0C/</id>
+        <link href="https://zdblog.top/YMrTb0F0C/">
+        </link>
+        <updated>2022-03-30T13:31:43.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="1-权限管理">1. 权限管理</h2>
+<h3 id="sql-yog-可视化管理">sql yog 可视化管理</h3>
+<figure data-type="image" tabindex="1"><img src="https://gitee.com/zhayuyao/img/raw/master/zhayuyao/img/image-20210704145840971.png" alt="image-20210704145840971" loading="lazy"></figure>
+<h3 id="sql-命令操作">sql 命令操作</h3>
+<p>用户表：mysql.user</p>
+<p>本质:读这张表进行增删改查</p>
+<pre><code class="language-sql">-- 创建用户
+CREATE USER aa IDENTIFIED BY '123456';
+
+-- 修改密码(修改当前用户密码)
+SET PASSWORD = PASSWORD('123456');
+
+-- 修改密码(修改指定用户密码)
+SET PASSWORD FOR aa = PASSWORD('123456');
+
+
+-- 重命名  RENAME 原名子 aa TO 新名字;
+RENAME USER aa TO newaa;
+
+
+-- 用户授权  ALL PRIVILEGES 全部的权限，库.表
+
+-- ALL PRIVILEGES 除了给别人授权不行，其他都能干
+
+GRANT ALL PRIVILEGES ON *.* TO newaa;
+
+-- 查询权限
+
+SHOW GRANTS FOR newaa; -- 查看指定用户的权限
+
+SHOW GRANTS FOR root@localhost; -- 查看root用户的权限
+
+-- 撤销权限   REVOKE哪些权限，在哪个库，给谁撤销
+REVOKE ALL PRIVILEGES ON *.* FROM newaa;
+
+-- 删除用户
+DROP USER newaa;
+</code></pre>
+<hr>
+<h2 id="2-mysql备份">2. MySQL备份</h2>
+<p>为什么要备份？</p>
+<ul>
+<li>保证重要的数据不丢失</li>
+<li>数据转移</li>
+</ul>
+<p>mysql数据库备份的方式</p>
+<ul>
+<li>
+<p>直接拷贝物理文件</p>
+</li>
+<li>
+<p>在sqlyog这种可视化工具中手动导出</p>
+<ul>
+<li>
+<p>在想要导出的表或者库中，右键，</p>
+<figure data-type="image" tabindex="2"><img src="https://gitee.com/zhayuyao/img/raw/master/zhayuyao/img/image-20210704155338509.png" alt="image-20210704155338509" loading="lazy"></figure>
+</li>
+</ul>
+</li>
+<li>
+<p>使用命令行导出 mysqldump 命令行使用</p>
+<pre><code class="language-bash"># 一张表 mysqldump -h主机 -u用户名 -p密码 数据库 表名 &gt;物理磁盘位置/文件名
+mysqldump -hlocalhost -uroot -p123456 school student &gt;D:/a.sql
+
+# 多张表 mysqldump -h主机 -u用户名 -p密码 数据库 表名1 表名2 &gt;物理磁盘位置/文件名
+mysqldump -hlocalhost -uroot -p123456 school student result &gt;D:/a.sql
+
+# 数据库 mysqldump -h主机 -u用户名 -p密码 数据库 &gt;物理磁盘位置/文件名
+mysqldump -hlocalhost -uroot -p123456 school &gt;D:/a.sql
+
+# 导入
+# 登录的情况下，切换到指定的数据库
+# source 备份文件
+# 也可以这样
+mysql -u用户名 -p密码 库名&lt;备份文件
+</code></pre>
+<figure data-type="image" tabindex="3"><img src="https://gitee.com/zhayuyao/img/raw/master/zhayuyao/img/image-20210704161230594.png" alt="image-20210704161230594" loading="lazy"></figure>
+</li>
+</ul>
+<p>假设你要备份数据库，防止数据丢失。</p>
+<p>把数据库给别人，直接给sql即可。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[MySQL_06_索引]]></title>
+        <id>https://zdblog.top/TlmET2R1z/</id>
+        <link href="https://zdblog.top/TlmET2R1z/">
+        </link>
+        <updated>2022-03-30T13:30:52.000Z</updated>
+        <content type="html"><![CDATA[<p><a href="https://www.cnblogs.com/zsql/p/13808417.html">MySQL索引</a></p>
+<p><a href="https://blog.codinglabs.org/articles/theory-of-mysql-index.html">索引的数据结构和算法</a></p>
+<blockquote>
+<p>Msql官方对索引的定义为：<strong>索引（index）是帮助MySQL高效获取数据的数据结构</strong></p>
+<p>索引是一个单独的、存储在磁盘上的数据库结构，它们包含着对数据表里所有记录的引用指针</p>
+<p>提取句子主干，就可以得到索引的本质：索引是数据结构</p>
+<p>索引大大提高了查询速度，同时却会降低更新表的速度</p>
+</blockquote>
+<h2 id="1-索引的分类">1. 索引的分类</h2>
+<p><a href="https://dev.mysql.com/doc/refman/8.0/en/create-index.html">MySQL索引官网</a></p>
+<blockquote>
+<p>在一个表中，主键索引只能有一个，唯一索引可以有多个</p>
+</blockquote>
+<ul>
+<li>主键索引（primary key）
+<ul>
+<li>唯一的标识，主键不可重复，只能有一个列作为主键</li>
+</ul>
+</li>
+<li>唯一索引 （unique key）
+<ul>
+<li>避免重复的列出现，可以重复，多个列都可以标示为唯一索引</li>
+</ul>
+</li>
+<li>常规索引（key/index）
+<ul>
+<li>默认的 index 或者 key关键字来设置</li>
+</ul>
+</li>
+<li>全文索引（FullText ）
+<ul>
+<li>在特定的数据库引擎下才有，myisam</li>
+<li>快速定位数据</li>
+</ul>
+</li>
+</ul>
+<p>基础语法</p>
+<pre><code class="language-sql">-- 索引的使用
+
+-- 1.在创建表的时候给字段增加索引
+-- 2.创建完毕后，增加索引
+
+-- 显示所有的索引信息
+SHOW INDEX FROM student;
+
+-- 新增一个索引 (索引名) 列名
+
+ALTER TABLE `student` ADD UNIQUE KEY `UK_IDENTITY_CARD` (`identity_card`);
+ALTER TABLE `student` ADD KEY `K_STUDENT_NAME`(`student_name`);
+
+ALTER TABLE `student`  ADD FULLTEXT INDEX `FI_PHONE` (`phone`);
+
+-- explain 分析sql执行的状况
+
+EXPLAIN SELECT * FROM student; -- 非全文索引
+
+EXPLAIN SELECT * FROM student WHERE MATCH(`phone`) AGAINST('138'); -- 全文索引
+</code></pre>
+<p><a href="https://blog.csdn.net/jiadajing267/article/details/81269067">【MySQL优化】——看懂explain</a></p>
+<hr>
+<h2 id="2-测试索引">2. 测试索引</h2>
+<pre><code class="language-sql">CREATE TABLE app_user (
+    `id` BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'ID',
+    `name` VARCHAR(50)  DEFAULT '' COMMENT '用户昵称',
+    `email` VARCHAR(50)  NOT NULL COMMENT '用户邮箱',
+    `phone` VARCHAR(20)  DEFAULT '' COMMENT '手机号',
+    `gender` TINYINT(4)  UNSIGNED DEFAULT '0' COMMENT '性别（0：男  1：女）',
+    `password` VARCHAR(100)  NOT NULL COMMENT '密码',
+    `age` TINYINT(4)  DEFAULT '0' COMMENT '年龄',
+    `create_time` DATETIME  DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `update_time` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+    PRIMARY KEY (`id`)
+) ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COMMENT='app用户表'
+
+
+-- 插入100万数据b (函数)
+
+DELIMITER $$ -- 写函数之前必须要写，标志
+CREATE FUNCTION mock_data()
+RETURNS INT
+DETERMINISTIC
+BEGIN
+    DECLARE num INT DEFAULT 1000000;
+    DECLARE i INT DEFAULT 0;
+    WHILE i&lt;num DO
+        INSERT INTO app_user(`name`,`email`,`phone`,`gender`,`password`,`age`)
+        VALUES(CONCAT('用户',i),'123345@qq.com',CONCAT('18',FLOOR(RAND()*((999999999-100000000)+100000000))),FLOOR(RAND()*2),UUID(),FLOOR(RAND()*100));
+        SET i = i+1;
+    END WHILE;
+    RETURN i;
+END;
+
+-- 执行函数
+SELECT mock_data();
+
+SELECT * FROM app_user;
+</code></pre>
+<p>测试</p>
+<pre><code class="language-sql">-- 加索引前
+SELECT * FROM app_user WHERE `name` = '用户9999'; -- 0.440 sec
+EXPLAIN SELECT * FROM app_user WHERE `name` = '用户9999';
+
+-- 创建索引
+-- id_表名_字段名  索引名
+-- CREATE INDEX 索引名 ON 表名(`字段名`);
+CREATE INDEX id_app_user_name ON app_user(`name`);
+ -- 加索引后
+SELECT * FROM app_user WHERE `name` = '用户9999'; -- 0.002 sec
+EXPLAIN SELECT * FROM app_user WHERE `name` = '用户9999';
+</code></pre>
+<p>加索引前</p>
+<figure data-type="image" tabindex="1"><img src="https://gitee.com/zhayuyao/img/raw/master/zhayuyao/img/image-20210704114603590.png" alt="image-20210704114603590" loading="lazy"></figure>
+<p>加索引后</p>
+<figure data-type="image" tabindex="2"><img src="https://gitee.com/zhayuyao/img/raw/master/zhayuyao/img/image-20210704114402938.png" alt="image-20210704114402938" loading="lazy"></figure>
+<p><strong>索引在小数据量的时候，用处不大，但是再大数据的时候，区分十分明显</strong></p>
+<hr>
+<h2 id="3-索引原则">3. 索引原则</h2>
+<ul>
+<li><strong>索引并非越多越好</strong>
+<ul>
+<li>占用磁盘空间</li>
+<li>影响INSERT、DELETE、UPDATE等语句的性能</li>
+</ul>
+</li>
+<li>避免对经常更新的表进行过多的索引，而对<strong>经常用于查询的字段应该创建索引</strong></li>
+<li><strong>数据量小的表最好不要使用索引</strong></li>
+<li>在条件表达式中经常用到的<strong>不同值较多的列上建立索引</strong>，在不同值很少的列上不要建立索引
+<ul>
+<li>严重降低数据更新速度</li>
+</ul>
+</li>
+<li>当<strong>唯一性是某种数据本身的特征时，指定唯一索引</strong>。使用唯一索引需能确保定义的列的数据完整性，以提高查询速度</li>
+<li>在<strong>频繁进行排序或分组</strong>（即进行group by或order by操作）的列上建立索引，如果待排序的列有多个，可以在这些列上<strong>建立组合索引</strong></li>
+<li>最适合索引的列是出现在<strong>WHERE子句中的列，或连接子句中指定的列</strong>，而不是出现在SELECT关键字后的选择列表中的列</li>
+<li><strong>使用短索引</strong>。如果对字符串列进行索引，应该指定一个前缀长度，只要有可能就应该这样做。
+<ul>
+<li>能够节省大量索引空间</li>
+<li>可能会使查询更快。较小的索引涉及的磁盘 IO 较少，较短的值比较起来更快。更为重要的是，对于较短的键值，索引高速缓存中的块能容纳更多的键值</li>
+</ul>
+</li>
+<li><strong>利用最左前缀</strong>。在创建一个n列的索引时，实际是创建了MySQL可利用的n个索引。多列索引可起几个索引的作用，因为可利用索引中最左边的列集来匹配行。这样的列集称为最左前缀。</li>
+<li>对于InnoDB存储引擎的表，记录默认会按照一定的顺序保存，如果有明确定义的<strong>主键</strong>，则按照主键顺序保存。如果没有主键，但是有<strong>唯一索引</strong>，那么就是按照唯一索引的顺序保存。如果既没有主键又没有唯一索引，那么表中会自动生成一个<strong>内部列</strong>，按照这个列的<strong>顺序保存</strong>。按照主键或者内部列进行的访问是最快的，所以InnoDB表尽量自己指定主键，当表中同时有几个列都是唯一的，都可以作为主键的时候，要选择最常作为访问条件的列作为主键，提高查询的效率。另外，还需要注意，InnoDB 表的普通索引都会保存主键的键值，所以主<strong>键要尽可能选择较短的数据类型</strong>，可以有效地减少索引的磁盘占用，提高索引的缓存效果</li>
+</ul>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[MySQL_05_事务]]></title>
+        <id>https://zdblog.top/kEulxZRW3/</id>
+        <link href="https://zdblog.top/kEulxZRW3/">
+        </link>
+        <updated>2022-03-30T13:30:07.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="1-事务的相关概念">1. 事务的相关概念</h2>
+<p><strong>要么都成功，要么都失败</strong></p>
+<p><strong>MySQL 中只有使用了 Innodb 数据库引擎的数据库或表才支持事务</strong></p>
+<p>将一组sql放到一个批次中去执行</p>
+<h3 id="事务原则acid原则-原子性-一致性-隔离性-持久性-脏读幻读">事务原则：ACID原则 原子性 、一致性、隔离性、持久性     （脏读，幻读。。。）</h3>
+<p>参考博客链接：<a href="https://blog.csdn.net/dengjili/article/details/82468576">事务ACID理解</a></p>
+<figure data-type="image" tabindex="1"><img src="https://s2.loli.net/2022/03/27/I8RZDmGrpOKo6ug.png" alt="事务转账例子.png" loading="lazy"></figure>
+<ul>
+<li><strong>原子性（Atomicity）</strong></li>
+</ul>
+<p>要么都成功，要么都失败</p>
+<ul>
+<li><strong>一致性（Consistency）</strong></li>
+</ul>
+<p>事务前后的数据完整性要保持一致</p>
+<p>下图操作前和操作后的总和都是1000</p>
+<ul>
+<li><strong>隔离性（Isolation）</strong></li>
+</ul>
+<p>事务的隔离性是多个用户并发访问数据库时，数据库为每一个用户开启的事务，不能被其他事务的操作数据所干扰，多个并发事务之间要相互隔离。</p>
+<ul>
+<li><strong>持久性（Durability）</strong></li>
+</ul>
+<p>事务一旦移交不可逆，被持久化到数据库中</p>
+<h3 id="隔离所导致的一些问题">隔离所导致的一些问题</h3>
+<ul>
+<li><strong>脏读</strong></li>
+</ul>
+<p>1、在事务A执行过程中，事务A对数据资源进行了修改，事务B读取了事务A修改后的数据。</p>
+<p>2、由于某些原因，事务A并没有完成提交，发生了RollBack操作，则事务B读取的数据就是脏数据。</p>
+<p>这种<strong>读取到另一个事务未提交的数据的现象就是脏读(Dirty Read)。</strong></p>
+<figure data-type="image" tabindex="2"><img src="https://s2.loli.net/2022/03/27/GJyRnpCUImgwrb3.png" alt="脏读.png" loading="lazy"></figure>
+<ul>
+<li><strong>不可重复读</strong></li>
+</ul>
+<p>事务B读取了两次数据资源，在这两次读取的过程中事务A修改了数据，导致事务B在这两次读取出来的数据不一致。</p>
+<p>这种<strong>在同一个事务中，前后两次读取的数据不一致的现象就是不可重复读(Nonrepeatable Read)。</strong></p>
+<figure data-type="image" tabindex="3"><img src="https://s2.loli.net/2022/03/27/G34RZp6F79PfAbW.png" alt="不可重复读.png" loading="lazy"></figure>
+<ul>
+<li><strong>虚读(幻读)</strong></li>
+</ul>
+<p>事务B前后两次读取同一个范围的数据，在事务B两次读取的过程中事务A新增了数据，导致事务B后一次读取到前一次查询没有看到的行。</p>
+<p>幻读和不可重复读有些类似，但是<strong>幻读强调的是集合的增减，而不是单条数据的更新。</strong></p>
+<figure data-type="image" tabindex="4"><img src="https://s2.loli.net/2022/03/27/OsMQfZEclhkRCnX.png" alt="幻读.png" loading="lazy"></figure>
+<ul>
+<li><strong>第一类更新丢失</strong></li>
+</ul>
+<p>事务A和事务B都对数据进行更新，但是事务A由于某种原因事务回滚了，把已经提交的事务B的更新数据给覆盖了。这种现象就是第一类更新丢失。</p>
+<figure data-type="image" tabindex="5"><img src="https://s2.loli.net/2022/03/27/jZB4nTvHPIg8w6o.png" alt="第一类更新丢失.png" loading="lazy"></figure>
+<ul>
+<li><strong>第二类更新丢失</strong></li>
+</ul>
+<p>其实跟第一类更新丢失有点类似，也是两个事务同时对数据进行更新，但是事务A的更新把已提交的事务B的更新数据给覆盖了。这种现象就是第二类更新丢失。</p>
+<figure data-type="image" tabindex="6"><img src="https://s2.loli.net/2022/03/27/yv8CMOAlKTr73Yo.png" alt="第二类更新丢失.jpg" loading="lazy"></figure>
+<h3 id="事务隔离级别">事务隔离级别</h3>
+<p>为了解决以上的问题，主流的关系型数据库都会提供四种事务的隔离级别。事务隔离级别从低到高分别是：读未提交，读已提交，可重复读，串行化。事务隔离级别越高，越能保证数据的一致性和完整性，但是执行效率也越低，所以在设置数据库的事务隔离级别时需要做一下权衡，mysql默认是可重复读</p>
+<ul>
+<li>读未提交</li>
+</ul>
+<p>读未提交(Read Uncommitted)，是最低的隔离级别，**所有的事务都可以看到其他未提交的事务的执行结果。**只能防止第一类更新丢失，不能解决脏读，可重复读，幻读，所以很少应用于实际项目。</p>
+<ul>
+<li>读已提交</li>
+</ul>
+<p>读已提交(Read Committed)，在该隔离级别下，**一个事务的更新操作只有在该事务提交之后，另外一个事务才可能读取到同一笔数据更新后的结果。**可以防止脏读和第一类更新丢失，但是不能解决可重复和幻读的问题。</p>
+<ul>
+<li>可重复读（重要）</li>
+</ul>
+<p>可重复读(Repeatable Read)，mysql默认的隔离级别。在该隔离级别下，<strong>一个事务多次读同一个数据，在这个事务还没有结束时，其他事务不能访问该数据（包括了读写）</strong>，这样就可以在同一个事务内两次读到的数据是一样的。可以防止脏读、不可重复读、第一类更新丢失，第二类更新丢失的问题，不过还是会出现幻读。</p>
+<ul>
+<li>串行化</li>
+</ul>
+<p>串行化(Serializable)，这是最高的隔离级别。它要求事务序列化执行，事务只能一个接着一个的执行，不能并发执行。在这个级别，可以解决上面提到的所有并发问题，但是可能导致大量的超时现象和锁竞争，通常不会用这个隔离级别。</p>
+<h3 id="总结">总结</h3>
+<table>
+<thead>
+<tr>
+<th>隔离级别</th>
+<th>脏读</th>
+<th>不可重复读</th>
+<th>幻读</th>
+<th>第一类更新丢失</th>
+<th>第二类更新丢失</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Read Uncommitted</td>
+<td>允许</td>
+<td>允许</td>
+<td>允许</td>
+<td>不允许</td>
+<td>允许</td>
+</tr>
+<tr>
+<td>Read Committed</td>
+<td>不允许</td>
+<td>允许</td>
+<td>允许</td>
+<td>不允许</td>
+<td>允许</td>
+</tr>
+<tr>
+<td>Repeatable Read</td>
+<td>不允许</td>
+<td>不允许</td>
+<td>允许</td>
+<td>不允许</td>
+<td>允许</td>
+</tr>
+<tr>
+<td>Serializable</td>
+<td>不允许</td>
+<td>不允许</td>
+<td>不允许</td>
+<td>不允许</td>
+<td>不允许</td>
+</tr>
+</tbody>
+</table>
+<h2 id="2-扩展回滚机制">2. 扩展：回滚机制</h2>
+<p>在mysql中，恢复机制是通过回滚日志（undo log）实现的，所有的事务进行的修改都会先记录到这个回滚日志中，然后在堆数据库中的对应进行写入。</p>
+<p>mysql的事务是由redo和undo的，redo操作的所有信息都是记录到重做日志（redo_log）中，也就是说当一个事务做commit操作时，需要先把这个事务的操作写到redo_log中，然后在把这些操作flush到磁盘上，当出现故障时，只需要读取redo_log，然后在重新flush到磁盘就行了。</p>
+<p>而对于undo就比较麻烦，mysql在处理事务时，会在数据共享表空间里申请一个段就做segment段，用保存undo信息，当在处理rollback，不是完完全全的物理undo，而是逻辑undo，也就是说会之前的操作进行反操作（对于每个insert，回滚时会执行delete；对于每个delete，回滚时会执行insert；对于每个update，回滚时会执行一个相反的update，把数据改回去。），但是这些共享表空间是不进行回收的。这些表空间的回收需要由mysql的master thread进程进行回收。</p>
+<h2 id="3-事务实例">3. 事务实例</h2>
+<h3 id="执行事务操作">执行事务操作</h3>
+<pre><code class="language-sql">
+-- 事务
+-- mysql 是默认开启事务自动提交
+
+-- 关闭
+SET autocommit = 0; 
+-- 开启（默认的）
+SET autocommit = 1;
+
+-- 手动处理事务
+
+SET autocommit = 0;  -- 关闭自动提交
+
+-- 事务开启
+START TRANSACTION;  -- 标记一个事务的开始，从这个之后的sql都在同一个事务内
+
+INSERT XX
+INSERT XX
+
+-- 提交 ： 持久化
+COMMIT;
+-- 回滚 ： 回到的原来的样子（失败）
+ROLLBACK;
+-- 事务结束
+SET autocommit = 1; -- 开启自动提交
+
+-- 了解
+SAVEPOINT 保存点名 -- 设置一个事务的保存点
+ROLLBACK TO SAVEPOINT 保存点名 -- 回滚到保存点
+RELEASE SAVEPOINT 保存点名 -- 撤销保存点
+</code></pre>
+<h3 id="模拟转账场景">模拟转账场景</h3>
+<pre><code class="language-sql">-- 转账
+
+-- 创建数据库
+CREATE DATABASE shop CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+-- 使用shop数据库
+USER `shop`;
+
+
+-- 建表
+CREATE TABLE `account`(
+  `id` INT(3) NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(100) NOT NULL,
+  `money` DECIMAL(9,2) NOT NULL,
+  PRIMARY KEY (`id`)
+)ENGINE=INNODB DEFAULT CHARSET=utf8;
+
+-- 初始化数据
+INSERT INTO account(`name`,`money`)
+VALUES('A',2000.00),
+('B',10000.00);
+
+-- 模拟转账
+SET autocommit = 0; -- 关闭自动提交
+
+START TRANSACTION; -- 开启事务 （一组事务）
+
+UPDATE account SET `money`=`money`-500 WHERE `name`='A'; -- A减500
+UPDATE account SET `money`=`money`+500 WHERE `name`='B'; -- B加500
+
+COMMIT; -- 提交事务，就会被持久化了
+
+ROLLBACK; -- 回滚
+
+SET autocommit = 1; -- 恢复自动提交
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[MySQL_04_函数]]></title>
+        <id>https://zdblog.top/1c5B254lO/</id>
+        <link href="https://zdblog.top/1c5B254lO/">
+        </link>
+        <updated>2022-03-30T13:29:20.000Z</updated>
+        <content type="html"><![CDATA[<p>官网：<a href="https://dev.mysql.com/doc/refman/8.0/en/built-in-function-reference.html">内置函数</a></p>
+<p>菜鸟教程：<a href="https://www.runoob.com/mysql/mysql-functions.html">MySQL函数</a></p>
+<h2 id="1-常用函数">1. 常用函数</h2>
+<h3 id="数学运算">数学运算</h3>
+<pre><code class="language-sql">SELECT ABS(-8)	-- 绝对值，8
+
+SELECT CEILING(9.4)  -- 向上取整，10
+
+SELECT FLOOR(9.4)  -- 向下取整，9
+
+SELECT RAND()  -- 返回一个0~1之间的随机数
+
+SELECT SIGN(-2)  -- 判断值的符号，正数返回1，零返回0，附属返回-1，-1
+</code></pre>
+<h3 id="字符串函数">字符串函数</h3>
+<pre><code class="language-sql">SELECT CHAR_LENGTH('返回字符串长度') -- 返回字符串长度，7
+
+SELECT CONCAT('hello',' ','My','SQL')  -- 拼接字符串，hello MySQL
+
+SELECT INSERT('我爱MySQL',2,1,'超级热爱'); -- 插入/替换，我超级热爱MySQL
+
+SELECT LOWER('ILoveMySQL') -- 返回小写，ilovemysql
+
+SELECT UPPER('ILoveMySQL') -- 返回大写，ILOVEMYSQL
+
+SELECT REPLACE('I Love Love MySQL','Love','Hate')  -- 用指定字符串替换出现的字符串，I Hate Hate MySQL
+
+SELECT INSTR('I Love Love MySQL','Love')  -- 返回第一次出现的子串的索引，3
+
+SELECT SUBSTR('I Love Love MySQL',8,17)  -- 返回指定索引的字符串，Love MySQL
+
+SELECT REVERSE('你是心中的恋爱')  -- 反转，爱恋的中心是你
+</code></pre>
+<h3 id="时间和日期">时间和日期</h3>
+<pre><code class="language-sql">SELECT CURRENT_DATE()  -- 返回当前日期，YYYY-MM-DD
+
+SELECT CURDATE()  -- 返回当前日期，YYYY-MM-DD
+
+SELECT NOW() -- 返回当前时间，YYYY-MM-DD hh:mm:ss
+
+SELECT LOCALTIME() -- 返回本地时间，YYYY-MM-DD hh:mm:ss
+
+SELECT SYSDATE() -- 返回系统时间，YYYY-MM-DD hh:mm:ss
+
+SELECT YEAR(NOW())
+SELECT MONTH(NOW())
+SELECT DAY(NOW())
+SELECT HOUR(NOW())
+SELECT MINUTE(NOW())
+SELECT SECOND(NOW())
+</code></pre>
+<h3 id="系统">系统</h3>
+<pre><code class="language-sql">SELECT SYSTEM_USER()
+
+SELECT USER()
+
+SELECT VERSION()
+</code></pre>
+<h2 id="2-聚合函数常用">2. 聚合函数（常用）</h2>
+<table>
+<thead>
+<tr>
+<th>函数名称</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>count()</td>
+<td>计数</td>
+</tr>
+<tr>
+<td>sum()</td>
+<td>求和</td>
+</tr>
+<tr>
+<td>avg()</td>
+<td>平均值</td>
+</tr>
+<tr>
+<td>max()</td>
+<td>最大值</td>
+</tr>
+<tr>
+<td>min()</td>
+<td>最小值</td>
+</tr>
+</tbody>
+</table>
+<pre><code class="language-sql">-- 聚合函数
+-- 都能统计 表中数据
+
+-- count(字段) 会忽略所有的null值(想查询一个表中有多少个记录，就使用这个count())
+SELECT COUNT(student_name) FROM student;
+-- COUNT(*) 不会忽略所有的null值 本质计算行数
+SELECT COUNT(*) FROM student;
+-- COUNT(1) 不会忽略所有的null值 本质计算行数
+SELECT COUNT(1) FROM student;
+
+
+SELECT SUM(student_result) AS '总和' FROM result;
+SELECT AVG(student_result) AS '平均分' FROM result;
+SELECT MAX(student_result) AS '最高分' FROM result;
+SELECT MIN(student_result) AS '最低分' FROM result;
+
+-- 查询不同课程的平均分，最高分，最低分
+SELECT sub.subject_name AS '课程',
+AVG(res.student_result) AS '平均分',
+MAX(res.student_result) AS '最高分',
+MIN(res.student_result) AS '最低分'
+FROM result res
+INNER JOIN `subject` sub
+ON res.`subject_no`=sub.`subject_no`
+GROUP BY res.`subject_no`
+HAVING AVG(res.student_result) &gt;80;
+</code></pre>
+<hr>
+<h2 id="3-数据库级别的md5加密拓展">3. 数据库级别的MD5加密（拓展）</h2>
+<p>MD5：增加算法复杂度和不可逆性。</p>
+<p>MD5不可逆，具体的值的md5是一样的</p>
+<p>MD5破解网站的原理，背后有一个字典，MD5加密后的值，加密前的值</p>
+<pre><code class="language-sql">CREATE TABLE `testmd5`(
+    `id` INT(4) NOT NULL,
+    `name` VARCHAR(20) NOT NULL,
+    `pwd` VARCHAR(50) NOT NULL,
+    PRIMARY KEY (`id`)
+)ENGINE=INNODB DEFAULT CHARSET=utf8;
+
+-- 明文密码
+INSERT INTO `testmd5`(`id`,`name`,`pwd`)
+VALUES
+(1,'张三','111111'),
+(2,'李四','123456'),
+(3,'王五','123456');
+
+
+SELECT * FROM `testmd5`;
+
+-- 加密
+UPDATE testmd5 SET pwd=MD5(pwd) 
+WHERE id=2;
+
+-- 插入的时候加密
+INSERT INTO `testmd5`(`id`,`name`,`pwd`)
+VALUES
+(4,'小明',MD5('123456'));
+
+-- 如何校验，将用户传递进来的密码，进行MD5加密，然后比对加密后的值
+
+SELECT * FROM `testmd5`
+WHERE `name`='小明'
+AND pwd = MD5('123456');
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[MySQL_03_DQL查询数据语言]]></title>
+        <id>https://zdblog.top/lwJF2vSoV/</id>
+        <link href="https://zdblog.top/lwJF2vSoV/">
+        </link>
+        <updated>2022-03-30T13:27:38.000Z</updated>
+        <content type="html"><![CDATA[<p>DQL(Date Query Language):数据查询语言</p>
+<p><strong>select 语法</strong></p>
+<pre><code class="language-sql">SELECT [ALL | DISTINCT]
+{* | table.* | [table.field1[as alias1][,table.field2[as alias2]][,...]]}
+FROM table_name [as table_alias]
+    [left | right | inner join table_name2]  -- 联合查询
+    [WHERE ...]  -- 指定结果需满足的条件
+    [GROUP BY ...]  -- 指定结果按照哪几个字段来分组
+    [HAVING ...]  -- 过滤分组的记录必须满足的次要条件
+    [ORDER BY ...]  -- 指定查询记录按一个或多个条件排序
+    [LIMIT {[offset,]row_count | row_countOFFSET offset}]; --  指定查询的记录从哪条至哪条
+</code></pre>
+<p>注意：[]括号代表可选的，{}括号代表必选的</p>
+<h2 id="1-指定查询字段">1. 指定查询字段</h2>
+<pre><code class="language-sql">DROP DATABASE IF EXISTS `school`;
+-- 创建一个school数据库
+CREATE DATABASE IF NOT EXISTS `school`;
+-- 使用school数据库
+USE `school`;
+-- 创建学生表
+DROP TABLE IF EXISTS `student`;
+CREATE TABLE `student`(
+    `student_no` INT(4) NOT NULL COMMENT '学号',
+    `login_pwd` VARCHAR(20) DEFAULT NULL,
+    `student_name` VARCHAR(20) DEFAULT NULL COMMENT '学生姓名',
+    `sex` TINYINT(1) DEFAULT NULL COMMENT '性别，0或1',
+    `grade_id` INT(11) DEFAULT NULL COMMENT '年级编号',
+    `phone` VARCHAR(50) NOT NULL COMMENT '联系电话',
+    `address` VARCHAR(255) NOT NULL COMMENT '地址',
+    `born_date` DATETIME DEFAULT NULL COMMENT '出生时间',
+    `email` VARCHAR (50) NOT NULL COMMENT '邮箱账号',
+    `identity_card` VARCHAR(18) DEFAULT NULL COMMENT '身份证号',
+    PRIMARY KEY (`student_no`)
+)ENGINE=INNODB DEFAULT CHARSET=utf8;
+
+-- 创建年级表
+DROP TABLE IF EXISTS `grade`;
+CREATE TABLE `grade`(
+  `grade_id` INT(11) NOT NULL AUTO_INCREMENT COMMENT '年级编号',
+  `grade_name` VARCHAR(50) NOT NULL COMMENT '年级名称',
+   PRIMARY KEY (`grade_id`)
+) ENGINE=INNODB DEFAULT CHARSET = utf8;
+
+-- 创建科目表
+DROP TABLE IF EXISTS `subject`;
+CREATE TABLE `subject`(
+  `subject_no`INT(11) NOT NULL AUTO_INCREMENT COMMENT '课程编号',
+  `subject_name` VARCHAR(50) DEFAULT NULL COMMENT '课程名称',
+  `class_hour` INT(4) DEFAULT NULL COMMENT '学时',
+  `grade_id` INT(4) DEFAULT NULL COMMENT '年级编号',
+   PRIMARY KEY (`subject_no`)
+)ENGINE = INNODB  DEFAULT CHARSET = utf8;
+
+-- 创建成绩表
+DROP TABLE IF EXISTS `result`;
+CREATE TABLE `result`(
+  `student_no` INT(4) NOT NULL COMMENT '学号',
+  `subject_no` INT(4) NOT NULL COMMENT '课程编号',
+  `exam_date` DATETIME NOT NULL COMMENT '考试日期',
+  `student_result` INT (4) NOT NULL COMMENT '考试成绩'
+  )ENGINE = INNODB DEFAULT CHARSET = utf8;
+  
+-- 插入学生数据 其余自行添加 这里只添加了2行
+INSERT INTO `student` (`student_no`,`login_pwd`,`student_name`,`sex`,`grade_id`,`phone`,`address`,`born_date`,`email`,`identity_card`)
+VALUES
+(1000,'123456','张伟',0,2,'13800001234','北京朝阳','1980-1-1','text123@qq.com','123456198001011234'),
+(1001,'123456','赵强',1,3,'13800002222','广东深圳','1990-1-1','text111@qq.com','123456199001011233');
+
+-- 插入年级数据
+INSERT INTO `grade` (`grade_id`,`grade_name`) VALUES(1,'大一'),(2,'大二'),(3,'大三'),(4,'大四'),(5,'预科班');
+
+-- 插入科目数据
+INSERT INTO `subject`(`subject_no`,`subject_name`,`class_hour`,`grade_id`)VALUES
+(1,'高等数学-1',110,1),
+(2,'高等数学-2',110,2),
+(3,'高等数学-3',100,3),
+(4,'高等数学-4',130,4),
+(5,'C语言-1',110,1),
+(6,'C语言-2',110,2),
+(7,'C语言-3',100,3),
+(8,'C语言-4',130,4),
+(9,'Java程序设计-1',110,1),
+(10,'Java程序设计-2',110,2),
+(11,'Java程序设计-3',100,3),
+(12,'Java程序设计-4',130,4),
+(13,'数据库结构-1',110,1),
+(14,'数据库结构-2',110,2),
+(15,'数据库结构-3',100,3),
+(16,'数据库结构-4',130,4),
+(17,'C#基础',130,1);
+
+-- 插入成绩数据  这里仅插入了一组，其余自行添加
+INSERT INTO `result`(`student_no`,`subject_no`,`exam_date`,`student_result`)
+VALUES
+(1000,1,'2013-11-11 16:00:00',85),
+(1000,2,'2013-11-12 16:00:00',70),
+(1000,3,'2013-11-11 09:00:00',68),
+(1000,4,'2013-11-13 16:00:00',98),
+(1000,5,'2013-11-14 16:00:00',58);
+
+</code></pre>
+<pre><code class="language-sql">  -- 查询全部的学生   SELECT 字段 FROM 表名;
+  SELECT * FROM student;
+  
+  -- 查询指定字段
+  SELECT student_name, student_no FROM student;
+  
+  -- 别名，给结果起一个名字 AS  可以给字段起别名，也可以给表起别名
+  
+  SELECT student_name AS '学号', student_no AS '姓名' FROM student;
+  
+  -- 函数 concat(a,b)
+  SELECT CONCAT('姓名：', student_no)  AS '新姓名' FROM student;
+</code></pre>
+<blockquote>
+<p>有的时候，列表名不是那么见名知意，我们可以使用别名</p>
+</blockquote>
+<h3 id="去重-distinct">去重 distinct</h3>
+<pre><code class="language-sql">  -- 查询全部的考试成绩
+  SELECT * FROM result;
+  -- 查询有哪些同学参加了考试
+  SELECT `student_no` FROM result;
+  -- 发现重复数据，去重
+  SELECT DISTINCT `student_no` FROM result;
+</code></pre>
+<h3 id="数据库的列表达式">数据库的列（表达式）</h3>
+<pre><code class="language-sql">-- 查询系统版本（函数）
+SELECT VERSION();
+
+-- 用来计算（表达式）
+SELECT 100*3 -1 ;
+
+-- 查询自增的步长（变量）
+SELECT @@auto_increment_increment;
+
+-- 学员考试成绩 +1 查看
+SELECT `student_no`,`student_result` + 1 AS '提分后' FROM result;
+</code></pre>
+<p>数据库中的表达式： 文本值，列，Null，函数，计算表达式，系统变量</p>
+<p>select `表达式` from 表名</p>
+<hr>
+<h2 id="2-where条件子句-select-中的使用">2. WHERE条件子句 SELECT 中的使用</h2>
+<p>作用：检索数据中<strong>符合条件</strong>的值</p>
+<p>搜索的条件由一个或多个表达式组成，结果返回布尔值</p>
+<pre><code class="language-sql">-- 查询考试成绩在 95 ~ 100分之间
+
+SELECT student_no,student_result FROM result;
+
+-- and
+SELECT student_no,student_result FROM result
+WHERE student_result&gt;=80 AND student_result&lt;=100;
+-- &amp;&amp; 
+SELECT student_no,student_result FROM result
+WHERE student_result&gt;=80 &amp;&amp; student_result&lt;=100;
+
+-- 模糊查询（区间）
+SELECT student_no,student_result FROM result
+WHERE student_result BETWEEN 80 AND 100;
+
+-- 除了1000号学生之外的学生的成绩
+-- !=
+SELECT student_no,student_result FROM result
+WHERE student_result BETWEEN 80 AND 100
+AND student_result!=98;
+-- not
+SELECT student_no,student_result FROM result
+WHERE student_result BETWEEN 80 AND 100
+AND NOT student_result=98;
+</code></pre>
+<h3 id="模糊查询比较运算符">模糊查询：比较运算符</h3>
+<table>
+<thead>
+<tr>
+<th>运算符</th>
+<th>语法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>IS NULL</td>
+<td>a is null</td>
+<td>如果操作符为null，结果为真</td>
+</tr>
+<tr>
+<td>IS NOT NULL</td>
+<td>a is not null</td>
+<td>如果操作符不为null，结果为真</td>
+</tr>
+<tr>
+<td>BWTWEEN...AND...</td>
+<td>a between b and c</td>
+<td>若a在b和c之间，则结果为真</td>
+</tr>
+<tr>
+<td><strong>LIKE</strong></td>
+<td>a like b</td>
+<td>SQL匹配，如果a匹配b,则结果为真</td>
+</tr>
+<tr>
+<td>IN</td>
+<td>a in (a1,a2,a3,...)</td>
+<td>假设a在a1或者a2或者a3,...其中的某一个，则结果为真</td>
+</tr>
+</tbody>
+</table>
+<pre><code class="language-sql">
+-- 查询姓刘的同学
+
+-- like 结合 
+--   %（代表0到任意个字符）
+--   _（代表1）
+
+-- 查询姓刘的同学
+SELECT `student_no`,`student_name` FROM `student`
+WHERE `student_name` LIKE '刘%';
+
+-- 查询姓刘的同学，名字后面只有一个字的
+SELECT `student_no`,`student_name` FROM `student`
+WHERE `student_name` LIKE '刘_';
+
+-- 查询姓刘的同学，名字后面有两个字的
+SELECT `student_no`,`student_name` FROM `student`
+WHERE `student_name` LIKE '刘__';
+
+-- 查询名字中间有嘉字的同学
+SELECT `student_no`,`student_name` FROM `student`
+WHERE `student_name` LIKE '%嘉%';
+
+
+-- in (具体的一个或者多个值)
+-- 查询学号1001,1002,1003号学号
+SELECT `student_no`,`student_name` FROM `student`
+WHERE student_no IN ('1001','1002','1003');
+-- 查询在北京的学生
+SELECT `student_no`,`student_name` FROM `student`
+WHERE `address` IN ('北京');
+
+
+-- null
+-- 查询地址为空的学生
+SELECT `student_no`,`student_name` FROM `student`
+WHERE `address` = '' OR address IS NULL;
+
+-- not null
+-- 查询有出生日期的同学 不为空
+SELECT `student_no`,`student_name` FROM `student`
+WHERE `born_date` IS NOT NULL;
+
+-- 查询没有出生日期的同学 为空
+SELECT `student_no`,`student_name` FROM `student`
+WHERE `born_date` IS NULL;
+</code></pre>
+<hr>
+<h2 id="3-联表查询join">3. 联表查询（join）</h2>
+<h3 id="七种join对比">七种join对比</h3>
+<figure data-type="image" tabindex="1"><img src="https://s2.loli.net/2022/03/26/B4vuxsynzr5RL9j.png" alt="joins.png" loading="lazy"></figure>
+<p>MySQL中没有<code>... FULL OUTER JOIN ...</code>操作，用<code>union</code></p>
+<pre><code class="language-sql">-- 全连接（左连接 union 右连接）
+SELECT &lt;select_list&gt; FROM TableA A LEFT JOIN TableB B ON A.Key = B.Key
+union
+SELECT &lt;select_list&gt; FROM TableA A RIGHT JOIN TableB B ON A.Key = B.Key;
+
+-- A、B各自独有的
+SELECT &lt;select_list&gt; FROM TableA A LEFT JOIN TableB B ON A.Key = B.Key WHERE B.Key IS NULL
+union
+SELECT &lt;select_list&gt; FROM TableA A RIGHT JOIN TableB B ON A.Key = B.Key WHERE A.Key IS NULL;
+</code></pre>
+<p>实例:</p>
+<pre><code class="language-sql">--   =========连表查询==================
+
+-- 查询参加了考试的同学（学号，姓名，科目编号，分数）
+SELECT * FROM student;
+SELECT * FROM result;
+
+-- join on 连接查询
+-- where 等值查询
+
+-- inner join
+SELECT st.`student_no`,st.`student_name`,re.`subject_no`,re.`student_result` 
+FROM student AS st
+INNER JOIN result AS re 
+ON st.`student_no`=re.`student_no`;
+
+-- right join
+SELECT st.`student_no`,st.`student_name`,re.`subject_no`,re.`student_result` 
+FROM student st
+RIGHT JOIN result re 
+ON st.`student_no`=re.`student_no`;
+
+-- left join
+SELECT st.`student_no`,st.`student_name`,re.`subject_no`,re.`student_result` 
+FROM student st
+LEFT JOIN result re
+ON st.`student_no`=re.`student_no`;
+
+-- 查询缺考的同学
+SELECT st.`student_no`,st.`student_name`,re.`subject_no`,re.`student_result` 
+FROM student st
+LEFT JOIN result re ON 
+st.`student_no`=re.`student_no`
+WHERE re.`student_result` IS NULL;
+
+-- 查询了参加考试的同学信息（学号，学生姓名，科目名称，分数）
+SELECT stu.`student_no`,stu.`student_name`,sub.`subject_name`,res.`student_result`
+FROM `student` stu
+RIGHT JOIN `result` res 
+ON res.`student_no`=stu.`student_no`
+INNER JOIN `subject` sub
+ON res.`subject_no`=sub.`subject_no`;
+
+-- 查询学员所属的年级（学号，学生的姓名，年级名称）
+SELECT `student_no`,`student_name`,`grade_name`
+FROM student stu
+INNER JOIN `grade` gra
+ON stu.`grade_id`=gra.`grade_id`;
+
+-- 查询了参加数据结构-1考试的同学信息（学号，学生姓名，科目名称，分数）
+SELECT stu.`student_no`,stu.`student_name`,sub.`subject_name`,res.`student_result`
+FROM student stu
+INNER JOIN `result` res
+ON stu.`student_no` = res.`student_no`
+INNER JOIN `subject` sub
+ON res.`subject_no`=sub.`subject_no`
+WHERE sub.`subject_name`='数据结构-1';
+
+
+-- 要查询哪些数据 select ...
+-- 从哪几个表中查 from 表 XXX join 连接的表 on 交叉条件
+-- 假设存在一种多张表查询，慢慢来，先查询两张表然后再慢慢增加
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>操作</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>inner join</td>
+<td>如果表中至少有一个匹配，就返回行</td>
+</tr>
+<tr>
+<td>left join</td>
+<td>会从左边中返回所有的值，即使右表中没有匹配</td>
+</tr>
+<tr>
+<td>right join</td>
+<td>会从右边中返回所有的值，即使左表中没有匹配</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="自连接">自连接</h3>
+<blockquote>
+<p>自连接</p>
+</blockquote>
+<p>自己的表和自己的表连接，核心：<strong>一张表拆为两张一样的表即可</strong></p>
+<pre><code class="language-sql">-- 创建表
+-- unsigned 无符号
+-- auto_increment=9 自增的起始值
+DROP TABLE IF EXISTS `category` ;
+CREATE TABLE `category` (
+  `category_id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '主题id',
+  `pid` INT(10) NOT NULL COMMENT '父id',
+  `category_name` VARCHAR(50) NOT NULL COMMENT '主题名字',
+  PRIMARY KEY (`category_id`)
+) ENGINE=INNODB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+
+-- 插入值
+INSERT INTO `category`(`category_id`,`pid`,`category_name`)
+VALUES('2','1','信息技术'),
+('3','1','软件开发'),
+('4','3','数据库'),
+('5','1','美术设计'),
+('6','3','web开发'),
+('7','5','ps技术'),
+('8','2','办公信息');
+
+SELECT * FROM `category`;
+</code></pre>
+<p>父类</p>
+<table>
+<thead>
+<tr>
+<th>pid</th>
+<th>category_id</th>
+<th>category_name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>2</td>
+<td>信息技术</td>
+</tr>
+<tr>
+<td>1</td>
+<td>3</td>
+<td>软件开发</td>
+</tr>
+<tr>
+<td>1</td>
+<td>5</td>
+<td>美术设计</td>
+</tr>
+</tbody>
+</table>
+<p>子类</p>
+<table>
+<thead>
+<tr>
+<th>pid</th>
+<th>category_id</th>
+<th>category_name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>3</td>
+<td>4</td>
+<td>数据库</td>
+</tr>
+<tr>
+<td>2</td>
+<td>8</td>
+<td>办公信息</td>
+</tr>
+<tr>
+<td>3</td>
+<td>6</td>
+<td>web开发</td>
+</tr>
+<tr>
+<td>5</td>
+<td>7</td>
+<td>ps技术</td>
+</tr>
+</tbody>
+</table>
+<p>操作：查询父类对应的子类关系</p>
+<table>
+<thead>
+<tr>
+<th>父类</th>
+<th>子类</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>信息技术</td>
+<td>办公信息</td>
+</tr>
+<tr>
+<td>软件开发</td>
+<td>数据库</td>
+</tr>
+<tr>
+<td>软件开发</td>
+<td>web开发</td>
+</tr>
+<tr>
+<td>美术设计</td>
+<td>ps技术</td>
+</tr>
+</tbody>
+</table>
+<pre><code class="language-sql">-- 查询父子信息，把一张表看为两个一模一样的表
+SELECT a.`category_name` AS '父栏目',b.`category_name` AS '子栏目'
+FROM `category` AS a, `category` AS b
+WHERE a.`category_id`=b.`pid`;
+</code></pre>
+<h2 id="4-分页和排序">4. 分页和排序</h2>
+<pre><code class="language-sql">-- 排序： 升序 ASC  降序 DESC
+-- ORDER BY 通过那个字段排序，怎么排
+-- 查询的结果根据成绩降序 排序
+SELECT stu.`student_no`,stu.`student_name`,sub.`subject_name`,res.`student_result`
+FROM student stu
+INNER JOIN `result` res
+ON stu.`student_no` = res.`student_no`
+INNER JOIN `subject` sub
+ON res.`subject_no`=sub.`subject_no`
+WHERE sub.`subject_name`='数据结构-1'
+ORDER BY `student_result` DESC;
+</code></pre>
+<pre><code class="language-sql">-- 100w
+-- 为什么要分页？
+-- 缓解数据库压力，给人更好的体验   瀑布流
+-- 分页，每页只显示五条数据
+-- 语法 ： limit 起始值，页面的大小
+-- 网页应用：当前页，总的页数，每页大小
+-- LIMIT 0,5    1~5
+-- LIMIT 1,5    2~6
+-- LIMIT 6,5
+SELECT stu.`student_no`,stu.`student_name`,sub.`subject_name`,res.`student_result`
+FROM student stu
+INNER JOIN `result` res
+ON stu.`student_no` = res.`student_no`
+INNER JOIN `subject` sub
+ON res.`subject_no`=sub.`subject_no`
+WHERE sub.`subject_name`='数据结构-1'
+ORDER BY `student_result` DESC
+LIMIT 1,5;
+-- 第一页 limit 0,5    (1-1)*5
+-- 第二页 limit 5,5    (2-1)*5
+-- 第三页 limit 10,5   (3-1)*5
+-- 第N页 limit (n-1)*5,5    (n-1)*pageSize,pageSize
+-- pageSize,页面大小
+-- (n-1)*pageSize，起始值
+-- n，当前页
+-- 总页数 = (数据总数%页面大小==0)? (数据总数/页面大小) : (数据总数/页面大小 + 1)
+
+-- 查询科目高等数学-2，课程成绩排名前十的学生，并且分数要大于60的学生信息（学号，姓名，课程名称，分数）
+SELECT stu.`student_no`,stu.`student_name`,sub.`subject_name`,res.`student_result`
+FROM student stu
+INNER JOIN `subject` sub
+ON stu.`grade_id`=sub.`grade_id`
+INNER JOIN `result` res
+ON sub.`subject_no`=res.`subject_no`
+WHERE sub.`subject_name`='高等数学-2'
+AND res.`student_result`&gt;60
+ORDER BY res.`student_result` DESC
+LIMIT 0,10;
+</code></pre>
+<p>语法： <code>limit 查询起始下标,页面大小</code></p>
+<hr>
+<h2 id="5-子查询">5. 子查询</h2>
+<p>where（这个值是计算出来的）</p>
+<p>本质：<code>在where语句中嵌套一个子查询语句</code></p>
+<pre><code class="language-sql">
+-- 1.查询数据库结构-1的所有考试结果（学号，科目名，成绩），降序排列
+-- 方式1：使用连接查询
+SELECT res.`student_no`,res.`subject_no`,res.`student_result`
+FROM `result` res
+INNER JOIN `subject` sub
+ON res.`subject_no`=sub.`subject_no`
+WHERE sub.`subject_name`='高等数学-2'
+ORDER BY res.`student_result` DESC;
+
+
+-- 使用子查询(由里及外)
+SELECT res.`student_no`,res.`subject_no`,res.`student_result`
+FROM `result` res
+WHERE res.`subject_no` = (
+    SELECT sub.`subject_no`
+    FROM `subject` sub
+    WHERE sub.`subject_name`='高等数学-2'
+)
+ORDER BY res.`student_result` DESC;
+
+-- 分数不小于80分的学生的学号和姓名
+
+SELECT DISTINCT stu.`student_no`,stu.`student_name`
+FROM student stu
+INNER JOIN result res
+ON stu.`student_no`=res.`student_no`
+WHERE res.`student_result` &gt; 80;
+
+
+-- 在这个基础上增加一个科目，查询课程为高等数学-2，且分数不小于80分的学生的学号和姓名
+SELECT DISTINCT stu.`student_no`,stu.`student_name`
+FROM student stu
+INNER JOIN result res
+ON stu.`student_no`=res.`student_no`
+WHERE res.`student_result` &gt; 80
+AND res.`subject_no`=(
+SELECT sub.`subject_no` FROM `subject` sub
+WHERE sub.`subject_name`='高等数学-2'
+);
+
+
+SELECT DISTINCT stu.`student_no`,stu.`student_name`
+FROM student stu
+INNER JOIN result res
+ON stu.`student_no`=res.`student_no`
+INNER JOIN `subject` sub
+ON res.`subject_no`=sub.`subject_no`
+WHERE sub.`subject_name`='高等数学-2'
+AND res.`student_result` &gt; 80;
+
+--  子查询（由里及外）
+SELECT DISTINCT `student_no`,`student_name` 
+FROM student 
+WHERE student_no IN (
+    SELECT student_no 
+    FROM result 
+    WHERE `student_result` &gt; 80 
+    AND subject_no = (
+        SELECT subject_no 
+        FROM `subject` 
+        WHERE `subject_name`='高等数学-2'
+    )
+);
+</code></pre>
+<hr>
+<h2 id="6-分组和过滤">6. 分组和过滤</h2>
+<pre><code class="language-sql">[GROUP BY ...]  -- 指定结果按照哪几个字段来分组
+[HAVING ...]  -- 过滤分组的记录必须满足的次要条件
+
+-- 查询不同课程的平均分，最高分，最低分
+SELECT sub.subject_name AS '课程',
+AVG(res.student_result) AS '平均分',
+MAX(res.student_result) AS '最高分',
+MIN(res.student_result) AS '最低分'
+FROM result res
+INNER JOIN `subject` sub
+ON res.`subject_no`=sub.`subject_no`
+GROUP BY res.`subject_no`
+HAVING AVG(res.student_result) &gt;80;
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[MySQL_02_mysql数据管理]]></title>
+        <id>https://zdblog.top/9N5dMuR4p/</id>
+        <link href="https://zdblog.top/9N5dMuR4p/">
+        </link>
+        <updated>2022-03-30T13:26:26.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="1-外键了解">1. 外键（了解）</h2>
+<h3 id="方式一在创建表的时候增加外键约束">方式一：在创建表的时候，增加外键约束</h3>
+<pre><code class="language-sql">-- 学生表students的 gradeid 字段要去引用年级表的 gradeid 字段
+
+CREATE TABLE IF NOT EXISTS `students`(
+    `id` INT(4) NOT NULL AUTO_INCREMENT COMMENT '学号',
+    `name` VARCHAR(30) NOT NULL DEFAULT '匿名' COMMENT '姓名',
+    `password` VARCHAR(10) NOT NULL DEFAULT '123456' COMMENT '密码',
+    `sex` VARCHAR(2) NOT NULL DEFAULT '女' COMMENT '性别',
+    `birthday` DATETIME DEFAULT NULL COMMENT '出生日期',
+    `gradeid` INT(10) NOT NULL COMMENT '学生的年纪',
+    `address` VARCHAR(110) DEFAULT NULL COMMENT '家庭地址',
+    `email` VARCHAR(50) DEFAULT NULL COMMENT '电子邮箱',
+    PRIMARY KEY(`id`),
+    KEY `FK_gradeid`(`gradeid`),    -- 定义外键key
+    CONSTRAINT `FK_gradeid` FOREIGN KEY(`gradeid`) REFERENCES `grade`(`gradeid`)    -- 给这个外键添加约束（执行引用）  references引用
+)ENGINE = INNODB DEFAULT CHARSET = utf8;
+
+CREATE TABLE IF NOT EXISTS `grade`(
+    `gradeid` INT(10) NOT NULL AUTO_INCREMENT COMMENT '年级id',
+    `gradename` VARCHAR(50) NOT NULL COMMENT '年级名称',
+    PRIMARY KEY(`gradeid`)
+)ENGINE = INNODB DEFAULT CHARSET = utf8;
+</code></pre>
+<h3 id="方式二创建表后添加外键约束">方式二：创建表后，添加外键约束</h3>
+<pre><code class="language-sql">-- ALTER TABLE `表名` ADD CONSTRAINT `约束名` FOREIGN KEY (`作为外键的字段`) REFERENCES `哪个表` (`哪个字段`);
+
+ALTER TABLE `students` ADD CONSTRAINT `FK_gradeid` FOREIGN KEY (`gradeid`) REFERENCES `grade` (`gradeid`);
+</code></pre>
+<p>删除有外键关系的表，必须先删除引用的表（从表），在删除被引用的表（主表）</p>
+<p>以上操作都是物理外键，数据库级别的外键，不建议使用</p>
+<p>最佳实践：</p>
+<ul>
+<li>数据库就当作单纯的表，只用来存数据，只有行（数据）和列（字段）</li>
+<li>用程序（应用层）去实现多张表的使用、外键</li>
+</ul>
+<hr>
+<h2 id="2-dml语言">2. DML语言</h2>
+<p>数据库意义：数据存储和数据管理</p>
+<p>DML语言：数据操作语言</p>
+<ul>
+<li>Insert</li>
+<li>update</li>
+<li>delete</li>
+</ul>
+<hr>
+<h2 id="3-插入数据insert">3. 插入数据（Insert）</h2>
+<h3 id="插入语句添加">插入语句（添加）</h3>
+<p><code>INSERT INTO</code>表名<code>([</code>字段1<code>,</code>字段2<code>,</code>字段3<code>,...]) VALUES (值1,值2,值3,...);</code></p>
+<p><code>INSERT INTO</code>grade<code>(</code>gradename<code>) VALUES ('大四');</code></p>
+<p>主键自增可以省略</p>
+<p>如果不写表的字段，会一一匹配</p>
+<h3 id="插入多个数据">插入多个数据</h3>
+<p>INSERT INTO <code>grade</code>(<code>gradename</code>) VALUES ('大四'),('大三');</p>
+<p>注意：</p>
+<ul>
+<li>字段可以省略，后面的值必须一一对应</li>
+<li>可以同时插入多条数据<code>VALUES (),(),...</code></li>
+</ul>
+<hr>
+<h2 id="4-修改数据update">4. 修改数据(update)</h2>
+<pre><code class="language-sql">-- 修改一行数据的一个字段
+UPDATE `students` SET `name` = 'zd' WHERE id = 2;
+
+-- 修改一行的多个字段
+UPDATE `students` SET `name` = 'aaa', `password` = '1223434' WHERE id = 2;
+
+-- 通过多个条件定位数据
+UPDATE `students` SET `name` = 'aaa' WHERE id = 2 AND `sex` = '男';
+
+-- 格式：
+UPDATE `table_name` SET `colnum_name` = new_value[, `colnum_name1 = new_value1...]  [WHERE 子句];
+
+-- 不带[WHERE 子句]修改表中所有该字段
+UPDATE `students` SET `name` = 'aaa';
+</code></pre>
+<p>格式：</p>
+<pre><code class="language-sql">UPDATE `table_name` SET `colnum_name` = new_value[, `colnum_name1 = new_value1...]  [WHERE 子句];
+</code></pre>
+<ul>
+<li>WHERE 子句，筛选的条件</li>
+<li>new_value，可以是设置具体的值，也可以是一个变量如 CURRENT_TIME</li>
+</ul>
+<hr>
+<h2 id="5-删除数据">5. 删除数据</h2>
+<h3 id="delete命令">delete命令</h3>
+<p>格式：</p>
+<pre><code class="language-sql">DELETE FROM `table_name` [WHERE 子句];
+</code></pre>
+<p>不带[WHERE 子句]会把对应表数据全部删除</p>
+<h3 id="truncate命令">truncate命令</h3>
+<p>作用：完全清空一个数据库表，标的结构和索引约束不会变</p>
+<pre><code class="language-sql">TRUNCATE [TABLE] `table_name`;
+</code></pre>
+<p>delete 和 truncate 的异同:</p>
+<ul>
+<li>相同点：都能删除数据，不会删除表结构</li>
+<li>不同点：
+<ul>
+<li>truncate 会重新设置自增列，计数器归零，delete不会</li>
+<li>truncate 不会影响事务</li>
+</ul>
+</li>
+</ul>
+<p>DELETE删除的问题，<strong>重启数据库</strong>，现象：</p>
+<ul>
+<li>InnoDB：自增列会重新从1开始（存在在内存当中，断电即失）</li>
+<li>MyISAM：自增列从上一个自增量开始（存在在文件中，不会丢失）</li>
+</ul>
+<hr>
+<h2 id="子句">子句</h2>
+<h3 id="where子句">WHERE子句</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">操作符</th>
+<th style="text-align:left">含义</th>
+<th style="text-align:left">实例(A=2,B=4,C=5)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">=</td>
+<td style="text-align:left">等于，相等返回true</td>
+<td style="text-align:left">A=B,false</td>
+</tr>
+<tr>
+<td style="text-align:left">&lt;&gt; 或 !=</td>
+<td style="text-align:left">不等于，不等返回true</td>
+<td style="text-align:left">A!=B,true</td>
+</tr>
+<tr>
+<td style="text-align:left">&gt;</td>
+<td style="text-align:left">大于</td>
+<td style="text-align:left">A&gt;B,false</td>
+</tr>
+<tr>
+<td style="text-align:left">&lt;</td>
+<td style="text-align:left">小于</td>
+<td style="text-align:left">A&lt;B,false</td>
+</tr>
+<tr>
+<td style="text-align:left">&gt;=</td>
+<td style="text-align:left">大于等于</td>
+<td style="text-align:left">A&gt;=B,false</td>
+</tr>
+<tr>
+<td style="text-align:left">&lt;=</td>
+<td style="text-align:left">小于等于</td>
+<td style="text-align:left">A&lt;=B,true</td>
+</tr>
+<tr>
+<td style="text-align:left">BETWEEN...AND...</td>
+<td style="text-align:left">范围内，闭区间</td>
+<td style="text-align:left">BETWEEN A AND B,[2,4]</td>
+</tr>
+<tr>
+<td style="text-align:left">AND</td>
+<td style="text-align:left">与，多个条件同时成立返回true</td>
+<td style="text-align:left">A&lt;B AND B&lt;C,true</td>
+</tr>
+<tr>
+<td style="text-align:left">OR</td>
+<td style="text-align:left">或，多个条件成立一个返回true</td>
+<td style="text-align:left">A&gt;B OR A&lt;C,true</td>
+</tr>
+</tbody>
+</table>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[MySQL_01_mysql操作]]></title>
+        <id>https://zdblog.top/XjkFHqdpf/</id>
+        <link href="https://zdblog.top/XjkFHqdpf/">
+        </link>
+        <updated>2022-03-30T13:23:33.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="0-什么是数据库">0. 什么是数据库</h2>
+<p>数据库（DB,database）</p>
+<p>概念：数据仓库，软件，安装在操作系统(window,linux,mac...)之上。SQL，可以存储大量的数据</p>
+<p>作用：存储数据，管理数据</p>
+<h3 id="数据库分类">数据库分类</h3>
+<p><strong>关系型数据库：(SQL)</strong></p>
+<ul>
+<li>MySQL、oracle、SqlServer、DB2、SqlLite</li>
+<li>通过表和表之间，行和列之间的关系进行数据的存储。</li>
+</ul>
+<p><strong>非关系型数据库：(NoSQL) not only</strong></p>
+<ul>
+<li>Redis、mongodb</li>
+<li>非关系型数据库，对象存储，通过对象的自身的属性来决定。</li>
+</ul>
+<p><strong>DBMS(数据库管理系统)</strong></p>
+<ul>
+<li>数据库的管理软件，科学有效的管理我们的数据，维护和获取数据</li>
+<li>MySQL，数据库管理系统</li>
+</ul>
+<hr>
+<h2 id="1-操作数据库">1. 操作数据库</h2>
+<ul>
+<li>创建数据库</li>
+</ul>
+<pre><code class="language-sql">CREATE DATABASE IF NOT EXISTS `westos`;
+CREATE DATABASE `school` CHARACTER SET utf8 COLLATE utf8_general_ci;
+</code></pre>
+<ul>
+<li>删除数据库</li>
+</ul>
+<pre><code class="language-sql">DROP DATABASE IF EXISTS westos;
+</code></pre>
+<ul>
+<li>使用数据库</li>
+</ul>
+<pre><code class="language-sql">USE westos;
+</code></pre>
+<ul>
+<li>查看数据库</li>
+</ul>
+<pre><code class="language-sql">SHOW DATABASES;
+</code></pre>
+<p>DDL 数据库<strong>定义</strong>语言</p>
+<p>DML 数据库<strong>操作</strong>语言</p>
+<p>DQL 数据库<strong>查询</strong>语言</p>
+<p>DCL 数据库<strong>控制</strong>语言</p>
+<h2 id="2-数据库的列类型">2. 数据库的列类型</h2>
+<ul>
+<li>
+<p>数值</p>
+<ul>
+<li>tinyint:   十分小的数据  ,  1字节</li>
+<li>smallint:  较小的数据     , 2字节</li>
+<li>mediumint: 中等大小的数据，3字节</li>
+<li><strong>int</strong>：标准的整数，4字节</li>
+<li>bigint：较大的数据，8字节</li>
+<li>float：浮点数，4字节</li>
+<li>double：浮点数，8字节</li>
+<li>decimal：字符串类型的浮点数，金融计算</li>
+</ul>
+</li>
+<li>
+<p>字符串</p>
+<ul>
+<li>char：字符串固定大小，0~255</li>
+<li><strong>varchar</strong>：可变字符串，0~65536（常用的变量，String）</li>
+<li>tinytext：微型文本，2^8-1</li>
+<li>text：文本串，2^16-1(保存大的文本)</li>
+</ul>
+</li>
+<li>
+<p>时间日期</p>
+<ul>
+<li>date：YYYY-MM-DD，日期格式</li>
+<li>time：HH:mm:ss，时间格式</li>
+<li><strong>datetime：YYYY-MM-DD HH:mm:ss 最常用的格式</strong></li>
+<li>timestamp：时间戳，1970.1.1到现在的毫秒数</li>
+<li>year：年份表示</li>
+</ul>
+</li>
+<li>
+<p>null</p>
+<ul>
+<li>没有值，未知</li>
+<li>不要用null进行运算，结果为null，无意义</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-数据库的字段属性重点">3. 数据库的字段属性（重点）</h2>
+<ul>
+<li>
+<p>Unsigned：</p>
+<ul>
+<li>无符号整数</li>
+<li>声明该列不能为负数</li>
+</ul>
+</li>
+<li>
+<p>zerofill</p>
+<ul>
+<li>0填充的</li>
+<li>不足位数的，使用0来填充，int(3)， 5-----005</li>
+</ul>
+</li>
+<li>
+<p>自增</p>
+<ul>
+<li>自动在上一条记录的基础上+1（默认）</li>
+<li>通常用来设计唯一主键~ index，必须是整型</li>
+<li>可以自定义设计主键自增的起始值和步长</li>
+</ul>
+</li>
+<li>
+<p>非空（null和not null）</p>
+<ul>
+<li>假如设置为not null，不赋值就会报错</li>
+<li>设置为null，不赋值，默认就是null</li>
+</ul>
+</li>
+<li>
+<p>默认</p>
+<ul>
+<li>设置默认的值！</li>
+<li>eg: SEX 默认设置为 女</li>
+</ul>
+</li>
+</ul>
+<p>拓展：</p>
+<pre><code class="language-sql">/*
+每个表，都必须存在以下五个字段  未来做项目用的，表示一个记录存在的意义
+
+id          主键
+version     乐观锁
+is_delete   伪删除
+gmt_create  创建时间
+gmt_update  修改时间
+
+*/
+</code></pre>
+<h2 id="4-创建数据库表">4. 创建数据库表</h2>
+<pre><code class="language-sql">CREATE TABLE IF NOT EXISTS `students`(
+    `id` INT(4) NOT NULL AUTO_INCREMENT COMMENT '学号',
+    `name` VARCHAR(30) NOT NULL DEFAULT '匿名' COMMENT '姓名',
+    `password` VARCHAR(10) NOT NULL DEFAULT '123456' COMMENT '密码',
+    `sex` VARCHAR(2) NOT NULL DEFAULT '女' COMMENT '性别',
+    `birthday` DATETIME DEFAULT NULL COMMENT '出生日期',
+    `address` VARCHAR(110) DEFAULT NULL COMMENT '家庭地址',
+    `email` VARCHAR(50) DEFAULT NULL COMMENT '电子邮箱',
+    PRIMARY KEY(`id`)
+)ENGINE = INNODB DEFAULT CHARSET = utf8;
+</code></pre>
+<p>等效于：<br>
+<img src="https://s2.loli.net/2022/03/24/ZNB57MK9ntmHfCv.png" alt="创建表.png" loading="lazy"></p>
+<p>格式</p>
+<pre><code class="language-sql">CREATE TABLE [IF NOT EXISTS] `表名`(
+    `字段名` 列类型 [属性] [索引] [注释],
+    `字段名` 列类型 [属性] [索引] [注释],
+    ......
+    `字段名` 列类型 [属性] [索引] [注释],
+    [PRIMARY KEY(`字段名`)]
+)[表类型][字符集类型][注释]
+</code></pre>
+<p>常用命令：</p>
+<pre><code class="language-sql">SHOW CREATE DATABASE school; -- 查看创建school数据库的语句
+SHOW CREATE TABLE students; -- 查看创建students表的语句
+DESC students; -- 显示表的结构
+</code></pre>
+<h2 id="5-数据表的类型">5. 数据表的类型</h2>
+<h3 id="数据库引擎">数据库引擎</h3>
+<ul>
+<li>InnoDB: 现在默认使用，安全性高，事务的处理，多表多用户操作</li>
+<li>MyISAM: 早些年使用，节约空间，速度较快</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:left"></th>
+<th style="text-align:left">MyISAM</th>
+<th style="text-align:left">InnoDB</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">事务支持</td>
+<td style="text-align:left">不支持</td>
+<td style="text-align:left">支持</td>
+</tr>
+<tr>
+<td style="text-align:left">数据行锁定</td>
+<td style="text-align:left">不支持，表锁</td>
+<td style="text-align:left">支持</td>
+</tr>
+<tr>
+<td style="text-align:left">外键约束</td>
+<td style="text-align:left">不支持</td>
+<td style="text-align:left">支持</td>
+</tr>
+<tr>
+<td style="text-align:left">全文索引</td>
+<td style="text-align:left">支持</td>
+<td style="text-align:left">不支持</td>
+</tr>
+<tr>
+<td style="text-align:left">表空间大小</td>
+<td style="text-align:left">较小</td>
+<td style="text-align:left">较大，约为2倍</td>
+</tr>
+</tbody>
+</table>
+<p>参考：<a href="https://www.runoob.com/w3cnote/mysql-different-nnodb-myisam.html">MyISAM和InnoDB区别</a></p>
+<h3 id="数据库表的字符集编码">数据库表的字符集编码</h3>
+<p><code>CHARSET = utf8;</code></p>
+<p>不设置的话，会是MySQL默认的字符集编码Latin1（不支持中文）</p>
+<p>设置方法：</p>
+<ul>
+<li>创表时设置<code>CHARSET = utf8;</code></li>
+<li>更改默认的编码：
+<ul>
+<li>Windows：<code>my.ini</code>中配置<code>character-set-server=utf8</code></li>
+<li>Linux：<code>my.cnf</code>中配置<code>default-character-set=utf8</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="修改删除表">修改删除表</h2>
+<h3 id="修改表">修改表</h3>
+<ul>
+<li>修改表名：<code>ALTER TABLE 旧表名 RENAME AS 新表名;</code>
+<blockquote>
+<p><code>ALTER TABLE students RENAME AS students1;</code></p>
+</blockquote>
+</li>
+<li>增加表的字段：<code>ALTER TABLE 表名 ADD 字段名 列属性;</code>
+<blockquote>
+<p><code>ALTER TABLE students1 ADD age INT(3);</code></p>
+</blockquote>
+</li>
+<li>修改表的字段（重命名，修改约束）：
+<ul>
+<li><code>ALTER TABLE 表名 MODIFY 字段名 列属性[];</code>
+<blockquote>
+<p><code>ALTER TABLE students1 MODIFY age VARCHAR(3);</code></p>
+</blockquote>
+</li>
+<li><code>ALTER TABLE 表名 CHANGE 旧字段名 新字段名 列属性[];</code>
+<blockquote>
+<p><code>ALTER TABLE students1 CHANGE age age1 INT(1);</code></p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>删除表的字段：<code>ALTER TABLE 表名 DROP 字段名;</code>
+<blockquote>
+<p><code>ALTER TABLE students1 DROP age1;</code></p>
+</blockquote>
+</li>
+</ul>
+<h3 id="删除表">删除表</h3>
+<p><code>DROP TABLE [IF EXISTS] students;</code></p>
+<p>注意点：</p>
+<ul>
+<li>`` 字段名，表名尽量使用</li>
+<li>注释：-- 或 /* ... */</li>
+<li>sql关键字大小写不敏感</li>
+</ul>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[数据结构]]></title>
         <id>https://zdblog.top/shu-ju-jie-gou/</id>
@@ -548,1438 +3082,6 @@ LinkedList&lt;E&gt; list = new LinkedList(Collection&lt;? extends E&gt; c); // �
 <p><code>HashMap&lt;Integer, String&gt; Sites = new HashMap&lt;Integer, String&gt;();</code></p>
 <figure data-type="image" tabindex="14"><img src="https://s2.loli.net/2022/03/14/QULCFrKElsuIfX8.png" alt="HashMap方法.png" loading="lazy"></figure>
 <hr>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[面向对象]]></title>
-        <id>https://zdblog.top/mian-xiang-dui-xiang/</id>
-        <link href="https://zdblog.top/mian-xiang-dui-xiang/">
-        </link>
-        <updated>2022-03-13T01:03:43.000Z</updated>
-        <content type="html"><![CDATA[<h2 id="继承">继承</h2>
-<p>继承就是子类继承父类的特征和行为，使得子类对象（实例）具有弗雷德实例域和方法，或子类从父类继承方法，使得子类具有父类相同的行为</p>
-<p>继承格式：</p>
-<pre><code class="language-java">class 父类 {
-}
- 
-class 子类 extends 父类 {
-}
-</code></pre>
-<h3 id="继承类型">继承类型</h3>
-<p>Java不支持多继承，但支持多重继承</p>
-<p>1.单继承</p>
-<p><code>Class A</code> &lt;-- <code>Class B</code></p>
-<ol start="2">
-<li>多重继承</li>
-</ol>
-<p><code>Class A</code> &lt;-- <code>Class B</code> &lt;-- <code>Class C</code> &lt;-- ...</p>
-<ol start="3">
-<li>不同类继承同一个类</li>
-</ol>
-<p><code>Class A</code> &lt;-- <code>Class B</code></p>
-<p><code>Class A</code> &lt;-- <code>Class C</code></p>
-<ol start="4">
-<li>多继承（不支持）</li>
-</ol>
-<p><code>Class A</code> &lt;-- <code>Class C</code></p>
-<p><code>Class B</code> &lt;-- <code>Class C</code></p>
-<h3 id="集成的特性">集成的特性</h3>
-<ul>
-<li>
-<p>子类拥有父类非 private 的属性、方法</p>
-</li>
-<li>
-<p>子类可以拥有自己的属性和方法，即子类可以对父类进行扩展</p>
-</li>
-<li>
-<p>子类可以用自己的方式实现父类的方法</p>
-</li>
-<li>
-<p>Java 的继承是单继承，但是可以多重继承</p>
-</li>
-<li>
-<p>提高了类之间的耦合性（继承的缺点，耦合度高就会造成代码之间的联系越紧密，代码独立性越差）</p>
-</li>
-</ul>
-<h3 id="继承关键字">继承关键字</h3>
-<ul>
-<li>extends</li>
-<li>implements</li>
-</ul>
-<ol>
-<li>extends关键字</li>
-</ol>
-<p>类的继承是单一继承，extends只能继承一个类</p>
-<ol start="2">
-<li>implements关键字</li>
-</ol>
-<p>implements 关键字可以变相的使java具有多继承的特性，使用范围为类继承接口的情况，可以同时继承多个接口</p>
-<pre><code class="language-java">public interface A {
-    public void eat();
-    public void sleep();
-}
- 
-public interface B {
-    public void show();
-}
- 
-public class C implements A,B {
-}
-</code></pre>
-<ol start="3">
-<li>super 和 this关键字</li>
-</ol>
-<ul>
-<li>
-<p>super关键字：我们可以通过super关键字来实现对父类成员的访问，用来引用当前对象的父类</p>
-</li>
-<li>
-<p>this关键字：指向自己的引用</p>
-</li>
-</ul>
-<ol start="4">
-<li>final关键字</li>
-</ol>
-<p>使用 final 关键字声明类，就是把类定义定义为最终类，不能被继承，或者用于修饰方法，该方法不能被子类重写</p>
-<h3 id="构造器">构造器</h3>
-<p>子类不继承父类的构造器，只是通过<code>super</code>关键字调用</p>
-<p>如果父类构造器没有参数，系统自动调用父类的无参数构造器</p>
-<hr>
-<h2 id="重写override与重载overload">重写（Override）与重载（Overload）</h2>
-<p>方法重载是一个类的多态性表现,而方法重写是子类与父类的一种多态性表现</p>
-<h3 id="override">Override</h3>
-<p>重写是子类在不改变形参的前提下，重新编写父类方法的实现过程</p>
-<p>重写方法不能抛出新的异常或是申明更宽泛的异常</p>
-<p>eg：</p>
-<pre><code class="language-java">class Animal{
-   public void move(){
-      System.out.println(&quot;动物可以移动&quot;);
-   }
-}
- 
-class Dog extends Animal{
-   public void move(){
-      System.out.println(&quot;狗可以跑和走&quot;);
-   }
-}
- 
-public class TestDog{
-   public static void main(String args[]){
-      Animal a = new Animal(); // Animal 对象
-      Animal b = new Dog(); // Dog 对象
- 
-      a.move();// 执行 Animal 类的方法
- 
-      b.move();//执行 Dog 类的方法
-   }
-}
-</code></pre>
-<p>方法的重写规则</p>
-<ul>
-<li>
-<p>参数列表与被重写方法的参数列表必须完全相同</p>
-</li>
-<li>
-<p>返回类型与被重写方法的返回类型可以不相同，但是必须是父类返回值的派生类（java5 及更早版本返回类型要一样，java7 及更高版本可以不同）</p>
-</li>
-<li>
-<p>访问权限不能比父类中被重写的方法的访问权限更低。例如：如果父类的一个方法被声明为 public，那么在子类中重写该方法就不能声明为 protected</p>
-</li>
-<li>
-<p>父类的成员方法只能被它的子类重写</p>
-</li>
-<li>
-<p>声明为 final 的方法不能被重写</p>
-</li>
-<li>
-<p>声明为 static 的方法不能被重写，但是能够被再次声明</p>
-</li>
-<li>
-<p>子类和父类在同一个包中，那么子类可以重写父类所有方法，除了声明为 private 和 final 的方法</p>
-</li>
-<li>
-<p>子类和父类不在同一个包中，那么子类只能够重写父类的声明为 public 和 protected 的非 final 方法</p>
-</li>
-<li>
-<p>重写的方法能够抛出任何非强制异常，无论被重写的方法是否抛出异常。但是，重写的方法不能抛出新的强制性异常，或者比被重写方法声明的更广泛的强制性异常，反之则可以</p>
-</li>
-<li>
-<p>构造方法不能被重写</p>
-</li>
-<li>
-<p>如果不能继承一个类，则不能重写该类的方法</p>
-</li>
-</ul>
-<h3 id="overload">Overload</h3>
-<p>重载是在一个类里面，方法名字相同，而参数不同，返回类型可以相同也可以不同</p>
-<p>重载规则：</p>
-<ul>
-<li>被重载的方法必须改变参数列表(参数个数或类型不一样)</li>
-<li>被重载的方法可以改变返回类型</li>
-<li>被重载的方法可以改变访问修饰符</li>
-<li>被重载的方法可以声明新的或更广的检查异常</li>
-<li>方法能够在同一个类中或者在一个子类中被重载</li>
-<li>无法以返回值类型作为重载函数的区分标准</li>
-</ul>
-<p>eg:</p>
-<pre><code class="language-java">public class Overloading {
-    public int test(){
-        System.out.println(&quot;test1&quot;);
-        return 1;
-    }
- 
-    public void test(int a){
-        System.out.println(&quot;test2&quot;);
-    }   
- 
-    //以下两个参数类型顺序不同
-    public String test(int a,String s){
-        System.out.println(s);
-        return &quot;return&quot; + s;
-    }   
- 
-    public String test(String s,int a){
-        System.out.println(s);
-        return &quot;return&quot; + s;
-    }   
- 
-    public static void main(String[] args){
-        Overloading o = new Overloading();
-        System.out.println(o.test());
-        o.test(1);
-        System.out.println(o.test(1,&quot;test3&quot;));
-        System.out.println(o.test(&quot;test4&quot;,1));
-    }
-}
-</code></pre>
-<h3 id="override-和overload之间的区别">Override 和Overload之间的区别</h3>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">区别点</th>
-<th style="text-align:left">重载</th>
-<th style="text-align:left">重写</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">参数列表</td>
-<td style="text-align:left">必须修改</td>
-<td style="text-align:left">不能修改</td>
-</tr>
-<tr>
-<td style="text-align:left">返回类型</td>
-<td style="text-align:left">可以修改</td>
-<td style="text-align:left">不能修改</td>
-</tr>
-<tr>
-<td style="text-align:left">异常</td>
-<td style="text-align:left">可以修改</td>
-<td style="text-align:left">可以减少或删除，不能增加</td>
-</tr>
-<tr>
-<td style="text-align:left">访问</td>
-<td style="text-align:left">可以修改</td>
-<td style="text-align:left">可以降低限制，不能更严格</td>
-</tr>
-</tbody>
-</table>
-<hr>
-<h2 id="多态">多态</h2>
-<p>多态是一个行为有多个不同表现形式或形态的能力</p>
-<p>多态就是同一个接口，使用不同的实例执行不同的操作</p>
-<p>多态的优点：</p>
-<ul>
-<li>消除类型之间的耦合关系</li>
-<li>可替换性</li>
-<li>可扩充性</li>
-<li>接口性</li>
-<li>灵活性</li>
-<li>简化性</li>
-</ul>
-<p>多态存在的必要条件：</p>
-<ul>
-<li>继承</li>
-<li>重写</li>
-<li>父类引用指向子类对象：<code>Parent p = new Child();</code></li>
-</ul>
-<p>eg:</p>
-<pre><code class="language-java">public class Test {
-    public static void main(String[] args) {
-        show(new Cat());  // 以 Cat 对象调用 show 方法
-        show(new Dog());  // 以 Dog 对象调用 show 方法
-                    
-        Animal a = new Cat();  // 向上转型  
-        a.eat();               // 调用的是 Cat 的 eat
-        Cat c = (Cat)a;        // 向下转型  
-        c.work();        // 调用的是 Cat 的 work
-    }  
-            
-    public static void show(Animal a)  {
-        a.eat();  
-        // 类型判断
-        if (a instanceof Cat)  {  // 猫做的事情 
-            Cat c = (Cat)a;  
-            c.work();  
-        } else if (a instanceof Dog) { // 狗做的事情 
-            Dog c = (Dog)a;  
-            c.work();  
-        }  
-    }  
-}
- 
-abstract class Animal {  
-    abstract void eat();  
-}  
-  
-class Cat extends Animal {  
-    public void eat() {  
-        System.out.println(&quot;吃鱼&quot;);  
-    }  
-    public void work() {  
-        System.out.println(&quot;抓老鼠&quot;);  
-    }  
-}  
-  
-class Dog extends Animal {  
-    public void eat() {  
-        System.out.println(&quot;吃骨头&quot;);  
-    }  
-    public void work() {  
-        System.out.println(&quot;看家&quot;);  
-    }  
-}
-</code></pre>
-<h3 id="虚函数">虚函数</h3>
-<p>Java没有虚函数的概念，其普通函数默认就相当于C++的虚函数，加上final关键字可以声明该函数不具有虚函数特性</p>
-<p>虚拟方法调用：</p>
-<p>实例时，编译时使用父类的方法进行，运行时调用重写的方法</p>
-<h3 id="多态的实现方式">多态的实现方式</h3>
-<ul>
-<li>重写</li>
-<li>接口</li>
-<li>抽象类和抽象方法</li>
-</ul>
-<hr>
-<h2 id="抽象类">抽象类</h2>
-<p>抽象类没有包含足够的信息来描绘一个对象</p>
-<p>所以不能实例化对象</p>
-<p>抽象类必须被继承，才能被使用</p>
-<p>抽象类是用来捕捉子类的通用特性的，是被用来创建继承层级里子类的模板。 现实中有些父类中的方法确实没有必要写，因为各个子类中的这个方法肯定会有不同；而写成抽象类，这样看代码时，就知道这是抽象方法，而知道这个方法是在子类中实现的，所以有提示作用</p>
-<h3 id="抽象类-2">抽象类</h3>
-<p>使用<code>abstract class</code>来定义抽象类</p>
-<h3 id="继承抽象类">继承抽象类</h3>
-<h3 id="抽象方法">抽象方法</h3>
-<p>抽象方法也用<code>abstract</code>来声明</p>
-<p>抽象方法只包含一个方法名，而没有方法体，即方法的具体由子类确定</p>
-<p><code>public abstract double computePay(); // 方法名后直接跟分号</code></p>
-<p>具有抽象方法的抽象类，其子类必须重写父类的抽象方法，或者也声明为抽象类</p>
-<p>构造方法，类方法（用 static 修饰的方法）不能声明为抽象方法</p>
-<hr>
-<h2 id="封装">封装</h2>
-<p>封装（Encapsulation）是指一种将抽象性函式接口的实现细节部分包装、隐藏起来的方法</p>
-<p>可理解为一个保护，防止该类的代码和数据被外部类定义的代码随机访问</p>
-<p>封装的优点：</p>
-<ul>
-<li>良好的封装能够减少耦合</li>
-<li>类内部的结构可以自由修改</li>
-<li>可以对成员变量进行更精确的控制</li>
-<li>隐藏信息，实现细节</li>
-</ul>
-<h3 id="实现封装的步骤">实现封装的步骤</h3>
-<ol>
-<li>
-<p>修改属性的可见性来限制对属性的访问（一般限制为private）</p>
-</li>
-<li>
-<p>对每个值属性提供对外的公共方法访问，即创建一对赋取值方法，用于对私有属性的访问</p>
-</li>
-</ol>
-<pre><code class="language-java">public class EncapTest{
- 
-    private String name;
-    private String idNum;
-    private int age;
-    
-    public int getAge(){
-        return age;
-    }
-    
-    public String getName(){
-        return name;
-    }
-    
-    public String getIdNum(){
-        return idNum;
-    }
-    
-    public void setAge( int newAge){
-        age = newAge;
-    }
-    
-    public void setName(String newName){
-        name = newName;
-    }
-    
-    public void setIdNum( String newId){
-        idNum = newId;
-    }
-}
-</code></pre>
-<pre><code class="language-java">public class RunEncap{
-    public static void main(String args[]){
-        EncapTest encap = new EncapTest();
-        encap.setName(&quot;James&quot;);
-        encap.setAge(20);
-        encap.setIdNum(&quot;12343ms&quot;);
-
-        System.out.print(&quot;Name : &quot; + encap.getName()+ &quot; Age : &quot;+ encap.getAge());
-    }
-}
-</code></pre>
-<hr>
-<h2 id="接口interface">接口（Interface）</h2>
-<p>接口是抽象方法的集合</p>
-<p>通常以<code>interface</code>声明</p>
-<p>一个类通过继承接口的方式来继承接口的抽象方法</p>
-<p>类描述对象的属性和方法，接口包含类要实现的方法</p>
-<p>实现接口的类要定义接口中的所有方法，除非是抽象类</p>
-<p>接口不能实例化，但可以被实现</p>
-<p>接口与类相似点：</p>
-<ul>
-<li>一个接口可以有多个方法</li>
-<li>接口文件保存在 .java 结尾的文件中，文件名使用接口名</li>
-<li>接口的字节码文件保存在 .class 结尾的文件中</li>
-<li>接口相应的字节码文件必须在与包名称相匹配的目录结构中</li>
-</ul>
-<p>接口与类的区别：</p>
-<ul>
-<li>接口不能用于实例化对象。</li>
-<li>接口没有构造方法。</li>
-<li>接口中所有的方法必须是抽象方法，Java 8 之后 接口中可以使用 default 关键字修饰的非抽象方法。</li>
-<li>接口不能包含成员变量，除了 static 和 final 变量。</li>
-<li>接口不是被类继承了，而是要被类实现。</li>
-<li>接口支持多继承</li>
-</ul>
-<p>抽象类和接口的区别：</p>
-<ul>
-<li>抽象类中的成员变量可以是各种类型的，而接口中的成员变量只能是 <code>public static final</code> 类型的</li>
-<li>一个类只能继承一个抽象类，可以实现多个接口</li>
-</ul>
-<h3 id="接口的声明">接口的声明</h3>
-<pre><code class="language-java">[可见度] interface 接口名称 [extends 其他的接口名] {
-        // 声明变量
-        // 抽象方法
-}
-</code></pre>
-<pre><code class="language-java">interface Animal {
-   public void eat();
-   public void travel();
-}
-</code></pre>
-<h3 id="接口的实现">接口的实现</h3>
-<p><code>...implements 接口名称[, 其他接口名称, 其他接口名称..., ...] ...</code></p>
-<pre><code class="language-java">public class MammalInt implements Animal{
-    ...
-}
-</code></pre>
-<h3 id="接口的继承">接口的继承</h3>
-<pre><code class="language-java">// 文件名: Sports.java
-public interface Sports
-{
-   public void setHomeTeam(String name);
-   public void setVisitingTeam(String name);
-}
- 
-// 文件名: Football.java
-public interface Football extends Sports
-{
-   public void homeTeamScored(int points);
-   public void visitingTeamScored(int points);
-   public void endOfQuarter(int quarter);
-}
-</code></pre>
-<h3 id="接口的多继承">接口的多继承</h3>
-<p><code>public interface Hockey extends Sports, Event</code></p>
-<h3 id="标记接口">标记接口</h3>
-<p>没有任何方法的接口被称为标记接口</p>
-<p>作用：</p>
-<ul>
-<li>建立一个公共的父接口</li>
-<li>向一个类添加数据类型</li>
-</ul>
-<hr>
-<h2 id="枚举enum">枚举（enum）</h2>
-<p>枚举是一个特殊的类，一般表示一组常量</p>
-<p>所有的枚举值都是 public static final</p>
-<pre><code class="language-java">enum Color
-{
-    RED, GREEN, BLUE;
-}
- 
-public class Test
-{
-    // 执行输出结果
-    public static void main(String[] args)
-    {
-        Color c1 = Color.RED;
-        System.out.println(c1);
-    }
-}
-
-
-//RED
-</code></pre>
-<p>内部类中使用枚举</p>
-<pre><code class="language-java">public class Test
-{
-    enum Color
-    {
-        RED, GREEN, BLUE;
-    }
- 
-    // 执行输出结果
-    public static void main(String[] args)
-    {
-        Color c1 = Color.RED;
-        System.out.println(c1);
-    }
-}
-</code></pre>
-<h3 id="迭代枚举元素">迭代枚举元素</h3>
-<pre><code class="language-java">enum Color
-{
-    RED, GREEN, BLUE;
-}
-public class MyClass {
-  public static void main(String[] args) {
-    for (Color myVar : Color.values()) {
-      System.out.println(myVar);
-    }
-  }
-}
-</code></pre>
-<h3 id="values-ordinal-valueof方法">values(), ordinal(), valueOf()方法</h3>
-<ul>
-<li>values() 返回枚举类中所有的值</li>
-<li>ordinal()方法可以找到每个枚举常量的索引，就像数组索引一样</li>
-<li>valueOf()方法返回指定字符串值的枚举常量</li>
-</ul>
-<pre><code class="language-java">enum Color
-{
-    RED, GREEN, BLUE;
-}
- 
-public class Test
-{
-    public static void main(String[] args)
-    {
-        // 调用 values()
-        Color[] arr = Color.values();
- 
-        // 迭代枚举
-        for (Color col : arr)
-        {
-            // 查看索引
-            System.out.println(col + &quot; at index &quot; + col.ordinal());
-        }
- 
-        // 使用 valueOf() 返回枚举常量，不存在的会报错 IllegalArgumentException
-        System.out.println(Color.valueOf(&quot;RED&quot;));
-        // System.out.println(Color.valueOf(&quot;WHITE&quot;));
-    }
-}
-
-
-// RED at index 0
-// GREEN at index 1
-// BLUE at index 2
-// RED
-</code></pre>
-<h3 id="枚举类成员">枚举类成员</h3>
-<p>枚举跟普通类一样可以用自己的变量、方法和构造函数，构造函数只能使用 private 访问修饰符</p>
-<p>枚举既可以包含具体方法，也可以包含抽象方法</p>
-<pre><code class="language-java">enum Color
-{
-    RED, GREEN, BLUE;
- 
-    // 构造函数
-    private Color()
-    {
-        System.out.println(&quot;Constructor called for : &quot; + this.toString());
-    }
- 
-    public void colorInfo()
-    {
-        System.out.println(&quot;Universal Color&quot;);
-    }
-}
- 
-public class Test
-{    
-    // 输出
-    public static void main(String[] args)
-    {
-        Color c1 = Color.RED;
-        System.out.println(c1);
-        c1.colorInfo();
-    }
-}
-
-
-// Constructor called for : RED
-// Constructor called for : GREEN
-// Constructor called for : BLUE
-// RED
-// Universal Color
-</code></pre>
-<hr>
-<h2 id="包package">包（package）</h2>
-<p>包的作用：</p>
-<ul>
-<li>把功能相似的类或接口组织在一个包中，方便查找和使用</li>
-<li>避免名字冲突</li>
-<li>包也限定了访问权限</li>
-</ul>
-<p>防止命名冲突，访问控制，提供搜索和定位类（class）、接口、枚举（enumerations）和注释（annotation）等</p>
-<ul>
-<li>java.lang-打包基础的类</li>
-<li>java.io-包含输入输出功能的函数</li>
-</ul>
-<h3 id="创建包">创建包</h3>
-<p><code>package pkg1[．pkg2[．pkg3…]];</code></p>
-<p>包的声明放在这个源文件的开头</p>
-<h3 id="import关键字">import关键字</h3>
-<p>import语句导入包</p>
-<p><code>import package1[.package2…].(classname|*);</code></p>
-<p>任意数量import 声明必须在包声明之后，类声明之前</p>
-<h3 id="package的目录结构">package的目录结构</h3>
-<ul>
-<li>包名成为类名的一部分，正如我们前面讨论的一样。</li>
-<li>包名必须与相应的字节码所在的目录结构相吻合</li>
-</ul>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[基础语法]]></title>
-        <id>https://zdblog.top/ji-chu-yu-fa/</id>
-        <link href="https://zdblog.top/ji-chu-yu-fa/">
-        </link>
-        <updated>2022-03-13T01:01:22.000Z</updated>
-        <content type="html"><![CDATA[<h2 id="java基础语法">Java基础语法</h2>
-<p>Java语言是面向对象的</p>
-<p>先介绍下类、对象、方法和实例变量的概念</p>
-<ul>
-<li>对象：是类的一个实例，有状态有行为。eg：对象（一条狗），状态（名字、品种、颜色等），行为（叫、吃、摇尾巴等）</li>
-<li>类：类是一个模板，描述一类对象的行为和状态</li>
-<li>方法：方法就是行为，一个类可以有很多方法</li>
-<li>实例变量：每个对象都有独特的实例变量，对象的状态由这些实例变量的值决定</li>
-</ul>
-<p>注意：</p>
-<ul>
-<li>大小写敏感</li>
-<li>
-<blockquote>
-<p>包名：多单词都小写</p>
-<p>类名、接口名：所有单词首字母大写</p>
-<p>变量名、方法名：第一个单词首字母小写，后面大写</p>
-<p>常量名：所有字母都大写，多单词用下划线连接(eg:XXX_YYY_ZZZ)</p>
-</blockquote>
-</li>
-<li>源文件名必须与类名相同</li>
-<li>一个源文件只能有一个public类，可以有若干个非public类</li>
-<li>主方法入口：<code>public static void main(String[] args)</code></li>
-</ul>
-<p><code>public static void main(String[] args)</code>:</p>
-<blockquote>
-<p>public：访问修饰符<br>
-static：关键字<br>
-void：返回类型<br>
-main：方法名<br>
-String：String类<br>
-args：字符串数组</p>
-</blockquote>
-<h3 id="标识符">标识符</h3>
-<p>Java所有的组成部分都需要名字。</p>
-<p>标识符：类名、变量名、方法名</p>
-<p>标识符规范：</p>
-<blockquote>
-<p>首字符：字母、<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi mathvariant="normal">、</mi><mi mathvariant="normal">其</mi></msub><mi mathvariant="normal">他</mi><mi mathvariant="normal">字</mi><mi mathvariant="normal">符</mi><mi mathvariant="normal">：</mi><mi mathvariant="normal">字</mi><mi mathvariant="normal">母</mi><mi mathvariant="normal">、</mi></mrow><annotation encoding="application/x-tex">、_
-其他字符：字母、</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.15em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord cjk_fallback">、</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:-0.15em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord cjk_fallback mtight">其</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord cjk_fallback">他</span><span class="mord cjk_fallback">字</span><span class="mord cjk_fallback">符</span><span class="mord cjk_fallback">：</span><span class="mord cjk_fallback">字</span><span class="mord cjk_fallback">母</span><span class="mord cjk_fallback">、</span></span></span></span>、_、数字<br>
-大小写敏感</p>
-</blockquote>
-<h3 id="修饰符">修饰符</h3>
-<p>Java用修饰符来修饰类中的方法和属性</p>
-<ul>
-<li>访问控制修饰符：default、public、protected、private</li>
-<li>非访问控制修饰符：final、abstract、static、synchronized</li>
-</ul>
-<h3 id="java变量">Java变量</h3>
-<ul>
-<li>局部变量</li>
-<li>类变量（静态变量）</li>
-<li>成员变量（非静态变量）</li>
-</ul>
-<h3 id="java关键字">Java关键字</h3>
-<figure data-type="image" tabindex="1"><img src="https://s2.loli.net/2022/03/08/Pnm1sC7QRDZG4z6.png" alt="Java关键字.png" loading="lazy"></figure>
-<hr>
-<h2 id="java-对象和类">Java 对象和类</h2>
-<p>Java面向对象支持以下基本概念：</p>
-<ul>
-<li>多态</li>
-<li>继承</li>
-<li>封装</li>
-<li>抽象</li>
-<li>类</li>
-<li>对象</li>
-<li>实例</li>
-<li>方法</li>
-<li>重载</li>
-</ul>
-<p>方法：改变对象的内部状态，对象的相互调用</p>
-<p>类中的变量：</p>
-<ul>
-<li>局部变量：在方法中定义的变量，随方法的结束而销毁</li>
-<li>成员变量：定义在类中、方法之外的变量，在创建对象时实例化，在类中可被访问</li>
-<li>类变量：声明在类中、方法块之外、必须声明为static类型</li>
-</ul>
-<h3 id="构造方法">构造方法</h3>
-<p>每个类都有一个或多个构造方法</p>
-<p>创建对象时，至少调用一个构造方法</p>
-<p>构造方法的名称必须与类同名</p>
-<h3 id="创建对象">创建对象</h3>
-<ol>
-<li>声明：对象的名称和类型</li>
-<li>实例化：使用关键字<code>new</code>来创建一个对象</li>
-<li>初始化：使用<code>new</code>创建对象时，会调用构造方法初始化对象</li>
-</ol>
-<pre><code class="language-java">public class Puppy{
-
-    // 该构造方法仅有一个参数：name
-    public Puppy(String name){
-        System.out.println(&quot;The dog's name is : &quot; + name);
-    }
-
-    public static void main(String[] args){
-        Puppy myPuppy = new Puppy(&quot;Tommy&quot;);
-    }
-}
-</code></pre>
-<h3 id="访问实例变量和方法">访问实例变量和方法</h3>
-<p>通过已创建的对象来访问成员变量和成员方法</p>
-<pre><code class="language-java">/* 实例化对象 */
-Object referenceVariable = new Constructor();
-/* 访问类中的变量 */
-referenceVariable.variableName;
-/* 访问类中的方法 */
-referenceVariable.methodName();
-</code></pre>
-<p>eg:</p>
-<pre><code class="language-java">public class Puppy{
-    int puppyAge;
-    public Puppy(String name){
-        System.out.println(&quot;The dog's name is : &quot; + name)；
-    }
-
-    public void setAge(int age){
-        puppyAge = age;
-    }
-
-    public int getAge(){
-        return puppyAge;
-    }
-
-    public static void main(String[] args){
-        Puppy myPuppy = new Puppy(Tommy);
-
-        myPuppy.setAge(2)
-        System.out.println(&quot;myPuppy's age is : &quot; + myPuppy.getAge());
-        System.out.println(&quot;变量值：&quot; + myPuppy.puppyAge);
-    }
-}
-</code></pre>
-<h3 id="java包">Java包</h3>
-<p>包主要用来对类和接口进行分类</p>
-<hr>
-<h2 id="java基本数据类型">Java基本数据类型</h2>
-<ol>
-<li>内置数据类型</li>
-<li>引用数据类型</li>
-</ol>
-<h3 id="内置数据类型">内置数据类型</h3>
-<p>8种基本类型</p>
-<ul>
-<li>byte：8位,默认值<code>0</code></li>
-<li>short：16位，默认值<code>0</code></li>
-<li>int：32位，默认值<code>0</code></li>
-<li>long：64位，默认值<code>0L</code>(L不区分大小写，最好大写区分1)</li>
-<li>float：单精度，32位，默认值<code>0.0f</code>(不能表示精确的值)</li>
-<li>double：双精度，64位，默认值<code>0.0d</code>(不能表示精确值)</li>
-<li>boolean：标志记录true/false，默认<code>false</code></li>
-<li>char：单一的16位Unicode字符，<code>\u0000</code>~<code>\uffff</code></li>
-</ul>
-<h3 id="引用数据类型">引用数据类型</h3>
-<p>对象、数组都是引用数据类型</p>
-<p>默认值<code>null</code></p>
-<p>一个引用变量可以用来引用任何与之兼容的类型</p>
-<h3 id="java常量">Java常量</h3>
-<p>使用<code>final</code>关键字来修饰常量</p>
-<p>eg：`final double PI = 3.14159265;</p>
-<p>常量名通常大写</p>
-<p>字符串常量：双引号之间的字符序列</p>
-<p>转义字符：</p>
-<figure data-type="image" tabindex="2"><img src="https://s2.loli.net/2022/03/08/Go2nVrQZF8Rpa9K.png" alt="转义字符.png" loading="lazy"></figure>
-<h3 id="自动类型转换">自动类型转换</h3>
-<pre><code>low --------------------------------------&gt; high
-byte,short,char -&gt; int -&gt; long -&gt; float -&gt; double
-</code></pre>
-<ul>
-<li>boolean不能转换</li>
-<li>容量大的必须用强制转换才可以转换为容量小的</li>
-<li>浮点数舍弃小数转换得到整形</li>
-</ul>
-<hr>
-<h2 id="java变量类型">Java变量类型</h2>
-<ul>
-<li>类变量</li>
-<li>实例变量</li>
-<li>局部变量</li>
-</ul>
-<p>eg：</p>
-<pre><code class="language-java">public class Variable{
-    static int allClicks=0;    // 类变量
- 
-    String str=&quot;hello world&quot;;  // 实例变量
- 
-    public void method(){
- 
-        int i =0;  // 局部变量
- 
-    }
-}
-</code></pre>
-<h3 id="java局部变量">java局部变量</h3>
-<ul>
-<li>局部变量声明在方法中</li>
-<li>不能用访问修饰符</li>
-<li>没有默认值，必须先初始化</li>
-</ul>
-<h3 id="java实例变量">Java实例变量</h3>
-<ul>
-<li>实例变量声明在一个类中，在方法、构造方法和语句块之外</li>
-<li>当一个对象被实例化之后，每个实例变量的值就跟着确定，对象被销毁的时候销毁</li>
-<li>实例变量的值应该至少被一个方法，使得外部能够通过这些方式获取实例变量信息</li>
-<li>可以声明在使用前或者使用后</li>
-<li>可用访问修饰符</li>
-<li>实例变量对于类中的方法、构造方法或者语句块是可见的。一般情况下应该把实例变量设为私有。通过使用访问修饰符可以使实例变量对子类可见</li>
-<li>有默认值。数值型变量的默认值是0，布尔型变量的默认值是false，引用类型变量的默认值是null。变量的值可以在声明时指定，也可以在构造方法中指定</li>
-<li>可以直接通过变量名访问。但在静态方法以及其他类中，就应该使用完全限定名：ObejectReference.VariableName</li>
-</ul>
-<h3 id="类变量静态变量">类变量（静态变量）</h3>
-<ul>
-<li>在类中以 static 关键字声明，但必须在方法之外</li>
-<li>类只拥有类变量的一份拷贝</li>
-<li>静态变量是指声明为 public/private，final 和 static 类型的变量。静态变量初始化后不可改变。</li>
-<li>类变量被声明为 public static final 类型时，类变量名称一般建议使用大写字母</li>
-</ul>
-<hr>
-<h2 id="java修饰符">java修饰符</h2>
-<ul>
-<li>访问修饰符</li>
-<li>非访问修饰符</li>
-</ul>
-<p>修饰符用来定义类、方法或者变量，通常放在语句的最前端</p>
-<h3 id="访问控制修饰符">访问控制修饰符</h3>
-<p>用来保护对类、对象、方法的访问</p>
-<ul>
-<li>default（默认，不写）：同一包内可见，不适用任何修饰符</li>
-<li>private：同一类内可见，不能修饰类（外部类）</li>
-<li>public：对所有类可见</li>
-<li>protected：对同一包内的类和子类可见，不能修饰类</li>
-</ul>
-<p>接口里的变量都隐式声明为<code>public static final</code>，而接口里的方法默认为<code>public</code></p>
-<ol>
-<li>私有访问修饰符--private</li>
-</ol>
-<p>声明为私有访问类型的变量只能通过类中公共的 getter 方法被外部类访问</p>
-<p>eg：</p>
-<pre><code class="language-java">public class Logger {
-    private String format;
-    public String getFormat() {
-        return this.format;
-    }
-    public void setFormat(String format) {
-        this.format = format;
-    }
-}
-</code></pre>
-<ol start="2">
-<li>公有访问修饰符--public</li>
-</ol>
-<p>声明为 public 的类、方法、构造方法和接口能够被任何其他类访问</p>
-<ol start="3">
-<li>受保护的访问修饰符--protected</li>
-</ol>
-<ul>
-<li>子类与父类在同一包中：能被同一个包中的任何其他类访问</li>
-<li>子类与父类不在同一包中：在子类中，子类实例可以访问其从基类继承而来的 protected 方法，而不能访问基类实例的protected方法</li>
-</ul>
-<ol start="4">
-<li>方法继承规则：</li>
-</ol>
-<ul>
-<li>父类-public，子类public</li>
-<li>父类-protected，子类public、protected</li>
-<li>父类-private，子类不能继承</li>
-</ul>
-<h3 id="非访问修饰符">非访问修饰符</h3>
-<ul>
-<li>static：用来修饰类方法和类变量</li>
-<li>final：修饰类、方法、变量，修饰的类不能被继承，方法不能被重新定义，变量为常量，不可修改</li>
-<li>abstract：用来修饰抽象类和抽象方法</li>
-<li>synchronized和volatile：主要用于线程的编程</li>
-</ul>
-<ol>
-<li>
-<p>static修饰符</p>
-<ul>
-<li>静态变量：用来声明静态变量，只有一份拷贝</li>
-<li>静态方法：静态方法不能使用类的非静态变量</li>
-</ul>
-</li>
-<li>
-<p>final修饰符</p>
-<ul>
-<li>final变量：赋值后为常量</li>
-<li>final方法：可以被继承，但不能被子类重写</li>
-<li>final类：不能被继承</li>
-</ul>
-</li>
-<li>
-<p>abstract修饰符</p>
-</li>
-<li>
-<p>synchronized修饰符</p>
-</li>
-</ol>
-<p>声明的方法同一时间只能被一个线程访问</p>
-<ol start="5">
-<li>transient修饰符</li>
-</ol>
-<p>java 虚拟机(JVM)跳过被 transient 修饰的实例变量</p>
-<ol start="6">
-<li>volatile修饰符</li>
-</ol>
-<p>volatile 修饰的成员变量在每次被线程访问时，都强制从共享内存中重新读取该成员变量的值,成员变量发生变化时，会强制线程将变化值回写到共享内存</p>
-<p>任何时刻，两个不同的线程总是看到某个成员变量的同一个值</p>
-<hr>
-<h2 id="java-运算符">java 运算符</h2>
-<ul>
-<li>算术运算符</li>
-<li>关系运算符</li>
-<li>位运算符</li>
-<li>逻辑运算符</li>
-<li>赋值运算符</li>
-<li>其他运算符</li>
-</ul>
-<ol>
-<li>算术运算符</li>
-</ol>
-<p><code>+</code>,<code>-</code>,<code>*</code>,<code>/</code>,<code>%</code>,<code>++</code>,<code>--</code></p>
-<ul>
-<li>前缀自增自减法(++a,--a): 先进行自增或者自减运算，再进行表达式运算</li>
-<li>后缀自增自减法(a++,a--): 先进行表达式运算，再进行自增或者自减运算</li>
-</ul>
-<ol start="2">
-<li>关系运算符</li>
-</ol>
-<p><code>==</code>,<code>!=</code>,<code>&gt;</code>,<code>&lt;</code>,<code>&gt;=</code>,<code>&lt;=</code></p>
-<ol start="3">
-<li>位运算符</li>
-</ol>
-<p><code>&amp;</code>,<code>|</code>,<code>^</code>,<code>~</code>,<code>&lt;&lt;</code>,<code>&gt;&gt;</code>,<code>&gt;&gt;&gt;</code>:</p>
-<figure data-type="image" tabindex="3"><img src="https://s2.loli.net/2022/03/09/SmKYWLxFpNgVylT.png" alt="位运算符.png" loading="lazy"></figure>
-<ol start="4">
-<li>逻辑运算符</li>
-</ol>
-<p><code>&amp;&amp;</code>,<code>||</code>,<code>!</code></p>
-<ol start="5">
-<li>赋值运算符</li>
-</ol>
-<p><code>=</code>,<code>+=</code>,<code>-=</code>,<code>*=</code>,<code>/=</code>,<code>(%)=</code>,<code>&lt;&lt;=</code>,<code>&gt;&gt;=</code>,<code>&amp;=</code>,<code>^=</code>,<code>|=</code></p>
-<ol start="6">
-<li>条件运算符（三元运算符）</li>
-</ol>
-<p><code>variable x = (expression) ? value if true : value if false</code></p>
-<p>eg:<code>b = (a == 1) ? 20 : 30;</code></p>
-<ol start="7">
-<li>instanceof运算符</li>
-</ol>
-<p>用于操作对象实例，检查该对象是否是一个特定类型（类类型或接口类型）</p>
-<p><code>( Object reference variable ) instanceof (class/interface type)</code></p>
-<p>eg:</p>
-<pre><code class="language-java">String name = &quot;James&quot;;
-boolean result = name instanceof String; // 由于 name 是 String 类型，所以返回真
-</code></pre>
-<h3 id="运算符优先级">运算符优先级</h3>
-<figure data-type="image" tabindex="4"><img src="https://s2.loli.net/2022/03/09/BfPx341d8E9zSwG.png" alt="运算符优先级.png" loading="lazy"></figure>
-<h2 id="java循环结构">Java循环结构</h2>
-<ul>
-<li>while循环</li>
-<li>do...while循环</li>
-<li>for循环</li>
-</ul>
-<h3 id="java增强for循环">Java增强for循环</h3>
-<pre><code class="language-java">for(声明语句 : 表达式)
-{
-    // 代码句子
-}
-// 声明语句：声明新的局部变量，该变量的类型必须和数组元素的类型匹配
-// 表达式：要访问的数组名，或者是返回值为数组的方法
-</code></pre>
-<p>eg:</p>
-<pre><code class="language-java">public class Test{
-    public static void main(String[] args){
-        String [] names = {&quot;James&quot;, &quot;Larry&quot;, &quot;Tom&quot;, &quot;Lacy&quot;};
-        for(String name : names){
-            System.out.print(name);
-            System.out.print(&quot;,&quot;);
-        }
-    }
-}
-
-// James,Larry,Tom,Lacy,
-</code></pre>
-<h3 id="break关键字">break关键字</h3>
-<p>break 主要用在循环语句或者 switch 语句中，用来跳出语句块</p>
-<h3 id="continue关键字">continue关键字</h3>
-<p>让程序立刻跳转到下一次循环的迭代</p>
-<hr>
-<h2 id="java条件语句">Java条件语句</h2>
-<ul>
-<li>if语句</li>
-<li>if...else语句</li>
-<li>if..else if...else语句</li>
-</ul>
-<hr>
-<h2 id="java-switch-case语句">Java switch case语句</h2>
-<p>switch case 语句判断一个变量与一系列值中某个值是否相等，每个值称为一个分支</p>
-<pre><code class="language-java">switch(expression){
-    case value :
-       //语句
-       break; //可选
-    case value :
-       //语句
-       break; //可选
-    //你可以有任意数量的case语句
-    default : //可选
-       //语句
-}
-</code></pre>
-<p>如果 case 语句块中没有 break 语句时，匹配成功后，从当前 case 开始，后续所有 case 的值都会输出直至break语句出现</p>
-<pre><code class="language-java">public class Test {
-   public static void main(String args[]){
-      int i = 1;
-      switch(i){
-         case 0:
-            System.out.println(&quot;0&quot;);
-         case 1:
-            System.out.println(&quot;1&quot;);
-         case 2:
-            System.out.println(&quot;2&quot;);
-         case 3:
-            System.out.println(&quot;3&quot;); break;
-         default:
-            System.out.println(&quot;default&quot;);
-      }
-   }
-}
-
-// 1
-// 2
-// 3
-</code></pre>
-<hr>
-<h2 id="数组">数组</h2>
-<h3 id="声明数组变量">声明数组变量</h3>
-<pre><code class="language-java">dataType[] arrayRefVar;   // 首选的方法
- 
-或
- 
-dataType arrayRefVar[];  // 效果相同，但不是首选方法
-</code></pre>
-<h3 id="创建数组">创建数组</h3>
-<p><code>arrayRefVar = new dataType[arraySize];</code></p>
-<p>数组变量的声明，和创建数组可以用一条语句完成:</p>
-<p><code>dataType[] arrayRefVar = new dataType[arraySize];</code></p>
-<p>其他：</p>
-<p><code>dataType[] arrayRefVar = {value0, value1, ..., valuek};</code></p>
-<h3 id="数组作为方法的参数或返回值">数组作为方法的参数或返回值</h3>
-<p>eg:</p>
-<p><code>printArray(new int[]{3, 1, 2, 6, 4, 2});</code></p>
-<h3 id="多维数组">多维数组</h3>
-<p><code>String[][] str = new String[3][4];</code></p>
-<h3 id="arrays类">Arrays类</h3>
-<ul>
-<li>给数组赋值：通过 fill 方法</li>
-<li>对数组排序：通过 sort 方法,按升序</li>
-<li>比较数组：通过 equals 方法比较数组中元素值是否相等</li>
-<li>查找数组元素：通过 binarySearch 方法能对排序好的数组进行二分查找法操作</li>
-</ul>
-<hr>
-<h2 id="日期和时间date类">日期和时间（Date类）</h2>
-<p>实例化Date对象：</p>
-<ul>
-<li><code>Date()</code></li>
-<li><code>Date(long milliseconds)</code>:该参数为1970.01.01起的毫秒数</li>
-</ul>
-<h3 id="date对象方法">Date对象方法：</h3>
-<figure data-type="image" tabindex="5"><img src="https://s2.loli.net/2022/03/10/NuxSwZg4ChOGVKd.png" alt="Date方法.png" loading="lazy"></figure>
-<h3 id="使用simpledateformat格式化日期">使用SimpleDateFormat格式化日期</h3>
-<p><code>SimpleDateFormat ft = new SimpleDateFormat (&quot;yyyy-MM-dd hh:mm:ss&quot;);</code></p>
-<h3 id="使用printf格式化日期">使用printf格式化日期</h3>
-<figure data-type="image" tabindex="6"><img src="https://s2.loli.net/2022/03/10/DbGnxh2APTH9qfW.png" alt="printf格式化日期.png" loading="lazy"></figure>
-<p>eg：</p>
-<p><code>System.out.printf(&quot;全部日期和时间信息：%tc%n&quot;,date);</code></p>
-<p><code>System.out.printf(&quot;%1$s %2$tB %2$td, %2$tY&quot;, &quot;Due date:&quot;, date);</code></p>
-<p><code>System.out.printf(&quot;%s %tB %&lt;te, %&lt;tY&quot;, &quot;Due date:&quot;, date);</code></p>
-<h3 id="java休眠sleep">Java休眠（sleep）</h3>
-<p>sleep()阻塞当前进程</p>
-<pre><code class="language-java">import java.util.*;
-  
-public class SleepDemo {
-    public static void main(String[] args) {
-        try { 
-            System.out.println(new Date( ) + &quot;\n&quot;); 
-            Thread.sleep(1000*3);   // 休眠3秒
-            System.out.println(new Date( ) + &quot;\n&quot;); 
-        } catch (Exception e) { 
-            System.out.println(&quot;Got an exception!&quot;); 
-        }
-    }
-}
-</code></pre>
-<h3 id="测量时间">测量时间</h3>
-<pre><code class="language-java">import java.util.*;
-  
-public class DiffDemo {
- 
-   public static void main(String[] args) {
-      try {
-         long start = System.currentTimeMillis( );
-         System.out.println(new Date( ) + &quot;\n&quot;);
-         Thread.sleep(5*60*10);
-         System.out.println(new Date( ) + &quot;\n&quot;);
-         long end = System.currentTimeMillis( );
-         long diff = end - start;
-         System.out.println(&quot;Difference is : &quot; + diff);
-      } catch (Exception e) {
-         System.out.println(&quot;Got an exception!&quot;);
-      }
-   }
-}
-</code></pre>
-<h3 id="calendar类对日期进行操作">Calendar类（对日期进行操作）</h3>
-<p>创建Calendar对象：</p>
-<ul>
-<li><code>Calendar c = Calendar.getInstance();//默认是当前日期</code></li>
-<li><code>//创建一个代表2009年6月12日的Calendar对象</code><br>
-<code>Calendar c1 = Calendar.getInstance();</code><br>
-<code>c1.set(2009, 6 - 1, 12);</code></li>
-</ul>
-<p>对象信息的设置:</p>
-<ul>
-<li>set设置：<code>public final void set(int year,int month,int date)</code></li>
-<li>add设置：<code>c1.add(Calendar.DATE, 10);</code></li>
-</ul>
-<p>对象信息的获得:</p>
-<p><code>int year = c1.get(Calendar.YEAR);</code></p>
-<h3 id="gregoriancalendar类">GregorianCalendar类</h3>
-<p>GregorianCalendar对象构造方法：</p>
-<figure data-type="image" tabindex="7"><img src="https://s2.loli.net/2022/03/10/Yomul6awe2RshgL.png" alt="GregorianCalendar构造方法.png" loading="lazy"></figure>
-<p>GregorianCalendar对象常用方法：</p>
-<figure data-type="image" tabindex="8"><img src="https://s2.loli.net/2022/03/10/RxTBoJFD1AIplwq.png" alt="GregorianCalendar常用方法.png" loading="lazy"></figure>
-<hr>
-<h2 id="java正则表达式">Java正则表达式</h2>
-<h3 id="正则表达式语法">正则表达式语法：</h3>
-<figure data-type="image" tabindex="9"><img src="https://s2.loli.net/2022/03/11/Mpk1wGBncSCRXOP.png" alt="正则表达式语法.png" loading="lazy"></figure>
-<h3 id="regex包">regex包</h3>
-<ul>
-<li>Pattern类：Pattern对象是一个正则表达式的编译表示</li>
-<li>Matcher类：Matcher对象是对输入字符串进行解释和匹配操作的引擎</li>
-<li>PatternSyntaxException类：是一个非强制异常类，表示一个正则表达式模式中的语法错误</li>
-</ul>
-<h3 id="matcher类的方法">Matcher类的方法</h3>
-<figure data-type="image" tabindex="10"><img src="https://s2.loli.net/2022/03/11/HKFdD3Gmsl7xXcI.png" alt="matcher方法.png" loading="lazy"></figure>
-<h3 id="patternsyntaxexception类的方法">PatternSyntaxException类的方法</h3>
-<figure data-type="image" tabindex="11"><img src="https://s2.loli.net/2022/03/11/ji7tRZLYEQkwg31.png" alt="patternsyntaxexception方法.png" loading="lazy"></figure>
-<hr>
-<h2 id="java-流stream-文件file-io">Java 流（stream）、文件（file）、IO</h2>
-<p>Java.io 包几乎包含了所有操作输入、输出需要的类</p>
-<p>一个流可以理解为一个数据的序列</p>
-<p>输入流表示从一个源读取数据，输出流表示向一个目标写数据</p>
-<h3 id="读取控制台输入">读取控制台输入</h3>
-<p>把System.in包装在一个BufferedReader对象中创建一个字符流</p>
-<p><code>BufferedReader br = new BufferedReader(new InputStreamReader(System.in));</code></p>
-<p>BufferedReader对象创建后，read()方法从控制台读取一个字符，readLine()方法从控制台读取一个字符串</p>
-<p>从控制台读取多字符输入</p>
-<p><code>int read( ) throws IOException</code></p>
-<pre><code class="language-java">//使用 BufferedReader 在控制台读取字符
- 
-import java.io.*;
- 
-public class BRRead {
-    public static void main(String[] args) throws IOException {
-        char c;
-        // 使用 System.in 创建 BufferedReader
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        System.out.println(&quot;输入字符, 按下 'q' 键退出。&quot;);
-        // 读取字符
-        do {
-            c = (char) br.read();
-            System.out.println(c);
-        } while (c != 'q');
-    }
-}
-</code></pre>
-<p>从控制台读取字符串</p>
-<p><code>String readLine( ) throws IOException</code></p>
-<pre><code class="language-java">//使用 BufferedReader 在控制台读取字符
-import java.io.*;
- 
-public class BRReadLines {
-    public static void main(String[] args) throws IOException {
-        // 使用 System.in 创建 BufferedReader
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        String str;
-        System.out.println(&quot;Enter lines of text.&quot;);
-        System.out.println(&quot;Enter 'end' to quit.&quot;);
-        do {
-            str = br.readLine();
-            System.out.println(str);
-        } while (!str.equals(&quot;end&quot;));
-    }
-}
-</code></pre>
-<h3 id="控制台输出">控制台输出</h3>
-<p><code>System.out.print()</code>, <code>System.out.println()</code>, <code>System.out.write()</code></p>
-<h3 id="读写文件">读写文件</h3>
-<ol>
-<li>FileInputStream</li>
-</ol>
-<p>该流用于读取数据</p>
-<ul>
-<li>
-<p>使用字符串类型的文件名来创建一个输入流对象来读取文件：</p>
-<p><code>InputStream f = new FileInputStream(&quot;C:/java/hello&quot;);</code></p>
-</li>
-<li>
-<p>使用一个文件对象来创建一个输入流对象来读取文件</p>
-<p><code>File f = new File(&quot;C:/java/hello&quot;);</code><br>
-<code>InputStream in = new FileInputStream(f);</code></p>
-</li>
-</ul>
-<p>InputStream对象的方法：</p>
-<figure data-type="image" tabindex="12"><img src="https://s2.loli.net/2022/03/11/3MpPyQUnLdIxrFD.png" alt="InputStream方法.png" loading="lazy"></figure>
-<ol start="2">
-<li>FileOutputStream</li>
-</ol>
-<p>该流用于创建一个文件并像文件中写入数据</p>
-<ul>
-<li>
-<p>使用字符串类型的文件名来创建一个输出流对象</p>
-<p><code>OutputStream f = new FileOutputStream(&quot;C:/java/hello&quot;)</code></p>
-</li>
-<li>
-<p>使用一个文件对象来创建一个输出流来写文件</p>
-<p><code>File f = new File(&quot;C:/java/hello&quot;);</code><br>
-<code>OutputStream fOut = new FileOutputStream(f);</code></p>
-</li>
-</ul>
-<p>OutputStream对象的方法：</p>
-<figure data-type="image" tabindex="13"><img src="https://s2.loli.net/2022/03/11/STUIgC2LF8MRcZ4.png" alt="OutputStream方法.png" loading="lazy"></figure>
-<p>其他输出流：<code>ByteArrayOutputStream</code>、<code>DataOutputStream</code></p>
-<p>eg：</p>
-<pre><code class="language-java">import java.io.*;
- 
-public class fileStreamTest {
-    public static void main(String[] args) {
-        try {
-            byte bWrite[] = { 11, 21, 3, 40, 5 };
-            OutputStream os = new FileOutputStream(&quot;test.txt&quot;);
-            for (int x = 0; x &lt; bWrite.length; x++) {
-                os.write(bWrite[x]); // writes the bytes
-            }
-            os.close();
- 
-            InputStream is = new FileInputStream(&quot;test.txt&quot;);
-            int size = is.available();
- 
-            for (int i = 0; i &lt; size; i++) {
-                System.out.print((char) is.read() + &quot;  &quot;);
-            }
-            is.close();
-        } catch (IOException e) {
-            System.out.print(&quot;Exception&quot;);
-        }
-    }
-}
-</code></pre>
-<h3 id="关于文件和io的类">关于文件和I/O的类</h3>
-<ul>
-<li>File Class</li>
-<li>FileReader Class</li>
-<li>FileWriter Class</li>
-</ul>
-<h3 id="目录">目录</h3>
-<ol>
-<li>
-<p>创建目录：</p>
-<ul>
-<li>mkdir()方法创建一个文件夹，成功返回true，失败返回false</li>
-<li>mkidrs()方法创建一个文件夹和它所有父类文件夹</li>
-</ul>
-</li>
-</ol>
-<pre><code class="language-java">import java.io.File;
- 
-public class CreateDir {
-    public static void main(String[] args) {
-        String dirname = &quot;/tmp/user/java/bin&quot;;
-        File d = new File(dirname);
-        // 现在创建目录
-        d.mkdirs();
-    }
-}
-</code></pre>
-<ol start="2">
-<li>读取目录</li>
-</ol>
-<p>调用该对象的list()方法，提取目录包含的文件和文件夹列表</p>
-<pre><code class="language-java">import java.io.File;
- 
-public class DirList {
-    public static void main(String args[]) {
-        String dirname = &quot;/tmp&quot;;
-        File f1 = new File(dirname);
-        if (f1.isDirectory()) {
-            System.out.println(&quot;目录 &quot; + dirname);
-            String s[] = f1.list();
-            for (int i = 0; i &lt; s.length; i++) {
-                File f = new File(dirname + &quot;/&quot; + s[i]);
-                if (f.isDirectory()) {
-                    System.out.println(s[i] + &quot; 是一个目录&quot;);
-                } else {
-                    System.out.println(s[i] + &quot; 是一个文件&quot;);
-                }
-            }
-        } else {
-            System.out.println(dirname + &quot; 不是一个目录&quot;);
-        }
-    }
-}
-</code></pre>
-<ol start="3">
-<li>删除目录或文件</li>
-</ol>
-<p>使用<code>java.io.File.delete()</code>方法</p>
-<p>删除某一目录时，必须保证该目录下没有其他文件</p>
-<hr>
-<h2 id="scanner-类">Scanner 类</h2>
-<p>用于获取用户的输入</p>
-<p><code>Scanner s = new Scanner(System.in)</code></p>
-<p>Scanner类的next()和nextLine()获取输入的字符串</p>
-<ul>
-<li>next()以空白为结束符，不能得到带空格的字符串</li>
-<li>nextLine()以Enter为结束符</li>
-</ul>
-<p>也可以读取其他类型的数据：</p>
-<ul>
-<li><code>nextXxx()</code>: 例如 f = scan.nextFloat()</li>
-</ul>
-<hr>
-<h2 id="异常处理">异常处理</h2>
-<p>异常发生的原因：</p>
-<ul>
-<li>用户输入非法字符</li>
-<li>要打开的文件不存在</li>
-<li>网络通信连接中断，或者JVM内存溢出</li>
-</ul>
-<p>三种类型的异常：</p>
-<ul>
-<li>检查性异常</li>
-<li>运行时异常</li>
-<li>错误</li>
-</ul>
-<p>Exception类有两个主要的子类：IOException类和RuntimeException类</p>
-<h3 id="java-内置异常类">java 内置异常类</h3>
-<figure data-type="image" tabindex="14"><img src="https://s2.loli.net/2022/03/11/h7Vr2tE3Gi8vW19.png" alt="内置异常类.png" loading="lazy"></figure>
-<h3 id="异常方法">异常方法</h3>
-<h3 id="捕获异常">捕获异常</h3>
-<pre><code class="language-java">try
-{
-   // 程序代码
-}catch(ExceptionName e1)
-{
-   //Catch 块
-}
-</code></pre>
-<p>catch语句包含要捕获异常的声明</p>
-<pre><code class="language-java">import java.io.*;
-public class ExcepTest{
- 
-   public static void main(String args[]){
-      try{
-         int a[] = new int[2];
-         System.out.println(&quot;Access element three :&quot; + a[3]);
-      }catch(ArrayIndexOutOfBoundsException e){
-         System.out.println(&quot;Exception thrown  :&quot; + e);
-      }
-      System.out.println(&quot;Out of the block&quot;);
-   }
-}
-
-
-//Exception thrown  :java.lang.ArrayIndexOutOfBoundsException: Index 3 out of bounds for length 2
-//Out of the block
-</code></pre>
-<h3 id="多重捕获块">多重捕获块</h3>
-<pre><code class="language-java">try{
-   // 程序代码
-}catch(异常类型1 异常的变量名1){
-  // 程序代码
-}catch(异常类型2 异常的变量名2){
-  // 程序代码
-}catch(异常类型3 异常的变量名3){
-  // 程序代码
-}
-</code></pre>
-<h3 id="throwsthrow关键字">throws/throw关键字</h3>
-<p>如果一个方法没有捕获到一个检查性异常，那么该方法必须使用 throws/throw 关键字来声明</p>
-<p><code>public void withdraw(double amount) throws RemoteException InsufficientFundsException</code></p>
-<h3 id="finally-关键字">finally 关键字</h3>
-<p>无论是否发生异常，finally 代码块中的代码总会被执行</p>
-<pre><code class="language-java">try{
-  // 程序代码
-}catch(异常类型1 异常的变量名1){
-  // 程序代码
-}catch(异常类型2 异常的变量名2){
-  // 程序代码
-}finally{
-  // 程序代码
-}
-</code></pre>
-<h3 id="声明自定义异常">声明自定义异常</h3>
-<ul>
-<li>所有异常都必须是 Throwable 的子类</li>
-<li>如果希望写一个检查性异常类，则需要继承 Exception 类</li>
-<li>如果你想写一个运行时异常类，那么需要继承 RuntimeException 类</li>
-</ul>
-<h3 id="通用异常">通用异常</h3>
-<ul>
-<li>JVM异常：由 JVM 抛出的异常或错误。例如：NullPointerException 类，ArrayIndexOutOfBoundsException 类，ClassCastException 类</li>
-<li>程序级异常：由程序或者API程序抛出的异常。例如 IllegalArgumentException 类，IllegalStateException 类</li>
-</ul>
 ]]></content>
     </entry>
 </feed>
